@@ -1,0 +1,4551 @@
+{
+ "meta": {
+  "schema": 1,
+  "locale": "fa-IR",
+  "direction": "rtl",
+  "app": {
+   "name": "اندرز",
+   "latin": "Andarz",
+   "tagline": "اول بقا، بعد سود",
+   "disclaimer": "اندرز ابزار مدیریت ریسک شخصی است، نه توصیهٔ مالی؛ اعداد پیشنهاد اولیه‌اند و باید با داده‌های خودت تنظیم شوند."
+  },
+  "sourceDocument": "اساس‌نامه و ژورنال معاملاتی من (نسخهٔ ۱)",
+  "rules": [
+   "All user-visible Persian text comes from this file; Kotlin code holds none.",
+   "ui strings use named {placeholders}; callers pass numbers already formatted with the user's digit setting.",
+   "Static Persian digits inside constitution/learn text are converted to Latin digits at render time when the user turns Persian digits off.",
+   "Clause 'refs' bind literal phrases to live parameters (see renderClause vectors)."
+  ]
+ },
+ "params": [
+  {
+   "key": "Start_Equity",
+   "label": "سرمایهٔ اولیهٔ حساب معاملاتی ($)",
+   "note": "با سرمایهٔ واقعی‌ات جایگزین کن (ماده ۲-۱). فقط پول حساب معاملاتی، نه پرتفوی اسپات.",
+   "kind": "usd",
+   "default": 2000.0,
+   "min": 10,
+   "max": 1000000000.0,
+   "step": 10,
+   "group": "core",
+   "article": "2-1",
+   "tighter": "neutral",
+   "locked": false
+  },
+  {
+   "key": "Risk_Pct",
+   "label": "ریسک هر معامله (٪ سرمایه)",
+   "note": "ماده ۳-۱: ضرر دلاری در لحظهٔ خوردن حد ضرر",
+   "kind": "pct",
+   "default": 0.01,
+   "min": 0.001,
+   "max": 0.02,
+   "step": 0.0005,
+   "group": "core",
+   "article": "3-1",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Risk_Max",
+   "label": "سقف ریسک هر معامله",
+   "note": "ماده ۳-۱ و ۹: فقط برای ستاپ درجه‌یک؛ بالاتر از آن خط قرمز است",
+   "kind": "pct",
+   "default": 0.02,
+   "min": 0.005,
+   "max": 0.03,
+   "step": 0.0025,
+   "group": "core",
+   "article": "3-1",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Lev_Max",
+   "label": "سقف مطلق اهرم",
+   "note": "ماده ۳-۳ (پیش‌فرض عملی: ۳ تا ۵ برابر)",
+   "kind": "mult",
+   "default": 10.0,
+   "min": 1,
+   "max": 20,
+   "step": 1,
+   "group": "core",
+   "article": "3-3",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Margin_Max",
+   "label": "سقف مارجین هر پوزیشن (٪ سرمایه)",
+   "note": "ماده ۳-۴ (هدف معمول ۵ درصد)",
+   "kind": "pct",
+   "default": 0.1,
+   "min": 0.01,
+   "max": 0.25,
+   "step": 0.005,
+   "group": "core",
+   "article": "3-4",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Maint_Rate",
+   "label": "نرخ مارجین نگهداری (تقریبی)",
+   "note": "فقط برای تخمین قیمت لیکوئید؛ عدد دقیق را از ماشین‌حساب صرافی بگیر",
+   "kind": "pct",
+   "default": 0.005,
+   "min": 0.001,
+   "max": 0.02,
+   "step": 0.0005,
+   "group": "core",
+   "article": "3-5",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "RR_Min",
+   "label": "حداقل R:R",
+   "note": "ماده ۴-۶",
+   "kind": "dec",
+   "default": 1.5,
+   "min": 1.0,
+   "max": 5.0,
+   "step": 0.1,
+   "group": "core",
+   "article": "4.6",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Liq_Mult",
+   "label": "حداقل نسبت فاصلهٔ لیکوئید به فاصلهٔ حد ضرر",
+   "note": "ماده ۳-۵",
+   "kind": "dec",
+   "default": 2.0,
+   "min": 1.0,
+   "max": 6.0,
+   "step": 0.5,
+   "group": "core",
+   "article": "3-5",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Open_Risk_Max",
+   "label": "سقف جمع ریسک پوزیشن‌های باز",
+   "note": "ماده ۳-۶",
+   "kind": "pct",
+   "default": 0.03,
+   "min": 0.005,
+   "max": 0.1,
+   "step": 0.005,
+   "group": "core",
+   "article": "3-6",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Max_Positions",
+   "label": "حداکثر پوزیشن همزمان",
+   "note": "ماده ۳-۶",
+   "kind": "int",
+   "default": 3,
+   "min": 1,
+   "max": 10,
+   "step": 1,
+   "group": "core",
+   "article": "3-6",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Daily_Loss_Cap",
+   "label": "سقف زیان روزانه",
+   "note": "ماده ۳-۷: توقف تا فردا (نسبت به سرمایهٔ ابتدای روز)",
+   "kind": "pct",
+   "default": 0.03,
+   "min": 0.005,
+   "max": 0.1,
+   "step": 0.005,
+   "group": "core",
+   "article": "3-7",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Weekly_Loss_Cap",
+   "label": "سقف زیان هفتگی",
+   "note": "ماده ۳-۷: توقف تا هفتهٔ بعد و بازبینی (نسبت به سرمایهٔ ابتدای هفته)",
+   "kind": "pct",
+   "default": 0.06,
+   "min": 0.01,
+   "max": 0.2,
+   "step": 0.005,
+   "group": "core",
+   "article": "3-7",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "DD_Cap",
+   "label": "سقف افت از اوج سرمایه",
+   "note": "ماده ۳-۷: توقف دست‌کم ۷ روز؛ از منحنی سود و زیان معاملات (بدون برداشت)",
+   "kind": "pct",
+   "default": 0.1,
+   "min": 0.02,
+   "max": 0.5,
+   "step": 0.01,
+   "group": "core",
+   "article": "3-7",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Max_Trades_Day",
+   "label": "حداکثر معامله در روز",
+   "note": "ماده ۸-۱",
+   "kind": "int",
+   "default": 3,
+   "min": 1,
+   "max": 20,
+   "step": 1,
+   "group": "core",
+   "article": "8-1",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Withdraw_Pct",
+   "label": "سهم برداشت ماهانه از سود محقق‌شده",
+   "note": "ماده ۷-۲ (قابل تنظیم تا ۵۰ درصد)",
+   "kind": "pct",
+   "default": 0.3,
+   "min": 0.0,
+   "max": 0.5,
+   "step": 0.05,
+   "group": "core",
+   "article": "7-2",
+   "tighter": "neutral",
+   "locked": false
+  },
+  {
+   "key": "Compliance_Target",
+   "label": "هدف درصد رعایت قوانین",
+   "note": "ماده ۱۳-۳",
+   "kind": "pct",
+   "default": 0.9,
+   "min": 0.5,
+   "max": 1.0,
+   "step": 0.05,
+   "group": "core",
+   "article": "13-3",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "PF_Min",
+   "label": "حداقل ضریب سود (Profit Factor)",
+   "note": "شاخص ماهانه",
+   "kind": "dec",
+   "default": 1.3,
+   "min": 1.0,
+   "max": 3.0,
+   "step": 0.1,
+   "group": "core",
+   "article": "12-3",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Min_Trades",
+   "label": "حداقل تعداد معامله برای قضاوت دربارهٔ یک ستاپ",
+   "note": "ماده ۱۲-۴",
+   "kind": "int",
+   "default": 30,
+   "min": 10,
+   "max": 200,
+   "step": 5,
+   "group": "core",
+   "article": "12-4",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Chk_N",
+   "label": "تعداد بندهای چک‌لیست",
+   "note": "ماده ۴ — این عدد را تغییر نده",
+   "kind": "int",
+   "default": 8,
+   "min": 8,
+   "max": 8,
+   "step": 1,
+   "group": "core",
+   "article": "4",
+   "tighter": "neutral",
+   "locked": true
+  },
+  {
+   "key": "Cooldown_Min",
+   "label": "توقف بعد از هر حد ضرر (دقیقه)",
+   "note": "بعد از هر حد ضرر این‌قدر صبر می‌کنی.",
+   "kind": "min",
+   "default": 30,
+   "min": 5,
+   "max": 240,
+   "step": 5,
+   "group": "governor",
+   "article": "8-1",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Consec_Stops",
+   "label": "پایان روز بعد از چند حد ضرر پیاپی",
+   "note": "ماده ۸-۱: بعد از دو حد ضرر پیاپی، معاملات همان روز تمام است.",
+   "kind": "int",
+   "default": 2,
+   "min": 1,
+   "max": 5,
+   "step": 1,
+   "group": "governor",
+   "article": "8-1",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Stopout_R",
+   "label": "آستانهٔ R برای «حد ضرر خوردن» در خروج دستی",
+   "note": "قاعدهٔ اپ: خروج دستی با زیانی تا این R هم مثل حد ضرر خوردن حساب می‌شود.",
+   "kind": "r",
+   "default": -0.5,
+   "min": -2.0,
+   "max": -0.1,
+   "step": 0.1,
+   "group": "governor",
+   "article": "8-1",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "DD_Lock_Days",
+   "label": "حداقل روز توقف بعد از سقف افت",
+   "note": "ماده ۳-۷: توقف دست‌کم این‌قدر روز و ثبت یک مرور.",
+   "kind": "days",
+   "default": 7,
+   "min": 1,
+   "max": 30,
+   "step": 1,
+   "group": "governor",
+   "article": "3-7",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Recovery_Risk",
+   "label": "ریسک بعد از بازگشت از افت",
+   "note": "ماده ۳-۷",
+   "kind": "pct",
+   "default": 0.005,
+   "min": 0.001,
+   "max": 0.01,
+   "step": 0.0005,
+   "group": "governor",
+   "article": "3-7",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Recovery_Trades",
+   "label": "تعداد معامله با ریسک کاهش‌یافته بعد از افت",
+   "note": "ماده ۳-۷",
+   "kind": "int",
+   "default": 20,
+   "min": 5,
+   "max": 100,
+   "step": 5,
+   "group": "governor",
+   "article": "3-7",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Violation_Pause_H",
+   "label": "توقف بعد از نقض خط قرمز (ساعت)",
+   "note": "ماده ۱۳-۱",
+   "kind": "hours",
+   "default": 48,
+   "min": 1,
+   "max": 168,
+   "step": 1,
+   "group": "governor",
+   "article": "13-1",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Violation_Trigger",
+   "label": "تعداد نقض برای کاهش ریسک",
+   "note": "ماده ۱۳-۲",
+   "kind": "int",
+   "default": 3,
+   "min": 2,
+   "max": 10,
+   "step": 1,
+   "group": "governor",
+   "article": "13-2",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Violation_Window_D",
+   "label": "پنجرهٔ شمارش نقض‌ها (روز)",
+   "note": "ماده ۱۳-۲: «در یک ماه»؛ پنجرهٔ غلتان.",
+   "kind": "days",
+   "default": 30,
+   "min": 7,
+   "max": 90,
+   "step": 1,
+   "group": "governor",
+   "article": "13-2",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Reduced_Risk",
+   "label": "ریسک بعد از نقض‌های تکراری",
+   "note": "ماده ۱۳-۲",
+   "kind": "pct",
+   "default": 0.005,
+   "min": 0.001,
+   "max": 0.01,
+   "step": 0.0005,
+   "group": "governor",
+   "article": "13-2",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Reduced_Trades",
+   "label": "تعداد معامله با ریسک کاهش‌یافته بعد از نقض‌ها",
+   "note": "ماده ۱۳-۲",
+   "kind": "int",
+   "default": 20,
+   "min": 5,
+   "max": 100,
+   "step": 5,
+   "group": "governor",
+   "article": "13-2",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "BigWin_R",
+   "label": "سود بزرگ: بیشتر از چند R",
+   "note": "ماده ۳-۸",
+   "kind": "r",
+   "default": 3.0,
+   "min": 1.0,
+   "max": 10.0,
+   "step": 0.5,
+   "group": "governor",
+   "article": "3-8",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "BigWin_Day_Pct",
+   "label": "سود بزرگ روزانه (٪ سرمایه)",
+   "note": "ماده ۳-۸",
+   "kind": "pct",
+   "default": 0.03,
+   "min": 0.01,
+   "max": 0.2,
+   "step": 0.005,
+   "group": "governor",
+   "article": "3-8",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "BigWin_Hold_H",
+   "label": "مدت مراقبت بعد از سود بزرگ (ساعت)",
+   "note": "ماده ۳-۸: ریسک بالا نمی‌رود و ستاپ درجه‌یک غیرفعال است.",
+   "kind": "hours",
+   "default": 24,
+   "min": 1,
+   "max": 72,
+   "step": 1,
+   "group": "governor",
+   "article": "3-8",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Setup_Test_Risk",
+   "label": "ریسک ستاپ در آزمایش",
+   "note": "ماده ۱۲-۶",
+   "kind": "pct",
+   "default": 0.0025,
+   "min": 0.001,
+   "max": 0.01,
+   "step": 0.0005,
+   "group": "governor",
+   "article": "12-6",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Setup_Test_Trades",
+   "label": "تعداد معامله آزمایشی ستاپ جدید",
+   "note": "ماده ۱۲-۶",
+   "kind": "int",
+   "default": 20,
+   "min": 5,
+   "max": 100,
+   "step": 5,
+   "group": "governor",
+   "article": "12-6",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Margin_Target",
+   "label": "مارجین هدف برای پیشنهاد اهرم",
+   "note": "ماده ۳-۴: هدف معمول ۵٪؛ فقط برای پیشنهاد اهرم.",
+   "kind": "pct",
+   "default": 0.05,
+   "min": 0.01,
+   "max": 0.1,
+   "step": 0.005,
+   "group": "governor",
+   "article": "3-4",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Time_Stop_Candles",
+   "label": "خروج زمانی: چند کندل",
+   "note": "ماده ۶-۵",
+   "kind": "int",
+   "default": 10,
+   "min": 3,
+   "max": 50,
+   "step": 1,
+   "group": "governor",
+   "article": "6-5",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Review_After_Loss_H",
+   "label": "فاصلهٔ ضرر تا ویرایش قوانین (ساعت)",
+   "note": "ماده ۱۲-۵",
+   "kind": "hours",
+   "default": 2,
+   "min": 0,
+   "max": 24,
+   "step": 1,
+   "group": "governor",
+   "article": "12-5",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Loosen_Delay_H",
+   "label": "تأخیر اعمال تغییر آسان‌گیرانه (ساعت)",
+   "note": "قاعدهٔ اپ: شُل کردن قانون ۲۴ ساعت دیرتر اعمال می‌شود.",
+   "kind": "hours",
+   "default": 24,
+   "min": 0,
+   "max": 168,
+   "step": 1,
+   "group": "governor",
+   "article": "12-5",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Watchlist_Max",
+   "label": "حداکثر نماد فهرست پیگیری",
+   "note": "ماده ۲-۲",
+   "kind": "int",
+   "default": 10,
+   "min": 3,
+   "max": 30,
+   "step": 1,
+   "group": "governor",
+   "article": "2-2",
+   "tighter": "lower",
+   "locked": false
+  },
+  {
+   "key": "Report_Min_Chars",
+   "label": "حداقل نویسهٔ گزارش نقض",
+   "note": "ماده ۱۳-۱",
+   "kind": "int",
+   "default": 20,
+   "min": 10,
+   "max": 200,
+   "step": 5,
+   "group": "governor",
+   "article": "13-1",
+   "tighter": "higher",
+   "locked": false
+  },
+  {
+   "key": "Partial_Exit_Pct",
+   "label": "سهم خروج پله‌ای",
+   "note": "ماده ۶-۱: راهنما، نه قفل.",
+   "kind": "pct",
+   "default": 0.5,
+   "min": 0.25,
+   "max": 0.75,
+   "step": 0.05,
+   "group": "governor",
+   "article": "6-1",
+   "tighter": "neutral",
+   "locked": false
+  },
+  {
+   "key": "Partial_R_Lo",
+   "label": "شروع بازهٔ خروج پله‌ای (R)",
+   "note": "ماده ۶-۱",
+   "kind": "r",
+   "default": 1.0,
+   "min": 0.5,
+   "max": 3.0,
+   "step": 0.25,
+   "group": "governor",
+   "article": "6-1",
+   "tighter": "neutral",
+   "locked": false
+  },
+  {
+   "key": "Partial_R_Hi",
+   "label": "پایان بازهٔ خروج پله‌ای (R)",
+   "note": "ماده ۶-۱",
+   "kind": "r",
+   "default": 1.5,
+   "min": 0.5,
+   "max": 4.0,
+   "step": 0.25,
+   "group": "governor",
+   "article": "6-1",
+   "tighter": "neutral",
+   "locked": false
+  },
+  {
+   "key": "Trail_Lock_R",
+   "label": "قفل سود فقط بالای (R)",
+   "note": "ماده ۶-۲",
+   "kind": "r",
+   "default": 3.0,
+   "min": 1.0,
+   "max": 10.0,
+   "step": 0.5,
+   "group": "governor",
+   "article": "6-2",
+   "tighter": "neutral",
+   "locked": false
+  }
+ ],
+ "enums": {
+  "side": [
+   {
+    "id": "LONG",
+    "label": "لانگ",
+    "csv": "Long"
+   },
+   {
+    "id": "SHORT",
+    "label": "شورت",
+    "csv": "Short"
+   }
+  ],
+  "kind": [
+   {
+    "id": "SCALP",
+    "label": "اسکالپ",
+    "csv": "اسکالپ"
+   },
+   {
+    "id": "INTRADAY",
+    "label": "اینترادی",
+    "csv": "اینترادی"
+   },
+   {
+    "id": "SWING",
+    "label": "سوینگ",
+    "csv": "سوینگ"
+   }
+  ],
+  "emotion": [
+   {
+    "id": "CALM",
+    "label": "آرام",
+    "csv": "آرام",
+    "calm": true
+   },
+   {
+    "id": "FOMO",
+    "label": "فومو",
+    "csv": "فومو",
+    "calm": false
+   },
+   {
+    "id": "GREED",
+    "label": "طمع",
+    "csv": "طمع",
+    "calm": false
+   },
+   {
+    "id": "FEAR",
+    "label": "ترس",
+    "csv": "ترس",
+    "calm": false
+   },
+   {
+    "id": "REVENGE",
+    "label": "انتقام",
+    "csv": "انتقام",
+    "calm": false
+   },
+   {
+    "id": "BORED",
+    "label": "کسل",
+    "csv": "کسل",
+    "calm": false
+   }
+  ],
+  "htfTrend": [
+   {
+    "id": "UP",
+    "label": "صعودی"
+   },
+   {
+    "id": "DOWN",
+    "label": "نزولی"
+   },
+   {
+    "id": "RANGE",
+    "label": "رنج"
+   }
+  ],
+  "timeframe": [
+   {
+    "id": "1m",
+    "minutes": 1,
+    "label": "۱ دقیقه"
+   },
+   {
+    "id": "3m",
+    "minutes": 3,
+    "label": "۳ دقیقه"
+   },
+   {
+    "id": "5m",
+    "minutes": 5,
+    "label": "۵ دقیقه"
+   },
+   {
+    "id": "15m",
+    "minutes": 15,
+    "label": "۱۵ دقیقه"
+   },
+   {
+    "id": "30m",
+    "minutes": 30,
+    "label": "۳۰ دقیقه"
+   },
+   {
+    "id": "1h",
+    "minutes": 60,
+    "label": "۱ ساعت"
+   },
+   {
+    "id": "4h",
+    "minutes": 240,
+    "label": "۴ ساعت"
+   },
+   {
+    "id": "1d",
+    "minutes": 1440,
+    "label": "روزانه"
+   }
+  ],
+  "entryOrder": [
+   {
+    "id": "LIMIT",
+    "label": "Limit",
+    "warn": false
+   },
+   {
+    "id": "LIMIT_LADDER",
+    "label": "پله‌ای (۲ تا ۳ Limit)",
+    "warn": false
+   },
+   {
+    "id": "MARKET_CONFIRMED",
+    "label": "Market بعد از شکست تأییدشده",
+    "warn": false
+   },
+   {
+    "id": "MARKET_OTHER",
+    "label": "Market (غیر از شکست تأییدشده)",
+    "warn": true
+   }
+  ],
+  "exitReason": [
+   {
+    "id": "TAKE_PROFIT",
+    "label": "حد سود"
+   },
+   {
+    "id": "STOP_LOSS",
+    "label": "حد ضرر"
+   },
+   {
+    "id": "TRAILING_STOP",
+    "label": "حد ضرر دنبال‌شونده"
+   },
+   {
+    "id": "BREAKEVEN",
+    "label": "سربه‌سر (ریسک‌فری)"
+   },
+   {
+    "id": "MANUAL",
+    "label": "خروج دستی"
+   },
+   {
+    "id": "TIME_STOP",
+    "label": "خروج زمانی"
+   },
+   {
+    "id": "EMERGENCY",
+    "label": "خروج اضطراری"
+   },
+   {
+    "id": "LIQUIDATED",
+    "label": "لیکوئید شد"
+   }
+  ],
+  "tradeStatus": [
+   {
+    "id": "PLANNED",
+    "label": "برنامه‌ریزی‌شده"
+   },
+   {
+    "id": "OPEN",
+    "label": "باز"
+   },
+   {
+    "id": "CLOSED",
+    "label": "بسته"
+   },
+   {
+    "id": "REJECTED",
+    "label": "ردشده"
+   },
+   {
+    "id": "CANCELLED",
+    "label": "رهاشده"
+   }
+  ],
+  "account": [
+   {
+    "id": "REAL",
+    "label": "واقعی"
+   },
+   {
+    "id": "DEMO",
+    "label": "دمو"
+   }
+  ],
+  "result": [
+   {
+    "id": "WIN",
+    "label": "برد",
+    "csv": "برد"
+   },
+   {
+    "id": "LOSS",
+    "label": "باخت",
+    "csv": "باخت"
+   },
+   {
+    "id": "EVEN",
+    "label": "سربه‌سر",
+    "csv": "سربه‌سر"
+   }
+  ],
+  "sizeVerdict": [
+   {
+    "id": "YES",
+    "label": "بله",
+    "csv": "بله"
+   },
+   {
+    "id": "GRADE_A_ONLY",
+    "label": "فقط ستاپ درجه‌یک",
+    "csv": "فقط ستاپ درجه‌یک"
+   },
+   {
+    "id": "OVER_CAP",
+    "label": "بیش از سقف",
+    "csv": null,
+    "note": "app-only verdict (Excel has no equivalent)"
+   },
+   {
+    "id": "RED_LINE",
+    "label": "خط قرمز",
+    "csv": "خط قرمز"
+   }
+  ],
+  "gateReason": [
+   {
+    "id": "DIRECTION",
+    "label": "جهت‌SL/TP",
+    "csv": "جهت‌SL/TP"
+   },
+   {
+    "id": "CHECKLIST",
+    "label": "چک‌لیست",
+    "csv": "چک‌لیست"
+   },
+   {
+    "id": "LEVERAGE",
+    "label": "اهرم",
+    "csv": "اهرم"
+   },
+   {
+    "id": "RR",
+    "label": "R:R",
+    "csv": "R:R"
+   },
+   {
+    "id": "MARGIN",
+    "label": "مارجین",
+    "csv": "مارجین"
+   },
+   {
+    "id": "LIQUIDATION",
+    "label": "لیکوئید",
+    "csv": "لیکوئید"
+   }
+  ],
+  "lockCode": [
+   {
+    "id": "VIOLATION",
+    "title": "توقف بعد از نقض خط قرمز"
+   },
+   {
+    "id": "DRAWDOWN",
+    "title": "سقف افت از اوج پر شد"
+   },
+   {
+    "id": "WEEKLY_LOSS",
+    "title": "سقف زیان هفتگی پر شد"
+   },
+   {
+    "id": "DAILY_LOSS",
+    "title": "سقف زیان روزانه پر شد"
+   },
+   {
+    "id": "DAY_OVER",
+    "title": "پایان معاملات امروز"
+   },
+   {
+    "id": "TRADE_CAP",
+    "title": "سقف معاملات امروز پر شد"
+   },
+   {
+    "id": "COOLDOWN",
+    "title": "توقف بعد از حد ضرر"
+   }
+  ],
+  "lockNeed": [
+   {
+    "id": "REPORT",
+    "label": "گزارش مکتوب بنویس (چه شد، چرا، چه می‌کنم؛ دست‌کم {min} نویسه)"
+   },
+   {
+    "id": "REVIEW",
+    "label": "یک مرور (هفتگی، ماهانه یا افت) ثبت کن"
+   },
+   {
+    "id": "WEEKLY_REVIEW",
+    "label": "مرور هفتگی همین هفته را ثبت کن"
+   },
+   {
+    "id": "CLOSE_POSITION",
+    "label": "پوزیشن نقض‌کننده را ببند"
+   }
+  ],
+  "reductionCode": [
+   {
+    "id": "DD_RECOVERY",
+    "label": "بازگشت بعد از افت: ریسک {risk} برای {n} معاملهٔ دیگر"
+   },
+   {
+    "id": "VIOLATIONS",
+    "label": "نقض‌های تکراری: ریسک {risk} برای {n} معاملهٔ دیگر"
+   },
+   {
+    "id": "SETUP_TEST",
+    "label": "ستاپ در آزمایش: ریسک {risk}، {n} معامله باقی مانده"
+   }
+  ],
+  "dashboardStatus": {
+   "trades": [
+    {
+     "id": "OK",
+     "label": "مجاز"
+    },
+    {
+     "id": "TRADES_CAP",
+     "label": "سقف امروز پر شد"
+    }
+   ],
+   "daily": [
+    {
+     "id": "OK",
+     "label": "مجاز"
+    },
+    {
+     "id": "DAILY_RED",
+     "label": "خط قرمز — توقف تا فردا"
+    }
+   ],
+   "weekly": [
+    {
+     "id": "OK",
+     "label": "مجاز"
+    },
+    {
+     "id": "WEEKLY_RED",
+     "label": "خط قرمز — توقف تا هفتهٔ بعد"
+    }
+   ],
+   "drawdown": [
+    {
+     "id": "OK",
+     "label": "مجاز"
+    },
+    {
+     "id": "DD_RED",
+     "label": "خط قرمز — توقف دست‌کم {days} روز"
+    }
+   ],
+   "positions": [
+    {
+     "id": "OK",
+     "label": "مجاز"
+    },
+    {
+     "id": "POSITIONS_FULL",
+     "label": "سقف پر است"
+    },
+    {
+     "id": "POSITIONS_OVER",
+     "label": "بیش از سقف"
+    }
+   ],
+   "openRisk": [
+    {
+     "id": "OK",
+     "label": "مجاز"
+    },
+    {
+     "id": "RISK_FULL",
+     "label": "جای ریسک جدید نیست"
+    }
+   ]
+  },
+  "kpiStatus": [
+   {
+    "id": "ENOUGH_DATA",
+    "label": "داده کافی"
+   },
+   {
+    "id": "LOW_DATA",
+    "label": "داده کم؛ هنوز دربارهٔ ستاپ قضاوت نکن"
+   },
+   {
+    "id": "ON_TARGET",
+    "label": "در هدف"
+   },
+   {
+    "id": "BELOW_TARGET",
+    "label": "زیر هدف"
+   },
+   {
+    "id": "POSITIVE",
+    "label": "مثبت"
+   },
+   {
+    "id": "NON_POSITIVE",
+    "label": "منفی یا صفر"
+   },
+   {
+    "id": "IN_RANGE",
+    "label": "در محدوده"
+   },
+   {
+    "id": "OVER_CAP",
+    "label": "از سقف گذشته"
+   },
+   {
+    "id": "COMPLETE",
+    "label": "کامل"
+   },
+   {
+    "id": "INCOMPLETE",
+    "label": "ناقص"
+   }
+  ],
+  "ledgerType": [
+   {
+    "id": "BASELINE",
+    "label": "سرمایهٔ اولیه"
+   },
+   {
+    "id": "DEPOSIT",
+    "label": "واریز"
+   },
+   {
+    "id": "WITHDRAWAL",
+    "label": "برداشت"
+   },
+   {
+    "id": "ADJUSTMENT",
+    "label": "تعدیل"
+   }
+  ],
+  "reviewType": [
+   {
+    "id": "DAILY",
+    "label": "بستن روز (۵ دقیقه)"
+   },
+   {
+    "id": "WEEKLY",
+    "label": "مرور هفتگی (۳۰ دقیقه)"
+   },
+   {
+    "id": "MONTHLY",
+    "label": "مرور ماهانه (۶۰ دقیقه)"
+   },
+   {
+    "id": "DRAWDOWN",
+    "label": "مرور افت از اوج"
+   }
+  ],
+  "paramChangeKind": [
+   {
+    "id": "TIGHTEN",
+    "label": "سخت‌گیرانه‌تر؛ فوراً اعمال می‌شود"
+   },
+   {
+    "id": "LOOSEN",
+    "label": "آسان‌گیرانه‌تر؛ {hours} ساعت بعد اعمال می‌شود"
+   },
+   {
+    "id": "NEUTRAL",
+    "label": "خنثی؛ فوراً اعمال می‌شود"
+   },
+   {
+    "id": "NONE",
+    "label": "بدون تغییر"
+   }
+  ],
+  "setupGrade": [
+   {
+    "id": "A",
+    "label": "درجه‌یک"
+   },
+   {
+    "id": "B",
+    "label": "عادی"
+   }
+  ],
+  "tradeEvent": [
+   {
+    "id": "SL_MOVE",
+    "label": "جابه‌جایی حد ضرر"
+   },
+   {
+    "id": "PARTIAL_EXIT",
+    "label": "خروج پله‌ای"
+   },
+   {
+    "id": "NEWS",
+    "label": "خبر"
+   },
+   {
+    "id": "EMOTION",
+    "label": "احساس"
+   },
+   {
+    "id": "PRAYER",
+    "label": "قاعدهٔ دعا"
+   },
+   {
+    "id": "NOTE",
+    "label": "یادداشت"
+   },
+   {
+    "id": "ADD_REPORTED",
+    "label": "افزودن مارجین (گزارش خودکار)"
+   }
+  ],
+  "violation": [
+   {
+    "id": "V01",
+    "label": "معامله بدون حد ضرر ثبت‌شده در صرافی",
+    "clauseId": "9.1",
+    "detect": "SELF",
+    "detectRule": "wizard toggle slTpOnExchange=false at entry confirmation",
+    "csv": "معامله بدون حد ضرر ثبت‌شده در صرافی"
+   },
+   {
+    "id": "V02",
+    "label": "ریسک بیش از دو درصد در یک معامله",
+    "clauseId": "9.2",
+    "detect": "AUTO",
+    "detectRule": "size verdict RED_LINE (actual risk above Risk_Max)",
+    "csv": "ریسک بیش از دو درصد در یک معامله"
+   },
+   {
+    "id": "V03",
+    "label": "اهرم بالای ۱۰ یا حالت Cross",
+    "clauseId": "9.3",
+    "detect": "AUTO",
+    "detectRule": "leverage above Lev_Max, or the isolated toggle is off (Cross)",
+    "csv": "اهرم بالای ۱۰ یا حالت Cross"
+   },
+   {
+    "id": "V04",
+    "label": "دور کردن یا حذف حد ضرر",
+    "clauseId": "9.4",
+    "detect": "AUTO",
+    "detectRule": "a stop-loss move away from price, or deleting the stop",
+    "csv": "دور کردن یا حذف حد ضرر"
+   },
+   {
+    "id": "V05",
+    "label": "میانگین‌گیری روی ضرر یا اضافه کردن مارجین",
+    "clauseId": "9.5",
+    "detect": "SELF",
+    "detectRule": "button 'I added margin / averaged down'",
+    "csv": "میانگین‌گیری روی ضرر یا اضافه کردن مارجین"
+   },
+   {
+    "id": "V06",
+    "label": "ورود بدون چک‌لیست (فومو)",
+    "clauseId": "9.6",
+    "detect": "AUTO",
+    "detectRule": "entry confirmed with checklist score below Chk_N",
+    "csv": "ورود بدون چک‌لیست (فومو)"
+   },
+   {
+    "id": "V07",
+    "label": "معاملهٔ انتقامی بعد از ضرر",
+    "clauseId": "9.7",
+    "detect": "SUGGEST",
+    "detectRule": "entry inside a cool-down after a stop-out, or emotion = REVENGE; the user confirms",
+    "csv": "معاملهٔ انتقامی بعد از ضرر"
+   },
+   {
+    "id": "V08",
+    "label": "پوزیشن اهرمی رهاشده هنگام خواب یا سفر",
+    "clauseId": "9.8",
+    "detect": "SELF",
+    "detectRule": "self-report; optional reminder when a monitor check is overdue",
+    "csv": "پوزیشن اهرمی رهاشده هنگام خواب یا سفر"
+   },
+   {
+    "id": "V09",
+    "label": "تبدیل معاملهٔ ضررده به نگه‌داری بلندمدت",
+    "clauseId": "9.9",
+    "detect": "SUGGEST",
+    "detectRule": "a losing position is held beyond 3x its time-stop; the user confirms",
+    "csv": "تبدیل معاملهٔ ضررده به نگه‌داری بلندمدت"
+   },
+   {
+    "id": "V10",
+    "label": "معامله با پولی که از دست دادنش قابل تحمل نیست",
+    "clauseId": "9.10",
+    "detect": "SELF",
+    "detectRule": "self-report",
+    "csv": "معامله با پولی که از دست دادنش قابل تحمل نیست"
+   }
+  ],
+  "mistake": [
+   {
+    "id": "M00",
+    "label": "بدون اشتباه",
+    "csv": "بدون اشتباه"
+   },
+   {
+    "id": "M01",
+    "label": "ورود زودهنگام",
+    "csv": "ورود زودهنگام"
+   },
+   {
+    "id": "M02",
+    "label": "تعقیب قیمت",
+    "csv": "تعقیب قیمت"
+   },
+   {
+    "id": "M03",
+    "label": "سایز بزرگ",
+    "csv": "سایز بزرگ"
+   },
+   {
+    "id": "M04",
+    "label": "حد ضرر دور یا نبود حد ضرر",
+    "csv": "حد ضرر دور یا نبود حد ضرر"
+   },
+   {
+    "id": "M05",
+    "label": "خروج زودهنگام",
+    "csv": "خروج زودهنگام"
+   },
+   {
+    "id": "M06",
+    "label": "خروج احساسی",
+    "csv": "خروج احساسی"
+   },
+   {
+    "id": "M07",
+    "label": "نقض چک‌لیست",
+    "csv": "نقض چک‌لیست"
+   },
+   {
+    "id": "M08",
+    "label": "معاملهٔ انتقامی",
+    "csv": "معاملهٔ انتقامی"
+   },
+   {
+    "id": "M09",
+    "label": "نادیده گرفتن خبر",
+    "csv": "نادیده گرفتن خبر"
+   },
+   {
+    "id": "M10",
+    "label": "خلاف روند",
+    "csv": "خلاف روند"
+   },
+   {
+    "id": "M11",
+    "label": "میانگین‌گیری",
+    "csv": "میانگین‌گیری"
+   }
+  ]
+ },
+ "checklist": [
+  {
+   "n": 1,
+   "id": "c1",
+   "short": "روند",
+   "full": "روند تایم‌فریم بالا مشخص و هم‌جهت با معامله است",
+   "clauseId": "4.1",
+   "text": "روند تایم‌فریم بالا مشخص و هم‌جهت با معامله است (خلاف روند فقط با دلیل مکتوب و نصف سایز).",
+   "needsCalmEmotion": false
+  },
+  {
+   "n": 2,
+   "id": "c2",
+   "short": "سه‌تایم‌فریم",
+   "full": "سه تایم‌فریم بررسی شد و ورودم روبه‌روی مقاومت یا حمایت تایم‌فریم بالا نیست",
+   "clauseId": "4.2",
+   "text": "سه تایم‌فریم بررسی شد (جهت، ستاپ، ورود) و ورودم روبه‌روی مقاومت یا حمایت تایم‌فریم بالا نیست.",
+   "needsCalmEmotion": false
+  },
+  {
+   "n": 3,
+   "id": "c3",
+   "short": "نقدینگی",
+   "full": "حجم معاملات ۲۴ ساعت دست‌کم ۱۰۰ میلیون دلار و حجم نسبی بین ۰٫۷ و ۳ است",
+   "clauseId": "4.3",
+   "text": "فیلتر نقدینگی برقرار است: حجم معاملات ۲۴ ساعت اخیر دست‌کم ۱۰۰ میلیون دلار و حجم نسبی بین ۰٫۷ و ۳.",
+   "needsCalmEmotion": false
+  },
+  {
+   "n": 4,
+   "id": "c4",
+   "short": "واگرایی",
+   "full": "واگرایی حجم و قیمت بررسی شد (اگر هست، ورود بدون تأیید ممنوع)",
+   "clauseId": "4.4",
+   "text": "واگرایی حجم و قیمت بررسی شد؛ اگر هست، ورود هم‌جهت با کندل بزرگ بدون تأیید ممنوع است.",
+   "needsCalmEmotion": false
+  },
+  {
+   "n": 5,
+   "id": "c5",
+   "short": "خبر",
+   "full": "در بازهٔ ۳۰ دقیقه پیش تا ۶۰ دقیقه بعد از رویداد مهم اقتصادی نیستم",
+   "clauseId": "4.5",
+   "text": "در بازهٔ ۳۰ دقیقه پیش تا ۶۰ دقیقه بعد از رویداد مهم اقتصادی (فدرال رزرو، تورم، اشتغال) نیستم.",
+   "needsCalmEmotion": false
+  },
+  {
+   "n": 6,
+   "id": "c6",
+   "short": "برنامه",
+   "full": "ورود، حد ضرر، حد سود و R:R (حداقل ۱ به ۱٫۵) پیش از ورود نوشته شده است",
+   "clauseId": "4.6",
+   "text": "ورود، حد ضرر، حد سود و R:R (حداقل ۱ به ۱٫۵) پیش از ورود نوشته شده است.",
+   "needsCalmEmotion": false
+  },
+  {
+   "n": 7,
+   "id": "c7",
+   "short": "اندازه",
+   "full": "اندازهٔ پوزیشن از فرمول آمده و قیود ماده ۳ برقرار است",
+   "clauseId": "4.7",
+   "text": "اندازهٔ پوزیشن از فرمول آمده و قیدهای ماده ۳ برقرار است (اهرم حداکثر ۱۰، ایزوله، لیکوئید دو برابر فاصلهٔ حد ضرر، ریسک باز حداکثر ۳٪).",
+   "needsCalmEmotion": false
+  },
+  {
+   "n": 8,
+   "id": "c8",
+   "short": "حال من",
+   "full": "حال خودم خوب است: گرسنه، عصبانی، تنها یا خسته نیستم",
+   "clauseId": "4.8",
+   "text": "حال خودم خوب است: گرسنه، عصبانی، تنها یا خسته نیستم و هیجان سود یا ضرر قبلی را ندارم.",
+   "needsCalmEmotion": true
+  }
+ ],
+ "kpiDefs": [
+  {
+   "id": "compliance",
+   "label": "درصد رعایت قوانین",
+   "formula": "معاملات با رعایت کامل ÷ همهٔ معاملات",
+   "targetText": "۹۰٪ یا بیشتر",
+   "targetParam": "Compliance_Target",
+   "targetTemplate": "{v} یا بیشتر",
+   "format": "pct",
+   "statusKey": "compliance"
+  },
+  {
+   "id": "expectancy",
+   "label": "امید ریاضی (R)",
+   "formula": "میانگین R همهٔ معاملات",
+   "targetText": "مثبت",
+   "targetParam": null,
+   "targetTemplate": "مثبت",
+   "format": "r",
+   "statusKey": "expectancy"
+  },
+  {
+   "id": "realRR",
+   "label": "R:R واقعی",
+   "formula": "میانگین R برنده‌ها ÷ میانگین ضرر باخت‌ها",
+   "targetText": "۱٫۵ یا بیشتر",
+   "targetParam": "RR_Min",
+   "targetTemplate": "{v} یا بیشتر",
+   "format": "dec",
+   "statusKey": "realRR"
+  },
+  {
+   "id": "winRate",
+   "label": "درصد برد",
+   "formula": "معاملات برنده ÷ همهٔ معاملات",
+   "targetText": "همراه با R:R سنجیده شود",
+   "targetParam": null,
+   "targetTemplate": "همراه با R:R سنجیده شود",
+   "format": "pct",
+   "statusKey": null
+  },
+  {
+   "id": "profitFactor",
+   "label": "ضریب سود (Profit Factor)",
+   "formula": "مجموع سودها ÷ مجموع زیان‌ها",
+   "targetText": "بالای ۱٫۳",
+   "targetParam": "PF_Min",
+   "targetTemplate": "بالای {v}",
+   "format": "dec",
+   "statusKey": "profitFactor"
+  },
+  {
+   "id": "maxDD",
+   "label": "بیشترین افت از اوج",
+   "formula": "بزرگ‌ترین افت منحنی سرمایه از آخرین اوج؛ فقط سود و زیان معاملات، بدون برداشت",
+   "targetText": "کمتر از ۱۰٪",
+   "targetParam": "DD_Cap",
+   "targetTemplate": "کمتر از {v}",
+   "format": "pct",
+   "statusKey": "maxDD"
+  },
+  {
+   "id": "avgChk",
+   "label": "میانگین امتیاز چک‌لیست",
+   "formula": "میانگین بندهای «بله» از ۸",
+   "targetText": "نزدیک ۸",
+   "targetParam": "Chk_N",
+   "targetTemplate": "نزدیک {v}",
+   "format": "dec",
+   "statusKey": "avgChk"
+  },
+  {
+   "id": "n",
+   "label": "معاملات بسته‌شده",
+   "format": "int",
+   "statusKey": "n"
+  },
+  {
+   "id": "avgWinR",
+   "label": "میانگین R برنده‌ها",
+   "format": "r"
+  },
+  {
+   "id": "avgLossR",
+   "label": "میانگین R بازنده‌ها",
+   "format": "r"
+  },
+  {
+   "id": "net",
+   "label": "سود/زیان خالص ($)",
+   "format": "usd"
+  },
+  {
+   "id": "sumR",
+   "label": "جمع R",
+   "format": "r"
+  },
+  {
+   "id": "withdrawSuggest",
+   "label": "برداشت پیشنهادی ($)",
+   "format": "usd",
+   "targetParam": "Withdraw_Pct"
+  }
+ ],
+ "calendar": {
+  "jalaliMonths": [
+   "فروردین",
+   "اردیبهشت",
+   "خرداد",
+   "تیر",
+   "مرداد",
+   "شهریور",
+   "مهر",
+   "آبان",
+   "آذر",
+   "دی",
+   "بهمن",
+   "اسفند"
+  ],
+  "gregorianMonths": [
+   "ژانویه",
+   "فوریه",
+   "مارس",
+   "آوریل",
+   "مه",
+   "ژوئن",
+   "ژوئیه",
+   "اوت",
+   "سپتامبر",
+   "اکتبر",
+   "نوامبر",
+   "دسامبر"
+  ],
+  "weekdaysSaturdayFirst": [
+   "شنبه",
+   "یکشنبه",
+   "دوشنبه",
+   "سه‌شنبه",
+   "چهارشنبه",
+   "پنجشنبه",
+   "جمعه"
+  ],
+  "weekdaysShort": [
+   "ش",
+   "ی",
+   "د",
+   "س",
+   "چ",
+   "پ",
+   "ج"
+  ],
+  "weekStart": "SATURDAY",
+  "weekend": [
+   "FRIDAY"
+  ],
+  "note": "No official holiday data is bundled; weekday names only."
+ },
+ "csv": {
+  "excel": {
+   "description": "Same input columns, same Persian headers, same order as the Excel journal. Formula columns are not exported.",
+   "encoding": "UTF-8 with BOM",
+   "delimiter": ",",
+   "dateFormat": "yyyy-mm-dd (Gregorian)",
+   "columns": [
+    {
+     "key": "date",
+     "header": "تاریخ ورود"
+    },
+    {
+     "key": "sym",
+     "header": "نماد"
+    },
+    {
+     "key": "side",
+     "header": "جهت"
+    },
+    {
+     "key": "kind",
+     "header": "نوع معامله"
+    },
+    {
+     "key": "setup",
+     "header": "ستاپ"
+    },
+    {
+     "key": "c1",
+     "header": "۱ روند"
+    },
+    {
+     "key": "c2",
+     "header": "۲ سه‌تایم‌فریم"
+    },
+    {
+     "key": "c3",
+     "header": "۳ نقدینگی"
+    },
+    {
+     "key": "c4",
+     "header": "۴ واگرایی"
+    },
+    {
+     "key": "c5",
+     "header": "۵ خبر"
+    },
+    {
+     "key": "c6",
+     "header": "۶ برنامه"
+    },
+    {
+     "key": "c7",
+     "header": "۷ اندازه"
+    },
+    {
+     "key": "c8",
+     "header": "۸ حال من"
+    },
+    {
+     "key": "emo",
+     "header": "احساس پیش از ورود"
+    },
+    {
+     "key": "eq",
+     "header": "سرمایهٔ حساب ($)"
+    },
+    {
+     "key": "entry",
+     "header": "قیمت ورود"
+    },
+    {
+     "key": "sl",
+     "header": "حد ضرر (SL)"
+    },
+    {
+     "key": "tp",
+     "header": "حد سود (TP)"
+    },
+    {
+     "key": "lev",
+     "header": "اهرم"
+    },
+    {
+     "key": "notl",
+     "header": "ارزش پوزیشن واقعی ($)"
+    },
+    {
+     "key": "exd",
+     "header": "تاریخ خروج (خالی = تاریخ ورود)"
+    },
+    {
+     "key": "exit",
+     "header": "قیمت خروج (میانگین)"
+    },
+    {
+     "key": "fee",
+     "header": "کارمزد + فاندینگ ($)"
+    },
+    {
+     "key": "viol",
+     "header": "نقض خط قرمز"
+    },
+    {
+     "key": "mist",
+     "header": "اشتباه اصلی"
+    },
+    {
+     "key": "lesson",
+     "header": "درس این معامله"
+    },
+    {
+     "key": "shot",
+     "header": "لینک اسکرین‌شات"
+    }
+   ],
+   "map": {
+    "date": "local date of entryTime",
+    "sym": "symbol",
+    "side": "side.csv",
+    "kind": "kind.csv",
+    "setup": "setup name",
+    "c1..c8": "'بله' when the checklist item was ticked, else 'خیر'",
+    "emo": "emotion.csv",
+    "eq": "equity",
+    "entry": "entry (actual average fill)",
+    "sl": "initial stop",
+    "tp": "tp",
+    "lev": "lev",
+    "notl": "notional",
+    "exd": "local date of exitTime (empty for open trades)",
+    "exit": "weighted average of legs",
+    "fee": "fee",
+    "viol": "first violation label or '—'",
+    "mist": "mistake.csv",
+    "lesson": "lesson",
+    "shot": "first attachment file name or empty"
+   },
+   "import": {
+    "rowIsTrade": "symbol, side, eq, entry, sl, tp, lev and notl are all present",
+    "entryTime": "date at 12:00 local time + (rowIndex seconds) to keep the row order",
+    "exitTime": "exd (or date when empty) at 12:00 local time + (rowIndex seconds), and at least 1 minute after entryTime; absent when exit is empty",
+    "legs": "[{price: exit, fraction: 1.0}]",
+    "exitReason": "TAKE_PROFIT if exit == tp, STOP_LOSS if exit == sl, otherwise MANUAL",
+    "chk": "count of 'بله' among c1..c8",
+    "gateAllowed": "recompute with the engine and the parameters in force at import time",
+    "setup": "match by name, otherwise create a grade B setup with that name",
+    "violation": "match label to V01..V10; '—' or empty means none (violationAt = exit time)",
+    "mistake": "match label to M00..M11; unknown labels are kept in lesson text and mistake = M00",
+    "account": "REAL",
+    "flags": "imported = true",
+    "duplicates": "same symbol + side + entry + sl + tp + date + notional => skip",
+    "invalid": "rows with missing numbers, entry == sl, or exit before entry are reported with the row number and skipped"
+   }
+  },
+  "full": {
+   "description": "Native Andarz export: every field the rules engine and the statistics use (JSON cells for legs, slMoves, events). Screenshots, monitor checks and plan-time switches are not included; use the encrypted backup or the JSON export for a complete copy.",
+   "encoding": "UTF-8 with BOM",
+   "delimiter": ",",
+   "columns": [
+    {
+     "key": "id"
+    },
+    {
+     "key": "account"
+    },
+    {
+     "key": "status"
+    },
+    {
+     "key": "symbol"
+    },
+    {
+     "key": "side"
+    },
+    {
+     "key": "kind"
+    },
+    {
+     "key": "setupId"
+    },
+    {
+     "key": "setupName"
+    },
+    {
+     "key": "timeframe"
+    },
+    {
+     "key": "htfTrend"
+    },
+    {
+     "key": "emotion"
+    },
+    {
+     "key": "c1"
+    },
+    {
+     "key": "c2"
+    },
+    {
+     "key": "c3"
+    },
+    {
+     "key": "c4"
+    },
+    {
+     "key": "c5"
+    },
+    {
+     "key": "c6"
+    },
+    {
+     "key": "c7"
+    },
+    {
+     "key": "c8"
+    },
+    {
+     "key": "chk"
+    },
+    {
+     "key": "equity"
+    },
+    {
+     "key": "plannedEntry"
+    },
+    {
+     "key": "entry"
+    },
+    {
+     "key": "slInitial"
+    },
+    {
+     "key": "tp"
+    },
+    {
+     "key": "lev"
+    },
+    {
+     "key": "riskPctCap"
+    },
+    {
+     "key": "gateAllowed"
+    },
+    {
+     "key": "gateReasons"
+    },
+    {
+     "key": "notional"
+    },
+    {
+     "key": "entryOrder"
+    },
+    {
+     "key": "entryTime"
+    },
+    {
+     "key": "exitTime"
+    },
+    {
+     "key": "legs"
+    },
+    {
+     "key": "fee"
+    },
+    {
+     "key": "exitReason"
+    },
+    {
+     "key": "gross"
+    },
+    {
+     "key": "net"
+    },
+    {
+     "key": "R"
+    },
+    {
+     "key": "verdict"
+    },
+    {
+     "key": "ok"
+    },
+    {
+     "key": "violations"
+    },
+    {
+     "key": "violationAt"
+    },
+    {
+     "key": "violationReport"
+    },
+    {
+     "key": "mistake"
+    },
+    {
+     "key": "emotionAfter"
+    },
+    {
+     "key": "lesson"
+    },
+    {
+     "key": "slMoves"
+    },
+    {
+     "key": "events"
+    },
+    {
+     "key": "imported"
+    }
+   ],
+   "formats": {
+    "time": "ISO-8601 with offset",
+    "checklist": "1/0",
+    "legs": "JSON array",
+    "violations": "V-codes joined by '|'",
+    "gateReasons": "codes joined by '|'"
+   }
+  }
+ },
+ "constitution": {
+  "intro": "این اساس‌نامه ۱۳ ماده دارد؛ ماده ۳ (سرمایه و ریسک) و ماده ۹ (خط‌قرمزها) از همه مهم‌ترند. اعداد پیشنهاد اولیه‌اند و بعد از ۳۰ معامله با داده‌های ژورنال تنظیم می‌شوند.",
+  "articles": [
+   {
+    "n": 1,
+    "title": "اصل بنیادین",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "1-1",
+      "text": "هدف اول من بقاست، هدف دوم سود. تا سرمایه هست، فرصت بعدی هم هست.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "1-2",
+      "text": "معاملهٔ خوب یعنی معامله‌ای که طبق قوانین انجام شد، نه معامله‌ای که سود داد. ضرر در چارچوب قوانین هزینهٔ کار است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "1-3",
+      "text": "بازار نسبت به من بی‌تفاوت است. فقط سه چیز در کنترل من است: اندازهٔ پوزیشن، نقطهٔ خروج و رفتار خودم.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "1-4",
+      "text": "معامله نکردن هم یک تصمیم است. بدون ستاپ، بدون معامله.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 2,
+    "title": "دامنهٔ فعالیت",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "2-1",
+      "text": "دو بخش جدا دارم: حساب معاملاتی (فیوچرز) و پرتفوی بلندمدت (اسپات). پول این دو هرگز قاطی نمی‌شود.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "2-2",
+      "text": "فقط روی فهرست پیگیری مکتوب (حداکثر ۱۰ نماد) معامله می‌کنم؛ نمادها باید فیلتر نقدینگی ماده ۴ را داشته باشند.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "2-3",
+      "text": "هر معامله پیش از ورود یک نوع دارد: اسکالپ، اینترادی یا سوینگ. نوع معامله و تارگتش بعد از ورود عوض نمی‌شود.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 3,
+    "title": "سرمایه و ریسک",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "3-1",
+      "text": "ریسک هر معامله ۱٪ سرمایهٔ حساب معاملاتی است (سقف ۲٪ فقط برای ستاپ درجه‌یک). ریسک یعنی ضرر دلاری در لحظهٔ خوردن حد ضرر، نه مقدار مارجین.",
+      "refs": [
+       {
+        "param": "Risk_Pct",
+        "literal": "ریسک هر معامله ۱٪",
+        "template": "ریسک هر معامله {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "Risk_Max",
+        "literal": "سقف ۲٪",
+        "template": "سقف {v}",
+        "fmt": "pct"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "3-2",
+      "text": "اندازهٔ پوزیشن فقط از فرمول زیر می‌آید. اهرم بعد از آن انتخاب می‌شود تا مارجین لازم را تأمین کند، نه برعکس.",
+      "refs": []
+     },
+     {
+      "type": "formula",
+      "text": "Position = Equity × Risk% ÷ SL distance%"
+     },
+     {
+      "type": "p",
+      "text": "ارزش پوزیشن برابر است با سرمایه ضرب در درصد ریسک، تقسیم بر درصد فاصلهٔ حد ضرر از ورود."
+     },
+     {
+      "type": "clause",
+      "id": "3-3",
+      "text": "اهرم پیش‌فرض ۳ تا ۵ برابر است و سقف مطلق ۱۰ برابر. اگر حد ضرر آن‌قدر نزدیک باشد که برای نگه داشتن مارجین زیر ۱۰٪ سرمایه اهرم بالای ۱۰ لازم شود (با ریسک ۱٪، یعنی حد ضرر کمتر از حدود ۱٪)، معامله را رد می‌کنم؛ نه اهرم را بالا می‌برم و نه ریسک را.",
+      "refs": [
+       {
+        "param": "Lev_Max",
+        "literal": "سقف مطلق ۱۰ برابر",
+        "template": "سقف مطلق {v} برابر",
+        "fmt": "int"
+       },
+       {
+        "param": "Margin_Max",
+        "literal": "زیر ۱۰٪ سرمایه",
+        "template": "زیر {v} سرمایه",
+        "fmt": "pct"
+       },
+       {
+        "param": "Lev_Max",
+        "literal": "اهرم بالای ۱۰ لازم",
+        "template": "اهرم بالای {v} لازم",
+        "fmt": "int"
+       },
+       {
+        "param": "Risk_Pct",
+        "literal": "با ریسک ۱٪",
+        "template": "با ریسک {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "@SL_Floor",
+        "literal": "کمتر از حدود ۱٪",
+        "template": "کمتر از حدود {v}",
+        "fmt": "pct"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "3-4",
+      "text": "مارجین هر پوزیشن حداکثر ۱۰٪ سرمایه است (هدف معمول ۵٪) و حالت همیشه Isolated.",
+      "refs": [
+       {
+        "param": "Margin_Max",
+        "literal": "حداکثر ۱۰٪",
+        "template": "حداکثر {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "Margin_Target",
+        "literal": "هدف معمول ۵٪",
+        "template": "هدف معمول {v}",
+        "fmt": "pct"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "3-5",
+      "text": "قیمت لیکوئید باید دست‌کم دو برابر فاصلهٔ حد ضرر از قیمت ورود فاصله داشته باشد.",
+      "refs": [
+       {
+        "param": "Liq_Mult",
+        "literal": "دست‌کم دو برابر",
+        "template": "دست‌کم {v} برابر",
+        "fmt": "word"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "3-6",
+      "text": "جمع ریسک همهٔ پوزیشن‌های باز (اگر همه حد ضرر بخورند) حداکثر ۳٪ است و حداکثر ۳ پوزیشن همزمان دارم. پوزیشن‌های هم‌جهت روی آلت‌کوین‌ها یک پوزیشن همبسته حساب می‌شوند.",
+      "refs": [
+       {
+        "param": "Open_Risk_Max",
+        "literal": "حداکثر ۳٪ است",
+        "template": "حداکثر {v} است",
+        "fmt": "pct"
+       },
+       {
+        "param": "Max_Positions",
+        "literal": "حداکثر ۳ پوزیشن",
+        "template": "حداکثر {v} پوزیشن",
+        "fmt": "int"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "3-7",
+      "text": "سقف زیان: روزانه ۳٪ (توقف تا فردا)، هفتگی ۶٪ (توقف تا هفتهٔ بعد و بازبینی)، افت ۱۰٪ از اوج سرمایه (توقف دست‌کم ۷ روز و بازگشت با ریسک ۰٫۵٪ برای ۲۰ معامله). درصدهای روزانه و هفتگی نسبت به سرمایهٔ ابتدای همان روز یا هفته‌اند. اوج و افت را از منحنی سرمایه‌ای حساب می‌کنم که فقط سود و زیان معاملات را دارد؛ برداشت و واریز جزو افت نیست.",
+      "refs": [
+       {
+        "param": "Daily_Loss_Cap",
+        "literal": "روزانه ۳٪",
+        "template": "روزانه {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "Weekly_Loss_Cap",
+        "literal": "هفتگی ۶٪",
+        "template": "هفتگی {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "DD_Cap",
+        "literal": "افت ۱۰٪",
+        "template": "افت {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "DD_Lock_Days",
+        "literal": "دست‌کم ۷ روز",
+        "template": "دست‌کم {v} روز",
+        "fmt": "int"
+       },
+       {
+        "param": "Recovery_Risk",
+        "literal": "ریسک ۰٫۵٪",
+        "template": "ریسک {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "Recovery_Trades",
+        "literal": "برای ۲۰ معامله",
+        "template": "برای {v} معامله",
+        "fmt": "int"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "3-8",
+      "text": "بعد از سود، اندازه فقط با فرمول تعیین می‌شود. بعد از سود بزرگ (بالای ۳ برابر ریسک یا ۳٪ سرمایه در یک روز) تا ۲۴ ساعت ریسک را بالا نمی‌برم.",
+      "refs": [
+       {
+        "param": "BigWin_R",
+        "literal": "بالای ۳ برابر ریسک",
+        "template": "بالای {v} برابر ریسک",
+        "fmt": "dec"
+       },
+       {
+        "param": "BigWin_Day_Pct",
+        "literal": "یا ۳٪ سرمایه",
+        "template": "یا {v} سرمایه",
+        "fmt": "pct"
+       },
+       {
+        "param": "BigWin_Hold_H",
+        "literal": "تا ۲۴ ساعت",
+        "template": "تا {v} ساعت",
+        "fmt": "int"
+       }
+      ]
+     },
+     {
+      "type": "example",
+      "title": "مثال عددی (فرضی)",
+      "paragraphs": [
+       "معاملهٔ لانگ با سرمایه ۲٬۰۰۰ دلار. ورود ۱۰۰، حد ضرر ۹۶ (فاصلهٔ ۴٪) و حد سود ۱۰۸ (سود دو برابر ضرر).",
+       "ریسک ۱٪ برابر ۲۰ دلار است؛ پس ارزش پوزیشن = ۲۰ ÷ ۰٫۰۴ = ۵۰۰ دلار. با اهرم ۵ مارجین ۱۰۰ دلار می‌شود (۵٪ سرمایه) و قیمت لیکوئید حدود ۸۰٫۵ است، یعنی حدود ۴٫۹ برابر فاصلهٔ حد ضرر. قیدهای ریسک ۱٪، مارجین زیر ۱۰٪ و فاصلهٔ لیکوئید هر سه برقرارند.",
+       "اگر حد ضرر بخورد، ضرر ۵۰۰ × ۴٪ = ۲۰ دلار است، یعنی همان ریسک ۱٪. اگر حد سود بخورد، سود ناخالص ۵۰۰ × ۸٪ = ۴۰ دلار است؛ با کارمزد و فاندینگ فرضی ۰٫۶ دلار، سود خالص ۳۹٫۴ دلار می‌ماند، یعنی حدود ۱٫۹۷ برابر ریسک."
+      ]
+     }
+    ]
+   },
+   {
+    "n": 4,
+    "title": "شرایط ورود",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "پیش از هر ورود، هر هشت بند زیر باید «بله» باشد؛ وگرنه معامله نمی‌کنم."
+     },
+     {
+      "type": "list",
+      "ordered": true,
+      "items": [
+       {
+        "id": "4.1",
+        "text": "روند تایم‌فریم بالا مشخص و هم‌جهت با معامله است (خلاف روند فقط با دلیل مکتوب و نصف سایز).",
+        "refs": []
+       },
+       {
+        "id": "4.2",
+        "text": "سه تایم‌فریم بررسی شد (جهت، ستاپ، ورود) و ورودم روبه‌روی مقاومت یا حمایت تایم‌فریم بالا نیست.",
+        "refs": []
+       },
+       {
+        "id": "4.3",
+        "text": "فیلتر نقدینگی برقرار است: حجم معاملات ۲۴ ساعت اخیر دست‌کم ۱۰۰ میلیون دلار و حجم نسبی بین ۰٫۷ و ۳.",
+        "refs": []
+       },
+       {
+        "id": "4.4",
+        "text": "واگرایی حجم و قیمت بررسی شد؛ اگر هست، ورود هم‌جهت با کندل بزرگ بدون تأیید ممنوع است.",
+        "refs": []
+       },
+       {
+        "id": "4.5",
+        "text": "در بازهٔ ۳۰ دقیقه پیش تا ۶۰ دقیقه بعد از رویداد مهم اقتصادی (فدرال رزرو، تورم، اشتغال) نیستم.",
+        "refs": []
+       },
+       {
+        "id": "4.6",
+        "text": "ورود، حد ضرر، حد سود و R:R (حداقل ۱ به ۱٫۵) پیش از ورود نوشته شده است.",
+        "refs": [
+         {
+          "param": "RR_Min",
+          "literal": "حداقل ۱ به ۱٫۵",
+          "template": "حداقل ۱ به {v}",
+          "fmt": "dec"
+         }
+        ]
+       },
+       {
+        "id": "4.7",
+        "text": "اندازهٔ پوزیشن از فرمول آمده و قیدهای ماده ۳ برقرار است (اهرم حداکثر ۱۰، ایزوله، لیکوئید دو برابر فاصلهٔ حد ضرر، ریسک باز حداکثر ۳٪).",
+        "refs": [
+         {
+          "param": "Lev_Max",
+          "literal": "اهرم حداکثر ۱۰",
+          "template": "اهرم حداکثر {v}",
+          "fmt": "int"
+         },
+         {
+          "param": "Liq_Mult",
+          "literal": "لیکوئید دو برابر",
+          "template": "لیکوئید {v} برابر",
+          "fmt": "word"
+         },
+         {
+          "param": "Open_Risk_Max",
+          "literal": "ریسک باز حداکثر ۳٪",
+          "template": "ریسک باز حداکثر {v}",
+          "fmt": "pct"
+         }
+        ]
+       },
+       {
+        "id": "4.8",
+        "text": "حال خودم خوب است: گرسنه، عصبانی، تنها یا خسته نیستم و هیجان سود یا ضرر قبلی را ندارم.",
+        "refs": []
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "n": 5,
+    "title": "اجرای سفارش",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "5-1",
+      "text": "ورود با سفارش Limit در ناحیه‌ای که از قبل تعیین کرده‌ام؛ ورود پله‌ای با ۲ تا ۳ سفارش مجاز است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "5-2",
+      "text": "Market فقط برای خروج اضطراری یا ورود بعد از شکست تأییدشده است. تعقیب کندل ممنوع است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "5-3",
+      "text": "برای شکست‌ها منتظر بسته شدن کندل تأییدی می‌مانم، چون فیک‌بریک و شکار استاپ زیاد است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "5-4",
+      "text": "حد ضرر و حد سود همان لحظهٔ ورود در صرافی ثبت می‌شود، نه در ذهن. حد ضرر پشت ساختار به‌علاوهٔ حدود ۰٫۵ تا ۱ ATR است، نه روی عدد رُند.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "5-5",
+      "text": "معاملهٔ از دست‌رفته ضرر نیست و دنبالش نمی‌دوم.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 6,
+    "title": "مدیریت پوزیشن",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "6-1",
+      "text": "در 1R تا 1.5R، ۵۰٪ پوزیشن را می‌بندم و حد ضرر بقیه را به نقطهٔ ورود (به‌علاوهٔ کارمزد) می‌برم.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "6-2",
+      "text": "بقیه را با حد ضرر دنبال‌شونده (ساختار یا ATR) تا حد سود نگه می‌دارم. قفل ۵۰ تا ۷۰٪ سود فقط برای حرکت‌های بالای 3R است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "6-3",
+      "text": "حد ضرر فقط به سمت سود حرکت می‌کند؛ هرگز دورتر یا حذف نمی‌شود.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "6-4",
+      "text": "میانگین‌گیری روی پوزیشن ضررده و اضافه کردن مارجین به آن ممنوع است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "6-5",
+      "text": "اگر ظرف ۱۰ کندل تایم‌فریم ورود (پیش‌فرض) معامله به سمت هدف نرفت، خارج می‌شوم.",
+      "refs": [
+       {
+        "param": "Time_Stop_Candles",
+        "literal": "ظرف ۱۰ کندل",
+        "template": "ظرف {v} کندل",
+        "fmt": "int"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "6-6",
+      "text": "ضرر را به «سرمایه‌گذاری بلندمدت» تبدیل نمی‌کنم.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "6-7",
+      "text": "مراقبت یعنی حد ضرر و حد سود فعال در صرافی، هشدار قیمت و ساعت‌های بازبینی مشخص. اگر نمی‌توانم پایش کنم (خواب، سفر، ناپایداری اینترنت)، پوزیشن باز نمی‌کنم.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 7,
+    "title": "خروج و برداشت سود",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "7-1",
+      "text": "سود وقتی سود است که محقق شده باشد؛ سود باز فقط یک عدد روی صفحه است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "7-2",
+      "text": "هر ماه ۳۰٪ از سود محقق‌شده (قابل تنظیم تا ۵۰٪) به اسپات یا کیف پول شخصی منتقل می‌شود.",
+      "refs": [
+       {
+        "param": "Withdraw_Pct",
+        "literal": "هر ماه ۳۰٪",
+        "template": "هر ماه {v}",
+        "fmt": "pct"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "7-3",
+      "text": "وقتی در سود بزرگ هستم و دلم «بیشتر» می‌خواهد، بخشی را فوراً می‌بندم؛ طمع علامت است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "7-4",
+      "text": "تا حد سود یا ابطال، بین این دو تصمیم احساسی نمی‌گیرم.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 8,
+    "title": "رفتار و روان",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "8-1",
+      "text": "حداکثر ۳ معامله در روز. بعد از هر حد ضرر ۳۰ دقیقه توقف؛ بعد از دو حد ضرر پیاپی، پایان معاملات همان روز.",
+      "refs": [
+       {
+        "param": "Max_Trades_Day",
+        "literal": "حداکثر ۳ معامله",
+        "template": "حداکثر {v} معامله",
+        "fmt": "int"
+       },
+       {
+        "param": "Cooldown_Min",
+        "literal": "۳۰ دقیقه توقف",
+        "template": "{v} دقیقه توقف",
+        "fmt": "int"
+       },
+       {
+        "param": "Consec_Stops",
+        "literal": "بعد از دو حد ضرر",
+        "template": "بعد از {v} حد ضرر",
+        "fmt": "word"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "8-2",
+      "text": "معاملهٔ انتقامی و معامله برای جبران ضرر ممنوع است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "8-3",
+      "text": "قاعدهٔ دعا: اگر خودم را در حال امیدواری یا دعا کردن دیدم، یعنی برنامه ندارم؛ نصف پوزیشن را می‌بندم.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "8-4",
+      "text": "پیش از هر ورود، احساسم را در ژورنال ثبت می‌کنم (آرام، فومو، طمع، ترس، انتقام، کسل).",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "8-5",
+      "text": "برای ضرر دنبال مقصر بیرونی نمی‌گردم؛ اول بررسی می‌کنم کدام قانون را نقض کردم.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 9,
+    "title": "خط‌قرمزها",
+    "blocks": [
+     {
+      "type": "p",
+      "text": "نقض هر کدام یعنی بسته شدن فوری معامله و اجرای ماده ۱۳:"
+     },
+     {
+      "type": "list",
+      "ordered": true,
+      "items": [
+       {
+        "id": "9.1",
+        "text": "معامله بدون حد ضرر ثبت‌شده در صرافی.",
+        "refs": []
+       },
+       {
+        "id": "9.2",
+        "text": "ریسک بیش از ۲٪ در یک معامله.",
+        "refs": [
+         {
+          "param": "Risk_Max",
+          "literal": "بیش از ۲٪",
+          "template": "بیش از {v}",
+          "fmt": "pct"
+         }
+        ]
+       },
+       {
+        "id": "9.3",
+        "text": "اهرم بالای ۱۰ یا حالت Cross.",
+        "refs": [
+         {
+          "param": "Lev_Max",
+          "literal": "اهرم بالای ۱۰",
+          "template": "اهرم بالای {v}",
+          "fmt": "int"
+         }
+        ]
+       },
+       {
+        "id": "9.4",
+        "text": "دور کردن یا حذف حد ضرر.",
+        "refs": []
+       },
+       {
+        "id": "9.5",
+        "text": "میانگین‌گیری روی ضرر یا اضافه کردن مارجین به پوزیشن ضررده.",
+        "refs": []
+       },
+       {
+        "id": "9.6",
+        "text": "ورود بدون چک‌لیست (فومو).",
+        "refs": []
+       },
+       {
+        "id": "9.7",
+        "text": "معاملهٔ انتقامی بعد از ضرر.",
+        "refs": []
+       },
+       {
+        "id": "9.8",
+        "text": "پوزیشن اهرمی رهاشده، بدون حد ضرر، هنگام خواب یا سفر.",
+        "refs": []
+       },
+       {
+        "id": "9.9",
+        "text": "تبدیل معاملهٔ ضررده به نگه‌داری بلندمدت.",
+        "refs": []
+       },
+       {
+        "id": "9.10",
+        "text": "معامله با پولی که از دست دادنش برایم قابل تحمل نیست.",
+        "refs": []
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "n": 10,
+    "title": "امنیت و ریسک عملیاتی",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "10-1",
+      "text": "احراز هویت دومرحله‌ای (2FA)، رمز یکتا و هشدار ورود روی حساب صرافی فعال است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "10-2",
+      "text": "کلید API فقط با دسترسی معامله و بدون اجازهٔ برداشت ساخته می‌شود (و در صورت امکان با محدودیت IP).",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "10-3",
+      "text": "سرمایه‌ای که برای معامله لازم نیست روی صرافی نمی‌ماند؛ آدرس‌های برداشت در فهرست سفید است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "10-4",
+      "text": "صرافی هم ریسک دارد (هک، توقف برداشت، مسدودی حساب)؛ تا جای ممکن همهٔ سرمایه را روی یک صرافی نگه نمی‌دارم.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "10-5",
+      "text": "هنگام ناپایداری اینترنت یا برق، پوزیشن اهرمی جدید باز نمی‌کنم. حد ضرر همیشه در خود صرافی ثبت است.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "10-6",
+      "text": "کلید خصوصی یا عبارت بازیابی را به هیچ‌کس و هیچ سایتی نمی‌دهم. سیگنال‌دهنده‌ها و لینک‌های ناشناس مشکوک‌اند.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 11,
+    "title": "سرمایه‌گذاری بلندمدت (اسپات)",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "11-1",
+      "text": "بلندمدت یعنی اسپات، نه فیوچرز (به‌خاطر هزینهٔ فاندینگ و خطر لیکوئید).",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "11-2",
+      "text": "هر دارایی تز مکتوب، شرط ابطال و سقف وزن دارد (مثلاً هر آلت‌کوین حداکثر ۵٪ پرتفوی).",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "11-3",
+      "text": "ورود و خروج پله‌ای است و هر فصل بازبینی می‌شود.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "11-4",
+      "text": "ردپای سرمایه‌گذاران بزرگ (جریان ETF، ذخایر صرافی، Open Interest) ورودی تحلیل است، نه دلیل خرید.",
+      "refs": []
+     }
+    ]
+   },
+   {
+    "n": 12,
+    "title": "بازبینی و اصلاح",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "12-1",
+      "text": "روزانه (۵ دقیقه): همهٔ معاملات امروز در ژورنال کامل می‌شود.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "12-2",
+      "text": "هفتگی (۳۰ دقیقه): یک اشتباه تکراری و یک قانون برای بهبود مشخص می‌شود.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "12-3",
+      "text": "ماهانه (۶۰ دقیقه): شاخص‌ها محاسبه و آستانه‌ها (حجم، R:R، ریسک) با داده تنظیم می‌شود.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "12-4",
+      "text": "دربارهٔ هر ستاپ فقط بعد از دست‌کم ۳۰ معامله قضاوت می‌کنم.",
+      "refs": [
+       {
+        "param": "Min_Trades",
+        "literal": "دست‌کم ۳۰ معامله",
+        "template": "دست‌کم {v} معامله",
+        "fmt": "int"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "12-5",
+      "text": "قوانین فقط در جلسهٔ بازبینی تغییر می‌کنند، نه وسط معامله و نه بعد از ضرر.",
+      "refs": []
+     },
+     {
+      "type": "clause",
+      "id": "12-6",
+      "text": "ستاپ جدید ۲۰ معامله با ریسک ۰٫۲۵٪ (یا در دمو) آزموده می‌شود.",
+      "refs": [
+       {
+        "param": "Setup_Test_Trades",
+        "literal": "ستاپ جدید ۲۰ معامله",
+        "template": "ستاپ جدید {v} معامله",
+        "fmt": "int"
+       },
+       {
+        "param": "Setup_Test_Risk",
+        "literal": "ریسک ۰٫۲۵٪",
+        "template": "ریسک {v}",
+        "fmt": "pct"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "n": 13,
+    "title": "ضمانت اجرا",
+    "blocks": [
+     {
+      "type": "clause",
+      "id": "13-1",
+      "text": "نقض خط قرمز: معامله فوراً بسته می‌شود، ۴۸ ساعت توقف، و یک گزارش یک‌پاراگرافی («چه شد، چرا، چه می‌کنم») در ژورنال ثبت می‌شود.",
+      "refs": [
+       {
+        "param": "Violation_Pause_H",
+        "literal": "۴۸ ساعت توقف",
+        "template": "{v} ساعت توقف",
+        "fmt": "int"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "13-2",
+      "text": "سه نقض در یک ماه: ریسک ۰٫۵٪ برای ۲۰ معامله بعدی.",
+      "refs": [
+       {
+        "param": "Violation_Trigger",
+        "literal": "سه نقض",
+        "template": "{v} نقض",
+        "fmt": "word"
+       },
+       {
+        "param": "Reduced_Risk",
+        "literal": "ریسک ۰٫۵٪",
+        "template": "ریسک {v}",
+        "fmt": "pct"
+       },
+       {
+        "param": "Reduced_Trades",
+        "literal": "برای ۲۰ معامله",
+        "template": "برای {v} معامله",
+        "fmt": "int"
+       }
+      ]
+     },
+     {
+      "type": "clause",
+      "id": "13-3",
+      "text": "معیار اصلی موفقیت ماهانه «درصد رعایت قوانین» است (هدف ۹۰٪ یا بیشتر)، نه سود.",
+      "refs": [
+       {
+        "param": "Compliance_Target",
+        "literal": "هدف ۹۰٪",
+        "template": "هدف {v}",
+        "fmt": "pct"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "pledge": {
+   "raw": "من، ............، به این اساس‌نامه (نسخهٔ ۱) متعهد می‌شوم. تاریخ: ............ | سرمایهٔ حساب معاملاتی در شروع: ............ | ریسک هر معامله: ............٪ | بازبینی بعدی: بعد از ۳۰ معامله.",
+   "template": "من، {name}، به این اساس‌نامه (نسخهٔ ۱) متعهد می‌شوم. تاریخ: {date} | سرمایهٔ حساب معاملاتی در شروع: {startEquity} | ریسک هر معامله: {riskPct} | بازبینی بعدی: بعد از ۳۰ معامله.",
+   "fields": [
+    "name",
+    "date",
+    "startEquity",
+    "riskPct"
+   ],
+   "version": 1
+  }
+ },
+ "learn": {
+  "summary": {
+   "thesis": "همهٔ تجربیات تو به یک اصل برمی‌گردد: اول بقا، بعد سود. هر قانونی که نوشته‌ای یا جلوی زیان بزرگ را می‌گیرد یا جلوی رفتار احساسی را.",
+   "axesIntro": "تجربیات در چهار محور جمع می‌شوند:",
+   "axes": [
+    {
+     "title": "حفظ سرمایه",
+     "text": "اهرم و مارجین کم، حالت ایزوله، حد سود و حد ضرر در هر معامله."
+    },
+    {
+     "title": "تحلیل پیش از ورود",
+     "text": "روند، چند تایم‌فریم، حجم و واگرایی، اخبار."
+    },
+    {
+     "title": "رفتار",
+     "text": "صبر، بی‌احساسی، دوری از طمع و فومو."
+    },
+    {
+     "title": "مدیریت سود",
+     "text": "سیو سود، ریسک‌فری، سود نقد، رها نکردن پوزیشن باز."
+    }
+   ],
+   "lessonsIntro": "دوازده درسی که از یادداشت‌های تو بیرون می‌آید:",
+   "lessons": [
+    {
+     "n": 1,
+     "text": "صعود قیمت همراه با کاهش حجم یعنی احتیاط، نه ورود."
+    },
+    {
+     "n": 2,
+     "text": "بدون روند و بدون بررسی چند تایم‌فریم وارد نشو."
+    },
+    {
+     "n": 3,
+     "text": "اهرم بالا نزن، مارجین کم بزن، همیشه ایزوله."
+    },
+    {
+     "n": 4,
+     "text": "هر معامله حد سود و حد ضرر دارد."
+    },
+    {
+     "n": 5,
+     "text": "با سفارش Limit بخر و بفروش؛ زیاد با Market نخر."
+    },
+    {
+     "n": 6,
+     "text": "بازار سیکل دارد: یک قیمت چند بار دیده می‌شود، و اگر خیلی در سودی احتمالاً وقت خروج است."
+    },
+    {
+     "n": 7,
+     "text": "اخبار (فدرال رزرو، خاورمیانه، سیاست آمریکا) نوسان شدید می‌سازند؛ فیوچرز همیشه با اهرم پایین."
+    },
+    {
+     "n": 8,
+     "text": "پشت هر معاملهٔ پرسودِ بسته‌نشده یک ضرر سنگین خوابیده است؛ یک دلار نقد از ده هزار دلار نسیه بهتر است."
+    },
+    {
+     "n": 9,
+     "text": "بعد از سود، ریسک‌فری کن و حد ضرر را بالا ببر."
+    },
+    {
+     "n": 10,
+     "text": "پوزیشن باز را رها نکن و مراقبش باش."
+    },
+    {
+     "n": 11,
+     "text": "بعد از یک سود بزرگ، مراقب بزرگ شدن بی‌صدای اندازهٔ معاملهٔ بعدی باش."
+    },
+    {
+     "n": 12,
+     "text": "سرمایه‌گذاری بلندمدت یعنی اسپات، نه فیوچرز."
+    }
+   ],
+   "keyInsights": "چهار نکته در تجربهٔ تو از بقیه ارزشمندتر است و در اساس‌نامه به قانون تبدیل شده: بزرگ شدن بی‌صدای اندازهٔ پوزیشن بعد از سود، «دعا کردن» داخل معامله به‌عنوان نشانهٔ نداشتن برنامه، هماهنگی تارگت با تایم‌فریم ورود، و فرق سود نقد با سود روی کاغذ."
+  },
+  "review": {
+   "intro": "پنج مورد از تجربیات تو نیاز به اصلاح جدی دارد و مهم‌ترینش اهرم ۱۰ تا ۱۲ است؛ بقیه درست‌اند و فقط باید عددی و قابل‌اجرا شوند. هر مورد چهار بخش دارد: تجربهٔ تو، اصلاح، دلیل، راه‌حل.",
+   "items": [
+    {
+     "n": 1,
+     "title": "واگرایی حجم و قیمت",
+     "status": "نیازمند اصلاح",
+     "needsFix": true,
+     "important": false,
+     "experience": "صعود قیمت با حجمِ رو به کاهش، حقهٔ صرافی‌ها و مارکت‌میکرهاست؛ صبر کن، ارز دیگری ببین، و بعد از برگشت شورت بگیر.",
+     "correction": "این وضعیت «تأیید ضعیف» است، نه الزاماً دستکاری. واگرایی زمان ورود را نمی‌گوید و می‌تواند مدتی ادامه یابد؛ پس دیدنش شرط شورت نیست.",
+     "reason": "نیت مارکت‌میکر را نمی‌شود سنجید، اما همسو نبودن حجم با قیمت را می‌شود. شورت زودهنگام در روند صعودی یکی از رایج‌ترین راه‌های ضرر است.",
+     "solution": "واگرایی را «هشدار» حساب کن: ورود هم‌جهت با کندل بزرگ تا تأیید ممنوع است. شورت فقط بعد از تأیید برگشت (شکست ساختار یا بسته شدن زیر یک سطح کلیدی)، با نصف سایز و حد ضرر مشخص. فاندینگ بالا و رشد Open Interest کنار واگرایی یعنی ازدحام در لانگ‌ها."
+    },
+    {
+     "n": 2,
+     "title": "حجم و نقدینگی توکن",
+     "status": "تکمیل",
+     "needsFix": false,
+     "important": false,
+     "experience": "حجم نباید خیلی کم یا خیلی زیاد باشد، و برایش یک پارامتر (مثلاً درصد) لازم است.",
+     "correction": "دو پارامتر لازم است: نقدینگی مطلق و حجم نسبی.",
+     "reason": "حجم کم یعنی اسلیپیج، اسپرد بزرگ و شکار استاپ آسان‌تر. جهش غیرعادی حجم یعنی خبر یا ازدحام و نوسان شدید.",
+     "solution": "پیشنهاد اولیه: حجم معاملات فیوچرز در ۲۴ ساعت اخیر دست‌کم ۱۰۰ میلیون دلار، و حجم نسبی (حجم فعلی ÷ میانگین ۲۰ دوره) بین ۰٫۷ و ۳. بیرون این بازه معامله نکن مگر با دلیل مکتوب. بعد از ۳۰ معامله آستانه‌ها را با ژورنال تنظیم کن."
+    },
+    {
+     "n": 3,
+     "title": "روند و چند تایم‌فریم",
+     "status": "درست، با تکمیل",
+     "needsFix": false,
+     "important": false,
+     "experience": "بدون در نظر گرفتن روند وارد نشو؛ ارز را در چند تایم‌فریم ببین؛ با تارگت روزانه اسکالپ نکن.",
+     "correction": "هر سه درست است؛ فقط باید ساختار بگیرد.",
+     "reason": "معاملهٔ خلاف روند احتمال موفقیت کمتر و حد ضرر بزرگ‌تر دارد. تارگت روزانه با ورود کوتاه‌مدت هماهنگ نیست و معامله را به نگه‌داشتن ضررده می‌کشاند.",
+     "solution": "مدل سه‌تایم‌فریمی: جهت (روزانه یا ۴ ساعته)، ستاپ (۱ ساعته)، ورود (۱۵ یا ۵ دقیقه). روند را با ساختار (سقف و کف بالاتر یا پایین‌تر) و EMA ۵۰ و ۲۰۰ تعیین کن؛ برای آلت‌کوین‌ها روند بیت‌کوین را هم ببین. نوع معامله (اسکالپ، اینترادی، سوینگ) پیش از ورود ثبت می‌شود و بعدش عوض نمی‌شود."
+    },
+    {
+     "n": 4,
+     "title": "نحوهٔ سفارش‌گذاری",
+     "status": "نیازمند اصلاح",
+     "needsFix": true,
+     "important": false,
+     "experience": "ارزان‌ترین قیمت بخر، گران‌ترین قیمت بفروش، و زیاد با Market نخر.",
+     "correction": "کف و سقف را از قبل نمی‌شود دانست. هدف را بگذار «ورود با Limit در ناحیهٔ از پیش تعیین‌شده».",
+     "reason": "دنبال بهترین قیمت بودن معاملهٔ خوب را از دست می‌دهد و بعد فومو و تعقیب قیمت می‌آورد. Limit کارمزد کمتر (Maker) و اسلیپیج کمتر دارد.",
+     "solution": "ورود پله‌ای با ۲ تا ۳ سفارش Limit در ناحیه. Market فقط برای خروج اضطراری یا ورود بعد از شکست تأییدشده. معاملهٔ از دست‌رفته ضرر نیست."
+    },
+    {
+     "n": 5,
+     "title": "اهرم و مارجین",
+     "status": "نیازمند اصلاح (مهم‌ترین مورد)",
+     "needsFix": true,
+     "important": true,
+     "experience": "اهرم حداکثر ۱۰ تا ۱۲ و مارجین حداکثر ۵ تا ۱۰٪ سرمایه.",
+     "correction": "این اعداد با «اهرم پایین» که خودت جای دیگر نوشته‌ای نمی‌خواند؛ ۱۰ تا ۱۲ برابر پایین نیست. معیار اصلی هم اهرم نیست، «ریسک هر معامله» است: ضرری که با خوردن حد ضرر از سرمایه کم می‌شود.",
+     "reason": "با اهرم ۱۰ حدود ۹٫۵٪ حرکت خلاف جهت پوزیشن را لیکوئید می‌کند؛ در کریپتو، به‌خصوص آلت‌کوین‌ها، حرکت ۱۰٪ در یک روز یا یک شمع خبری عجیب نیست. مارجین ۱۰٪ با اهرم ۱۲ یعنی پوزیشنی به اندازهٔ ۱۲۰٪ سرمایه: حد ضرر ۵٪ یعنی ۶٪ سرمایه در یک معامله.",
+     "solution": "ریسک هر معامله ۱٪ سرمایه؛ اندازهٔ پوزیشن از فرمول (ماده ۳)؛ اهرم پیش‌فرض ۳ تا ۵ و سقف مطلق ۱۰؛ قیمت لیکوئید دست‌کم دو برابر فاصلهٔ حد ضرر از ورود. سقف مارجین ۵ تا ۱۰٪ تو می‌ماند، به‌عنوان قید دوم.",
+     "chart": {
+      "id": "leverage_liquidation",
+      "caption": "محاسبهٔ تقریبی برای لانگ ایزوله با نرخ مارجین نگهداری ۰٫۵٪؛ عدد دقیق در ماشین‌حساب صرافی"
+     },
+     "after": "هر چه اهرم بالاتر برود، جای مجاز حد ضرر تنگ‌تر می‌شود؛ با اهرم‌های ۲۰ و ۵۰ تقریباً هر نوسان عادی آن را می‌زند."
+    },
+    {
+     "n": 6,
+     "title": "حالت ایزوله",
+     "status": "درست، با تکمیل",
+     "needsFix": false,
+     "important": false,
+     "experience": "همیشه Isolated، تا در ضرر یا لیکوئید فقط مارجین همان پوزیشن درگیر شود.",
+     "correction": "درست است. ایزوله سقف ضرر را «مارجین پوزیشن» می‌کند، اما جای حد ضرر را نمی‌گیرد.",
+     "reason": "لیکوئید شدن یعنی از دست رفتن کل مارجین پوزیشن، که معمولاً چند برابر ریسک ۱٪ است.",
+     "solution": "ایزوله به‌علاوهٔ حد ضرر واقعی. اضافه کردن مارجین به پوزیشن ضررده ممنوع است، چون یعنی نپذیرفتن ضرر."
+    },
+    {
+     "n": 7,
+     "title": "حد سود و حد ضرر",
+     "status": "درست، با تکمیل",
+     "needsFix": false,
+     "important": false,
+     "experience": "هر معامله باید حد سود و حد ضرر داشته باشد.",
+     "correction": "درست؛ دو چیز اضافه می‌شود: جای حد ضرر و حداقل نسبت سود به ضرر (R:R).",
+     "reason": "حد ضررِ دلخواه (مثلاً «۳٪») به ساختار بازار ربطی ندارد و راحت شکار می‌شود. با R:R ضعیف، حتی درصد برد بالا هم بازنده می‌شود.",
+     "solution": "حد ضرر پشت نقطه‌ای که ایدهٔ معامله را باطل می‌کند (پشت ساختار به‌علاوهٔ حدود ۰٫۵ تا ۱ ATR)، نه روی عدد رُند. حداقل R:R برابر ۱ به ۱٫۵ و ترجیحاً ۱ به ۲. R یعنی ریسک اولیهٔ همان معامله؛ سود 2R یعنی دو برابر آنچه ریسک کرده‌ای. با ۱ به ۲ درصد برد سربه‌سر حدود ۳۳٪ است و با ۱ به ۱ می‌شود ۵۰٪. حد ضرر فقط به سمت سود حرکت می‌کند و هر دو سفارش همان لحظهٔ ورود در صرافی ثبت می‌شوند."
+    },
+    {
+     "n": 8,
+     "title": "اخبار و رویدادها",
+     "status": "درست، با اصلاح یک اصطلاح",
+     "needsFix": false,
+     "important": false,
+     "experience": "بازار به اخبار (فدرال رزرو، خاورمیانه، سیاست آمریکا) حساس است؛ فیوچرز همیشه با اهرم پایین، تا «liquidity price» کاهش یابد و خبر معامله را نزند.",
+     "correction": "اصطلاح درست liquidation price (قیمت لیکوئید) است، و هدف «دورتر کردن» آن از قیمت ورود است: برای لانگ پایین‌تر، برای شورت بالاتر. اخبار را باید مدیریت کرد، نه فقط تحمل.",
+     "reason": "هنگام اعلام خبر اسپرد باز می‌شود و حد ضرر با اسلیپیج اجرا می‌شود. فاصلهٔ تا لیکوئید حاشیهٔ ایمنی توست.",
+     "solution": "هر صبح تقویم اقتصادی را ببین (جلسهٔ فدرال رزرو، تورم آمریکا، آمار اشتغال). از ۳۰ دقیقه پیش تا ۶۰ دقیقه بعد از رویداد مهم ورود جدید نکن و پوزیشن باز را کوچک یا بسته نگه دار. در روز خبرهای ناگهانی (مثل تنش‌های منطقه) ریسک را نصف کن."
+    },
+    {
+     "n": 9,
+     "title": "سیکل، خروج در سود زیاد، ریسک‌فری",
+     "status": "نیازمند اصلاح",
+     "needsFix": true,
+     "important": false,
+     "experience": "بازار سیکل دارد و اگر خیلی در سودی وقت خروج است؛ بعد از سود ریسک‌فری کن و حد ضرر را روی ۵۰ تا ۷۰٪ سود ببر؛ همیشه سیو سود کن.",
+     "correction": "هدف درست است، اما «سود زیاد» معیار خروج نیست و حد ضرر روی ۵۰ تا ۷۰٪ سود برای نوسان معمول کریپتو تنگ است. قانون خروج را باید پیش از ورود نوشت.",
+     "reason": "بستن زودهنگام برنده‌ها و نگه‌داشتن بازنده‌ها امید ریاضی را خراب می‌کند. حد ضرر روی نقطهٔ ورود یا نزدیک سود، با یک پولبک عادی اجرا می‌شود و معاملهٔ درست را می‌کشد.",
+     "solution": "خروج پلکانی: ۵۰٪ پوزیشن در 1R تا 1.5R بسته می‌شود و حد ضرر بقیه به نقطهٔ ورود (به‌علاوهٔ کارمزد) می‌رود؛ بقیه با حد ضرر دنبال‌شونده (ساختار یا ATR) تا حد سود می‌ماند. قفل ۵۰ تا ۷۰٪ سود فقط برای حرکت‌های بالای 3R. «سیکل» را این‌گونه به کار ببر: قیمت‌ها دوباره آزمون می‌شوند، پس در ریتست وارد شو و قیمت را تعقیب نکن."
+    },
+    {
+     "n": 10,
+     "title": "بزرگ شدن بی‌صدای اندازه بعد از سود",
+     "status": "درست",
+     "needsFix": false,
+     "important": false,
+     "experience": "بعد از یک معاملهٔ پرسود، از روی عادت درصد ثابتی می‌گذاری و اندازه مدام بزرگ‌تر می‌شود.",
+     "correction": "بینش مهمی است؛ فقط راه‌حل مکتوب لازم دارد.",
+     "reason": "سود اعتمادبه‌نفس کاذب می‌سازد («پول بازار») و با اهرم، این چرخه به یک ضرر بزرگ ختم می‌شود.",
+     "solution": "اندازه همیشه از فرمول ریسک ۱٪ می‌آید، نه از «درصد ثابت» و عادت. سرمایهٔ حساب را قبل از هر ورود از صرافی ببین و در ژورنال بنویس. بعد از سود بزرگ ۲۴ ساعت ریسک را بالا نبر."
+    },
+    {
+     "n": 11,
+     "title": "صبر، فومو و مراقبت از پوزیشن",
+     "status": "درست، با تبدیل به قانون",
+     "needsFix": false,
+     "important": false,
+     "experience": "صبر مهم‌ترین عامل بقاست؛ دعا کردن برای سود بیشتر یعنی نزدیکی به لیکوئید؛ پوزیشن باز را رها نکن.",
+     "correction": "درست؛ اما «بی‌احساس باش» تنها عملی نیست، و «مراقب باش» نباید به خیره شدن به صفحه تبدیل شود. همچنین بیشتر ضررها از اهرم زیاد، نبود حد ضرر و معاملهٔ انتقامی می‌آید، نه فقط از مارکت‌میکرها.",
+     "reason": "احساسات را قانون مهار می‌کند، نه نصیحت. پایش مداوم خودش به معاملهٔ زیاد و جابه‌جا کردن حد ضرر می‌انجامد.",
+     "solution": "سقف ۳ معامله در روز؛ ۳۰ دقیقه توقف بعد از هر حد ضرر؛ پایان روز بعد از دو حد ضرر پیاپی. «قاعدهٔ دعا»: به محض امید یا دعا، نصف پوزیشن را ببند. مراقبت یعنی حد ضرر و حد سود فعال در صرافی، هشدار قیمت و ساعت‌های بازبینی مشخص؛ اگر نمی‌توانی پایش کنی، پوزیشن باز نکن."
+    },
+    {
+     "n": 12,
+     "title": "سرمایه‌گذاران بزرگ و اسپات",
+     "status": "نیازمند اصلاح",
+     "needsFix": true,
+     "important": false,
+     "experience": "بلک‌راک و صندوق‌های ETF ریسک نمی‌کنند و فقط برای چند برابر شدن وارد می‌شوند؛ پس بلندمدت را اسپات بخر، نه فیوچرز.",
+     "correction": "نتیجه (بلندمدت = اسپات) درست است، مقدمه نه. نهادها هم ریسک می‌کنند و آن را با تنوع، سقف وزن و افق بلند مدیریت می‌کنند. ورود ETF بیشتر پاسخ به تقاضای مشتریان است، نه پیش‌بینی چند برابر شدن یک توکن.",
+     "reason": "اگر ورود نهادها را «سیگنال چند برابر شدن» بدانی، بدون سنجش دنبالشان می‌روی و ممکن است در اوج وارد شوی.",
+     "solution": "جریان ETF، ذخایر صرافی‌ها و Open Interest را فقط ورودی تحلیل بگیر. برای هر دارایی بلندمدت تز مکتوب، شرط ابطال و سقف وزن داشته باش (مثلاً هر آلت‌کوین حداکثر ۵٪ پرتفوی)، و پله‌ای وارد و خارج شو."
+    },
+    {
+     "n": 13,
+     "title": "سود نقد در برابر سود روی کاغذ",
+     "status": "درست، با تکمیل",
+     "needsFix": false,
+     "important": false,
+     "experience": "یک دلار نقد از ده هزار دلار نسیه بهتر است؛ سود باید در کیف پول باشد.",
+     "correction": "درست؛ فقط «محقق شدن» باید به یک عادت مشخص تبدیل شود.",
+     "reason": "سود باز در یک شمع برمی‌گردد، و سرمایه‌ای که روی صرافی می‌ماند ریسک هک، توقف برداشت و مسدودی هم دارد.",
+     "solution": "هر ماه ۳۰ تا ۵۰٪ سود محقق‌شده را به اسپات یا کیف پول شخصی منتقل کن (پیش‌فرض ۳۰٪)."
+    }
+   ]
+  },
+  "additions": {
+   "intro": "ده چیز در تجربیات نبود که بدون آن‌ها بقیهٔ قوانین پایدار نمی‌ماند؛ مهم‌ترینشان ریسک ثابت هر معامله و سقف زیان است. اعداد پیشنهاد اولیه‌اند و باید با داده‌های ژورنال خودت تنظیم شوند.",
+   "items": [
+    {
+     "n": 1,
+     "title": "ریسک ثابت هر معامله",
+     "reason": "اهرم و مارجین ضرر واقعی را نشان نمی‌دهند؛ ضرر در لحظهٔ خوردن حد ضرر را نشان می‌دهد.",
+     "solution": "۱٪ سرمایه (سقف ۲٪)؛ اندازهٔ پوزیشن از فرمول"
+    },
+    {
+     "n": 2,
+     "title": "سقف زیان روزانه، هفتگی و افت از اوج",
+     "reason": "افت‌های بزرگ از زنجیرهٔ ضررهای احساسی می‌آیند، نه از یک ضرر.",
+     "solution": "روزانه ۳٪، هفتگی ۶٪، افت ۱۰٪ از اوج: توقف و بازبینی"
+    },
+    {
+     "n": 3,
+     "title": "سقف پوزیشن و همبستگی",
+     "reason": "چند آلت‌کوین هم‌جهت عملاً یک پوزیشن روی بیت‌کوین‌اند.",
+     "solution": "حداکثر ۳ پوزیشن؛ جمع ریسک باز حداکثر ۳٪"
+    },
+    {
+     "n": 4,
+     "title": "ستاپ مکتوب",
+     "reason": "بدون ستاپ، هر شمع «فرصت» به نظر می‌رسد.",
+     "solution": "۱ تا ۲ ستاپ با شرط ورود، ابطال و هدف؛ بدون ستاپ، بدون معامله"
+    },
+    {
+     "n": 5,
+     "title": "امید ریاضی و آمار",
+     "reason": "درصد برد به‌تنهایی گمراه‌کننده است.",
+     "solution": "ثبت R هر معامله؛ قضاوت بعد از ۳۰ تا ۵۰ معامله"
+    },
+    {
+     "n": 6,
+     "title": "فاندینگ، کارمزد و اسلیپیج",
+     "reason": "هزینه‌های پنهان، معاملهٔ کوتاه‌مدت را بازنده می‌کنند.",
+     "solution": "کارمزد و فاندینگ را در R:R حساب کن؛ پوزیشنی که فاندینگ سنگین می‌پردازد را طولانی نگه نداشته باش"
+    },
+    {
+     "n": 7,
+     "title": "ریسک عملیاتی و امنیتی",
+     "reason": "قطعی اینترنت یا برق، هک، توقف برداشت و مسدودی حساب.",
+     "solution": "حد ضرر در صرافی؛ 2FA؛ API بدون اجازهٔ برداشت؛ سرمایهٔ اضافه روی صرافی نماند"
+    },
+    {
+     "n": 8,
+     "title": "تست پیش از اجرا",
+     "reason": "ستاپ جدید نباید با پول واقعی کشف شود.",
+     "solution": "دمو یا ریسک ۰٫۲۵٪ برای ۲۰ معامله"
+    },
+    {
+     "n": 9,
+     "title": "ممنوعیت میانگین‌گیری روی ضرر و دور کردن حد ضرر",
+     "reason": "دو راه رایج تبدیل ضرر کوچک به نابودی حساب.",
+     "solution": "خط قرمز در ماده ۹"
+    },
+    {
+     "n": 10,
+     "title": "ژورنال و بازبینی",
+     "reason": "بدون داده، یادگیری از تجربه حدسی است.",
+     "solution": "ثبت هر معامله؛ مرور هفتگی و ماهانه (بخش ژورنال)"
+    }
+   ],
+   "expectancy": {
+    "title": "چرا درصد برد به‌تنهایی کافی نیست",
+    "lead": "معیار درست، امید ریاضی هر معامله بر حسب R است:",
+    "formula": "E = p × R − (1 − p) × 1",
+    "example": "در این فرمول p درصد برد و R نسبت سود به ضرر است. با درصد برد ۴۰٪ و R:R برابر ۱ به ۲ داریم ۰٫۴ × ۲ − ۰٫۶ = ۰٫۲؛ یعنی هر معامله به‌طور میانگین ۰٫۲R سود می‌دهد، با اینکه ۶۰٪ معاملات ضرر می‌کنند.",
+    "breakEvenNote": "نقطهٔ سربه‌سر درصد برد = ۱ ÷ (۱ + R)؛ با R برابر ۲ می‌شود حدود ۳۳٪ و با R برابر ۱ می‌شود ۵۰٪."
+   }
+  },
+  "journal": {
+   "intro": "ژورنال دو کار می‌کند: پیش از ورود جلوی معاملهٔ بی‌قاعده را می‌گیرد و بعد از خروج اشتباه‌های تکراری را نشان می‌دهد. جدول Excel ژورنال، با فرمول‌های محاسبهٔ خودکار، جداگانه همراه این سند است؛ این بخش ساختار و قالب سریع آن را توضیح می‌دهد.",
+   "flowCaption": "مسیر یک معامله · ۷ مرحله، ۱ تصمیم، ۱ حلقهٔ بهبود",
+   "flowNote": "اگر چک‌لیست کامل نباشد معامله باز نمی‌شود؛ هر معاملهٔ بسته‌شده وارد ژورنال می‌شود و قوانین فقط در مرور هفتگی یا ماهانه تغییر می‌کنند.",
+   "stages": [
+    {
+     "stage": "پیش از ورود",
+     "fields": "نماد، جهت، نوع معامله (اسکالپ، اینترادی، سوینگ)، ستاپ، روند تایم‌فریم بالا، چک‌لیست هشت‌بندی، احساس"
+    },
+    {
+     "stage": "برنامه",
+     "fields": "سرمایهٔ حساب، ورود، حد ضرر، حد سود، R:R، اهرم، ریسک ۱٪، ارزش پوزیشن، مارجین، قیمت لیکوئید"
+    },
+    {
+     "stage": "حین معامله",
+     "fields": "جابه‌جایی حد ضرر، خروج پله‌ای، خبر یا رویداد، احساس"
+    },
+    {
+     "stage": "بعد از خروج",
+     "fields": "قیمت خروج، کارمزد و فاندینگ، سود یا زیان، R، رعایت قوانین، اشتباه، درس، اسکرین‌شات"
+    }
+   ],
+   "stagesNote": "پارامترهایی که خودت برای ژورنال نوشته بودی (حجم، روند، اهرم و مارجین، ایزوله، حد سود و ضرر، چند تایم‌فریم، نوع سفارش) همه در چک‌لیست و بخش برنامه جا گرفته‌اند.",
+   "mistakeNote": "برای هر معامله فقط یک اشتباه اصلی انتخاب کن: ورود زودهنگام، تعقیب قیمت، سایز بزرگ، حد ضرر دور یا نبود حد ضرر، خروج زودهنگام، خروج احساسی، نقض چک‌لیست، معاملهٔ انتقامی، نادیده گرفتن خبر، خلاف روند، میانگین‌گیری.",
+   "quickTemplate": "تاریخ و ساعت:\nنماد / جهت:\nنوع معامله: اسکالپ | اینترادی | سوینگ\nستاپ:\nروند تایم‌فریم بالا:\nچک‌لیست (از ۸):\nسرمایهٔ حساب:        ریسک ۱٪:\nورود:    حد ضرر:    حد سود:    R:R:\nاهرم:    مارجین:    ارزش پوزیشن:    لیکوئید:\nاحساس پیش از ورود:\n--- بعد از خروج ---\nخروج:    کارمزد و فاندینگ:    سود یا زیان:    R:\nرعایت قوانین؟  بله / خیر\nاشتباه:\nدرس این معامله:",
+   "weeklyQuestions": [
+    {
+     "n": 1,
+     "text": "چند معامله کردم و چند درصدشان طبق قوانین بود؟"
+    },
+    {
+     "n": 2,
+     "text": "بزرگ‌ترین اشتباه این هفته چه بود و چند بار تکرار شد؟"
+    },
+    {
+     "n": 3,
+     "text": "بهترین تصمیم این هفته چه بود، حتی اگر سود نداد؟"
+    },
+    {
+     "n": 4,
+     "text": "کدام ستاپ، نماد یا ساعت بهترین و بدترین R را داشت؟"
+    },
+    {
+     "n": 5,
+     "text": "کدام قانون یا عادت را هفتهٔ بعد اصلاح می‌کنم؟"
+    }
+   ],
+   "monthlyKpis": [
+    {
+     "label": "درصد رعایت قوانین",
+     "formula": "معاملات با رعایت کامل ÷ همهٔ معاملات",
+     "target": "۹۰٪ یا بیشتر"
+    },
+    {
+     "label": "امید ریاضی (R)",
+     "formula": "میانگین R همهٔ معاملات",
+     "target": "مثبت"
+    },
+    {
+     "label": "R:R واقعی",
+     "formula": "میانگین R برنده‌ها ÷ میانگین ضرر باخت‌ها",
+     "target": "۱٫۵ یا بیشتر"
+    },
+    {
+     "label": "درصد برد",
+     "formula": "معاملات برنده ÷ همهٔ معاملات",
+     "target": "همراه با R:R سنجیده شود"
+    },
+    {
+     "label": "ضریب سود (Profit Factor)",
+     "formula": "مجموع سودها ÷ مجموع زیان‌ها",
+     "target": "بالای ۱٫۳"
+    },
+    {
+     "label": "بیشترین افت از اوج",
+     "formula": "بزرگ‌ترین افت منحنی سرمایه از آخرین اوج؛ فقط سود و زیان معاملات، بدون برداشت",
+     "target": "کمتر از ۱۰٪"
+    },
+    {
+     "label": "میانگین امتیاز چک‌لیست",
+     "formula": "میانگین بندهای «بله» از ۸",
+     "target": "نزدیک ۸"
+    }
+   ],
+   "disclaimer": "یادداشت: این سند یک چارچوب شخصی مدیریت ریسک است، نه توصیهٔ مالی. اعداد پیشنهاد اولیه‌اند و باید با داده‌های ژورنال خودت تنظیم شوند."
+  }
+ },
+ "security": [
+  {
+   "id": "10-1",
+   "text": "احراز هویت دومرحله‌ای (2FA)، رمز یکتا و هشدار ورود روی حساب صرافی فعال است."
+  },
+  {
+   "id": "10-2",
+   "text": "کلید API فقط با دسترسی معامله و بدون اجازهٔ برداشت ساخته می‌شود (و در صورت امکان با محدودیت IP)."
+  },
+  {
+   "id": "10-3",
+   "text": "سرمایه‌ای که برای معامله لازم نیست روی صرافی نمی‌ماند؛ آدرس‌های برداشت در فهرست سفید است."
+  },
+  {
+   "id": "10-4",
+   "text": "صرافی هم ریسک دارد (هک، توقف برداشت، مسدودی حساب)؛ تا جای ممکن همهٔ سرمایه را روی یک صرافی نگه نمی‌دارم."
+  },
+  {
+   "id": "10-5",
+   "text": "هنگام ناپایداری اینترنت یا برق، پوزیشن اهرمی جدید باز نمی‌کنم. حد ضرر همیشه در خود صرافی ثبت است."
+  },
+  {
+   "id": "10-6",
+   "text": "کلید خصوصی یا عبارت بازیابی را به هیچ‌کس و هیچ سایتی نمی‌دهم. سیگنال‌دهنده‌ها و لینک‌های ناشناس مشکوک‌اند."
+  }
+ ],
+ "adviceOfDay": [
+  {
+   "id": "L01",
+   "text": "صعود قیمت همراه با کاهش حجم یعنی احتیاط، نه ورود.",
+   "source": {
+    "type": "lesson",
+    "n": 1
+   }
+  },
+  {
+   "id": "L02",
+   "text": "بدون روند و بدون بررسی چند تایم‌فریم وارد نشو.",
+   "source": {
+    "type": "lesson",
+    "n": 2
+   }
+  },
+  {
+   "id": "L03",
+   "text": "اهرم بالا نزن، مارجین کم بزن، همیشه ایزوله.",
+   "source": {
+    "type": "lesson",
+    "n": 3
+   }
+  },
+  {
+   "id": "L04",
+   "text": "هر معامله حد سود و حد ضرر دارد.",
+   "source": {
+    "type": "lesson",
+    "n": 4
+   }
+  },
+  {
+   "id": "L05",
+   "text": "با سفارش Limit بخر و بفروش؛ زیاد با Market نخر.",
+   "source": {
+    "type": "lesson",
+    "n": 5
+   }
+  },
+  {
+   "id": "L06",
+   "text": "بازار سیکل دارد: یک قیمت چند بار دیده می‌شود، و اگر خیلی در سودی احتمالاً وقت خروج است.",
+   "source": {
+    "type": "lesson",
+    "n": 6
+   }
+  },
+  {
+   "id": "L07",
+   "text": "اخبار (فدرال رزرو، خاورمیانه، سیاست آمریکا) نوسان شدید می‌سازند؛ فیوچرز همیشه با اهرم پایین.",
+   "source": {
+    "type": "lesson",
+    "n": 7
+   }
+  },
+  {
+   "id": "L08",
+   "text": "پشت هر معاملهٔ پرسودِ بسته‌نشده یک ضرر سنگین خوابیده است؛ یک دلار نقد از ده هزار دلار نسیه بهتر است.",
+   "source": {
+    "type": "lesson",
+    "n": 8
+   }
+  },
+  {
+   "id": "L09",
+   "text": "بعد از سود، ریسک‌فری کن و حد ضرر را بالا ببر.",
+   "source": {
+    "type": "lesson",
+    "n": 9
+   }
+  },
+  {
+   "id": "L10",
+   "text": "پوزیشن باز را رها نکن و مراقبش باش.",
+   "source": {
+    "type": "lesson",
+    "n": 10
+   }
+  },
+  {
+   "id": "L11",
+   "text": "بعد از یک سود بزرگ، مراقب بزرگ شدن بی‌صدای اندازهٔ معاملهٔ بعدی باش.",
+   "source": {
+    "type": "lesson",
+    "n": 11
+   }
+  },
+  {
+   "id": "L12",
+   "text": "سرمایه‌گذاری بلندمدت یعنی اسپات، نه فیوچرز.",
+   "source": {
+    "type": "lesson",
+    "n": 12
+   }
+  },
+  {
+   "id": "C01",
+   "text": "هدف اول من بقاست، هدف دوم سود. تا سرمایه هست، فرصت بعدی هم هست.",
+   "source": {
+    "type": "clause",
+    "id": "1-1"
+   }
+  },
+  {
+   "id": "C02",
+   "text": "معاملهٔ خوب یعنی معامله‌ای که طبق قوانین انجام شد، نه معامله‌ای که سود داد. ضرر در چارچوب قوانین هزینهٔ کار است.",
+   "source": {
+    "type": "clause",
+    "id": "1-2"
+   }
+  },
+  {
+   "id": "C03",
+   "text": "بازار نسبت به من بی‌تفاوت است. فقط سه چیز در کنترل من است: اندازهٔ پوزیشن، نقطهٔ خروج و رفتار خودم.",
+   "source": {
+    "type": "clause",
+    "id": "1-3"
+   }
+  },
+  {
+   "id": "C04",
+   "text": "معامله نکردن هم یک تصمیم است. بدون ستاپ، بدون معامله.",
+   "source": {
+    "type": "clause",
+    "id": "1-4"
+   }
+  },
+  {
+   "id": "C05",
+   "text": "معاملهٔ از دست‌رفته ضرر نیست و دنبالش نمی‌دوم.",
+   "source": {
+    "type": "clause",
+    "id": "5-5"
+   }
+  },
+  {
+   "id": "C06",
+   "text": "حد ضرر فقط به سمت سود حرکت می‌کند؛ هرگز دورتر یا حذف نمی‌شود.",
+   "source": {
+    "type": "clause",
+    "id": "6-3"
+   }
+  },
+  {
+   "id": "C07",
+   "text": "میانگین‌گیری روی پوزیشن ضررده و اضافه کردن مارجین به آن ممنوع است.",
+   "source": {
+    "type": "clause",
+    "id": "6-4"
+   }
+  },
+  {
+   "id": "C08",
+   "text": "ضرر را به «سرمایه‌گذاری بلندمدت» تبدیل نمی‌کنم.",
+   "source": {
+    "type": "clause",
+    "id": "6-6"
+   }
+  },
+  {
+   "id": "C09",
+   "text": "سود وقتی سود است که محقق شده باشد؛ سود باز فقط یک عدد روی صفحه است.",
+   "source": {
+    "type": "clause",
+    "id": "7-1"
+   }
+  },
+  {
+   "id": "C10",
+   "text": "وقتی در سود بزرگ هستم و دلم «بیشتر» می‌خواهد، بخشی را فوراً می‌بندم؛ طمع علامت است.",
+   "source": {
+    "type": "clause",
+    "id": "7-3"
+   }
+  },
+  {
+   "id": "C11",
+   "text": "معاملهٔ انتقامی و معامله برای جبران ضرر ممنوع است.",
+   "source": {
+    "type": "clause",
+    "id": "8-2"
+   }
+  },
+  {
+   "id": "C12",
+   "text": "قاعدهٔ دعا: اگر خودم را در حال امیدواری یا دعا کردن دیدم، یعنی برنامه ندارم؛ نصف پوزیشن را می‌بندم.",
+   "source": {
+    "type": "clause",
+    "id": "8-3"
+   }
+  },
+  {
+   "id": "C13",
+   "text": "برای ضرر دنبال مقصر بیرونی نمی‌گردم؛ اول بررسی می‌کنم کدام قانون را نقض کردم.",
+   "source": {
+    "type": "clause",
+    "id": "8-5"
+   }
+  }
+ ],
+ "ui": {
+  "common.ok": "تأیید",
+  "common.cancel": "انصراف",
+  "common.save": "ذخیره",
+  "common.delete": "حذف",
+  "common.edit": "ویرایش",
+  "common.close": "بستن",
+  "common.back": "بازگشت",
+  "common.next": "بعدی",
+  "common.previous": "قبلی",
+  "common.done": "انجام شد",
+  "common.retry": "تلاش دوباره",
+  "common.search": "جستجو",
+  "common.all": "همه",
+  "common.none": "هیچ‌کدام",
+  "common.yes": "بله",
+  "common.no": "خیر",
+  "common.optional": "اختیاری",
+  "common.required": "الزامی",
+  "common.today": "امروز",
+  "common.yesterday": "دیروز",
+  "common.thisWeek": "این هفته",
+  "common.thisMonth": "این ماه",
+  "common.custom": "بازهٔ دلخواه",
+  "common.usd": "دلار",
+  "common.dash": "—",
+  "common.demo": "دمو",
+  "common.real": "واقعی",
+  "common.share": "اشتراک‌گذاری",
+  "common.copy": "کپی",
+  "common.copied": "کپی شد",
+  "common.undo": "برگرداندن",
+  "common.add": "افزودن",
+  "common.remove": "برداشتن",
+  "common.continue": "ادامه",
+  "common.skip": "رد کردن",
+  "common.open": "باز",
+  "common.closed": "بسته",
+  "common.from": "از",
+  "common.to": "تا",
+  "common.loading": "در حال بارگذاری…",
+  "common.more": "بیشتر",
+  "common.less": "کمتر",
+  "common.details": "جزئیات",
+  "common.article": "ماده {n}",
+  "common.clause": "بند {id}",
+  "common.confirm": "مطمئنی؟",
+  "common.saved": "ذخیره شد",
+  "common.deleted": "حذف شد",
+  "common.unknown": "نامشخص",
+  "nav.today": "امروز",
+  "nav.journal": "ژورنال",
+  "nav.calculator": "ماشین‌حساب",
+  "nav.insights": "تحلیل",
+  "nav.more": "بیشتر",
+  "app.name": "اندرز",
+  "app.latin": "Andarz",
+  "app.tagline": "اول بقا، بعد سود",
+  "app.disclaimer": "اندرز ابزار مدیریت ریسک شخصی است، نه توصیهٔ مالی؛ اعداد پیشنهاد اولیه‌اند و باید با داده‌های خودت تنظیم شوند.",
+  "onb.welcome.title": "به اندرز خوش آمدی",
+  "onb.welcome.body": "اندرز اساس‌نامهٔ ترید خودت را اجرا می‌کند: پیش از ورود جلوی معاملهٔ بی‌قاعده را می‌گیرد و بعد از خروج اشتباه‌های تکراری‌ات را نشان می‌دهد.",
+  "onb.welcome.start": "شروع",
+  "onb.privacy.title": "داده‌هایت فقط روی گوشی توست",
+  "onb.privacy.body": "اندرز اینترنت ندارد و هیچ داده‌ای نمی‌فرستد. پشتیبان رمزگذاری‌شده را خودت می‌سازی و خودت نگه می‌داری؛ اگر رمزش را گم کنی، هیچ‌کس نمی‌تواند بازیابی‌اش کند.",
+  "onb.how.title": "اندرز چطور کار می‌کند",
+  "onb.how.1": "پیش از ورود: چک‌لیست هشت‌بندی و محاسبهٔ اندازهٔ پوزیشن؛ اگر یکی از قیدها نخواند، ورود بسته می‌ماند و دلیلش با عدد نوشته می‌شود.",
+  "onb.how.2": "حین معامله: حد ضرر فقط به سمت سود می‌رود و نقض‌ها ثبت می‌شوند.",
+  "onb.how.3": "بعد از خروج: R، رعایت قوانین و اشتباه اصلی ثبت می‌شود و آمار هفتگی و ماهانه از همین‌ها ساخته می‌شود.",
+  "onb.setup.title": "اعداد آغازین",
+  "onb.setup.name": "نام",
+  "onb.setup.name.hint": "فقط برای تعهدنامه؛ روی گوشی می‌ماند.",
+  "onb.setup.equity": "سرمایهٔ حساب معاملاتی ($)",
+  "onb.setup.equity.hint": "فقط پول حساب معاملاتی (فیوچرز)، نه پرتفوی اسپات (ماده ۲-۱).",
+  "onb.setup.risk": "ریسک هر معامله",
+  "onb.setup.risk.hint": "پیش‌فرض اساس‌نامه {default} است.",
+  "onb.setup.zone": "منطقهٔ زمانی",
+  "onb.pledge.title": "تعهدنامه",
+  "onb.pledge.read": "اول اساس‌نامه را بخوان",
+  "onb.pledge.body": "این تعهد فقط برای خودت است. بدون امضا می‌توانی اپ را ببینی، اما معامله ثبت نمی‌شود.",
+  "onb.pledge.sign": "امضا می‌کنم",
+  "onb.pledge.later": "بعداً امضا می‌کنم",
+  "onb.lock.title": "قفل برنامه",
+  "onb.lock.body": "ژورنال معاملاتی خصوصی است. می‌توانی قفل را با اثر انگشت، چهره یا رمز فعال کنی.",
+  "onb.lock.enable": "فعال‌سازی قفل",
+  "onb.done.title": "آماده‌ای",
+  "onb.done.body": "همهٔ سقف‌ها از اساس‌نامه آمده‌اند و فقط در جلسهٔ بازبینی عوض می‌شوند.",
+  "onb.done.cta": "رفتن به صفحهٔ امروز",
+  "today.title": "امروز",
+  "today.equity": "سرمایهٔ حساب",
+  "today.dayPnl": "سود/زیان امروز",
+  "today.weekPnl": "سود/زیان این هفته",
+  "today.limits": "سقف‌های امروز",
+  "today.tradesToday": "معاملات امروز",
+  "today.dailyLoss": "زیان روزانه",
+  "today.weeklyLoss": "زیان هفتگی",
+  "today.drawdown": "افت از اوج",
+  "today.positions": "پوزیشن‌های باز",
+  "today.openRisk": "ریسک باز",
+  "today.cap": "سقف {v}",
+  "today.allowed.yes": "مجاز به معاملهٔ جدید — همهٔ سقف‌ها آزاد است",
+  "today.allowed.no": "ورود جدید ممنوع — یکی از سقف‌ها فعال است",
+  "today.newTrade": "معاملهٔ جدید",
+  "today.newTrade.blocked": "ورود بسته است",
+  "today.noOpen": "پوزیشن بازی نداری.",
+  "today.openTitle": "پوزیشن‌های باز",
+  "today.obligations": "کارهای عقب‌افتاده",
+  "today.advice": "اندرز امروز",
+  "today.closeDay": "بستن روز (۵ دقیقه)",
+  "today.closeDay.hint": "همهٔ معاملات امروز را در ژورنال کامل کن (ماده ۱۲-۱).",
+  "today.noTradesToday": "امروز معامله‌ای ثبت نشده. معامله نکردن هم یک تصمیم است.",
+  "today.pledgeMissing": "تعهدنامه امضا نشده؛ تا امضا نکنی معامله ثبت نمی‌شود.",
+  "today.overall.ok": "بله — همهٔ سقف‌ها مجاز است",
+  "today.overall.no": "خیر — یکی از سقف‌ها فعال است",
+  "today.status.OK": "مجاز",
+  "today.status.TRADES_CAP": "سقف امروز پر شد",
+  "today.status.DAILY_RED": "خط قرمز — توقف تا فردا",
+  "today.status.WEEKLY_RED": "خط قرمز — توقف تا هفتهٔ بعد",
+  "today.status.DD_RED": "خط قرمز — توقف دست‌کم {days} روز",
+  "today.status.POSITIONS_FULL": "سقف پر است",
+  "today.status.POSITIONS_OVER": "بیش از سقف",
+  "today.status.RISK_FULL": "جای ریسک جدید نیست",
+  "lock.title": "ورود بسته است",
+  "lock.until": "تا {until}",
+  "lock.untilDone": "همین که کارهای لازم را انجام بدهی باز می‌شود",
+  "lock.VIOLATION.title": "توقف بعد از نقض خط قرمز",
+  "lock.VIOLATION.body": "نقض خط قرمز یعنی {hours} ساعت توقف و یک گزارش مکتوب (ماده ۱۳-۱). هر بهانه‌ای را کنار بگذار و اول ببین کدام قانون شکست.",
+  "lock.VIOLATION.open": "پوزیشن نقض‌کننده هنوز باز است؛ اول ببندش (ماده ۹).",
+  "lock.DRAWDOWN.title": "سقف افت از اوج پر شد",
+  "lock.DRAWDOWN.body": "افت از اوج به {cap} رسید. دست‌کم {days} روز توقف و یک مرور ثبت‌شده لازم است؛ بعدش با ریسک {risk} برای {n} معامله برمی‌گردی (ماده ۳-۷).",
+  "lock.WEEKLY_LOSS.title": "سقف زیان هفتگی پر شد",
+  "lock.WEEKLY_LOSS.body": "زیان این هفته به {cap} رسید. تا شنبهٔ بعد ورود نداری و مرور هفتگی همین هفته باید ثبت شود (ماده ۳-۷).",
+  "lock.DAILY_LOSS.title": "سقف زیان روزانه پر شد",
+  "lock.DAILY_LOSS.body": "زیان امروز به {cap} رسید. تا فردا ورود نداری (ماده ۳-۷).",
+  "lock.DAY_OVER.title": "پایان معاملات امروز",
+  "lock.DAY_OVER.body": "{n} حد ضرر پیاپی خوردی؛ طبق ماده ۸-۱ امروز تمام شد. فردا با ذهن تازه برگرد.",
+  "lock.TRADE_CAP.title": "سقف معاملات امروز پر شد",
+  "lock.TRADE_CAP.body": "امروز {n} معامله وارد کردی (سقف {cap}). تا نیمه‌شب ورود نداری (ماده ۸-۱).",
+  "lock.COOLDOWN.title": "توقف بعد از حد ضرر",
+  "lock.COOLDOWN.body": "بعد از هر حد ضرر {minutes} دقیقه صبر می‌کنی (ماده ۸-۱). در این مدت انتقام و جبران ممنوع است.",
+  "lock.COOLDOWN.left": "{m} دقیقه مانده",
+  "need.REPORT": "گزارش مکتوب بنویس (چه شد، چرا، چه می‌کنم؛ دست‌کم {min} نویسه)",
+  "need.REVIEW": "یک مرور (هفتگی، ماهانه یا افت) ثبت کن",
+  "need.WEEKLY_REVIEW": "مرور هفتگی همین هفته را ثبت کن",
+  "need.CLOSE_POSITION": "پوزیشن نقض‌کننده را ببند",
+  "need.action.report": "نوشتن گزارش",
+  "need.action.review": "رفتن به مرور",
+  "need.action.close": "رفتن به پوزیشن",
+  "reduction.DD_RECOVERY": "بازگشت بعد از افت: ریسک {risk} برای {n} معاملهٔ دیگر",
+  "reduction.VIOLATIONS": "نقض‌های تکراری: ریسک {risk} برای {n} معاملهٔ دیگر",
+  "reduction.SETUP_TEST": "ستاپ در آزمایش: ریسک {risk}، {n} معامله باقی مانده",
+  "reduction.title": "ریسک کاهش‌یافته",
+  "reduction.cap": "سقف ریسک فعلی: {risk}",
+  "bigwin.hold": "بعد از سود بزرگ: تا {until} ریسک را بالا نبر و ستاپ درجه‌یک را فعال نکن (ماده ۳-۸).",
+  "bigwin.title": "مراقب بزرگ شدن بی‌صدای اندازه باش",
+  "wiz.title": "معاملهٔ جدید",
+  "wiz.step.gate": "اجازهٔ ورود",
+  "wiz.step.setup": "ستاپ و احساس",
+  "wiz.step.checklist": "چک‌لیست",
+  "wiz.step.numbers": "اعداد معامله",
+  "wiz.step.review": "مرور و ثبت",
+  "wiz.step.n": "مرحلهٔ {n} از {total}",
+  "wiz.gate.blocked": "الان نمی‌توانی وارد شوی",
+  "wiz.gate.fine": "قفلی فعال نیست؛ ادامه بده.",
+  "wiz.symbol": "نماد",
+  "wiz.symbol.hint": "از فهرست پیگیری انتخاب کن (ماده ۲-۲).",
+  "wiz.symbol.notInList": "این نماد در فهرست پیگیری نیست.",
+  "wiz.side": "جهت",
+  "wiz.kind": "نوع معامله",
+  "wiz.kind.hint": "بعد از ورود عوض نمی‌شود (ماده ۲-۳).",
+  "wiz.setup": "ستاپ",
+  "wiz.setup.none": "بدون ستاپ، بدون معامله (ماده ۱-۴).",
+  "wiz.setup.new": "ستاپ جدید بساز",
+  "wiz.timeframe": "تایم‌فریم ورود",
+  "wiz.emotion": "احساس پیش از ورود",
+  "wiz.emotion.hint": "قبل از هر ورود ثبت می‌شود (ماده ۸-۴).",
+  "wiz.emotion.warn": "با احساس «{emotion}» وارد نشو؛ اول چند دقیقه کنار بکش.",
+  "wiz.htf": "روند تایم‌فریم بالا",
+  "wiz.htf.up": "صعودی",
+  "wiz.htf.down": "نزولی",
+  "wiz.htf.range": "رنج",
+  "wiz.counterTrend": "خلاف روند فقط با دلیل مکتوب و نصف سایز مجاز است (ماده ۴، بند ۱).",
+  "wiz.counterTrend.reason": "دلیل مکتوب",
+  "wiz.demo.toggle": "این معامله دمو است",
+  "wiz.demo.hint": "دمو در سقف‌ها و آمار حساب نمی‌شود.",
+  "wiz.checklist.title": "چک‌لیست ورود",
+  "wiz.checklist.score": "{n} از {total}",
+  "wiz.checklist.rule": "هر هشت بند باید «بله» باشد؛ وگرنه معامله نمی‌کنم (ماده ۴).",
+  "wiz.checklist.incomplete": "چک‌لیست کامل نیست؛ ورود بسته می‌ماند.",
+  "wiz.equity": "سرمایهٔ حساب ($)",
+  "wiz.equity.hint": "پیش از هر ورود از صرافی ببین و بنویس (ماده ۳-۸).",
+  "wiz.equity.fromLedger": "از دفتر حساب: {v}",
+  "wiz.equity.mismatch": "با عدد دفتر حساب ({v}) فرق دارد؛ مطمئنی؟",
+  "wiz.entry": "قیمت ورود",
+  "wiz.sl": "حد ضرر (SL)",
+  "wiz.tp": "حد سود (TP)",
+  "wiz.leverage": "اهرم",
+  "wiz.riskPct": "ریسک این معامله",
+  "wiz.riskPct.reduced": "ریسک به‌خاطر «{reason}» روی {risk} است.",
+  "wiz.entryOrder": "نوع سفارش ورود",
+  "wiz.entryOrder.LIMIT": "Limit",
+  "wiz.entryOrder.LIMIT_LADDER": "پله‌ای (۲ تا ۳ Limit)",
+  "wiz.entryOrder.MARKET_CONFIRMED": "Market بعد از شکست تأییدشده",
+  "wiz.entryOrder.MARKET_OTHER": "Market (غیر از شکست تأییدشده)",
+  "wiz.entryOrder.warn": "Market فقط برای خروج اضطراری یا ورود بعد از شکست تأییدشده است؛ تعقیب کندل ممنوع است (ماده ۵-۲).",
+  "wiz.slTpOnExchange": "حد ضرر و حد سود همین الان در صرافی ثبت شد (ماده ۵-۴)",
+  "wiz.canMonitor": "می‌توانم پوزیشن را پایش کنم؛ خواب، سفر یا قطعی اینترنت در پیش نیست (ماده ۶-۷)",
+  "wiz.isolated": "حالت مارجین Isolated است (ماده ۳-۴)",
+  "wiz.calc.title": "محاسبهٔ خودکار",
+  "wiz.calc.sld": "فاصلهٔ حد ضرر",
+  "wiz.calc.rr": "R:R",
+  "wiz.calc.riskUsd": "ریسک مجاز ($)",
+  "wiz.calc.notionalMax": "ارزش پوزیشن مجاز ($)",
+  "wiz.calc.margin": "مارجین لازم ($)",
+  "wiz.calc.marginPct": "مارجین به سرمایه",
+  "wiz.calc.liq": "قیمت لیکوئید (تقریبی)",
+  "wiz.calc.liqDist": "فاصلهٔ لیکوئید",
+  "wiz.calc.liqX": "لیکوئید ÷ حد ضرر",
+  "wiz.calc.note": "قیمت لیکوئید تقریبی است (ایزوله، بدون کارمزد و فاندینگ)؛ عدد دقیق را از ماشین‌حساب صرافی بگیر.",
+  "wiz.calc.fees": "کارمزد و فاندینگ را هم در R:R حساب کن (افزودهٔ ۶).",
+  "wiz.gate.allowed": "مجاز",
+  "wiz.gate.denied": "ممنوع",
+  "wiz.gate.deniedWith": "ممنوع: {reasons}",
+  "wiz.gate.reasons.title": "چرا ممنوع است",
+  "wiz.gate.reason.DIRECTION": "جهت‌SL/TP",
+  "wiz.gate.reason.CHECKLIST": "چک‌لیست",
+  "wiz.gate.reason.LEVERAGE": "اهرم",
+  "wiz.gate.reason.RR": "R:R",
+  "wiz.gate.reason.MARGIN": "مارجین",
+  "wiz.gate.reason.LIQUIDATION": "لیکوئید",
+  "wiz.gate.detail.DIRECTION": "برای {side}، حد ضرر باید {slWhere} قیمت ورود و حد سود {tpWhere} آن باشد.",
+  "wiz.gate.detail.CHECKLIST": "چک‌لیست {n} از {total} است؛ هر هشت بند باید «بله» باشد (ماده ۴).",
+  "wiz.gate.detail.LEVERAGE": "اهرم {lev}× از سقف {max}× بیشتر است (ماده ۳-۳).",
+  "wiz.gate.detail.RR": "R:R برابر {rr} است؛ دست‌کم {min} لازم است (ماده ۴، بند ۶).",
+  "wiz.gate.detail.MARGIN": "مارجین لازم {pct} سرمایه است؛ سقف {max} است (ماده ۳-۴).",
+  "wiz.gate.detail.LIQUIDATION": "فاصلهٔ لیکوئید {x}× فاصلهٔ حد ضرر است؛ دست‌کم {min}× لازم است (ماده ۳-۵).",
+  "wiz.gate.fix.DIRECTION": "قیمت‌ها را جابه‌جا کن یا جهت را درست کن.",
+  "wiz.gate.fix.CHECKLIST": "بندهای ناقص را واقعاً بررسی کن؛ تیک زدن بدون بررسی نقض ماده ۴ است.",
+  "wiz.gate.fix.LEVERAGE": "اهرم را کم کن. اگر برای رسیدن به مارجین مجاز اهرم بالاتر لازم می‌شود، معامله را رد کن (ماده ۳-۳).",
+  "wiz.gate.fix.RR": "حد سود را دورتر بگذار یا حد ضرر را (پشت ساختار) نزدیک‌تر؛ وگرنه این معامله ارزش ندارد.",
+  "wiz.gate.fix.MARGIN": "اهرم را بالاتر ببر (تا سقف) یا حد ضرر را دورتر بگذار؛ ریسک را بالا نبر.",
+  "wiz.gate.fix.LIQUIDATION": "اهرم را کم کن تا قیمت لیکوئید دورتر شود.",
+  "wiz.gate.slWhere.LONG": "زیر",
+  "wiz.gate.slWhere.SHORT": "بالای",
+  "wiz.gate.tpWhere.LONG": "بالای",
+  "wiz.gate.tpWhere.SHORT": "زیر",
+  "wiz.adv.title": "اهرم پیشنهادی",
+  "wiz.adv.range": "اهرم‌های مجاز: {min}× تا {max}×",
+  "wiz.adv.recommended": "پیشنهاد: {lev}× (مارجین {margin} سرمایه)",
+  "wiz.adv.use": "استفاده",
+  "wiz.adv.none": "با این فاصلهٔ حد ضرر هیچ اهرم مجازی وجود ندارد؛ معامله را رد کن (ماده ۳-۳).",
+  "wiz.adv.tight": "حد ضرر خیلی نزدیک است: برای مارجین مجاز اهرم حدود {lev}× لازم است.",
+  "wiz.adv.far": "حد ضرر دور است: برای فاصلهٔ لیکوئید مجاز اهرم حداکثر حدود {lev}× می‌شود.",
+  "wiz.review.title": "مرور پیش از ثبت",
+  "wiz.review.size": "اندازهٔ پوزیشن از فرمول",
+  "wiz.review.formula": "ارزش پوزیشن = سرمایه × ریسک ÷ فاصلهٔ حد ضرر",
+  "wiz.commit.plan": "ثبت برنامه",
+  "wiz.commit.enter": "ثبت ورود",
+  "wiz.commit.reject": "ذخیره به‌عنوان ردشده",
+  "wiz.commit.cancel": "رها کردن",
+  "wiz.commit.rejected": "معامله ردشده ذخیره شد. معاملهٔ از دست‌رفته ضرر نیست (ماده ۵-۵).",
+  "wiz.confirm.title": "ورود انجام شد؟",
+  "wiz.confirm.entry": "قیمت ورود واقعی (میانگین)",
+  "wiz.confirm.notional": "ارزش پوزیشن واقعی ($)",
+  "wiz.confirm.time": "زمان ورود",
+  "wiz.confirm.note": "ارزش پوزیشن را از صرافی بنویس تا ریسک واقعی حساب شود و بزرگ شدن بی‌صدای اندازه دیده شود.",
+  "wiz.confirm.slippage": "لغزش ورود: {v}",
+  "wiz.planned.title": "برنامهٔ ثبت‌شده",
+  "wiz.planned.expire": "برنامه‌ای که وارد نشدی بعد از {hours} ساعت منقضی می‌شود.",
+  "size.YES": "اندازه مجاز است",
+  "size.GRADE_A_ONLY": "فقط برای ستاپ درجه‌یک",
+  "size.OVER_CAP": "بیش از سقف ریسک فعلی ({cap})",
+  "size.RED_LINE": "خط قرمز: ریسک بیش از {max}",
+  "size.short.YES": "بله",
+  "size.short.GRADE_A_ONLY": "فقط ستاپ درجه‌یک",
+  "size.short.OVER_CAP": "بیش از سقف",
+  "size.short.RED_LINE": "خط قرمز",
+  "size.actual": "ریسک واقعی",
+  "size.actualPct": "ریسک واقعی به سرمایه",
+  "size.silentGrowth": "اندازه از فرمول بزرگ‌تر شده است؛ همین «بزرگ شدن بی‌صدا» بعد از سود خطرناک است.",
+  "trade.title": "جزئیات معامله",
+  "trade.status.PLANNED": "برنامه‌ریزی‌شده",
+  "trade.status.OPEN": "باز",
+  "trade.status.CLOSED": "بسته",
+  "trade.status.REJECTED": "ردشده",
+  "trade.status.CANCELLED": "رهاشده",
+  "trade.account.DEMO": "دمو",
+  "trade.account.REAL": "واقعی",
+  "trade.section.plan": "برنامه",
+  "trade.section.execution": "اجرا",
+  "trade.section.management": "مدیریت",
+  "trade.section.result": "نتیجه",
+  "trade.section.review": "بازبینی",
+  "trade.currentPrice": "قیمت فعلی",
+  "trade.currentPrice.hint": "برای دیدن R لحظه‌ای؛ فقط روی همین صفحه می‌ماند.",
+  "trade.floatingR": "R لحظه‌ای",
+  "trade.floatingPnl": "سود/زیان باز",
+  "trade.sl.current": "حد ضرر فعلی",
+  "trade.sl.initial": "حد ضرر اولیه (مبنای R)",
+  "trade.moveSl": "جابه‌جایی حد ضرر",
+  "trade.moveSl.toward": "به سمت سود: مجاز",
+  "trade.moveSl.toBreakeven": "حد ضرر را به نقطهٔ ورود ببر (به‌علاوهٔ کارمزد)",
+  "trade.moveSl.away": "دور کردن یا حذف حد ضرر خط قرمز است (ماده ۶-۳ و ۹). اگر ثبت کنی، نقض ثبت می‌شود و ۴۸ ساعت توقف می‌آید.",
+  "trade.moveSl.away.confirm": "نقض را ثبت کن",
+  "trade.moveSl.log": "حد ضرر از {from} به {to} رفت",
+  "trade.partial": "خروج پله‌ای",
+  "trade.partial.hint": "در {lo}R تا {hi}R نصف پوزیشن را ببند و حد ضرر بقیه را به نقطهٔ ورود ببر (ماده ۶-۱).",
+  "trade.partial.due": "به {r}R رسیدی؛ وقت خروج پله‌ای است.",
+  "trade.partial.add": "ثبت خروج پله‌ای",
+  "trade.trail": "حد ضرر دنبال‌شونده (ساختار یا ATR) تا حد سود (ماده ۶-۲).",
+  "trade.trail.lock": "قفل ۵۰ تا ۷۰٪ سود فقط بالای {r}R معنا دارد.",
+  "trade.timeStop": "خروج زمانی",
+  "trade.timeStop.left": "تا خروج زمانی: {n} کندل",
+  "trade.timeStop.due": "{n} کندل گذشت و معامله به هدف نرفت؛ طبق ماده ۶-۵ خارج شو.",
+  "trade.prayer": "قاعدهٔ دعا",
+  "trade.prayer.hint": "اگر خودت را امیدوار یا در حال دعا دیدی، یعنی برنامه نداری؛ نصف پوزیشن را ببند (ماده ۸-۳).",
+  "trade.prayer.log": "قاعدهٔ دعا فعال شد",
+  "trade.greed": "طمع علامت است؛ بخشی را فوراً ببند (ماده ۷-۳).",
+  "trade.noAdd": "اضافه کردن مارجین یا میانگین‌گیری روی ضرر ممنوع است (ماده ۶-۴).",
+  "trade.noAdd.report": "اضافه کردم یا میانگین گرفتم",
+  "trade.noAdd.logged": "نقض ثبت شد",
+  "trade.news": "رویداد یا خبر",
+  "trade.news.add": "ثبت خبر",
+  "trade.emotionNow": "احساس الان",
+  "trade.note": "یادداشت",
+  "trade.events": "رویدادهای معامله",
+  "trade.event.SL_MOVE": "جابه‌جایی حد ضرر",
+  "trade.event.PARTIAL_EXIT": "خروج پله‌ای",
+  "trade.event.NEWS": "خبر",
+  "trade.event.EMOTION": "احساس",
+  "trade.event.PRAYER": "قاعدهٔ دعا",
+  "trade.event.NOTE": "یادداشت",
+  "trade.event.ADD_REPORTED": "افزودن مارجین (گزارش خودکار)",
+  "trade.monitor.title": "پایش پوزیشن",
+  "trade.monitor.hint": "حد ضرر و حد سود در صرافی فعال است، هشدار قیمت گذاشته‌ای و ساعت بازبینی مشخص است؟",
+  "trade.monitor.check": "بررسی کردم",
+  "trade.monitor.last": "آخرین بررسی: {t}",
+  "trade.close": "بستن معامله",
+  "trade.delete.confirm": "این معامله برای همیشه حذف شود؟ آمار و سقف‌ها دوباره حساب می‌شوند.",
+  "trade.duplicate": "ساختن معاملهٔ مشابه",
+  "trade.shareNote": "اشتراک‌گذاری به‌صورت یادداشت",
+  "trade.imported": "واردشده از فایل",
+  "close.title": "ثبت خروج",
+  "close.exitPrice": "قیمت خروج (میانگین)",
+  "close.legs": "خروج‌ها",
+  "close.legs.hint": "برای خروج پله‌ای هر پله را جدا بنویس؛ جمع سهم‌ها باید ۱۰۰٪ شود.",
+  "close.addLeg": "افزودن پله",
+  "close.price": "قیمت",
+  "close.fraction": "سهم از پوزیشن",
+  "close.fee": "کارمزد + فاندینگ ($)",
+  "close.reason": "دلیل خروج",
+  "close.time": "زمان خروج",
+  "close.sum": "جمع سهم‌ها: {v}",
+  "close.preview": "پیش‌نمایش نتیجه",
+  "close.confirm": "ثبت خروج",
+  "close.reason.TAKE_PROFIT": "حد سود",
+  "close.reason.STOP_LOSS": "حد ضرر",
+  "close.reason.TRAILING_STOP": "حد ضرر دنبال‌شونده",
+  "close.reason.BREAKEVEN": "سربه‌سر (ریسک‌فری)",
+  "close.reason.MANUAL": "خروج دستی",
+  "close.reason.TIME_STOP": "خروج زمانی",
+  "close.reason.EMERGENCY": "خروج اضطراری",
+  "close.reason.LIQUIDATED": "لیکوئید شد",
+  "close.autoReason": "با قیمت خروج، دلیل «{reason}» حدس زده شد؛ اگر درست نیست عوضش کن.",
+  "result.title": "نتیجه",
+  "result.net": "سود/زیان خالص ($)",
+  "result.gross": "سود/زیان ناخالص ($)",
+  "result.r": "R نتیجه",
+  "result.equityAfter": "سرمایه پس از معامله ($)",
+  "result.win": "برد",
+  "result.loss": "باخت",
+  "result.even": "سربه‌سر",
+  "result.compliant.yes": "طبق قوانین بود",
+  "result.compliant.no": "خارج از قوانین بود",
+  "result.why": "علت: {reasons}",
+  "result.why.GATE": "ورود بدون اجازهٔ ثبت‌شده",
+  "result.why.VIOLATION": "نقض خط قرمز",
+  "result.why.SIZE": "اندازهٔ پوزیشن بیش از سقف",
+  "result.goodLoss": "ضرر در چارچوب قوانین هزینهٔ کار است (ماده ۱-۲).",
+  "result.badWin": "این برد خارج از قوانین بود؛ سود، قانون‌شکنی را درست نمی‌کند.",
+  "result.rVsInitial": "R همیشه نسبت به حد ضرر اولیه حساب می‌شود.",
+  "review.title": "بازبینی بعد از معامله",
+  "review.ruleFirst": "اول بررسی کن: کدام قانون را نقض کردم؟ (ماده ۸-۵)",
+  "review.violations": "نقض خط قرمز (ماده ۹)",
+  "review.violations.none": "هیچ نقضی نبود",
+  "review.mistake": "اشتباه اصلی",
+  "review.mistake.hint": "فقط یکی را انتخاب کن.",
+  "review.emotionAfter": "احساس بعد از خروج",
+  "review.lesson": "درس این معامله",
+  "review.lesson.hint": "یک جمله: دفعهٔ بعد چه کار متفاوتی می‌کنم؟",
+  "review.screenshot": "اسکرین‌شات",
+  "review.screenshot.add": "افزودن تصویر",
+  "review.report": "گزارش نقض",
+  "review.report.hint": "چه شد، چرا، چه می‌کنم",
+  "review.report.min": "دست‌کم {min} نویسه ({n}/{min})",
+  "review.report.required": "نقض ثبت شده؛ بدون گزارش مکتوب قفل باز نمی‌شود.",
+  "review.save": "ثبت بازبینی",
+  "review.skip": "بعداً",
+  "review.pending": "{n} معامله بازبینی ندارد",
+  "review.autoViolation": "برنامه این نقض را خودکار تشخیص داد: {label}",
+  "review.autoViolation.V02": "ریسک واقعی از سقف {max} بیشتر بود",
+  "review.autoViolation.V03": "اهرم از سقف {max}× بیشتر بود",
+  "review.autoViolation.V04": "حد ضرر دورتر شد",
+  "review.autoViolation.V06": "ورود با چک‌لیست ناقص",
+  "review.autoViolation.V01": "حد ضرر در صرافی ثبت نشده بود",
+  "review.autoViolation.V08": "پایش ممکن نبود و پوزیشن رها شد",
+  "journal.title": "ژورنال",
+  "journal.empty": "هنوز معامله‌ای ثبت نشده. اولین معامله را با «معاملهٔ جدید» شروع کن.",
+  "journal.emptyFilter": "با این فیلتر معامله‌ای نیست.",
+  "journal.filter": "فیلتر",
+  "journal.filter.status": "وضعیت",
+  "journal.filter.result": "نتیجه",
+  "journal.filter.symbol": "نماد",
+  "journal.filter.setup": "ستاپ",
+  "journal.filter.account": "حساب",
+  "journal.filter.compliance": "رعایت قوانین",
+  "journal.filter.violation": "دارای نقض",
+  "journal.filter.clear": "پاک کردن فیلترها",
+  "journal.sort": "ترتیب",
+  "journal.sort.newest": "جدیدترین",
+  "journal.sort.oldest": "قدیمی‌ترین",
+  "journal.sort.bestR": "بیشترین R",
+  "journal.sort.worstR": "کمترین R",
+  "journal.search.hint": "نماد، ستاپ یا درس…",
+  "journal.row.r": "{r}R",
+  "journal.row.pending": "در انتظار بازبینی",
+  "journal.row.open": "باز",
+  "journal.count": "{n} معامله",
+  "journal.export.csv": "خروجی CSV",
+  "journal.export.csv.excel": "قالب ژورنال اکسل (ستون‌های ورودی)",
+  "journal.export.csv.full": "قالب کامل اندرز",
+  "journal.export.note": "یادداشت متنی (قالب سریع)",
+  "journal.import.csv": "ورود از CSV",
+  "journal.import.hint": "فایل CSV ژورنال اکسل یا خروجی کامل اندرز را انتخاب کن.",
+  "journal.import.preview": "{ok} ردیف قابل ورود، {skip} ردیف ناقص",
+  "journal.import.confirm": "ورود {n} معامله",
+  "journal.import.done": "{n} معامله وارد شد.",
+  "journal.import.row.invalid": "ردیف {row}: {why}",
+  "journal.import.dup": "{n} ردیف تکراری بود و رد شد.",
+  "journal.import.note": "ردیف‌های واردشده با زمان ۱۲:۰۰ همان روز ثبت می‌شوند؛ سقف‌ها و توقف‌ها فقط بر پایهٔ زمان دقیق معاملات خود اپ دقیق‌اند.",
+  "journal.export.done": "فایل ساخته شد.",
+  "journal.export.share": "اشتراک‌گذاری فایل",
+  "calc.title": "ماشین‌حساب",
+  "calc.subtitle": "اندازهٔ پوزیشن و قیدهای ماده ۳",
+  "calc.useEquity": "سرمایهٔ فعلی",
+  "calc.toPlan": "ساخت معامله از این اعداد",
+  "calc.riskCap": "ریسک (سقف فعلی)",
+  "calc.result": "نتیجه",
+  "calc.needInputs": "ورود، حد ضرر، حد سود و اهرم را بنویس.",
+  "calc.formula": "ارزش پوزیشن = سرمایه × ریسک ÷ فاصلهٔ حد ضرر",
+  "calc.withFees": "کارمزد رفت‌وبرگشت (٪ ارزش پوزیشن)",
+  "calc.feeImpact": "اثر کارمزد روی R:R: از {from} به {to}",
+  "calc.demoNote": "ماشین‌حساب چیزی ذخیره نمی‌کند و روی سقف‌ها اثر ندارد.",
+  "ins.title": "تحلیل",
+  "ins.period": "بازه",
+  "ins.period.week": "این هفته",
+  "ins.period.month": "این ماه",
+  "ins.period.last30": "۳۰ روز اخیر",
+  "ins.period.all": "همه",
+  "ins.period.custom": "دلخواه",
+  "ins.period.exitDate": "بر پایهٔ تاریخ خروج",
+  "ins.kpi.title": "شاخص‌ها",
+  "ins.kpi.n": "معاملات بسته‌شده",
+  "ins.kpi.compliance": "درصد رعایت قوانین",
+  "ins.kpi.expectancy": "امید ریاضی (R)",
+  "ins.kpi.avgWinR": "میانگین R برنده‌ها",
+  "ins.kpi.avgLossR": "میانگین R بازنده‌ها",
+  "ins.kpi.realRR": "R:R واقعی",
+  "ins.kpi.winRate": "درصد برد",
+  "ins.kpi.profitFactor": "ضریب سود",
+  "ins.kpi.maxDD": "بیشترین افت از اوج",
+  "ins.kpi.avgChk": "میانگین چک‌لیست",
+  "ins.kpi.net": "سود/زیان خالص ($)",
+  "ins.kpi.sumR": "جمع R",
+  "ins.kpi.withdraw": "برداشت پیشنهادی ($)",
+  "ins.kpi.target": "هدف: {t}",
+  "ins.kpi.na": "—",
+  "ins.status.ENOUGH_DATA": "داده کافی",
+  "ins.status.LOW_DATA": "داده کم؛ هنوز دربارهٔ ستاپ قضاوت نکن",
+  "ins.status.ON_TARGET": "در هدف",
+  "ins.status.BELOW_TARGET": "زیر هدف",
+  "ins.status.POSITIVE": "مثبت",
+  "ins.status.NON_POSITIVE": "منفی یا صفر",
+  "ins.status.IN_RANGE": "در محدوده",
+  "ins.status.OVER_CAP": "از سقف گذشته",
+  "ins.status.COMPLETE": "کامل",
+  "ins.status.INCOMPLETE": "ناقص",
+  "ins.chart.equity": "منحنی سود و زیان",
+  "ins.chart.equity.note": "فقط سود و زیان معاملات؛ برداشت و واریز در آن نیست.",
+  "ins.chart.drawdown": "افت از اوج",
+  "ins.chart.rHist": "توزیع R",
+  "ins.chart.compliance": "روند رعایت قوانین",
+  "ins.chart.byHour": "R به تفکیک ساعت",
+  "ins.chart.bySymbol": "R به تفکیک نماد",
+  "ins.chart.bySetup": "R به تفکیک ستاپ",
+  "ins.chart.mistakes": "اشتباه‌های اصلی",
+  "ins.chart.violations": "نقض خط قرمزها",
+  "ins.chart.empty": "برای این بازه داده‌ای نیست.",
+  "ins.chart.alt": "نمودار {title}؛ {summary}",
+  "ins.chart.point": "{label}: {value}",
+  "ins.setups.title": "عملکرد ستاپ‌ها",
+  "ins.setups.n": "{n} معامله",
+  "ins.setups.judge": "برای قضاوت دربارهٔ ستاپ دست‌کم {min} معامله لازم است (ماده ۱۲-۴).",
+  "ins.top.mistake": "پرتکرارترین اشتباه",
+  "ins.top.mistake.value": "{label} ({n} بار)",
+  "ins.top.none": "—",
+  "ins.breakEven": "درصد برد سربه‌سر با R برابر {r}: {p}",
+  "ins.expectancy.formula": "E = p × R − (1 − p) × 1",
+  "rev.title": "مرورها",
+  "rev.daily.title": "بستن روز (۵ دقیقه)",
+  "rev.daily.item.trades": "همهٔ معاملات امروز در ژورنال کامل شد",
+  "rev.daily.item.emotion": "احساس هر ورود ثبت شد",
+  "rev.daily.item.sltp": "حد ضرر و حد سود همهٔ پوزیشن‌های باز در صرافی فعال است",
+  "rev.daily.item.calendar": "تقویم اقتصادی فردا را دیدم",
+  "rev.daily.save": "بستن روز",
+  "rev.daily.done": "روز بسته شد.",
+  "rev.weekly.title": "مرور هفتگی (۳۰ دقیقه)",
+  "rev.weekly.start": "شروع هفته (شنبه)",
+  "rev.weekly.end": "پایان هفته",
+  "rev.weekly.kpis": "شاخص‌های هفته",
+  "rev.weekly.topMistake": "پرتکرارترین اشتباه این هفته",
+  "rev.weekly.rule": "یک قانون یا عادت برای هفتهٔ بعد",
+  "rev.weekly.save": "ثبت مرور هفتگی",
+  "rev.weekly.required": "مرور هفتگی همین هفته لازم است.",
+  "rev.weekly.q.hint": "کوتاه و صادقانه بنویس.",
+  "rev.monthly.title": "مرور ماهانه (۶۰ دقیقه)",
+  "rev.monthly.kpis": "شاخص‌های ماه",
+  "rev.monthly.thresholds": "آستانه‌ها را با داده تنظیم کن (حجم، R:R، ریسک)",
+  "rev.monthly.withdraw": "برداشت پیشنهادی از سود محقق‌شده",
+  "rev.monthly.withdraw.hint": "سود محقق‌شدهٔ {month}: {net} — سهم {pct}: {amount}",
+  "rev.monthly.withdraw.record": "ثبت برداشت",
+  "rev.monthly.withdraw.none": "این ماه سود محقق‌شده‌ای نبود؛ برداشتی پیشنهاد نمی‌شود.",
+  "rev.monthly.security": "فهرست امنیت را مرور کردم (ماده ۱۰)",
+  "rev.monthly.save": "ثبت مرور ماهانه",
+  "rev.drawdown.title": "مرور افت از اوج",
+  "rev.drawdown.q1": "چه چیزی باعث این افت شد؟ کدام قانون شکست؟",
+  "rev.drawdown.q2": "برای برگشت با ریسک کمتر چه می‌کنم؟",
+  "rev.drawdown.save": "ثبت مرور افت",
+  "rev.history": "تاریخچهٔ مرورها",
+  "rev.empty": "هنوز مروری ثبت نشده.",
+  "rev.due.weekly": "مرور هفتگی سررسید است",
+  "rev.due.monthly": "مرور ماهانه سررسید است",
+  "rev.due.daily": "روز هنوز بسته نشده",
+  "rev.session.title": "جلسهٔ بازبینی قوانین",
+  "rev.session.start": "شروع جلسه",
+  "rev.session.end": "پایان جلسه",
+  "rev.session.rule": "قوانین فقط در جلسهٔ بازبینی عوض می‌شوند، نه وسط معامله و نه بعد از ضرر (ماده ۱۲-۵).",
+  "rev.session.blocked.OPEN_POSITION": "با پوزیشن باز نمی‌شود قوانین را عوض کرد؛ اول ببندش.",
+  "rev.session.blocked.RECENT_LOSS": "تا {until} (بعد از آخرین ضرر) نمی‌شود قوانین را عوض کرد؛ اول آرام شو.",
+  "rev.session.open": "جلسه باز است؛ تغییرها را ثبت کن.",
+  "params.title": "قوانین و سقف‌ها",
+  "params.subtitle": "همهٔ فرمول‌ها و اپ از همین‌جا می‌خوانند.",
+  "params.group.core": "سقف‌های ریسک و ورود",
+  "params.group.governor": "توقف‌ها و محافظ‌ها",
+  "params.locked": "قفل (تغییرناپذیر)",
+  "params.needsSession": "برای تغییر، جلسهٔ بازبینی باز کن.",
+  "params.default": "پیش‌فرض: {v}",
+  "params.article": "ماده {a}",
+  "params.change.TIGHTEN": "سخت‌گیرانه‌تر؛ فوراً اعمال می‌شود",
+  "params.change.LOOSEN": "آسان‌گیرانه‌تر؛ {hours} ساعت بعد اعمال می‌شود",
+  "params.change.NEUTRAL": "خنثی؛ فوراً اعمال می‌شود",
+  "params.change.NONE": "بدون تغییر",
+  "params.pending": "{label}: {old} ← {new} (اعمال در {at})",
+  "params.pending.title": "تغییرهای در انتظار",
+  "params.pending.cancel": "لغو تغییر",
+  "params.reason": "دلیل تغییر (الزامی)",
+  "params.reason.hint": "چه داده‌ای نشان داد این تغییر لازم است؟",
+  "params.apply": "ثبت تغییر",
+  "params.audit": "تاریخچهٔ تغییرات",
+  "params.audit.row": "{label}: {old} ← {new} — {kind}",
+  "params.invalid.min": "کمتر از حد مجاز ({min})",
+  "params.invalid.max": "بیشتر از حد مجاز ({max})",
+  "params.invalid.riskOrder": "سقف ریسک نمی‌تواند از ریسک هر معامله کمتر باشد",
+  "params.reset": "برگشت به پیش‌فرض اساس‌نامه",
+  "params.warn.loosen": "این تغییر قانون را شُل می‌کند. مطمئنی که داده نشان داده، نه احساس بعد از یک ضرر؟",
+  "setups.title": "ستاپ‌ها",
+  "setups.new": "ستاپ جدید",
+  "setups.name": "نام ستاپ",
+  "setups.entryRule": "شرط ورود",
+  "setups.invalidation": "شرط ابطال",
+  "setups.target": "هدف",
+  "setups.notes": "یادداشت",
+  "setups.grade": "درجه",
+  "setups.grade.A": "درجه‌یک",
+  "setups.grade.B": "عادی",
+  "setups.test": "در آزمایش: ریسک {risk} برای {n} معاملهٔ دیگر",
+  "setups.eligibleA": "شرط ارتقا به درجه‌یک را دارد: دست‌کم {min} معامله و امید ریاضی مثبت.",
+  "setups.notEligibleA": "هنوز شرط درجه‌یک را ندارد ({n} از {min} معامله).",
+  "setups.promote": "ارتقا به درجه‌یک",
+  "setups.demote": "برگشت به عادی",
+  "setups.stats": "آمار این ستاپ",
+  "setups.none": "بدون ستاپ، بدون معامله (ماده ۱-۴).",
+  "setups.limit": "یک تا دو ستاپ مکتوب کافی است؛ بیشتر شدن یعنی هر شمع «فرصت» به نظر می‌رسد.",
+  "setups.archive": "بایگانی",
+  "setups.archived": "بایگانی‌شده",
+  "setups.judge": "قضاوت دربارهٔ ستاپ بعد از {min} معامله",
+  "setups.demo.test": "یا در دمو آزمایش کن",
+  "wl.title": "فهرست پیگیری",
+  "wl.limit": "حداکثر {max} نماد (ماده ۲-۲)",
+  "wl.add": "افزودن نماد",
+  "wl.symbol": "نماد",
+  "wl.volume": "حجم ۲۴ ساعتهٔ فیوچرز دست‌کم {usd} دلار است",
+  "wl.relVolume": "حجم نسبی بین {lo} و {hi} است",
+  "wl.levels": "سطوح کلیدی",
+  "wl.notes": "یادداشت",
+  "wl.full": "فهرست پر است؛ اول یک نماد را حذف کن.",
+  "wl.filter.pass": "فیلتر نقدینگی برقرار است",
+  "wl.filter.fail": "فیلتر نقدینگی برقرار نیست؛ بیرون این بازه فقط با دلیل مکتوب معامله کن.",
+  "wl.empty": "فهرست خالی است.",
+  "wl.checkedAt": "آخرین بررسی نقدینگی: {date}",
+  "wl.recheck": "هر ماه نقدینگی را دوباره بسنج.",
+  "ledger.title": "حساب و برداشت‌ها",
+  "ledger.equity": "سرمایهٔ فعلی",
+  "ledger.type.BASELINE": "سرمایهٔ اولیه",
+  "ledger.type.DEPOSIT": "واریز",
+  "ledger.type.WITHDRAWAL": "برداشت",
+  "ledger.type.ADJUSTMENT": "تعدیل",
+  "ledger.add": "ثبت تراکنش",
+  "ledger.amount": "مبلغ ($)",
+  "ledger.note": "یادداشت",
+  "ledger.date": "تاریخ",
+  "ledger.withdraw.rule": "هر ماه {pct} از سود محقق‌شده به اسپات یا کیف پول شخصی منتقل می‌شود (ماده ۷-۲).",
+  "ledger.withdraw.hint": "سود محقق‌شدهٔ ماه قبل: {net} — برداشت پیشنهادی: {amount}",
+  "ledger.note.curve": "برداشت و واریز در منحنی سود و زیان و افت از اوج اثر ندارند، اما روی سرمایهٔ ابتدای روز و هفته اثر می‌گذارند.",
+  "ledger.negative": "برداشت از سرمایهٔ فعلی بیشتر است.",
+  "ledger.empty": "تراکنشی نیست.",
+  "ledger.adjust.hint": "تعدیل برای اصلاح اختلاف با صرافی (کارمزد، فاندینگ، خطا) است.",
+  "ledger.baseline.locked": "سرمایهٔ اولیه فقط در جلسهٔ بازبینی عوض می‌شود.",
+  "con.title": "اساس‌نامه",
+  "con.article": "ماده {n}",
+  "con.pledge": "تعهدنامه",
+  "con.pledge.signed": "امضا شده در {date}",
+  "con.pledge.version": "نسخهٔ {v}",
+  "con.pledge.sign": "امضا می‌کنم",
+  "con.pledge.resign": "امضای دوباره",
+  "con.pledge.fields": "نام، تاریخ، سرمایهٔ آغازین و ریسک هر معامله از تنظیمات آمده‌اند.",
+  "con.pledge.next": "بازبینی بعدی: بعد از {n} معامله",
+  "con.search": "جستجو در مواد",
+  "con.live": "عدد زنده",
+  "con.live.hint": "عددهای رنگی از تنظیمات فعلی خوانده می‌شوند.",
+  "con.amend": "پیشنهاد اصلاح",
+  "con.amend.hint": "اصلاح فقط در جلسهٔ بازبینی ممکن است.",
+  "con.version": "نسخهٔ اساس‌نامه",
+  "con.empty": "نتیجه‌ای نیست.",
+  "con.mark.read": "خواندم",
+  "con.readProgress": "{n} از {total} ماده خوانده شد",
+  "con.example": "مثال عددی",
+  "con.example.try": "همین مثال را در ماشین‌حساب باز کن",
+  "con.formula": "فرمول",
+  "con.toc": "فهرست مواد",
+  "con.intro": "مقدمه",
+  "learn.title": "درس‌ها",
+  "learn.summary": "جمع‌بندی تجربیات",
+  "learn.review": "اصلاح تجربیات",
+  "learn.additions": "افزوده‌ها",
+  "learn.expectancy": "چرا درصد برد کافی نیست",
+  "learn.experience": "تجربهٔ تو",
+  "learn.correction": "اصلاح",
+  "learn.reason": "دلیل",
+  "learn.solution": "راه‌حل",
+  "learn.needsFix": "نیازمند اصلاح",
+  "learn.important": "مهم‌ترین مورد",
+  "learn.lessons": "دوازده درس",
+  "learn.axes": "چهار محور",
+  "learn.journalGuide": "راهنمای ژورنال",
+  "learn.stages": "چه چیزی در هر مرحله ثبت می‌شود",
+  "learn.quickTemplate": "قالب سریع یادداشت گوشی",
+  "learn.mistakes": "برچسب‌های اشتباه",
+  "learn.calc.expectancy": "ماشین‌حساب امید ریاضی",
+  "learn.calc.p": "درصد برد",
+  "learn.calc.r": "نسبت سود به ضرر (R)",
+  "learn.calc.result": "امید ریاضی: {e}R در هر معامله",
+  "sec.title": "امنیت و ریسک عملیاتی",
+  "sec.subtitle": "ماده ۱۰ را هر ماه یک‌بار مرور کن.",
+  "sec.lastChecked": "آخرین بررسی: {date}",
+  "sec.never": "هنوز بررسی نشده",
+  "sec.markAll": "همه را بررسی کردم",
+  "sec.reminder": "یادآوری ماهانه",
+  "sec.incomplete": "{n} مورد هنوز انجام نشده",
+  "sec.complete": "همهٔ موردها تیک خورده‌اند",
+  "spot.title": "پرتفوی بلندمدت (اسپات)",
+  "spot.note": "پول این بخش با حساب معاملاتی قاطی نمی‌شود (ماده ۲-۱).",
+  "spot.asset": "دارایی",
+  "spot.thesis": "تز مکتوب",
+  "spot.invalidation": "شرط ابطال",
+  "spot.weightCap": "سقف وزن (٪ پرتفوی)",
+  "spot.weight": "وزن فعلی (٪)",
+  "spot.overWeight": "از سقف وزن بیشتر است",
+  "spot.review": "بازبینی فصلی",
+  "spot.reviewDue": "بازبینی فصلی سررسید است",
+  "spot.staged": "ورود و خروج پله‌ای",
+  "spot.add": "افزودن دارایی",
+  "spot.empty": "دارایی ثبت نشده.",
+  "spot.signals": "جریان ETF، ذخایر صرافی و Open Interest فقط ورودی تحلیل‌اند، نه دلیل خرید (ماده ۱۱-۴).",
+  "set.title": "تنظیمات",
+  "set.appearance": "ظاهر",
+  "set.theme": "پوسته",
+  "set.theme.dark": "تیره",
+  "set.theme.light": "روشن",
+  "set.theme.system": "مطابق سیستم",
+  "set.digits": "ارقام",
+  "set.digits.fa": "فارسی (۱۲۳)",
+  "set.digits.en": "لاتین (123)",
+  "set.calendar": "تقویم",
+  "set.cal.jalali": "شمسی",
+  "set.cal.gregorian": "میلادی",
+  "set.zone": "منطقهٔ زمانی",
+  "set.week": "هفته از شنبه شروع می‌شود",
+  "set.fontScale": "اندازهٔ نوشته",
+  "set.reduceMotion": "کاهش انیمیشن",
+  "set.haptics": "لرزش",
+  "set.security": "امنیت",
+  "set.lock": "قفل برنامه",
+  "set.lock.biometric": "اثر انگشت یا چهره",
+  "set.lock.pin": "رمز ۴ تا ۶ رقمی",
+  "set.lock.timeout": "قفل شدن بعد از",
+  "set.lock.immediate": "بلافاصله",
+  "set.lock.min1": "۱ دقیقه",
+  "set.lock.min5": "۵ دقیقه",
+  "set.lock.hideRecents": "پنهان کردن پیش‌نمایش در برنامه‌های اخیر",
+  "set.lock.pin.set": "تنظیم رمز",
+  "set.lock.pin.wrong": "رمز اشتباه است",
+  "set.lock.pin.tries": "{n} تلاش دیگر",
+  "set.lock.pin.wait": "{s} ثانیه صبر کن",
+  "set.lock.pin.confirm": "رمز را دوباره بنویس",
+  "set.notifications": "اعلان‌ها",
+  "set.notif.permission": "برای اعلان‌ها اجازه بده",
+  "set.notif.cooldown": "پایان توقف",
+  "set.notif.timeStop": "خروج زمانی",
+  "set.notif.reviews": "یادآوری مرورها",
+  "set.notif.open": "پوزیشن باز",
+  "set.notif.backup": "پشتیبان‌گیری",
+  "set.notif.quiet": "ساعت سکوت",
+  "set.notif.advice": "اندرز روزانه",
+  "set.backup": "پشتیبان‌گیری",
+  "set.backup.export": "ساخت پشتیبان رمزگذاری‌شده",
+  "set.backup.import": "بازیابی از پشتیبان",
+  "set.backup.password": "رمز پشتیبان",
+  "set.backup.password.confirm": "تکرار رمز",
+  "set.backup.warn": "اگر رمز را گم کنی، پشتیبان قابل بازیابی نیست. رمز را جایی امن بنویس.",
+  "set.backup.last": "آخرین پشتیبان: {date}",
+  "set.backup.never": "هنوز پشتیبان نگرفته‌ای",
+  "set.backup.done": "پشتیبان ساخته شد.",
+  "set.backup.restore.title": "بازیابی داده‌ها",
+  "set.backup.restore.warn": "بازیابی، همهٔ داده‌های فعلی گوشی را جایگزین می‌کند.",
+  "set.backup.restore.done": "داده‌ها بازیابی شد.",
+  "set.backup.autoRemind": "هر ۳۰ روز یادآوری شود",
+  "set.backup.size": "{kb} کیلوبایت",
+  "set.data": "داده‌ها",
+  "set.csv": "ورود و خروج CSV",
+  "set.wipe": "پاک کردن همهٔ داده‌ها",
+  "set.wipe.warn": "همهٔ معامله‌ها، مرورها و تنظیمات برای همیشه پاک می‌شود.",
+  "set.wipe.confirm": "برای تأیید بنویس «حذف»",
+  "set.wipe.word": "حذف",
+  "set.demoData": "داده‌های نمونه",
+  "set.demoData.load": "بارگذاری معاملات نمونه",
+  "set.demoData.remove": "حذف داده‌های نمونه",
+  "set.advice.show": "نمایش اندرز روزانه",
+  "set.about": "دربارهٔ اندرز",
+  "set.licenses": "مجوزهای متن‌باز",
+  "set.version": "نسخهٔ {v}",
+  "set.build": "ساخت {b}",
+  "set.language": "زبان",
+  "set.language.fa": "فارسی",
+  "set.exportAll": "خروجی همهٔ داده‌ها (JSON)",
+  "about.title": "دربارهٔ اندرز",
+  "about.meaning": "«اندرز» یعنی پند و سفارشِ خردمندانه. در ایران ساسانی «اندرزبد» به سرمشاور می‌گفتند؛ اندرزبد پیش از تصمیم حرف می‌زد و اندرز همین برنامه است: پیش از دکمهٔ ورود، با دلیل، «بله» یا «نه» می‌گوید.",
+  "about.privacy": "همهٔ داده‌ها فقط روی همین گوشی می‌ماند. اندرز اینترنت ندارد، تبلیغ ندارد و چیزی ارسال نمی‌کند.",
+  "about.disclaimer": "اندرز ابزار مدیریت ریسک شخصی است، نه توصیهٔ مالی.",
+  "about.fonts": "قلم: وزیرمتن (مجوز OFL)",
+  "about.madeFor": "ساخته‌شده بر پایهٔ اساس‌نامهٔ شخصی خودت؛ هر عدد قابل تنظیم است.",
+  "notif.channel.discipline": "انضباط معاملاتی",
+  "notif.channel.reviews": "مرورها",
+  "notif.channel.system": "سیستم",
+  "notif.cooldownEnd.title": "توقف تمام شد",
+  "notif.cooldownEnd.body": "حال خودت را بسنج؛ اگر آرامی، چک‌لیست را از اول بخوان.",
+  "notif.lockEnd.title": "قفل برداشته شد",
+  "notif.lockEnd.body": "{title}؛ ورود دوباره ممکن است.",
+  "notif.timeStop.title": "{symbol}: خروج زمانی",
+  "notif.timeStop.body": "{n} کندل گذشت و معامله به هدف نرفت؛ طبق ماده ۶-۵ تصمیم بگیر.",
+  "notif.partial.title": "{symbol}: به {r}R رسیدی",
+  "notif.partial.body": "نصف پوزیشن را ببند و حد ضرر را به نقطهٔ ورود ببر.",
+  "notif.open.title": "پوزیشن باز داری",
+  "notif.open.body": "حد ضرر و حد سود در صرافی فعال است؟ پایش ممکن است؟",
+  "notif.dailyClose.title": "وقت بستن روز",
+  "notif.dailyClose.body": "معاملات امروز را کامل کن (۵ دقیقه).",
+  "notif.weekly.title": "مرور هفتگی",
+  "notif.weekly.body": "۳۰ دقیقه برای یک اشتباه تکراری و یک قانون بهتر.",
+  "notif.monthly.title": "مرور ماهانه و برداشت",
+  "notif.monthly.body": "شاخص‌های ماه را ببین و سهم برداشت را جدا کن.",
+  "notif.backup.title": "پشتیبان‌گیری",
+  "notif.backup.body": "یک ماه از آخرین پشتیبان گذشته.",
+  "notif.advice.title": "اندرز امروز",
+  "notif.reportDue.title": "گزارش نقض لازم است",
+  "notif.reportDue.body": "تا گزارش ننویسی قفل باز نمی‌شود.",
+  "notif.security.title": "مرور امنیت",
+  "notif.security.body": "فهرست ماده ۱۰ را این ماه مرور کن.",
+  "err.required": "این مورد الزامی است",
+  "err.number": "عدد معتبر وارد کن",
+  "err.positive": "باید بزرگ‌تر از صفر باشد",
+  "err.entryEqSl": "ورود و حد ضرر نمی‌توانند برابر باشند",
+  "err.slDirection": "حد ضرر باید {dir} قیمت ورود باشد",
+  "err.tpDirection": "حد سود باید {dir} قیمت ورود باشد",
+  "err.below": "زیر",
+  "err.above": "بالای",
+  "err.leverage": "اهرم باید بین ۱ و {max} باشد",
+  "err.reportShort": "گزارش دست‌کم {min} نویسه باشد",
+  "err.legsSum": "جمع سهم خروج‌ها باید ۱۰۰٪ باشد",
+  "err.dateOrder": "زمان خروج نمی‌تواند قبل از ورود باشد",
+  "err.futureTime": "زمان در آینده است",
+  "err.notionalZero": "ارزش پوزیشن باید بیشتر از صفر باشد",
+  "err.backup.wrongPassword": "رمز اشتباه است یا فایل خراب شده است",
+  "err.backup.version": "این پشتیبان از نسخهٔ جدیدتری از اندرز است؛ اول اپ را به‌روز کن.",
+  "err.backup.notAndarz": "این فایل پشتیبان اندرز نیست",
+  "err.passwordShort": "رمز دست‌کم ۸ نویسه باشد",
+  "err.passwordMismatch": "دو رمز یکی نیست",
+  "err.csv.header": "سرستون‌های فایل شناخته نشد",
+  "err.csv.encoding": "فایل باید UTF-8 باشد",
+  "err.generic": "مشکلی پیش آمد؛ دوباره تلاش کن.",
+  "err.storage": "ذخیره‌سازی ممکن نشد؛ فضای گوشی را بررسی کن.",
+  "err.locked": "این کار الان بسته است: {reason}",
+  "err.noPledge": "اول تعهدنامه را امضا کن",
+  "err.symbolRequired": "نماد را بنویس",
+  "err.setupRequired": "ستاپ انتخاب کن؛ بدون ستاپ، بدون معامله",
+  "err.checklistRequired": "چک‌لیست را کامل کن",
+  "err.slTpRequired": "حد ضرر و حد سود باید در صرافی ثبت شده باشد",
+  "a11y.back": "بازگشت",
+  "a11y.close": "بستن",
+  "a11y.menu": "منو",
+  "a11y.equityChart": "نمودار منحنی سود و زیان",
+  "a11y.drawdownChart": "نمودار افت از اوج",
+  "a11y.lockedState": "قفل فعال",
+  "a11y.allowedState": "مجاز",
+  "a11y.redState": "خط قرمز",
+  "a11y.cautionState": "احتیاط",
+  "a11y.toggleOn": "روشن",
+  "a11y.toggleOff": "خاموش",
+  "a11y.progress": "پیشرفت {n} از {total}",
+  "a11y.positive": "مثبت",
+  "a11y.negative": "منفی",
+  "a11y.required": "الزامی"
+ },
+ "uiArgs": {
+  "common.article": [
+   "n"
+  ],
+  "common.clause": [
+   "id"
+  ],
+  "onb.setup.risk.hint": [
+   "default"
+  ],
+  "today.cap": [
+   "v"
+  ],
+  "today.status.DD_RED": [
+   "days"
+  ],
+  "lock.until": [
+   "until"
+  ],
+  "lock.VIOLATION.body": [
+   "hours"
+  ],
+  "lock.DRAWDOWN.body": [
+   "cap",
+   "days",
+   "n",
+   "risk"
+  ],
+  "lock.WEEKLY_LOSS.body": [
+   "cap"
+  ],
+  "lock.DAILY_LOSS.body": [
+   "cap"
+  ],
+  "lock.DAY_OVER.body": [
+   "n"
+  ],
+  "lock.TRADE_CAP.body": [
+   "cap",
+   "n"
+  ],
+  "lock.COOLDOWN.body": [
+   "minutes"
+  ],
+  "lock.COOLDOWN.left": [
+   "m"
+  ],
+  "need.REPORT": [
+   "min"
+  ],
+  "reduction.DD_RECOVERY": [
+   "n",
+   "risk"
+  ],
+  "reduction.VIOLATIONS": [
+   "n",
+   "risk"
+  ],
+  "reduction.SETUP_TEST": [
+   "n",
+   "risk"
+  ],
+  "reduction.cap": [
+   "risk"
+  ],
+  "bigwin.hold": [
+   "until"
+  ],
+  "wiz.step.n": [
+   "n",
+   "total"
+  ],
+  "wiz.emotion.warn": [
+   "emotion"
+  ],
+  "wiz.checklist.score": [
+   "n",
+   "total"
+  ],
+  "wiz.equity.fromLedger": [
+   "v"
+  ],
+  "wiz.equity.mismatch": [
+   "v"
+  ],
+  "wiz.riskPct.reduced": [
+   "reason",
+   "risk"
+  ],
+  "wiz.gate.deniedWith": [
+   "reasons"
+  ],
+  "wiz.gate.detail.DIRECTION": [
+   "side",
+   "slWhere",
+   "tpWhere"
+  ],
+  "wiz.gate.detail.CHECKLIST": [
+   "n",
+   "total"
+  ],
+  "wiz.gate.detail.LEVERAGE": [
+   "lev",
+   "max"
+  ],
+  "wiz.gate.detail.RR": [
+   "min",
+   "rr"
+  ],
+  "wiz.gate.detail.MARGIN": [
+   "max",
+   "pct"
+  ],
+  "wiz.gate.detail.LIQUIDATION": [
+   "min",
+   "x"
+  ],
+  "wiz.adv.range": [
+   "max",
+   "min"
+  ],
+  "wiz.adv.recommended": [
+   "lev",
+   "margin"
+  ],
+  "wiz.adv.tight": [
+   "lev"
+  ],
+  "wiz.adv.far": [
+   "lev"
+  ],
+  "wiz.confirm.slippage": [
+   "v"
+  ],
+  "wiz.planned.expire": [
+   "hours"
+  ],
+  "size.OVER_CAP": [
+   "cap"
+  ],
+  "size.RED_LINE": [
+   "max"
+  ],
+  "trade.moveSl.log": [
+   "from",
+   "to"
+  ],
+  "trade.partial.hint": [
+   "hi",
+   "lo"
+  ],
+  "trade.partial.due": [
+   "r"
+  ],
+  "trade.trail.lock": [
+   "r"
+  ],
+  "trade.timeStop.left": [
+   "n"
+  ],
+  "trade.timeStop.due": [
+   "n"
+  ],
+  "trade.monitor.last": [
+   "t"
+  ],
+  "close.sum": [
+   "v"
+  ],
+  "close.autoReason": [
+   "reason"
+  ],
+  "result.why": [
+   "reasons"
+  ],
+  "review.report.min": [
+   "min",
+   "n"
+  ],
+  "review.pending": [
+   "n"
+  ],
+  "review.autoViolation": [
+   "label"
+  ],
+  "review.autoViolation.V02": [
+   "max"
+  ],
+  "review.autoViolation.V03": [
+   "max"
+  ],
+  "journal.row.r": [
+   "r"
+  ],
+  "journal.count": [
+   "n"
+  ],
+  "journal.import.preview": [
+   "ok",
+   "skip"
+  ],
+  "journal.import.confirm": [
+   "n"
+  ],
+  "journal.import.done": [
+   "n"
+  ],
+  "journal.import.row.invalid": [
+   "row",
+   "why"
+  ],
+  "journal.import.dup": [
+   "n"
+  ],
+  "calc.feeImpact": [
+   "from",
+   "to"
+  ],
+  "ins.kpi.target": [
+   "t"
+  ],
+  "ins.chart.alt": [
+   "summary",
+   "title"
+  ],
+  "ins.chart.point": [
+   "label",
+   "value"
+  ],
+  "ins.setups.n": [
+   "n"
+  ],
+  "ins.setups.judge": [
+   "min"
+  ],
+  "ins.top.mistake.value": [
+   "label",
+   "n"
+  ],
+  "ins.breakEven": [
+   "p",
+   "r"
+  ],
+  "rev.monthly.withdraw.hint": [
+   "amount",
+   "month",
+   "net",
+   "pct"
+  ],
+  "rev.session.blocked.RECENT_LOSS": [
+   "until"
+  ],
+  "params.default": [
+   "v"
+  ],
+  "params.article": [
+   "a"
+  ],
+  "params.change.LOOSEN": [
+   "hours"
+  ],
+  "params.pending": [
+   "at",
+   "label",
+   "new",
+   "old"
+  ],
+  "params.audit.row": [
+   "kind",
+   "label",
+   "new",
+   "old"
+  ],
+  "params.invalid.min": [
+   "min"
+  ],
+  "params.invalid.max": [
+   "max"
+  ],
+  "setups.test": [
+   "n",
+   "risk"
+  ],
+  "setups.eligibleA": [
+   "min"
+  ],
+  "setups.notEligibleA": [
+   "min",
+   "n"
+  ],
+  "setups.judge": [
+   "min"
+  ],
+  "wl.limit": [
+   "max"
+  ],
+  "wl.volume": [
+   "usd"
+  ],
+  "wl.relVolume": [
+   "hi",
+   "lo"
+  ],
+  "wl.checkedAt": [
+   "date"
+  ],
+  "ledger.withdraw.rule": [
+   "pct"
+  ],
+  "ledger.withdraw.hint": [
+   "amount",
+   "net"
+  ],
+  "con.article": [
+   "n"
+  ],
+  "con.pledge.signed": [
+   "date"
+  ],
+  "con.pledge.version": [
+   "v"
+  ],
+  "con.pledge.next": [
+   "n"
+  ],
+  "con.readProgress": [
+   "n",
+   "total"
+  ],
+  "learn.calc.result": [
+   "e"
+  ],
+  "sec.lastChecked": [
+   "date"
+  ],
+  "sec.incomplete": [
+   "n"
+  ],
+  "set.lock.pin.tries": [
+   "n"
+  ],
+  "set.lock.pin.wait": [
+   "s"
+  ],
+  "set.backup.last": [
+   "date"
+  ],
+  "set.backup.size": [
+   "kb"
+  ],
+  "set.version": [
+   "v"
+  ],
+  "set.build": [
+   "b"
+  ],
+  "notif.lockEnd.body": [
+   "title"
+  ],
+  "notif.timeStop.title": [
+   "symbol"
+  ],
+  "notif.timeStop.body": [
+   "n"
+  ],
+  "notif.partial.title": [
+   "r",
+   "symbol"
+  ],
+  "err.slDirection": [
+   "dir"
+  ],
+  "err.tpDirection": [
+   "dir"
+  ],
+  "err.leverage": [
+   "max"
+  ],
+  "err.reportShort": [
+   "min"
+  ],
+  "err.locked": [
+   "reason"
+  ],
+  "a11y.progress": [
+   "n",
+   "total"
+  ]
+ }
+}

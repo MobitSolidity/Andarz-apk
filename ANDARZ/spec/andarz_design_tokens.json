@@ -1,0 +1,231 @@
+{
+ "meta": {
+  "name": "Andarz design tokens",
+  "version": 1,
+  "note": "Contrast ratios are WCAG 2.1 (relative luminance). Text pairs are >= 4.5 (body text >= 7); UI outlines and chart lines/markers are >= 3.",
+  "fontFamily": "Vazirmatn (OFL) - weights 400, 500, 700",
+  "defaultTheme": "dark"
+ },
+ "themes": {
+  "dark": {
+   "colors": {
+    "bg": "#0A1016",
+    "surface": "#111922",
+    "surfaceAlt": "#17212C",
+    "surfaceHigh": "#1E2A37",
+    "divider": "#273445",
+    "outline": "#62768C",
+    "text": "#E9EFF5",
+    "textMuted": "#9DB0C3",
+    "firouzeh": "#2DD4C0",
+    "onFirouzeh": "#02201C",
+    "firouzehContainer": "#0F3A37",
+    "saffron": "#F5B942",
+    "onSaffron": "#231600",
+    "saffronContainer": "#3A2B07",
+    "anar": "#FF7385",
+    "anarFill": "#C62A43",
+    "onAnarFill": "#FFFFFF",
+    "anarContainer": "#3F1219",
+    "lapis": "#8AA4FF",
+    "lapisContainer": "#16214A",
+    "violet": "#B79CFF"
+   },
+   "contrast": {
+    "text on bg": 16.5,
+    "textMuted on bg": 8.59,
+    "text on surface": 15.29,
+    "textMuted on surface": 7.95,
+    "text on surfaceAlt": 14.05,
+    "textMuted on surfaceAlt": 7.31,
+    "text on surfaceHigh": 12.58,
+    "textMuted on surfaceHigh": 6.54,
+    "firouzeh on bg": 10.28,
+    "saffron on bg": 10.83,
+    "anar on bg": 7.32,
+    "lapis on bg": 8.04,
+    "outline on bg": 4.09,
+    "firouzeh on surface": 9.52,
+    "saffron on surface": 10.03,
+    "anar on surface": 6.78,
+    "lapis on surface": 7.45,
+    "outline on surface": 3.79,
+    "firouzeh on surfaceAlt": 8.75,
+    "saffron on surfaceAlt": 9.22,
+    "anar on surfaceAlt": 6.23,
+    "lapis on surfaceAlt": 6.85,
+    "outline on surfaceAlt": 3.48,
+    "outline on surfaceHigh": 3.11,
+    "onFirouzeh on firouzeh": 9.21,
+    "onSaffron on saffron": 10.03,
+    "onAnarFill on anarFill": 5.51,
+    "chip firouzeh on firouzehContainer": 6.72,
+    "chip saffron on saffronContainer": 7.79,
+    "chip anar on anarContainer": 6.13,
+    "chip lapis on lapisContainer": 6.54,
+    "chart firouzeh on surface": 9.52,
+    "chart lapis on surface": 7.45,
+    "chart saffron on surface": 10.03,
+    "chart anar on surface": 6.78,
+    "chart violet on surface": 7.77
+   },
+   "chartSeries": [
+    "#2DD4C0",
+    "#8AA4FF",
+    "#F5B942",
+    "#FF7385",
+    "#B79CFF"
+   ]
+  },
+  "light": {
+   "colors": {
+    "bg": "#F6F1E6",
+    "surface": "#FFFDF8",
+    "surfaceAlt": "#EFE8D8",
+    "surfaceHigh": "#E7DFCB",
+    "divider": "#D8CFBB",
+    "outline": "#7D7560",
+    "text": "#14212C",
+    "textMuted": "#4F6071",
+    "firouzeh": "#087069",
+    "onFirouzeh": "#FFFFFF",
+    "firouzehContainer": "#D3EFEA",
+    "saffron": "#8A5600",
+    "onSaffron": "#231600",
+    "saffronFill": "#F2B134",
+    "saffronContainer": "#FBEBC4",
+    "anar": "#B3203A",
+    "anarFill": "#B3203A",
+    "onAnarFill": "#FFFFFF",
+    "anarContainer": "#FBD9DE",
+    "lapis": "#2F4AC4",
+    "lapisContainer": "#DDE3FB",
+    "violet": "#6B4FD1"
+   },
+   "contrast": {
+    "text on bg": 14.52,
+    "textMuted on bg": 5.75,
+    "text on surface": 16.09,
+    "textMuted on surface": 6.37,
+    "text on surfaceAlt": 13.4,
+    "textMuted on surfaceAlt": 5.3,
+    "text on surfaceHigh": 12.32,
+    "textMuted on surfaceHigh": 4.88,
+    "firouzeh on bg": 5.28,
+    "saffron on bg": 5.46,
+    "anar on bg": 5.85,
+    "lapis on bg": 6.43,
+    "outline on bg": 4.07,
+    "firouzeh on surface": 5.85,
+    "saffron on surface": 6.05,
+    "anar on surface": 6.49,
+    "lapis on surface": 7.13,
+    "outline on surface": 4.51,
+    "firouzeh on surfaceAlt": 4.87,
+    "saffron on surfaceAlt": 5.04,
+    "anar on surfaceAlt": 5.4,
+    "lapis on surfaceAlt": 5.94,
+    "outline on surfaceAlt": 3.75,
+    "outline on surfaceHigh": 3.45,
+    "onFirouzeh on firouzeh": 5.95,
+    "onSaffron on saffronFill": 9.37,
+    "onAnarFill on anarFill": 6.59,
+    "chip firouzeh on firouzehContainer": 4.9,
+    "chip saffron on saffronContainer": 5.21,
+    "chip anar on anarContainer": 5.05,
+    "chip lapis on lapisContainer": 5.68,
+    "chart firouzeh on surface": 5.85,
+    "chart lapis on surface": 7.13,
+    "chart anar on surface": 6.49,
+    "chart violet on surface": 5.64,
+    "chart saffron (series #B87300) on surface": 3.76
+   },
+   "chartSeries": [
+    "#087069",
+    "#2F4AC4",
+    "#B87300",
+    "#B3203A",
+    "#6B4FD1"
+   ],
+   "chartSeriesNote": "Series 3 (#B87300) is a chart-only amber: 3.76:1 on surface (>= 3:1 for graphical objects). Never use it for text; text uses colors.saffron (#8A5600, 6.05:1)."
+  }
+ },
+ "semantics": {
+  "allowed_or_profit": "firouzeh",
+  "caution_or_grade1_only": "saffron",
+  "redline_or_loss": "anar",
+  "info_or_chart": "lapis",
+  "rule": "Colour is never the only signal: pair it with an icon and a +/- sign or a text label."
+ },
+ "shape": {
+  "radiusSmall": 8,
+  "radiusMedium": 14,
+  "radiusLarge": 20,
+  "radiusSheet": 28,
+  "unit": "dp"
+ },
+ "spacing": {
+  "grid": 4,
+  "scale": [
+   4,
+   8,
+   12,
+   16,
+   20,
+   24,
+   32,
+   48
+  ],
+  "screenHorizontalPadding": 16,
+  "cardPadding": 16,
+  "minTouchTarget": 48,
+  "unit": "dp"
+ },
+ "typography": {
+  "unit": "sp",
+  "lineHeightFactorFa": 1.6,
+  "scale": {
+   "display": {
+    "size": 32,
+    "weight": 700
+   },
+   "headline": {
+    "size": 24,
+    "weight": 700
+   },
+   "title": {
+    "size": 18,
+    "weight": 700
+   },
+   "bodyLarge": {
+    "size": 16,
+    "weight": 400
+   },
+   "body": {
+    "size": 15,
+    "weight": 400
+   },
+   "label": {
+    "size": 12,
+    "weight": 500
+   }
+  },
+  "numerals": "Use tabular figures where the font supports them; money and R values are always wrapped in an LTR isolate."
+ },
+ "elevation": "Tonal: express depth with surface/surfaceAlt/surfaceHigh, not drop shadows (dark theme). Light theme may use 1-2dp shadows.",
+ "motion": {
+  "durationsMs": {
+   "fast": 150,
+   "standard": 250,
+   "emphasized": 400
+  },
+  "easing": "Material standard; no bouncy or celebratory animation anywhere (a trading-discipline app never cheers for a win).",
+  "reduceMotion": "Respect the system animation scale: at 0 skip all non-essential transitions."
+ },
+ "iconConcept": {
+  "foreground": "upright tapered alef stroke in firouzeh, inside the adaptive-icon safe zone",
+  "accent": "short saffron bar under the stroke",
+  "background": "lapis-night #101A33 to #0A1016 vertical gradient",
+  "monochrome": "alef stroke only (themed icon)"
+ }
+}
