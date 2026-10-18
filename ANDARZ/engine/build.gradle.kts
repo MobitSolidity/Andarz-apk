@@ -27,3 +27,27 @@ tasks.test {
     // Engine tests must finish in under five seconds in total (3.13).
     testLogging { events("failed") }
 }
+
+// Engine line coverage must stay at or above 90% (10.7, M2 exit). `check` runs the verification.
+apply(plugin = "jacoco")
+configure<JacocoPluginExtension> { toolVersion = "0.8.12" }
+
+tasks.named<JacocoReport>("jacocoTestReport") {
+    dependsOn(tasks.test)
+    reports { xml.required.set(true); html.required.set(false) }
+}
+
+val engineCoverage = tasks.named<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
+    dependsOn(tasks.test)
+    violationRules {
+        rule {
+            limit {
+                counter = "LINE"
+                value = "COVEREDRATIO"
+                minimum = "0.90".toBigDecimal()
+            }
+        }
+    }
+}
+
+tasks.named("check") { dependsOn(engineCoverage, "jacocoTestReport") }

@@ -295,6 +295,41 @@ kpi 5, jalali 53, format 37, renderClause 29) and 14 property/extension tests pa
 walks all 73,414 days. Engine tests take about 3 s. Coverage (JaCoCo ≥ 90%) is measured from M2, when the
 governor lands.
 
+## M2 — Engine B (decisions)
+
+### D-42 — Equity queries use a prefix-sum index
+
+**Context.** `equity_before` of the reference sums every ledger row and trade on each call; the governor
+calls it per trade (weekly scan, big-win hold), which is quadratic: a 5,000-trade snapshot took ~1 s.
+4.5 asks for under 50 ms on a phone. **Choice.** `Governor.EquityIndex` sorts the flows by time once per
+snapshot and answers each query by binary search over prefix sums. **Reason.** Same definition (flows
+strictly before t, REAL trades only, withdrawals negative); only the order of floating-point additions
+changes, which stays orders of magnitude inside the 1e-9 tolerance — all 33 scenarios pass unchanged.
+Measured: ~230 ms for 5,000 trades on the JVM under JaCoCo instrumentation; the remaining cost is
+`XlMath.round` in the per-trade drawdown and weekly checks. If the device measurement in M7 misses 50 ms,
+cache the closed-trade resolution as 4.5 suggests.
+
+### D-43 — Imported history (D-14) is implemented as a filter on lock *sources*
+
+An imported row is skipped as a source of violation events, drawdown breaches (but still advances `cum`
+and `peak`), weekly/daily/day-over scans, the trade cap, the cool-down and the big-win hold. It still counts
+for equity, the curve, KPIs, the dashboard drawdown, `SETUP_TEST` and grade A. Tests in
+`GovernorExtensionTest` show each rule with the imported rows and, as a control, the same rows live.
+
+### D-44 — `testWaived` (D-21, P1) counts DEMO trades of the setup entered up to now
+
+`SETUP_TEST` is skipped when the setup has `testWaived = true` **and** at least `Setup_Test_Trades` DEMO
+trades with `entryTime ≤ now`. The flag alone does not waive the test.
+
+### D-45 — An open violating lock has `until = null`
+
+The reference uses `INF` (9999-12-31) and prints it as `null`; Kotlin uses `null` directly and sorts it
+last within its priority, as `INF` sorts.
+
+**M2 result.** scenarios 33, reviewSession 4, paramChange 8, paramsAt 2, gradeA 4 pass (51 cases); with
+M1 all 248 checks of the vector file pass, plus 24 property/extension tests. Engine line coverage 96.6%,
+enforced at ≥ 90% by `:engine:jacocoTestCoverageVerification` in `check`.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |
