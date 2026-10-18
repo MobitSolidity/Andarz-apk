@@ -23,6 +23,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,33 +33,68 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.hilt.navigation.compose.hiltViewModel
 import ir.andarz.app.content.ContentRepository
 import ir.andarz.app.ui.nav.MarketSection
 import ir.andarz.app.ui.theme.LocalAndarzColors
+import ir.andarz.app.ui.ui
 
 /**
  * The Market destination: one screen with four sections in a scrollable segmented row (K6.1).
  *
- * M0 ships the off state of Prices and the consent sheet it opens, and touches no network at all. Prices,
- * My coins, News and Alerts get their real content in MK1 and MK2.
+ * M0 shipped the off state and the consent sheet; MK1 adds Prices, My coins and the read-only coin sheet.
+ * News and Alerts get their content in MK2. The section and the open sheet survive process death.
  */
 @Composable
 fun MarketScreen(
     content: ContentRepository,
     modifier: Modifier = Modifier,
+    initialCoin: String? = null,
+    initialSection: MarketSection? = null,
     viewModel: MarketViewModel = hiltViewModel(),
 ) {
     val gate by viewModel.gate.collectAsStateWithLifecycle()
-    var section by rememberSaveable { mutableStateOf(MarketSection.PRICES) }
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val watch by viewModel.watch.collectAsStateWithLifecycle()
+    val toman by viewModel.toman.collectAsStateWithLifecycle()
+    val sectionName by viewModel.section.collectAsStateWithLifecycle()
+    val openCoin by viewModel.openCoin.collectAsStateWithLifecycle()
+    val section = MarketSection.entries.firstOrNull { it.name == sectionName } ?: MarketSection.PRICES
     var consentOpen by rememberSaveable { mutableStateOf(false) }
+    val u = ui()
+    val fmt = remember(u.fa, u.zone) { MarketFmt(u.fa, content.ui("mkt.unit.tomanSuffix"), u.zone) }
+
+    // A deep link `market/coin/{id}` opens the sheet once (K6.11).
+    LaunchedEffect(initialCoin) { if (initialCoin != null) viewModel.openCoin(initialCoin) }
+    LaunchedEffect(initialSection) { if (initialSection != null) viewModel.setSection(initialSection) }
+
+    // K6.4 reason (a): the hub is held only while this screen is at least STARTED. Leaving the screen, or
+    // sending the app to the background, gives the demand back and the socket closes.
+    val owner = LocalLifecycleOwner.current
+    DisposableEffect(owner) {
+        val obs = LifecycleEventObserver { _, e ->
+            when (e) {
+                Lifecycle.Event.ON_START -> viewModel.onVisible()
+                Lifecycle.Event.ON_STOP -> viewModel.onHidden()
+                else -> Unit
+            }
+        }
+        owner.lifecycle.addObserver(obs)
+        onDispose {
+            owner.lifecycle.removeObserver(obs)
+            viewModel.onHidden()
+        }
+    }
 
     Column(modifier = modifier.fillMaxSize()) {
         SectionRow(
             content = content,
             selected = section,
-            onSelect = { section = it },
+            onSelect = { viewModel.setSection(it) },
         )
 
         when (section) {
@@ -65,7 +102,21 @@ fun MarketScreen(
             // state (K6.1). News is local and keeps working; Alerts shows its settings with a note.
             MarketSection.PRICES, MarketSection.COINS ->
                 if (gate.mayUseNetwork) {
-                    Placeholder(content.ui("mkt.tab." + if (section == MarketSection.PRICES) "prices" else "coins"))
+                    if (section == MarketSection.PRICES) {
+                        PricesScreen(
+                            content = content, fmt = fmt, state = state, watch = watch, toman = toman,
+                            onToman = viewModel::setToman, onToggle = viewModel::toggleStar,
+                            onRefresh = viewModel::refresh, onOpen = { viewModel.openCoin(it) },
+                        )
+                    } else {
+                        MyCoinsScreen(
+                            content = content, fmt = fmt, coins = state.coins, watch = watch, toman = toman,
+                            rate = state.usdt?.toman, onToggle = viewModel::toggleStar,
+                            onOpen = { viewModel.openCoin(it) },
+                            onGoPrices = { viewModel.setSection(MarketSection.PRICES) },
+                            onGoNews = { viewModel.setSection(MarketSection.NEWS) },
+                        )
+                    }
                 } else {
                     MarketOff(
                         content = content,
@@ -79,6 +130,16 @@ fun MarketScreen(
             MarketSection.NEWS -> Placeholder(content.ui("mkt.tab.news"))
             MarketSection.ALERTS -> Placeholder(content.ui("mkt.tab.alerts"))
         }
+    }
+
+    val coin = openCoin?.let { id -> state.coins.firstOrNull { it.id == id } }
+    if (coin != null && gate.mayUseNetwork) {
+        CoinSheet(
+            content = content, fmt = fmt, c = coin, toman = toman, rate = state.usdt?.toman,
+            starred = coin.id in watch, session = viewModel.session(coin.id),
+            onToggleStar = { viewModel.toggleStar(coin.id) },
+            onDismiss = { viewModel.openCoin(null) },
+        )
     }
 
     if (consentOpen) {

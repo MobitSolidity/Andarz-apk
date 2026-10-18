@@ -117,3 +117,19 @@ The same check, repeated after Market has been accepted and then switched back o
 | F3 | Close a trade at its stop | Cool-down banner with minutes left; FAB muted with lock; 30 min later allowed | pending |
 | F4 | Move the stop away, confirm | V04; VIOLATION lock needs close + report; after close only report; 20-char report → lock until +48 h | pending |
 | 6.9-1..4 | 360×800 dp, dark/light, 100%/200% | Hero + six gauges + verdict visible without scrolling; isolates keep `BTCUSDT`, `+$39.40`, `−0.5R` readable | pending |
+
+## MK1 market data and prices (pending: needs a device with a network; nothing below has been run)
+
+JVM tests cover parsing, merge, cadence, demand, zero traffic and formatting (D-M48). These rows are the
+real-host and device part of A3, A4 and the MK1 part of A5.
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| MK1-1 | Fresh install, airplane mode off, open Market | Off state; no connection in the log of "How to check zero connections" | pending |
+| MK1-2 | Accept the consent sheet | Within a few seconds: USDT/Toman card on top, 200 coins, overview strip, live label "Binance" (or "Nobitex" when Binance is blocked) with the clock | pending |
+| MK1-3 | Leave Market for Today, wait 30 s | The connection log shows the socket closed and no further request (K6.4 a) | pending |
+| MK1-4 | Airplane mode with Market on | The list stays with its last time; the header shows `mkt.err.noNetwork` under the last data | pending |
+| MK1-5 | On a network where CoinGecko answers 403/451 | `mkt.err.blocked` naming CoinGecko; USDT/Toman and live prices still work | pending |
+| MK1-6 | USD/Toman toggle, search "btc" and "Bitcoin", each sort pill, star and unstar | Prices switch units; USDT/Toman stays pinned; stars appear in My coins | pending |
+| MK1-7 | Open a coin, then rotate or kill the process from the recents screen and reopen | The sheet shows stats, 7-day chart and star; section and sheet survive process death | pending |
+| MK1-8 | Settings off (master switch) while Prices is open | Off state at once; the socket closes | pending (switch UI in M6; testable via the off state's action once M6 lands) |

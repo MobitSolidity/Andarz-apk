@@ -150,6 +150,44 @@ class MarketHttpEgressTest {
         assertEquals(setOf("accept", "user-agent"), EgressInterceptor.ALLOWED_HEADERS)
     }
 
+    // ---------------------------------------------------------------- WebSocket upgrade (D-M42)
+
+    private fun upgrade(host: String): Request.Builder =
+        Request.Builder()
+            .url("https://" + host + "/ws")
+            .header("User-Agent", MarketHttp.USER_AGENT)
+            .header("Upgrade", "websocket")
+            .header("Connection", "Upgrade")
+            .header("Sec-WebSocket-Key", "dGhlIHNhbXBsZSBub25jZQ==")
+            .header("Sec-WebSocket-Version", "13")
+            .header("Sec-WebSocket-Extensions", "permessage-deflate")
+
+    @Test
+    fun `the websocket handshake to the live-ticks host passes`() {
+        val chain = FakeChain(upgrade(ir.andarz.market.MarketHosts.LIVE_TICKS).get().build())
+        interceptor.intercept(chain)
+        assertTrue(chain.proceeded)
+    }
+
+    @Test
+    fun `a websocket upgrade to any other host is refused`() {
+        val chain = FakeChain(upgrade(ir.andarz.market.MarketHosts.COIN_LIST).get().build())
+        assertFailsWith<EgressRefused> { interceptor.intercept(chain) }
+        assertFalse(chain.proceeded)
+    }
+
+    @Test
+    fun `handshake headers on a plain GET are refused`() {
+        val chain = FakeChain(allowed().header("Sec-WebSocket-Key", "x").get().build())
+        assertFailsWith<EgressRefused> { interceptor.intercept(chain) }
+    }
+
+    @Test
+    fun `an upgrade still refuses headers outside the handshake`() {
+        val chain = FakeChain(upgrade(ir.andarz.market.MarketHosts.LIVE_TICKS).header("Cookie", "a=b").get().build())
+        assertFailsWith<EgressRefused> { interceptor.intercept(chain) }
+    }
+
     // ---------------------------------------------------------------- WebSocket client frames
 
     @Test

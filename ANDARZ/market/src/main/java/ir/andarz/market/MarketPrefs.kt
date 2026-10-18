@@ -1,25 +1,59 @@
 package ir.andarz.market
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.MutablePreferences
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import ir.andarz.market.model.AlertDirection
+import ir.andarz.market.model.AlertScope
+import ir.andarz.market.model.AlertSettings
+import ir.andarz.market.model.AlertWindow
+import ir.andarz.market.model.CoinRule
+import ir.andarz.market.model.RingMode
+import ir.andarz.market.model.USDT_IRT_ID
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import org.json.JSONObject
 
 /**
- * Market's own preference store, separate from the journal's settings (D-M17). March's theme and language
- * preferences are dropped: Andarz owns both.
+ * Market's own preference store, separate from the journal's settings (D-M17). Port of March's
+ * `data/Prefs.kt`: the keys are March's (`watch`, `alarms`, `toman`, `alert_*`, `user_name`,
+ * `coin_rules`); `theme` and `lang` are dropped because Andarz owns both; `market_enabled` and `consent_at`
+ * are new and default to "off/never", so a fresh install opens no socket (K4).
  *
- * The watch list, alert settings and per-coin rules join this file in MK1/MK2; M0 needs only the two
- * values that gate the network: the master switch and the consent stamp. Both default to "off/never", so
- * a fresh install opens no socket (K4).
+ * Defaults of the alert keys follow D-M08 (off), not March's (on).
  */
 private val Context.marketStore by preferencesDataStore(name = "market")
 
 private val MARKET_ENABLED = booleanPreferencesKey("market_enabled")
 private val CONSENT_AT = longPreferencesKey("consent_at")
+private val WATCH = stringSetPreferencesKey("watch")
+private val ALARMS = stringSetPreferencesKey("alarms")
+private val TOMAN = booleanPreferencesKey("toman")
+private val A_ENABLED = booleanPreferencesKey("alert_enabled")
+private val A_PCT = floatPreferencesKey("alert_pct")
+private val A_WINDOW = stringPreferencesKey("alert_window")
+private val A_SCOPE = stringPreferencesKey("alert_scope")
+private val A_DIR = stringPreferencesKey("alert_dir")
+private val A_COOLDOWN = intPreferencesKey("alert_cooldown")
+private val A_BG = booleanPreferencesKey("alert_bg")
+private val A_USDT = booleanPreferencesKey("alert_usdt")
+private val A_RING = stringPreferencesKey("alert_ring")
+private val A_CLOCK = booleanPreferencesKey("alert_clock_app")
+private val NAME = stringPreferencesKey("user_name")
+private val RULES = stringPreferencesKey("coin_rules")
+
+/** March's default stars (K5.2). */
+val DEFAULT_WATCH: Set<String> = setOf("bitcoin", "ethereum", "solana", "ripple", USDT_IRT_ID)
 
 /** The state of the two gates in front of every request. */
 data class MarketGate(
@@ -32,25 +66,140 @@ data class MarketGate(
     val mayUseNetwork: Boolean get() = enabled && consentAt != null
 }
 
-internal class MarketPrefs(private val context: Context) {
+private inline fun <reified T : Enum<T>> enumOr(name: String?, fallback: T): T =
+    enumValues<T>().firstOrNull { it.name == name } ?: fallback
 
-    val gate: Flow<MarketGate> = context.marketStore.data.map { p ->
+private val DEFAULTS = AlertSettings()
+
+internal fun readSettings(p: Preferences) = AlertSettings(
+    enabled = p[A_ENABLED] ?: DEFAULTS.enabled,
+    thresholdPct = p[A_PCT] ?: DEFAULTS.thresholdPct,
+    window = enumOr(p[A_WINDOW], DEFAULTS.window),
+    scope = enumOr(p[A_SCOPE], DEFAULTS.scope),
+    direction = enumOr(p[A_DIR], DEFAULTS.direction),
+    cooldownMin = p[A_COOLDOWN] ?: DEFAULTS.cooldownMin,
+    background = p[A_BG] ?: DEFAULTS.background,
+    includeUsdt = p[A_USDT] ?: DEFAULTS.includeUsdt,
+    name = p[NAME] ?: DEFAULTS.name,
+    ring = enumOr(p[A_RING], DEFAULTS.ring),
+    clockApp = p[A_CLOCK] ?: DEFAULTS.clockApp,
+)
+
+private fun MutablePreferences.write(s: AlertSettings) {
+    this[A_ENABLED] = s.enabled
+    this[A_PCT] = s.thresholdPct
+    this[A_WINDOW] = s.window.name
+    this[A_SCOPE] = s.scope.name
+    this[A_DIR] = s.direction.name
+    this[A_COOLDOWN] = s.cooldownMin
+    this[A_BG] = s.background
+    this[A_USDT] = s.includeUsdt
+    this[NAME] = s.name
+    this[A_RING] = s.ring.name
+    this[A_CLOCK] = s.clockApp
+}
+
+private fun JSONObject.optNum(k: String): Double? =
+    if (has(k) && !isNull(k)) optDouble(k).takeIf { !it.isNaN() } else null
+
+internal fun decodeRules(raw: String?): Map<String, CoinRule> {
+    if (raw.isNullOrBlank()) return emptyMap()
+    return try {
+        val o = JSONObject(raw)
+        val out = LinkedHashMap<String, CoinRule>()
+        for (id in o.keys()) {
+            val r = o.optJSONObject(id) ?: continue
+            val rule = CoinRule(id, r.optNum("pct")?.toFloat(), r.optNum("above"), r.optNum("below"))
+            if (!rule.isEmpty) out[id] = rule
+        }
+        out
+    } catch (_: Exception) {
+        emptyMap()
+    }
+}
+
+internal fun encodeRules(m: Map<String, CoinRule>): String {
+    val o = JSONObject()
+    for (r in m.values) {
+        val j = JSONObject()
+        r.pct?.let { j.put("pct", it.toDouble()) }
+        r.above?.let { j.put("above", it) }
+        r.below?.let { j.put("below", it) }
+        o.put(r.id, j)
+    }
+    return o.toString()
+}
+
+internal class MarketPrefs(private val store: DataStore<Preferences>) {
+
+    constructor(context: Context) : this(context.applicationContext.marketStore)
+
+    val gate: Flow<MarketGate> = store.data.map { p ->
         MarketGate(
             enabled = p[MARKET_ENABLED] ?: false,
             consentAt = p[CONSENT_AT]?.takeIf { it > 0L },
         )
-    }
+    }.distinctUntilChanged()
+
+    val watch: Flow<Set<String>> = store.data.map { it[WATCH] ?: DEFAULT_WATCH }.distinctUntilChanged()
+    val alarms: Flow<Set<String>> = store.data.map { it[ALARMS] ?: emptySet() }.distinctUntilChanged()
+    val toman: Flow<Boolean> = store.data.map { it[TOMAN] ?: false }.distinctUntilChanged()
+    val alertSettings: Flow<AlertSettings> = store.data.map { readSettings(it) }.distinctUntilChanged()
+    val rules: Flow<Map<String, CoinRule>> = store.data.map { decodeRules(it[RULES]) }.distinctUntilChanged()
 
     /** Turning the switch off stops the hub, the service and every price alert (K4). */
     suspend fun setEnabled(on: Boolean) {
-        context.marketStore.edit { it[MARKET_ENABLED] = on }
+        store.edit { it[MARKET_ENABLED] = on }
     }
 
     /** Records the consent and turns Market on, in one write, as the sheet's accept button does. */
     suspend fun acceptConsent(at: Long) {
-        context.marketStore.edit {
+        store.edit {
             it[CONSENT_AT] = at
             it[MARKET_ENABLED] = true
+        }
+    }
+
+    suspend fun toggleWatch(id: String) {
+        store.edit {
+            val cur = it[WATCH] ?: DEFAULT_WATCH
+            it[WATCH] = if (id in cur) cur - id else cur + id
+        }
+    }
+
+    suspend fun toggleAlarm(id: String): Boolean {
+        var on = false
+        store.edit {
+            val cur = it[ALARMS] ?: emptySet()
+            on = id !in cur
+            it[ALARMS] = if (on) cur + id else cur - id
+        }
+        return on
+    }
+
+    suspend fun setToman(on: Boolean) {
+        store.edit { it[TOMAN] = on }
+    }
+
+    suspend fun updateSettings(change: (AlertSettings) -> AlertSettings) {
+        store.edit { p -> p.write(change(readSettings(p))) }
+    }
+
+    suspend fun setRule(rule: CoinRule) {
+        store.edit { p ->
+            val m = decodeRules(p[RULES]).toMutableMap()
+            if (rule.isEmpty) m.remove(rule.id) else m[rule.id] = rule
+            p[RULES] = encodeRules(m)
+        }
+    }
+
+    suspend fun clearTarget(id: String, above: Boolean) {
+        store.edit { p ->
+            val m = decodeRules(p[RULES]).toMutableMap()
+            val r = m[id] ?: return@edit
+            val next = if (above) r.copy(above = null) else r.copy(below = null)
+            if (next.isEmpty) m.remove(id) else m[id] = next
+            p[RULES] = encodeRules(m)
         }
     }
 }

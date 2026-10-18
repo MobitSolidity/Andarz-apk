@@ -1,0 +1,5 @@
+[
+ {"id":"bitcoin","symbol":"btc","name":"Bitcoin","current_price":64250.5,"market_cap":1265000000000,"market_cap_rank":1,"total_volume":31000000000,"high_24h":65000,"low_24h":63100.25,"price_change_percentage_24h":1.234,"ath":73738,"ath_change_percentage":-12.9,"sparkline_in_7d":{"price":[63000.1,63500.2,null,64250.5]},"price_change_percentage_7d_in_currency":3.5},
+ {"id":"tether","symbol":"usdt","name":"Tether","current_price":1.0,"market_cap":110000000000,"market_cap_rank":3,"total_volume":50000000000,"high_24h":1.001,"low_24h":0.999,"price_change_percentage_24h":-0.01,"ath":1.32,"ath_change_percentage":-24.4,"price_change_percentage_7d_in_currency":null},
+ {"id":"weird","symbol":"wrd","name":"Weird","current_price":"0.000012345","market_cap":null,"market_cap_rank":null,"total_volume":"12","high_24h":null,"low_24h":null,"price_change_percentage_24h":null}
+]

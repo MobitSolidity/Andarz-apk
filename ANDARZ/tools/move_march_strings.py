@@ -74,6 +74,63 @@ MAPPING: list[dict] = [
     {"key": "mkt.channel.price_alarm.desc", "at": "notify/AlarmRinger.kt:74", "args": []},
     {"key": "mkt.channel.live_monitor.name", "at": "notify/LiveService.kt:122", "args": []},
     {"key": "mkt.channel.releases.name", "at": "notify/Reminders.kt:57", "args": []},
+
+    # ---- MK1: Prices (ui/MarketScreen.kt) ----
+    {"key": "mkt.prices.title", "at": "ui/MarketScreen.kt:172", "args": []},
+    {"key": "mkt.prices.search", "at": "ui/MarketScreen.kt:128", "args": []},
+    {"key": "mkt.prices.clear", "at": "ui/MarketScreen.kt:133", "args": []},
+    {"key": "mkt.prices.empty", "at": "ui/MarketScreen.kt:113", "args": []},
+    {"key": "mkt.prices.refresh", "at": "ui/MarketScreen.kt:192", "args": []},
+    # March appends the error sentence after this prefix (trailing space kept).
+    {"key": "mkt.prices.failed", "at": "ui/MarketScreen.kt:158", "args": []},
+    {"key": "mkt.sort.RANK", "at": "ui/MarketScreen.kt:63", "quote": 0, "args": []},
+    {"key": "mkt.sort.GAIN", "at": "ui/MarketScreen.kt:64", "quote": 0, "args": []},
+    {"key": "mkt.sort.LOSS", "at": "ui/MarketScreen.kt:65", "quote": 0, "args": []},
+    {"key": "mkt.sort.VOLUME", "at": "ui/MarketScreen.kt:66", "quote": 0, "args": []},
+    # Live-mode label, keyed by the LiveMode enum name.
+    {"key": "mkt.live.BINANCE", "at": "ui/MarketScreen.kt:151", "args": []},
+    {"key": "mkt.live.NOBITEX", "at": "ui/MarketScreen.kt:152", "args": []},
+    {"key": "mkt.live.POLLING", "at": "ui/MarketScreen.kt:153", "args": []},
+    {"key": "mkt.live.CONNECTING", "at": "ui/MarketScreen.kt:154", "args": []},
+    # Fear & Greed classes, keyed by alternative.me's raw classification without spaces.
+    {"key": "mkt.fg.ExtremeFear", "at": "ui/MarketScreen.kt:203", "args": []},
+    {"key": "mkt.fg.Fear", "at": "ui/MarketScreen.kt:204", "args": []},
+    {"key": "mkt.fg.Neutral", "at": "ui/MarketScreen.kt:205", "args": []},
+    {"key": "mkt.fg.Greed", "at": "ui/MarketScreen.kt:206", "args": []},
+    {"key": "mkt.fg.ExtremeGreed", "at": "ui/MarketScreen.kt:207", "args": []},
+    {"key": "mkt.ov.cap", "at": "ui/MarketScreen.kt:219", "args": []},
+    {"key": "mkt.ov.dominance", "at": "ui/MarketScreen.kt:225", "args": []},
+    {"key": "mkt.ov.fg", "at": "ui/MarketScreen.kt:232", "args": []},
+
+    # ---- MK1: the USD/Toman toggle (MainActivity.kt) and the Toman suffix (ui/Format.kt) ----
+    {"key": "mkt.unit.toman", "at": "MainActivity.kt:161", "args": []},
+    {"key": "mkt.unit.usd", "at": "MainActivity.kt:161#2", "args": []},
+    {"key": "mkt.unit.tomanSuffix", "at": "ui/Format.kt:71", "args": []},
+    # The synthetic USDT/Toman coin's name (data/PriceHub.kt); the source name is appended after " · ".
+    {"key": "mkt.usdt.name", "at": "data/PriceHub.kt:306", "args": []},
+
+    # ---- MK1: My coins (ui/WatchScreen.kt). The title is mkt.tab.coins (same wording, K7: one key). ----
+    {"key": "mkt.coins.empty", "at": "ui/WatchScreen.kt:50", "args": []},
+    {"key": "mkt.coins.reminders", "at": "ui/WatchScreen.kt:62", "args": []},
+    {"key": "mkt.coins.remindersEmpty", "at": "ui/WatchScreen.kt:64", "args": []},
+    {"key": "mkt.coins.remove", "at": "ui/WatchScreen.kt:112", "args": []},
+    {"key": "mkt.coins.usdtPair", "at": "ui/WatchScreen.kt:115", "args": []},
+
+    # ---- MK1: the read-only part of the coin sheet (ui/CoinSheet.kt) ----
+    {"key": "mkt.sheet.rank", "at": "ui/CoinSheet.kt:100", "quote": 0, "args": []},
+    {"key": "mkt.sheet.star", "at": "ui/CoinSheet.kt:106", "quote": 0, "args": []},
+    {"key": "mkt.sheet.h24", "at": "ui/CoinSheet.kt:122", "quote": 0, "args": []},
+    {"key": "mkt.sheet.d7", "at": "ui/CoinSheet.kt:123", "quote": 0, "args": []},
+    {"key": "mkt.sheet.liveIran", "at": "ui/CoinSheet.kt:127", "quote": 0, "args": []},
+    {"key": "mkt.sheet.chart7d", "at": "ui/CoinSheet.kt:137", "quote": 0, "args": []},
+    {"key": "mkt.sheet.chartSession", "at": "ui/CoinSheet.kt:137", "quote": 1, "args": []},
+    {"key": "mkt.sheet.collecting", "at": "ui/CoinSheet.kt:147", "quote": 0, "args": []},
+    {"key": "mkt.sheet.high24", "at": "ui/CoinSheet.kt:152", "quote": 0, "args": []},
+    {"key": "mkt.sheet.low24", "at": "ui/CoinSheet.kt:153", "quote": 0, "args": []},
+    {"key": "mkt.sheet.vol24", "at": "ui/CoinSheet.kt:154", "quote": 0, "args": []},
+    {"key": "mkt.sheet.cap", "at": "ui/CoinSheet.kt:155", "quote": 0, "args": []},
+    {"key": "mkt.sheet.ath", "at": "ui/CoinSheet.kt:156", "quote": 0, "args": []},
+    {"key": "mkt.sheet.athDist", "at": "ui/CoinSheet.kt:157", "quote": 0, "args": []},
 ]
 
 # March gives `live_monitor` and `releases` no description, so `ChannelText.description` is empty for them
@@ -89,8 +146,15 @@ PRODUCT_NAMES = re.compile(r"Bazaaryar|مارچ|بازاریار")
 def load_raw() -> dict[str, dict]:
     with open(RAW, encoding="utf-8") as fh:
         rows = json.load(fh)
-    return {r["file"].split("Bazaaryar/app/src/main/java/ir/bazaaryar/app/")[-1] + ":" + str(r["line"]): r
-            for r in rows}
+    out: dict[str, dict] = {}
+    for r in rows:
+        base = r["file"].split("Bazaaryar/app/src/main/java/ir/bazaaryar/app/")[-1] + ":" + str(r["line"])
+        key, n = base, 1
+        while key in out:  # several tr() calls on one line: the second is "file:line#2", and so on
+            n += 1
+            key = base + "#" + str(n)
+        out[key] = r
+    return out
 
 
 def resolve(raw: dict[str, dict], entry: dict, app_name: str) -> str:
@@ -105,6 +169,13 @@ def resolve(raw: dict[str, dict], entry: dict, app_name: str) -> str:
                 "--json docs/march_strings_raw.json" % (entry["at"], entry["key"])
             )
         text = row["fa"]
+        if "quote" in entry:
+            # A `literal` row is the whole Kotlin line; take the n-th double-quoted string that holds
+            # Persian. The quotes are the only thing removed: the text between them is kept byte for byte.
+            quoted = [q for q in re.findall(r'"((?:[^"\\]|\\.)*)"', text) if re.search("[\u0600-\u06FF]", q)]
+            if entry["quote"] >= len(quoted):
+                raise SystemExit("key %s: no Persian string #%d at %s" % (entry["key"], entry["quote"], entry["at"]))
+            text = quoted[entry["quote"]]
 
     text = EMOJI.sub("", text)
     text = PRODUCT_NAMES.sub(app_name, text)

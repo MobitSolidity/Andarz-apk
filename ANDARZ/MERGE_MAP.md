@@ -19,14 +19,14 @@ Acceptance A12 is met when no row says `todo` and every row has a reason.
 
 | March file | Treatment | Goes to | Status | Notes |
 |---|---|---|---|---|
-| `data/Models.kt` | ADAPT | `:market` `model/` | todo (MK1) | Keep `Coin`, `LiveQuote`, `UsdtRate`, `MarketOverview`, `LiveMode`, `MarketState`, `Source`, `AlertSettings`, `CoinRule` and the enums. Every `tr()` and `label` is removed: labels become content keys (law 3). Defaults per D-M08 (alerts, monitor, ring all off). `EconEvent` moves to the calendar loader (see `data/Events.kt`). |
-| `data/Net.kt` | ADAPT | `:market` `net/MarketHttp.kt`, `net/EgressInterceptor.kt` | partial | **M0 done:** the client with March's timeouts (connect 10 s, read 20 s, ping 20 s), `retrying` (2 attempts, 1.5 s pause), the localized `friendly()` replaced by typed `MarketError`/`toMarketError`, and the new egress interceptor of K4. **MK1:** the `num()` helper travels with the parsers that use it. |
-| `data/CoinRepository.kt` | PORT | `:market` | todo (MK1) | Top-200 markets with the 7-day sparkline, global overview, Fear & Greed. Parsers become pure `String -> model` functions testable on the JVM; `org.json` stays and is added as a **test** dependency (D-M28). |
-| `data/BinanceStream.kt` | PORT | `:market` | todo (MK1) | miniTicker WebSocket. The SUBSCRIBE-frame check of K4 is already written (`net.WsPolicy`, M0) and the port must build its frames through it. |
-| `data/IranMarket.kt` | PORT | `:market` | todo (MK1) | USDT/Toman from Nobitex, fallback Wallex. Its `tr()` texts become typed errors (`IRAN_PRIMARY`, `IRAN_FALLBACK`). |
-| `data/PriceHistory.kt` | PORT | `:market` | todo (MK1) | Session samples and range queries behind the 5/15/60-minute windows. |
-| `data/PriceHub.kt` | ADAPT | `:market` | todo (MK1) | The singleton becomes a class built by `MarketModule` with client, prefs, clock and dispatchers injected, so tests drive it with virtual time. Keep every loop and the cadence of K5.2. Add the consent and master-switch gate, drop the language handling, add the `extraSymbols` setter (MK3). |
-| `data/Prefs.kt` | ADAPT | `:market` `MarketPrefs.kt` | partial | DataStore renamed to `market` (D-M17). **M0 done:** the store plus `marketEnabled` and `consentAt`. **MK1/MK2:** `watch`, `alarms`, `toman`, `alert_*`, `user_name`, `coin_rules`. **MK3:** `exportJson`/`importJson`. Dropped: `theme` and `lang` — Andarz owns both. |
+| `data/Models.kt` | ADAPT | `:market` `model/` | done | Keep `Coin`, `LiveQuote`, `UsdtRate`, `MarketOverview`, `LiveMode`, `MarketState`, `Source`, `AlertSettings`, `CoinRule` and the enums. Every `tr()` and `label` is removed: labels become content keys (law 3). Defaults per D-M08 (alerts, monitor, ring all off). `EconEvent` moves to the calendar loader (see `data/Events.kt`). **MK1 done:** `model/Models.kt`. `UsdtRate.source` is `IranSource`, `MarketState.error` a `MarketError` (D-M44). |
+| `data/Net.kt` | ADAPT | `:market` `net/MarketHttp.kt`, `net/EgressInterceptor.kt` | done | **M0 done:** the client with March's timeouts (connect 10 s, read 20 s, ping 20 s), `retrying` (2 attempts, 1.5 s pause), the localized `friendly()` replaced by typed `MarketError`/`toMarketError`, and the new egress interceptor of K4. **MK1:** the `num()` helper travels with the parsers that use it. **MK1 done:** `num()` in `data/Parsers.kt`; `MarketHttp.webSocket()` opens the socket through the same interceptor (D-M42). |
+| `data/CoinRepository.kt` | PORT | `:market` `data/Parsers.kt`, `data/Sources.kt` | done | Top-200 markets with the 7-day sparkline, global overview, Fear & Greed. Parsers become pure `String -> model` functions testable on the JVM; `org.json` stays and is added as a **test** dependency (D-M28). **MK1 done:** `data/Parsers.kt` (pure) + `data/Sources.kt` `NetSources.top/overview`; fixture tests in `ParsersTest`. |
+| `data/BinanceStream.kt` | PORT | `:market` `data/Sources.kt` | done | miniTicker WebSocket. The SUBSCRIBE-frame check of K4 is already written (`net.WsPolicy`, M0) and the port must build its frames through it. **MK1 done:** `NetSources.ticks()`; frames only via `WsPolicy.subscribeFrame`; symbols via `WsPolicy.streamOf`. |
+| `data/IranMarket.kt` | PORT | `:market` `data/Parsers.kt`, `data/Sources.kt` | done | USDT/Toman from Nobitex, fallback Wallex. Its `tr()` texts become typed errors (`IRAN_PRIMARY`, `IRAN_FALLBACK`). **MK1 done:** `NetSources.iran()`; failure is a `MarketException` with the first typed error. |
+| `data/PriceHistory.kt` | PORT | `:market` `data/PriceHistory.kt` | done | Session samples and range queries behind the 5/15/60-minute windows. **MK1 done:** `data/PriceHistory.kt`, unchanged; `PriceHistoryTest`. |
+| `data/PriceHub.kt` | ADAPT | `:market` `data/PriceHub.kt` | done | The singleton becomes a class built by `MarketModule` with client, prefs, clock and dispatchers injected, so tests drive it with virtual time. Keep every loop and the cadence of K5.2. Add the consent and master-switch gate, drop the language handling, add the `extraSymbols` setter (MK3). **MK1 done:** `data/PriceHub.kt` (D-M43); the first acquire no longer kicks a second fetch; alert evaluation is the `onPublish` hook for MK2. |
+| `data/Prefs.kt` | ADAPT | `:market` `MarketPrefs.kt` | partial | DataStore renamed to `market` (D-M17). **M0 done:** the store plus `marketEnabled` and `consentAt`. **MK1/MK2:** `watch`, `alarms`, `toman`, `alert_*`, `user_name`, `coin_rules`. **MK3:** `exportJson`/`importJson`. Dropped: `theme` and `lang` — Andarz owns both. **MK1 done:** all March keys (defaults per D-M08), injectable `DataStore` for tests. MK3 left: export/import. |
 | `data/Events.kt` | CONVERT | `:market` `assets/market_calendar.json` + a loader | todo (MK2) | JSON `{validUntil, events:[{id, at (ISO-8601 with +03:30), country, title, titleEn?, impact, previous, forecast}]}`. Ids are unique per occurrence (e.g. `2026-10-cpi`) so a refreshed list never re-arms an old reminder. The flag-emoji map is dropped and the country becomes an ISO code chip (K6.7). |
 
 ## Notifications, alarms, background
@@ -44,12 +44,12 @@ Acceptance A12 is met when no row says `todo` and every row has a reason.
 
 | March file | Treatment | Goes to | Status | Notes |
 |---|---|---|---|---|
-| `ui/MarketScreen.kt` | REIMPLEMENT | `:app` `ui/market/PricesScreen` | todo (MK1) | Header (live-mode label, refresh, data age), overview strip (market cap, BTC dominance, Fear & Greed), search, coin rows. Built from Andarz components; the disclaimer `mkt.disclaimer` sits at the bottom. |
-| `ui/CoinSheet.kt` | REIMPLEMENT | `:app` `ui/market/CoinSheet` | todo (MK1 read-only, MK2 rules) | Stats, range chart, star (MK1); per-coin rule editor with percent threshold and above/below targets (MK2). |
-| `ui/WatchScreen.kt` | REIMPLEMENT | `:app` `ui/market/MyCoinsScreen` | todo (MK1) | Starred coins as cards; keeps the block of reminded releases. |
+| `ui/MarketScreen.kt` | REIMPLEMENT | `:app` `ui/market/PricesScreen` | done | Header (live-mode label, refresh, data age), overview strip (market cap, BTC dominance, Fear & Greed), search, coin rows. Built from Andarz components; the disclaimer `mkt.disclaimer` sits at the bottom. **MK1 done:** plus the USD/Toman toggle (K6.2) and the sort pills. |
+| `ui/CoinSheet.kt` | REIMPLEMENT | `:app` `ui/market/CoinSheet` | partial | Stats, range chart, star (MK1); per-coin rule editor with percent threshold and above/below targets (MK2). **MK1 done:** read-only part. MK2: rule editor. |
+| `ui/WatchScreen.kt` | REIMPLEMENT | `:app` `ui/market/MyCoinsScreen` | done | Starred coins as cards; keeps the block of reminded releases. **MK1 done:** the reminders block shows March's empty line until the MK2 calendar fills it. |
 | `ui/NewsScreen.kt` | REIMPLEMENT | `:app` `ui/market/NewsScreen` | todo (MK2) | Events by day, impact filter, next-release countdown, reminder bell, Clock-app alarm for releases within 24 h, "released" state, plus the expired state of K6.10. Works with the master switch off, because the calendar is local. |
 | `ui/AlertsScreen.kt` | REIMPLEMENT | `:app` `ui/market/AlertsScreen` | todo (MK2) | Alert settings, per-coin rules, permission rows (notifications, full-screen, exact alarms, overlay) with their settings intents, test buttons. Shows its settings with the master switch off plus the note `mkt.link.needMarket`. |
-| `ui/Format.kt` | REIMPLEMENT | `:app` `ui/market/MarketFmt` | todo (MK1) | `MarketFmt` on top of `Fmt` (D-M14): March's price tiers (≥1000 → 0 decimals, ≥1 → 2, ≥0.01 → 4, below that three significant digits, at most 10), market cap with T/B/M, percent with sign **and** arrow. Honours the digit and calendar settings; prices, symbols and hosts are LTR isolates. Input parsing follows §3.10, never March's `parseNum`. |
+| `ui/Format.kt` | REIMPLEMENT | `:app` `ui/market/MarketFmt` | done | `MarketFmt` on top of `Fmt` (D-M14): March's price tiers (≥1000 → 0 decimals, ≥1 → 2, ≥0.01 → 4, below that three significant digits, at most 10), market cap with T/B/M, percent with sign **and** arrow. Honours the digit and calendar settings; prices, symbols and hosts are LTR isolates. Input parsing follows §3.10, never March's `parseNum`. **MK1 done** (D-M47): the small-price rule is March's `3 - floor(log10 p)` exactly; `MarketFmtTest`. |
 | `ui/Components.kt`, `ui/Motion.kt` | DROP | — | done | Andarz has its own components (§6.4) and motion tokens (§6.6); D-M13. |
 | `ui/Theme.kt`, `ui/I18n.kt` | DROP | — | done | Andarz owns theme and language. `I18n.kt`'s `tr()` is exactly what law 3 forbids; its Persian half is extracted into `content_market_fa.json` (K7), its English half into `docs/march_strings_en.json` (D-M11). |
 | `ui/UpdateUi.kt`, `update/Updater.kt` | DROP | — | done | D-M09: no in-app updater, nothing that installs a package. |
@@ -90,21 +90,21 @@ Checked off when the owning milestone proves it with a test. None of it is redes
 
 | Behaviour | Milestone | Status |
 |---|---|---|
-| CoinGecko top 200 every 60 s on screen, every 5 min in background, back-off 2 min on HTTP 429 | MK1 | todo |
-| Nobitex (fallback Wallex) USDT/Toman every 10 s; overview every 5 min | MK1 | todo |
-| Binance ticks ~1 s; Nobitex prices when the socket has been quiet for 15 s; history samples every 5 s; a quote older than 10 min is unused | MK1 | todo |
-| Background-only runs stream watch-list and rule coins only | MK1 | todo |
+| CoinGecko top 200 every 60 s on screen, every 5 min in background, back-off 2 min on HTTP 429 | MK1 | done (`PriceHubTest`) |
+| Nobitex (fallback Wallex) USDT/Toman every 10 s; overview every 5 min | MK1 | done (`PriceHubTest`) |
+| Binance ticks ~1 s; Nobitex prices when the socket has been quiet for 15 s; history samples every 5 s; a quote older than 10 min is unused | MK1 | done (`PriceHubTest`) |
+| Background-only runs stream watch-list and rule coins only | MK1 | done (`PriceHubTest`) |
 | Alert windows 5 min / 15 min / 1 h / 24 h; per-coin percent override; direction up/down/both; cooldown; scope watch-list or all; include USDT/Toman; one-shot absolute targets; ring modes off/targets/all; ≤ 3 individual alerts per round plus one summary; name in the greeting | MK2 | todo |
 | Ringing: looping alarm tone on the ALARM stream, repeating vibration, partial wake lock, full-screen over the lock screen, Stop and Snooze 5 min, auto-stop after 3 min, alarm volume raised to a 70 % floor and restored | MK2 | todo |
 | Clock app first (a 1-second timer, no UI) when allowed; the app's own alarm as the fallback, so the phone always rings | MK2 | todo |
 | Calendar: sorted by time, impact 1–3, countdown, reminder 10 min before (inexact while idle), Clock-app alarm only within 24 h, "released" state, filter all/high, grouping by day, counter for simultaneous releases | MK2 | todo |
 | Live monitor: foreground service of type `specialUse` with a Stop action, notification refreshed at most every 20 s, restarted after boot only when enabled | MK2 | todo |
-| Default stars: `bitcoin`, `ethereum`, `solana`, `ripple`, `usdt-irt` | MK1 | todo |
+| Default stars: `bitcoin`, `ethereum`, `solana`, `ripple`, `usdt-irt` | MK1 | done (`DEFAULT_WATCH`) |
 
 ## Suspected March defects (flagged, not fixed — D-M23)
 
 | Where | Observation | Decision |
 |---|---|---|
-| `data/PriceHub.kt` `wantedSymbols()` | The symbol set is recomputed every 10 s in a watchdog coroutine that throws `Resubscribe` to restart the socket. A set that flaps between two values can resubscribe repeatedly. | Ported as is. Worth a note once MK1 drives the hub with virtual time; not changed as part of the port. |
+| `data/PriceHub.kt` `wantedSymbols()` | The symbol set is recomputed every 10 s in a watchdog coroutine that throws `Resubscribe` to restart the socket. A set that flaps between two values can resubscribe repeatedly. | Ported as is. MK1's virtual-time tests confirm the 10 s watchdog; a flapping set is not reachable from the UI (stars and rules change by user action only). Not changed. |
 | `notify/PriceAlerts.kt` `firedTargets` | The one-shot guard is an in-memory `HashSet`, so a process restart can fire the same target again before `clearTarget` has been written. | Ported as is; `MarketPrefs` already clears the target, so the window is small. Re-check in MK2. |
 | `data/PriceHub.kt` `compose()` | A live quote is accepted only when it is within 30 % of the CoinGecko price. A genuine 30 %+ move would be ignored until the next CoinGecko poll. | Deliberate sanity check in March (same-ticker tokens); kept. |

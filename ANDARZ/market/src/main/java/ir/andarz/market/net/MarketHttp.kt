@@ -7,6 +7,8 @@ import kotlinx.coroutines.delay
 import okhttp3.Call
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 import java.util.concurrent.TimeUnit
 
 /**
@@ -46,6 +48,20 @@ internal class MarketHttp(
             if (!response.isSuccessful) throw HttpStatus(response.code)
             return response.body?.string() ?: throw HttpStatus(response.code)
         }
+    }
+
+    /**
+     * Opens a WebSocket through the same client, so the egress interceptor sees the upgrade request (K4).
+     * Client frames must be built with [WsPolicy.subscribeFrame]; nothing else is ever sent.
+     */
+    fun webSocket(url: String, listener: WebSocketListener): WebSocket {
+        val request = Request.Builder()
+            .url(url)
+            .header("User-Agent", userAgent)
+            .build()
+        val f = factory.value as? WebSocket.Factory
+            ?: throw java.io.IOException("this client cannot open a WebSocket")
+        return f.newWebSocket(request, listener)
     }
 
     internal companion object {

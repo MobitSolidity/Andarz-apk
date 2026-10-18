@@ -404,6 +404,77 @@ So every screen shows the caps the snapshot actually used (`paramsAt(now)`), nev
 Replaced by `Duration.seconds` (API 26). `:engine` is JVM-only and not linted for Android API levels; a scan
 found no API-31+ `java.time` calls there. M8 adds an API check for the engine.
 
+## MK1 — Market data and prices (decisions)
+
+### D-M42 — The WebSocket handshake headers are allowed, on the live-ticks host only
+
+**Context.** K4 limits HTTP headers to `Accept` and the generic `User-Agent`, and the M0 interceptor refuses
+everything else. OkHttp's WebSocket upgrade adds the RFC 6455 handshake (`Upgrade`, `Connection`,
+`Sec-WebSocket-Key`, `Sec-WebSocket-Version`, `Sec-WebSocket-Extensions`) before the request reaches the
+interceptor, so the M0 policy would have refused the only socket K4 allows. **Choice.** Those five names are
+accepted only on a request that carries `Upgrade` **and** goes to `data-stream.binance.vision`; anywhere else
+they are refused like any other header, and an upgrade to any other host is refused. Cookies and
+authorization stay refused on the upgrade too. The socket is opened by `MarketHttp.webSocket()`, through the
+same client and interceptor. **Reason.** The handshake carries no user data (the key is 16 random bytes per
+connection); the guard is narrowed to exactly what the protocol needs, not weakened. Four new tests in
+`MarketHttpEgressTest`.
+
+### D-M43 — PriceHub as a class: gate-and-demand controller, injected sources, virtual time
+
+`PriceHub` keeps every loop and every cadence of March (K5.2) and gains one controller:
+`combine(gate, holders > 0)`. Only when both are true do the loops run, inside one `coroutineScope` that
+is cancelled the moment either falls — the release of the last holder, or the master switch going off,
+closes the socket and stops every request (K4, K6.4). The outside world is a `MarketSources` interface
+(`NetSources` over `MarketHttp` in production, a fake in tests), and the clock is `() -> Long`, so
+`PriceHubTest` drives the hub with `kotlinx-coroutines-test` virtual time: 60 s / 5 min / 2 min after a 429,
+Iran every 10 s, overview every 5 min, 15 s socket liveness, 10 min quote age, 5 s samples. The alert
+evaluation of March's publish loop becomes the `onPublish` hook that MK2 fills. `extraSymbols` (MK3) is
+already honoured by `wantedSymbols()`.
+
+One behaviour was made exact rather than approximate: March kicks a refresh on every UI `acquire`, which
+right after the first acquire made the CoinGecko loop fetch twice at start. The first holder no longer
+kicks; a later UI holder still does (it may want the sparkline a background run skipped). Recorded in the
+MERGE_MAP notes of `data/PriceHub.kt`.
+
+### D-M44 — Typed values instead of March's localized fields in the models
+
+`UsdtRate.source` and the synthetic USDT/Toman coin's `name` held Persian text in March. They are now
+`IranSource` (NOBITEX/WALLEX) and an empty name; the UI composes `mkt.usdt.name` + `mkt.data.*`.
+`MarketState.error` is a `MarketError`, rendered by `MarketTexts.error()` (`mkt.err.*`).
+
+### D-M45 — March's screen wording moved by the script, with one helper for literal lines
+
+`tools/move_march_strings.py` gained (a) `quote: n`, which takes the n-th Persian string of a `literal` row
+(the whole Kotlin line) with nothing but the quotes removed, and (b) `file:line#2` for the second `tr()` on
+one line. 45 keys were moved for Prices, My coins, the coin sheet, the live-mode label, Fear & Greed classes,
+the sort pills, the USD/Toman toggle and the Toman suffix. Where March used the same wording twice
+(`لحظه‌ای · بایننس` in the header and the sheet; «ارزهای من» as My coins title) one key serves both (K7).
+The per-coin rule editor's wording (CoinSheet.kt lines 168–210) moves with MK2.
+
+### D-M46 — The hub is held by the Market screen's lifecycle
+
+K6.4 reason (a) is implemented with a lifecycle observer on the Market destination: ON_START acquires with
+`ui = true`, ON_STOP and disposal release. A Market screen in the back stack, or an app in the background,
+holds nothing. Reasons (b) and (c) arrive with MK2 (foreground alert reason, LiveService), (d) with MK3.
+Section and open coin sheet are saved in `SavedStateHandle` (K6.1, process death); `market/<section>` and
+`market/coin/{id}` routes open the screen with that section or sheet.
+
+### D-M47 — MarketFmt keeps March's tiers exactly, including the small-price formula
+
+The tier rule for prices below 0.01 is March's `3 - floor(log10 p)` decimals (capped at 10), which gives
+three or four significant digits depending on the mantissa; it is ported as is, not "fixed" to exactly
+three (D-M23). Numbers use `Fmt.number` with the digit setting; the clock uses the app's zone setting, not
+`Asia/Tehran` hard-coded as in March. The test pins a fixed `+03:30` offset so it does not depend on the
+host JDK's tzdata.
+
+### D-M48 — Device-only checks of MK1
+
+Real-host behaviour (the five services answering, CoinGecko or Binance blocked from an Iranian network,
+airplane mode, Market off with a firewall log) cannot run here: no emulator and K12 forbids tests against
+real hosts. They are rows A3/A4/A5-MK1 in MANUAL_TEST.md, marked pending. JVM tests cover the parsers
+(fixtures for all five services), PriceHistory, the merge, cadence, demand and zero traffic, error mapping,
+MarketFmt and the Prices filter/sort.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |

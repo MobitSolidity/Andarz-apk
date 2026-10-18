@@ -123,6 +123,13 @@ fun AndarzNavHost(
                 JournalScreen(onOpen = { navController.navigate(AndarzNav.trade(it)) }, onInsights = { navController.navigate(AndarzNav.INSIGHTS) })
             }
             composable(AndarzNav.MARKET) { MarketScreen(content = content) }
+            // Section routes and the coin deep link (K6.1, K6.11). Arguments are ids only.
+            for (sec in MarketSection.entries) {
+                composable(sec.route) { MarketScreen(content = content, initialSection = sec) }
+            }
+            composable(AndarzNav.MARKET_COIN) { entry ->
+                MarketScreen(content = content, initialCoin = entry.arguments?.getString("id"))
+            }
             composable(AndarzNav.CALCULATOR) { Placeholder(content.ui("nav.calculator")) }
             composable(AndarzNav.MORE) { Placeholder(content.ui("nav.more")) }
             composable(AndarzNav.INSIGHTS) { Placeholder(content.ui("nav.insights")) }

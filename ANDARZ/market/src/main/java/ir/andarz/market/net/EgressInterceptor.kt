@@ -39,8 +39,14 @@ internal class EgressInterceptor(
         if (request.body != null) {
             refuse("a request body is never sent")
         }
+        val upgrade = request.header("Upgrade") != null
+        if (upgrade && url.host != MarketHosts.LIVE_TICKS) {
+            refuse("a WebSocket upgrade is allowed only to " + MarketHosts.LIVE_TICKS)
+        }
         for (name in request.headers.names()) {
-            if (name.lowercase() !in ALLOWED_HEADERS) {
+            val n = name.lowercase()
+            val ok = n in ALLOWED_HEADERS || (upgrade && n in WS_HANDSHAKE_HEADERS)
+            if (!ok) {
                 refuse("header '" + name + "' is not allowed")
             }
         }
@@ -53,6 +59,15 @@ internal class EgressInterceptor(
     internal companion object {
         /** Only these two headers leave the device (K4). */
         val ALLOWED_HEADERS: Set<String> = setOf("accept", "user-agent")
+
+        /**
+         * The RFC 6455 handshake headers OkHttp itself adds to a WebSocket upgrade (D-M42). They carry no
+         * user data (the key is 16 random bytes per connection) and are accepted only on an upgrade request
+         * to the live-ticks host; on any other request they are refused like every other header.
+         */
+        val WS_HANDSHAKE_HEADERS: Set<String> = setOf(
+            "upgrade", "connection", "sec-websocket-key", "sec-websocket-version", "sec-websocket-extensions",
+        )
     }
 }
 
