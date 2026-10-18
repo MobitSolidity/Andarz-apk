@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Only the handful of values the platform needs before Compose draws its first frame: the window
+  background and the splash. They mirror `themes.dark.colors.bg` and `firouzeh` of
+  spec/andarz_design_tokens.json; `ThemeTokensTest` fails the build if they drift (§6.2).
+
+  Every other colour in the app comes from the tokens at runtime (D-M13). Dark is the default (law 9).
+-->
+<resources>
+    <color name="andarz_window_background">#0A1016</color>
+    <color name="andarz_splash_mark">#2DD4C0</color>
+</resources>

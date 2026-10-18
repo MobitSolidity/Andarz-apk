@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  K4: HTTPS and WSS only. Cleartext is refused for the whole app, and the five market hosts are listed
+  explicitly so the configuration says out loud which hosts exist. The same five constants live in
+  ir.andarz.market.MarketHosts and are enforced by EgressInterceptor, so a mismatch is a code bug, not a
+  silent downgrade.
+
+  Journal, engine, data layer and backup use no network at all (K2).
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="false">api.coingecko.com</domain>
+        <domain includeSubdomains="false">api.alternative.me</domain>
+        <domain includeSubdomains="false">data-stream.binance.vision</domain>
+        <domain includeSubdomains="false">api.nobitex.ir</domain>
+        <domain includeSubdomains="false">api.wallex.ir</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>

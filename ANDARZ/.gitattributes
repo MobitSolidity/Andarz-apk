@@ -1,0 +1,20 @@
+# LF everywhere. The spec/ inputs must stay byte-identical to what was delivered, the content JSON is
+# compared byte-for-byte by tests, and the CSV/backup formats of §9 and §8.3 pin their own line endings
+# in code rather than inheriting the checkout's.
+* text=auto eol=lf
+
+# Windows batch files need CRLF: cmd.exe misreads labels and GOTO targets in an LF file.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binaries.
+*.jar binary
+*.ttf binary
+*.png binary
+*.jpg binary
+*.keystore binary
+*.jks binary
+
+# Generated or vendored: keep them out of language statistics and diffs.
+gradle/wrapper/gradle-wrapper.jar binary linguist-vendored
+spec/** linguist-vendored

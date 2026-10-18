@@ -1,0 +1,38 @@
+{
+  "_note": "Data for the K8.4 build guards. Persian and emoji live in data files, never in code or build scripts.",
+  "emojiRanges": [
+    ["1F000", "1FAFF"],
+    ["1F1E6", "1F1FF"],
+    ["2600", "26FF"],
+    ["2700", "27BF"],
+    ["2B00", "2BFF"],
+    ["23E9", "23FA"],
+    ["FE0F", "FE0F"],
+    ["203C", "203C"],
+    ["2049", "2049"],
+    ["2122", "2122"],
+    ["24C2", "24C2"]
+  ],
+  "emojiRangeNote": "Deliberately excluded: U+2190-U+21FF (arrows, the delivered spec uses U+2190), U+25A0-U+25FF (geometric shapes: the arrows U+25B2/U+25BC that replace March's emoji per K6.7), U+2212 (minus), U+2066-U+2069 (bidi isolates), U+066B/U+066C (Persian separators), U+200C (ZWNJ).",
+  "noInternetClaims": [
+    "اینترنت ندارد"
+  ],
+  "noInternetClaimNote": "A shipped string may say that the journal works without a network (true); it may not say that Andarz has no internet (K2). about.privacy and onb.privacy.body are replaced through the overrides block of content_market_fa.json.",
+  "forbiddenTokens": [
+    "android.icu",
+    "PackageInstaller",
+    "application/vnd.android.package-archive",
+    "REQUEST_INSTALL_PACKAGES"
+  ],
+  "forbiddenTokenNote": "K8.4 guard 8 and K8.5: no calendar via android.icu (use the Jalali port of 3.12), and nothing that installs packages (D-M09).",
+  "productNames": [
+    "Bazaaryar",
+    "بازاریار",
+    "مارچ",
+    "March"
+  ],
+  "productNameNote": "A10: no March/Bazaaryar name in shipped strings. The Latin word March is allowed only in the About credit key mkt.about.credit (K13). Persian month names are used for dates, so the Latin word never appears legitimately elsewhere.",
+  "marchCreditKeys": [
+    "mkt.about.credit"
+  ]
+}

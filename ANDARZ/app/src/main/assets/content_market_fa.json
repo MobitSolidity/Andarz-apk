@@ -1,0 +1,118 @@
+{
+ "meta": {
+  "schema": 1,
+  "locale": "fa-IR",
+  "direction": "rtl",
+  "note": "Market wording (K7, K13 of KICKOFF_MESSAGE.txt). Loaded after content_fa.json; 'overrides' replace values of that file (D-M12). The spec file is never edited.",
+  "keyPrefix": "mkt.",
+  "source": "KICKOFF_MESSAGE.txt K13 (copy) + tools/move_march_strings.py, which moves March wording byte-identically from the sources listed in its mapping (K7, D-M32)"
+ },
+ "ui": {
+  "mkt.about.credit": "بخش بازار بر پایهٔ برنامهٔ March ساخته شده است.",
+  "mkt.cal.expired.body": "فهرست این بخش دستی است و تا {date} را پوشش می‌داد. بعد از به‌روزرسانی فهرست، رویدادهای تازه اینجا می‌آیند.",
+  "mkt.cal.expired.title": "برنامهٔ انتشارها تمام شده است",
+  "mkt.cal.validUntil": "فهرست تا {date} معتبر است",
+  "mkt.channel.live_monitor.name": "پایش زنده (پس‌زمینه)",
+  "mkt.channel.price_alarm.desc": "مثل ساعت زنگ‌دار: صفحه‌ی کامل، صدای آلارم و لرزش تا وقتی قطعش کنی",
+  "mkt.channel.price_alarm.name": "زنگ هشدار قیمت",
+  "mkt.channel.price_alerts.desc": "اعلان فوری وقتی قیمت به آستانه‌ی تو می‌رسد",
+  "mkt.channel.price_alerts.name": "هشدار نوسان قیمت",
+  "mkt.channel.releases.name": "انتشار اخبار اقتصادی",
+  "mkt.chip.age": "{age} پیش · {source}",
+  "mkt.chip.live": "قیمت لحظه‌ای {symbol}: {price}",
+  "mkt.chip.note": "این قیمت از سرویس بازار می‌آید، نه لزوماً از صرافی‌ات؛ پیش از استفاده بررسی کن.",
+  "mkt.chip.stale": "قیمت قدیمی است؛ خودت وارد کن.",
+  "mkt.consent.accept": "روشن کردن بازار",
+  "mkt.consent.body": "بخش بازار برای نمایش قیمت‌ها از اینترنت داده می‌گیرد. فقط قیمت‌ها و نماد ارزهایی که دنبال می‌کنی درخواست می‌شود. هیچ چیز از ژورنال، معامله‌ها یا موجودی‌ات فرستاده نمی‌شود. سرویس‌های زیر نشانی IP گوشی را می‌بینند.",
+  "mkt.consent.decline": "حالا نه",
+  "mkt.consent.hosts": "سرویس‌ها: {hosts}",
+  "mkt.consent.title": "اتصال به اینترنت برای قیمت‌ها",
+  "mkt.data.iran": "نوبیتکس و والکس",
+  "mkt.data.nobitex": "نوبیتکس",
+  "mkt.data.wallex": "والکس",
+  "mkt.disclaimer": "قیمت‌ها از سرویس‌های بیرونی می‌آیند و ممکن است دیر برسند یا با قیمت صرافی‌ات فرق داشته باشند. ماشین‌حساب و قوانین اندرز از آن‌ها استفاده نمی‌کنند.",
+  "mkt.err.badData": "خطای شبکه",
+  "mkt.err.blocked": "دسترسی به {service} از این IP مسدود است",
+  "mkt.err.noNetwork": "اینترنت در دسترس نیست",
+  "mkt.err.rateLimited": "محدودیت درخواست {service}؛ کمی صبر کن",
+  "mkt.err.server": "خطای سرور {service} ({code})",
+  "mkt.err.timeout": "زمان اتصال به {service} تمام شد",
+  "mkt.link.needMarket": "برای هشدار قیمت، بازار باید روشن باشد.",
+  "mkt.link.nocoin": "این نماد در فهرست بازار پیدا نشد.",
+  "mkt.link.note": "فقط اعلان می‌دهد؛ هیچ معامله‌ای را باز یا بسته نمی‌کند.",
+  "mkt.link.notif.body": "طبق برنامهٔ ثبت‌شده عمل کن.",
+  "mkt.link.notif.stop.title": "{symbol}: قیمت به حد ضررت رسید",
+  "mkt.link.notif.tp.title": "{symbol}: قیمت به حد سودت رسید",
+  "mkt.link.partial": "هشدار در نقطهٔ خروج پله‌ای ({price})",
+  "mkt.link.stop": "هشدار در حد ضرر ({price})",
+  "mkt.link.title": "هشدار قیمت برای این معامله",
+  "mkt.link.tp": "هشدار در حد سود ({price})",
+  "mkt.nav.market": "بازار",
+  "mkt.net.body": "ژورنال، قوانین و پشتیبان‌گیری بدون اینترنت کار می‌کنند. فقط بخش بازار، اگر روشنش کرده باشی، برای خواندن قیمت‌ها به اینترنت وصل می‌شود.",
+  "mkt.net.sent": "درخواست‌ها فقط می‌خوانند و جز نماد ارزها چیزی با خود نمی‌برند.",
+  "mkt.net.title": "اینترنت در اندرز",
+  "mkt.off.action": "روشن کردن",
+  "mkt.off.body": "تا روشنش نکنی، اندرز هیچ درخواستی به اینترنت نمی‌فرستد.",
+  "mkt.off.title": "بازار خاموش است",
+  "mkt.set.enable": "دریافت قیمت‌ها از اینترنت",
+  "mkt.set.enable.hint": "با خاموش کردن، همهٔ اتصال‌ها، هشدارهای قیمت و پایش پس‌زمینه متوقف می‌شود.",
+  "mkt.set.quiet": "بی‌صدا کردن هشدارهای قیمت در ساعت سکوت",
+  "mkt.set.sources": "سرویس‌های داده",
+  "mkt.set.sources.body": "CoinGecko برای فهرست و تاریخچه، Binance برای قیمت لحظه‌ای، Nobitex و Wallex برای تتر به تومان، alternative.me برای شاخص ترس و طمع.",
+  "mkt.tab.alerts": "هشدارها",
+  "mkt.tab.coins": "ارزهای من",
+  "mkt.tab.news": "اخبار",
+  "mkt.tab.prices": "قیمت‌ها"
+ },
+ "uiArgs": {
+  "mkt.cal.expired.body": [
+   "date"
+  ],
+  "mkt.cal.validUntil": [
+   "date"
+  ],
+  "mkt.chip.age": [
+   "age",
+   "source"
+  ],
+  "mkt.chip.live": [
+   "symbol",
+   "price"
+  ],
+  "mkt.consent.hosts": [
+   "hosts"
+  ],
+  "mkt.err.blocked": [
+   "service"
+  ],
+  "mkt.err.rateLimited": [
+   "service"
+  ],
+  "mkt.err.server": [
+   "code",
+   "service"
+  ],
+  "mkt.err.timeout": [
+   "service"
+  ],
+  "mkt.link.notif.stop.title": [
+   "symbol"
+  ],
+  "mkt.link.notif.tp.title": [
+   "symbol"
+  ],
+  "mkt.link.partial": [
+   "price"
+  ],
+  "mkt.link.stop": [
+   "price"
+  ],
+  "mkt.link.tp": [
+   "price"
+  ]
+ },
+ "overrides": {
+  "about.privacy": "دادهٔ ژورنال و حسابت فقط روی همین گوشی می‌ماند. اندرز تبلیغ ندارد و از ژورنال چیزی نمی‌فرستد. فقط بخش بازار برای خواندن قیمت‌ها به اینترنت وصل می‌شود، آن هم وقتی خودت روشنش کرده باشی.",
+  "onb.privacy.body": "ژورنال و قوانین اندرز بدون اینترنت کار می‌کنند و هیچ داده‌ای از آن‌ها نمی‌رود. فقط بخش بازار، اگر روشنش کنی، برای خواندن قیمت‌ها به اینترنت وصل می‌شود. پشتیبان رمزگذاری‌شده را خودت می‌سازی و خودت نگه می‌داری؛ اگر رمزش را گم کنی، هیچ‌کس نمی‌تواند بازیابی‌اش کند."
+ }
+}

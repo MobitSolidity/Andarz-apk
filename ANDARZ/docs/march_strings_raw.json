@@ -1,0 +1,1996 @@
+[
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 135,
+  "kind": "literal",
+  "fa": "Tab(\"اخبار\", \"News\", Icons.Filled.Event), Tab(\"بازار\", \"Market\", Icons.Filled.BarChart),",
+  "en": "",
+  "faRaw": "Tab(\"اخبار\", \"News\", Icons.Filled.Event), Tab(\"بازار\", \"Market\", Icons.Filled.BarChart),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 136,
+  "kind": "literal",
+  "fa": "Tab(\"واچ‌لیست\", \"Watchlist\", Icons.Filled.Star), Tab(\"هشدارها\", \"Alerts\", Icons.Filled.NotificationsActive),",
+  "en": "",
+  "faRaw": "Tab(\"واچ‌لیست\", \"Watchlist\", Icons.Filled.Star), Tab(\"هشدارها\", \"Alerts\", Icons.Filled.NotificationsActive),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 140,
+  "kind": "tr",
+  "fa": "تم: خودکار",
+  "en": "Theme: system",
+  "faRaw": "تم: خودکار",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 140,
+  "kind": "tr",
+  "fa": "تم: روشن",
+  "en": "Theme: light",
+  "faRaw": "تم: روشن",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 140,
+  "kind": "tr",
+  "fa": "تم: تیره",
+  "en": "Theme: dark",
+  "faRaw": "تم: تیره",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 161,
+  "kind": "tr",
+  "fa": "تومان",
+  "en": "Toman",
+  "faRaw": "تومان",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 161,
+  "kind": "tr",
+  "fa": "دلار",
+  "en": "USD",
+  "faRaw": "دلار",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt",
+  "line": 162,
+  "kind": "literal",
+  "fa": "Text(if (L.en) \"فا\" else \"EN\", color = C.OnDeep, fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clip(chip).background(C.OnDeep.copy(alpha = 0.16f)).clickable { vm.setLang(if (L.en) Lang.FA else Lang.EN) }.padding(horizontal = 10.dp, vertical = 4.dp))",
+  "en": "",
+  "faRaw": "Text(if (L.en) \"فا\" else \"EN\", color = C.OnDeep, fontSize = 13.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clip(chip).background(C.OnDeep.copy(alpha = 0.16f)).clickable { vm.setLang(if (L.en) Lang.FA else Lang.EN) }.padding(horizontal = 10.dp, vertical = 4.dp))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 15,
+  "kind": "literal",
+  "fa": "EconEvent(\"nfp\", t(\"2026-10-02T16:00:00\"), \"US\", \"اشتغال بخش غیرکشاورزی (NFP)\", 3, en = \"Nonfarm Payrolls (NFP)\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"nfp\", t(\"2026-10-02T16:00:00\"), \"US\", \"اشتغال بخش غیرکشاورزی (NFP)\", 3, en = \"Nonfarm Payrolls (NFP)\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 16,
+  "kind": "literal",
+  "fa": "EconEvent(\"unemp\", t(\"2026-10-02T16:00:00\"), \"US\", \"نرخ بیکاری\", 3, en = \"Unemployment Rate\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"unemp\", t(\"2026-10-02T16:00:00\"), \"US\", \"نرخ بیکاری\", 3, en = \"Unemployment Rate\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 17,
+  "kind": "literal",
+  "fa": "EconEvent(\"ism-s\", t(\"2026-10-05T17:30:00\"), \"US\", \"شاخص مدیران خرید خدماتی ISM\", 3, en = \"ISM Services PMI\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"ism-s\", t(\"2026-10-05T17:30:00\"), \"US\", \"شاخص مدیران خرید خدماتی ISM\", 3, en = \"ISM Services PMI\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 18,
+  "kind": "literal",
+  "fa": "EconEvent(\"trade\", t(\"2026-10-06T16:00:00\"), \"US\", \"تراز تجاری\", 1, en = \"Trade Balance\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"trade\", t(\"2026-10-06T16:00:00\"), \"US\", \"تراز تجاری\", 1, en = \"Trade Balance\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 19,
+  "kind": "literal",
+  "fa": "EconEvent(\"adp\", t(\"2026-10-07T15:45:00\"), \"US\", \"اشتغال بخش خصوصی ADP\", 2, en = \"ADP Employment Change\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"adp\", t(\"2026-10-07T15:45:00\"), \"US\", \"اشتغال بخش خصوصی ADP\", 2, en = \"ADP Employment Change\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 20,
+  "kind": "literal",
+  "fa": "EconEvent(\"fomc-min\", t(\"2026-10-07T21:30:00\"), \"US\", \"صورتجلسه فدرال رزرو (FOMC Minutes)\", 3, en = \"FOMC Meeting Minutes\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"fomc-min\", t(\"2026-10-07T21:30:00\"), \"US\", \"صورتجلسه فدرال رزرو (FOMC Minutes)\", 3, en = \"FOMC Meeting Minutes\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 21,
+  "kind": "literal",
+  "fa": "EconEvent(\"claims\", t(\"2026-10-08T16:00:00\"), \"US\", \"مدعیان بیمه بیکاری\", 2, previous = \"197K\", en = \"Initial Jobless Claims\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"claims\", t(\"2026-10-08T16:00:00\"), \"US\", \"مدعیان بیمه بیکاری\", 2, previous = \"197K\", en = \"Initial Jobless Claims\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 22,
+  "kind": "literal",
+  "fa": "EconEvent(\"umich\", t(\"2026-10-09T17:30:00\"), \"US\", \"اطمینان مصرف‌کننده میشیگان (اولیه)\", 2, previous = \"51.7\", forecast = \"54.1\", en = \"UMich Consumer Sentiment (Prelim)\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"umich\", t(\"2026-10-09T17:30:00\"), \"US\", \"اطمینان مصرف‌کننده میشیگان (اولیه)\", 2, previous = \"51.7\", forecast = \"54.1\", en = \"UMich Consumer Sentiment (Prelim)\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 23,
+  "kind": "literal",
+  "fa": "EconEvent(\"cpi\", t(\"2026-10-14T16:00:00\"), \"US\", \"شاخص قیمت مصرف‌کننده (CPI) سپتامبر\", 3, en = \"CPI (September)\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"cpi\", t(\"2026-10-14T16:00:00\"), \"US\", \"شاخص قیمت مصرف‌کننده (CPI) سپتامبر\", 3, en = \"CPI (September)\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 24,
+  "kind": "literal",
+  "fa": "EconEvent(\"beige\", t(\"2026-10-14T21:30:00\"), \"US\", \"گزارش کتاب بژ فدرال رزرو\", 2, en = \"Fed Beige Book\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"beige\", t(\"2026-10-14T21:30:00\"), \"US\", \"گزارش کتاب بژ فدرال رزرو\", 2, en = \"Fed Beige Book\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 25,
+  "kind": "literal",
+  "fa": "EconEvent(\"ppi\", t(\"2026-10-15T16:00:00\"), \"US\", \"شاخص قیمت تولیدکننده (PPI)\", 2, en = \"Producer Price Index (PPI)\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"ppi\", t(\"2026-10-15T16:00:00\"), \"US\", \"شاخص قیمت تولیدکننده (PPI)\", 2, en = \"Producer Price Index (PPI)\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 26,
+  "kind": "literal",
+  "fa": "EconEvent(\"indpro\", t(\"2026-10-16T16:45:00\"), \"US\", \"تولید صنعتی\", 1, en = \"Industrial Production\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"indpro\", t(\"2026-10-16T16:45:00\"), \"US\", \"تولید صنعتی\", 1, en = \"Industrial Production\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 27,
+  "kind": "literal",
+  "fa": "EconEvent(\"fomc\", t(\"2026-10-28T21:30:00\"), \"US\", \"تصمیم نرخ بهره فدرال رزرو\", 3, previous = \"3.75–4.00%\", en = \"Fed Interest Rate Decision\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"fomc\", t(\"2026-10-28T21:30:00\"), \"US\", \"تصمیم نرخ بهره فدرال رزرو\", 3, previous = \"3.75–4.00%\", en = \"Fed Interest Rate Decision\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 28,
+  "kind": "literal",
+  "fa": "EconEvent(\"presser\", t(\"2026-10-28T22:00:00\"), \"US\", \"کنفرانس خبری رئیس فدرال رزرو\", 3, en = \"Fed Chair Press Conference\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"presser\", t(\"2026-10-28T22:00:00\"), \"US\", \"کنفرانس خبری رئیس فدرال رزرو\", 3, en = \"Fed Chair Press Conference\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Events.kt",
+  "line": 29,
+  "kind": "literal",
+  "fa": "EconEvent(\"pce\", t(\"2026-10-29T16:00:00\"), \"US\", \"شاخص هسته PCE\", 3, en = \"Core PCE Price Index\"),",
+  "en": "",
+  "faRaw": "EconEvent(\"pce\", t(\"2026-10-29T16:00:00\"), \"US\", \"شاخص هسته PCE\", 3, en = \"Core PCE Price Index\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/IranMarket.kt",
+  "line": 29,
+  "kind": "tr",
+  "fa": "نوبیتکس/والکس",
+  "en": "Nobitex/Wallex",
+  "faRaw": "نوبیتکس/والکس",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/IranMarket.kt",
+  "line": 54,
+  "kind": "tr",
+  "fa": "نوبیتکس",
+  "en": "Nobitex",
+  "faRaw": "نوبیتکس",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/IranMarket.kt",
+  "line": 84,
+  "kind": "tr",
+  "fa": "والکس",
+  "en": "Wallex",
+  "faRaw": "والکس",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 85,
+  "kind": "literal",
+  "fa": "M5(5, \"۵ دقیقه\", \"5 min\"),",
+  "en": "",
+  "faRaw": "M5(5, \"۵ دقیقه\", \"5 min\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 86,
+  "kind": "literal",
+  "fa": "M15(15, \"۱۵ دقیقه\", \"15 min\"),",
+  "en": "",
+  "faRaw": "M15(15, \"۱۵ دقیقه\", \"15 min\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 87,
+  "kind": "literal",
+  "fa": "H1(60, \"۱ ساعت\", \"1 hour\"),",
+  "en": "",
+  "faRaw": "H1(60, \"۱ ساعت\", \"1 hour\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 88,
+  "kind": "literal",
+  "fa": "H24(1440, \"۲۴ ساعت\", \"24 hours\");",
+  "en": "",
+  "faRaw": "H24(1440, \"۲۴ ساعت\", \"24 hours\");",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 94,
+  "kind": "literal",
+  "fa": "WATCHLIST(\"واچ‌لیست من\", \"My watchlist\"),",
+  "en": "",
+  "faRaw": "WATCHLIST(\"واچ‌لیست من\", \"My watchlist\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 95,
+  "kind": "literal",
+  "fa": "ALL(\"همه‌ی ۲۰۰ ارز\", \"All 200 coins\");",
+  "en": "",
+  "faRaw": "ALL(\"همه‌ی ۲۰۰ ارز\", \"All 200 coins\");",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 101,
+  "kind": "literal",
+  "fa": "BOTH(\"رشد و ریزش\", \"Up & down\"),",
+  "en": "",
+  "faRaw": "BOTH(\"رشد و ریزش\", \"Up & down\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 102,
+  "kind": "literal",
+  "fa": "UP(\"فقط رشد\", \"Up only\"),",
+  "en": "",
+  "faRaw": "UP(\"فقط رشد\", \"Up only\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 103,
+  "kind": "literal",
+  "fa": "DOWN(\"فقط ریزش\", \"Down only\");",
+  "en": "",
+  "faRaw": "DOWN(\"فقط ریزش\", \"Down only\");",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 110,
+  "kind": "literal",
+  "fa": "OFF(\"فقط اعلان\", \"Notification only\"),",
+  "en": "",
+  "faRaw": "OFF(\"فقط اعلان\", \"Notification only\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 111,
+  "kind": "literal",
+  "fa": "TARGETS(\"زنگ برای قیمت هدف\", \"Ring on targets\"),",
+  "en": "",
+  "faRaw": "TARGETS(\"زنگ برای قیمت هدف\", \"Ring on targets\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Models.kt",
+  "line": 112,
+  "kind": "literal",
+  "fa": "ALL(\"زنگ برای همه\", \"Ring on everything\");",
+  "en": "",
+  "faRaw": "ALL(\"زنگ برای همه\", \"Ring on everything\");",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt",
+  "line": 40,
+  "kind": "tr",
+  "fa": "اینترنت در دسترس نیست",
+  "en": "No internet connection",
+  "faRaw": "اینترنت در دسترس نیست",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt",
+  "line": 41,
+  "kind": "tr",
+  "fa": "زمان اتصال به {service} تمام شد",
+  "en": "{service} timed out",
+  "faRaw": "زمان اتصال به $service تمام شد",
+  "args": [
+   "service"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt",
+  "line": 43,
+  "kind": "tr",
+  "fa": "محدودیت درخواست {service}؛ کمی صبر کن",
+  "en": "{service} rate limit, please wait",
+  "faRaw": "محدودیت درخواست $service؛ کمی صبر کن",
+  "args": [
+   "service"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt",
+  "line": 44,
+  "kind": "tr",
+  "fa": "دسترسی به {service} از این IP مسدود است",
+  "en": "{service} is blocked from this IP",
+  "faRaw": "دسترسی به $service از این IP مسدود است",
+  "args": [
+   "service"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt",
+  "line": 45,
+  "kind": "tr",
+  "fa": "خطای سرور {service} ({code})",
+  "en": "{service} server error ({code})",
+  "faRaw": "خطای سرور $service (${e.code})",
+  "args": [
+   "service",
+   "code"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt",
+  "line": 47,
+  "kind": "tr",
+  "fa": "خطای شبکه",
+  "en": "Network error",
+  "faRaw": "خطای شبکه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/PriceHub.kt",
+  "line": 139,
+  "kind": "tr",
+  "fa": "خطای شبکه",
+  "en": "Network error",
+  "faRaw": "خطای شبکه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/PriceHub.kt",
+  "line": 306,
+  "kind": "tr",
+  "fa": "تتر به تومان",
+  "en": "USDT in Toman",
+  "faRaw": "تتر به تومان",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt",
+  "line": 73,
+  "kind": "tr",
+  "fa": "زنگ هشدار قیمت",
+  "en": "Price alarm",
+  "faRaw": "زنگ هشدار قیمت",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt",
+  "line": 74,
+  "kind": "tr",
+  "fa": "مثل ساعت زنگ‌دار: صفحه‌ی کامل، صدای آلارم و لرزش تا وقتی قطعش کنی",
+  "en": "Rings like an alarm clock: full screen, alarm sound and vibration until you stop it",
+  "faRaw": "مثل ساعت زنگ‌دار: صفحه‌ی کامل، صدای آلارم و لرزش تا وقتی قطعش کنی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt",
+  "line": 293,
+  "kind": "tr",
+  "fa": "قطع زنگ",
+  "en": "Stop",
+  "faRaw": "قطع زنگ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt",
+  "line": 294,
+  "kind": "tr",
+  "fa": "تعویق ۵ دقیقه",
+  "en": "Snooze 5 min",
+  "faRaw": "تعویق ۵ دقیقه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt",
+  "line": 43,
+  "kind": "tr",
+  "fa": "در حال اتصال به بازار…",
+  "en": "Connecting to the market…",
+  "faRaw": "در حال اتصال به بازار…",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt",
+  "line": 53,
+  "kind": "tr",
+  "fa": "تتر ",
+  "en": "USDT ",
+  "faRaw": "تتر ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt",
+  "line": 104,
+  "kind": "tr",
+  "fa": "پایش زنده‌ی قیمت فعال است",
+  "en": "Live price monitor is on",
+  "faRaw": "پایش زنده‌ی قیمت فعال است",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt",
+  "line": 111,
+  "kind": "tr",
+  "fa": "توقف",
+  "en": "Stop",
+  "faRaw": "توقف",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt",
+  "line": 122,
+  "kind": "tr",
+  "fa": "پایش زنده (پس‌زمینه)",
+  "en": "Live monitor (background)",
+  "faRaw": "پایش زنده (پس‌زمینه)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 54,
+  "kind": "tr",
+  "fa": "هشدار نوسان قیمت",
+  "en": "Price move alerts",
+  "faRaw": "هشدار نوسان قیمت",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 55,
+  "kind": "tr",
+  "fa": "اعلان فوری وقتی قیمت به آستانه‌ی تو می‌رسد",
+  "en": "Instant notification when a price crosses your threshold",
+  "faRaw": "اعلان فوری وقتی قیمت به آستانه‌ی تو می‌رسد",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 144,
+  "kind": "tr",
+  "fa": "اعلان‌های March فعال است",
+  "en": "March alerts are on",
+  "faRaw": "اعلان‌های March فعال است",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 145,
+  "kind": "tr",
+  "fa": "هر وقت ارزی در {label} بیش از {pct}٪ جابه‌جا شد، همین‌طور فوری خبرت می‌کنم.",
+  "en": "Whenever a coin moves more than {pct}% within {label}, you'll hear about it right away.",
+  "faRaw": "هر وقت ارزی در ${s.window.label} بیش از ${fa(pct)}٪ جابه‌جا شد، همین‌طور فوری خبرت می‌کنم.",
+  "args": [
+   "label",
+   "pct"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 157,
+  "kind": "tr",
+  "fa": "آزمایش زنگ هشدار",
+  "en": "Alarm test",
+  "faRaw": "آزمایش زنگ هشدار",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 158,
+  "kind": "tr",
+  "fa": "وقتی قیمت به هدفت برسد گوشی همین‌طور زنگ می‌خورد. برای قطع، زنگ را قطع کن.",
+  "en": "This is how your phone rings when a price hits your target. Stop it to silence it.",
+  "faRaw": "وقتی قیمت به هدفت برسد گوشی همین‌طور زنگ می‌خورد. برای قطع، زنگ را قطع کن.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 178,
+  "kind": "tr",
+  "fa": "، ",
+  "en": ", ",
+  "faRaw": "، ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 191,
+  "kind": "literal",
+  "fa": "\"{symbol} در {label} {pct}٪ \" + (if (up) \"رشد کرد\" else \"ریزش کرد\"),",
+  "en": "",
+  "faRaw": "\"${c.symbol} در ${s.window.label} ${fa(pct)}٪ \" + (if (up) \"رشد کرد\" else \"ریزش کرد\"),",
+  "args": [
+   "symbol",
+   "label",
+   "pct"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 194,
+  "kind": "tr",
+  "fa": "قیمت الان ",
+  "en": "Now ",
+  "faRaw": "قیمت الان ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 195,
+  "kind": "tr",
+  "fa": "تغییر ۲۴ ساعته: ",
+  "en": "24h change: ",
+  "faRaw": "تغییر ۲۴ ساعته: ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 196,
+  "kind": "tr",
+  "fa": "آستانه‌ی تو: ",
+  "en": "your threshold: ",
+  "faRaw": "آستانه‌ی تو: ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 196,
+  "kind": "tr",
+  "fa": "٪",
+  "en": "%",
+  "faRaw": "٪",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 207,
+  "kind": "tr",
+  "fa": "{symbol} به قیمت هدفت رسید",
+  "en": "{symbol} hit your target",
+  "faRaw": "${c.symbol} به قیمت هدفت رسید",
+  "args": [
+   "symbol"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 208,
+  "kind": "tr",
+  "fa": "بالای ",
+  "en": "Above ",
+  "faRaw": "بالای ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 208,
+  "kind": "tr",
+  "fa": "زیر ",
+  "en": "Below ",
+  "faRaw": "زیر ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 209,
+  "kind": "tr",
+  "fa": "قیمت الان ",
+  "en": "now ",
+  "faRaw": "قیمت الان ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 219,
+  "kind": "literal",
+  "fa": "val title = \"⚡ \" + greeting(s) + tr(\"نوسان شدید در \" + fa(n) + \" ارز دیگر\", \"Sharp moves in {n} more coins\")",
+  "en": "",
+  "faRaw": "val title = \"⚡ \" + greeting(s) + tr(\"نوسان شدید در \" + fa(n) + \" ارز دیگر\", \"Sharp moves in $n more coins\")",
+  "args": [
+   "n"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt",
+  "line": 220,
+  "kind": "tr",
+  "fa": "، ",
+  "en": ", ",
+  "faRaw": "، ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/Reminders.kt",
+  "line": 57,
+  "kind": "tr",
+  "fa": "انتشار اخبار اقتصادی",
+  "en": "Economic releases",
+  "faRaw": "انتشار اخبار اقتصادی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/Reminders.kt",
+  "line": 75,
+  "kind": "tr",
+  "fa": "{LEAD_MINUTES} دقیقه تا انتشار",
+  "en": "{LEAD_MINUTES} minutes to release",
+  "faRaw": "$LEAD_MINUTES دقیقه تا انتشار",
+  "args": [
+   "LEAD_MINUTES"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlarmScreen.kt",
+  "line": 90,
+  "kind": "tr",
+  "fa": "مشاهده‌ی ارز",
+  "en": "Open coin",
+  "faRaw": "مشاهده‌ی ارز",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlarmScreen.kt",
+  "line": 95,
+  "kind": "literal",
+  "fa": "tr(\"تعویق \" + fa(AlarmRinger.SNOOZE_MIN.toString()) + \" دقیقه\", \"Snooze \" + AlarmRinger.SNOOZE_MIN + \" min\"),",
+  "en": "",
+  "faRaw": "tr(\"تعویق \" + fa(AlarmRinger.SNOOZE_MIN.toString()) + \" دقیقه\", \"Snooze \" + AlarmRinger.SNOOZE_MIN + \" min\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlarmScreen.kt",
+  "line": 98,
+  "kind": "tr",
+  "fa": "قطع زنگ",
+  "en": "Stop",
+  "faRaw": "قطع زنگ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 85,
+  "kind": "literal",
+  "fa": "\"هشدار نوسان شدید\",",
+  "en": "",
+  "faRaw": "\"هشدار نوسان شدید\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 86,
+  "kind": "literal",
+  "fa": "\"اعلان فوری و شخصی وقتی قیمت در یک بازه‌ی کوتاه تند حرکت کند\",",
+  "en": "",
+  "faRaw": "\"اعلان فوری و شخصی وقتی قیمت در یک بازه‌ی کوتاه تند حرکت کند\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 97,
+  "kind": "tr",
+  "fa": "زنگ هشدار",
+  "en": "Alarm",
+  "faRaw": "زنگ هشدار",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 99,
+  "kind": "tr",
+  "fa": "وقتی هشدار می‌آید گوشی مثل ساعت زنگ‌دار زنگ می‌زند تا خودت قطعش کنی.",
+  "en": "When an alert fires, the phone rings like an alarm clock until you stop it.",
+  "faRaw": "وقتی هشدار می‌آید گوشی مثل ساعت زنگ‌دار زنگ می‌زند تا خودت قطعش کنی.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 108,
+  "kind": "tr",
+  "fa": "زنگ از برنامه‌ی ساعت گوشی",
+  "en": "Ring through the Clock app",
+  "faRaw": "زنگ از برنامه‌ی ساعت گوشی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 109,
+  "kind": "tr",
+  "fa": "هشدار با تایمر برنامه‌ی ساعت پخش می‌شود، دقیقاً مثل زنگ بیدارباش. اگر ممکن نباشد، زنگ داخلی March پخش می‌شود.",
+  "en": "Uses the Clock app's timer alarm, just like a wake-up alarm. If that's not possible, March's own alarm rings.",
+  "faRaw": "هشدار با تایمر برنامه‌ی ساعت پخش می‌شود، دقیقاً مثل زنگ بیدارباش. اگر ممکن نباشد، زنگ داخلی March پخش می‌شود.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 117,
+  "kind": "tr",
+  "fa": "برنامه‌ی ساعت سازگار پیدا نشد",
+  "en": "No compatible Clock app found",
+  "faRaw": "برنامه‌ی ساعت سازگار پیدا نشد",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 118,
+  "kind": "tr",
+  "fa": "زنگ داخلی March استفاده می‌شود. می‌توانی Google Clock را نصب کنی.",
+  "en": "March's own alarm will be used. You can install Google Clock.",
+  "faRaw": "زنگ داخلی March استفاده می‌شود. می‌توانی Google Clock را نصب کنی.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 123,
+  "kind": "tr",
+  "fa": "اجازه‌ی «نمایش روی برنامه‌های دیگر» را بده",
+  "en": "Allow \"Display over other apps\"",
+  "faRaw": "اجازه‌ی «نمایش روی برنامه‌های دیگر» را بده",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 124,
+  "kind": "tr",
+  "fa": "بدون این اجازه وقتی اپ بسته است اندروید نمی‌گذارد ساعت باز شود و زنگ داخلی پخش می‌شود. روی شیائومی «نمایش پنجره‌های بازشو در پس‌زمینه» را هم روشن کن.",
+  "en": "Without it Android won't let the closed app open the Clock app, so March's own alarm rings. On Xiaomi also enable \"Display pop-up windows while running in the background\".",
+  "faRaw": "بدون این اجازه وقتی اپ بسته است اندروید نمی‌گذارد ساعت باز شود و زنگ داخلی پخش می‌شود. روی شیائومی «نمایش پنجره‌های بازشو در پس‌زمینه» را هم روشن کن.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 132,
+  "kind": "tr",
+  "fa": "اجازه‌ی «اعلان تمام‌صفحه» را بده",
+  "en": "Allow full-screen notifications",
+  "faRaw": "اجازه‌ی «اعلان تمام‌صفحه» را بده",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 133,
+  "kind": "tr",
+  "fa": "تا زنگ روی صفحه‌ی قفل نمایش داده شود.",
+  "en": "So the alarm shows over the lock screen.",
+  "faRaw": "تا زنگ روی صفحه‌ی قفل نمایش داده شود.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 138,
+  "kind": "tr",
+  "fa": "اجازه‌ی «آلارم و یادآور» را بده",
+  "en": "Allow alarms & reminders",
+  "faRaw": "اجازه‌ی «آلارم و یادآور» را بده",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 139,
+  "kind": "tr",
+  "fa": "برای تعویق دقیق و زنگ مطمئن.",
+  "en": "For exact snooze and reliable ringing.",
+  "faRaw": "برای تعویق دقیق و زنگ مطمئن.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 146,
+  "kind": "tr",
+  "fa": "آزمایش زنگ هشدار",
+  "en": "Test the alarm",
+  "faRaw": "آزمایش زنگ هشدار",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 155,
+  "kind": "literal",
+  "fa": "\"حداقل درصد تغییر\", color = C.Ink, fontSize = 15.sp, fontWeight = FontWeight.SemiBold,",
+  "en": "",
+  "faRaw": "\"حداقل درصد تغییر\", color = C.Ink, fontSize = 15.sp, fontWeight = FontWeight.SemiBold,",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 158,
+  "kind": "literal",
+  "fa": "Text(fa(fmtNum(pct.toDouble())) + \"٪\", color = C.Ember, fontSize = 20.sp, fontWeight = FontWeight.Bold)",
+  "en": "",
+  "faRaw": "Text(fa(fmtNum(pct.toDouble())) + \"٪\", color = C.Ember, fontSize = 20.sp, fontWeight = FontWeight.Bold)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 167,
+  "kind": "literal",
+  "fa": "FieldLabel(\"در چه بازه‌ای\")",
+  "en": "",
+  "faRaw": "FieldLabel(\"در چه بازه‌ای\")",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 169,
+  "kind": "literal",
+  "fa": "FieldLabel(\"جهت حرکت\")",
+  "en": "",
+  "faRaw": "FieldLabel(\"جهت حرکت\")",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 171,
+  "kind": "literal",
+  "fa": "FieldLabel(\"برای کدام ارزها\")",
+  "en": "",
+  "faRaw": "FieldLabel(\"برای کدام ارزها\")",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 173,
+  "kind": "literal",
+  "fa": "FieldLabel(\"فاصله‌ی دو اعلان برای یک ارز\")",
+  "en": "",
+  "faRaw": "FieldLabel(\"فاصله‌ی دو اعلان برای یک ارز\")",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 176,
+  "kind": "literal",
+  "fa": "Pill(fa(m.toString()) + \" دقیقه\", s.cooldownMin == m) { onUpdate { it.copy(cooldownMin = m) } }",
+  "en": "",
+  "faRaw": "Pill(fa(m.toString()) + \" دقیقه\", s.cooldownMin == m) { onUpdate { it.copy(cooldownMin = m) } }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 181,
+  "kind": "literal",
+  "fa": "\"نوسان تتر / تومان هم اعلام شود\",",
+  "en": "",
+  "faRaw": "\"نوسان تتر / تومان هم اعلام شود\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 182,
+  "kind": "literal",
+  "fa": "\"حتی اگر تتر در واچ‌لیستت نباشد\",",
+  "en": "",
+  "faRaw": "\"حتی اگر تتر در واچ‌لیستت نباشد\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 189,
+  "kind": "literal",
+  "fa": "Text(\"شخصی‌سازی اعلان\", color = C.Ink, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)",
+  "en": "",
+  "faRaw": "Text(\"شخصی‌سازی اعلان\", color = C.Ink, fontSize = 15.sp, fontWeight = FontWeight.SemiBold)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 198,
+  "kind": "literal",
+  "fa": "label = { Text(\"اسمت (اختیاری)\") },",
+  "en": "",
+  "faRaw": "label = { Text(\"اسمت (اختیاری)\") },",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 201,
+  "kind": "literal",
+  "fa": "val who = name.trim().let { if (it.isEmpty()) \"\" else \"{it}، \" }",
+  "en": "",
+  "faRaw": "val who = name.trim().let { if (it.isEmpty()) \"\" else \"${it}، \" }",
+  "args": [
+   "it"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 203,
+  "kind": "literal",
+  "fa": "\"پیش‌نمایش: 🚀 \" + who + \"BTC در \" + s.window.label + \" \" + fa(fmtNum(s.thresholdPct.toDouble())) + \"٪ رشد کرد\",",
+  "en": "",
+  "faRaw": "\"پیش‌نمایش: 🚀 \" + who + \"BTC در \" + s.window.label + \" \" + fa(fmtNum(s.thresholdPct.toDouble())) + \"٪ رشد کرد\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 210,
+  "kind": "literal",
+  "fa": ") { Text(\"ارسال اعلان آزمایشی\") }",
+  "en": "",
+  "faRaw": ") { Text(\"ارسال اعلان آزمایشی\") }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 216,
+  "kind": "literal",
+  "fa": "\"پایش زنده در پس‌زمینه\",",
+  "en": "",
+  "faRaw": "\"پایش زنده در پس‌زمینه\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 217,
+  "kind": "literal",
+  "fa": "\"تا وقتی اپ بسته است هم اعلان فوری بگیری. یک اعلان ثابت کوچک نمایش داده می‌شود.\",",
+  "en": "",
+  "faRaw": "\"تا وقتی اپ بسته است هم اعلان فوری بگیری. یک اعلان ثابت کوچک نمایش داده می‌شود.\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 222,
+  "kind": "literal",
+  "fa": "\"پایش همه‌ی ۲۰۰ ارز در پس‌زمینه اینترنت بیشتری مصرف می‌کند.\"",
+  "en": "",
+  "faRaw": "\"پایش همه‌ی ۲۰۰ ارز در پس‌زمینه اینترنت بیشتری مصرف می‌کند.\"",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 224,
+  "kind": "literal",
+  "fa": "\"در پس‌زمینه فقط ارزهای واچ‌لیست و هشدارهای اختصاصی پایش می‌شوند (کم‌مصرف).\"",
+  "en": "",
+  "faRaw": "\"در پس‌زمینه فقط ارزهای واچ‌لیست و هشدارهای اختصاصی پایش می‌شوند (کم‌مصرف).\"",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 234,
+  "kind": "literal",
+  "fa": "}) { Text(\"حذف محدودیت باتری برای March\", color = C.Lead) }",
+  "en": "",
+  "faRaw": "}) { Text(\"حذف محدودیت باتری برای March\", color = C.Lead) }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 239,
+  "kind": "literal",
+  "fa": "\"هشدارهای اختصاصی ارزها\", color = C.Muted, fontSize = 14.sp, fontWeight = FontWeight.Bold,",
+  "en": "",
+  "faRaw": "\"هشدارهای اختصاصی ارزها\", color = C.Muted, fontSize = 14.sp, fontWeight = FontWeight.Bold,",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 247,
+  "kind": "literal",
+  "fa": "\"در تب بازار روی هر ارز بزن تا آستانه یا قیمت هدف مخصوص خودش را بگذاری.\",",
+  "en": "",
+  "faRaw": "\"در تب بازار روی هر ارز بزن تا آستانه یا قیمت هدف مخصوص خودش را بگذاری.\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 290,
+  "kind": "literal",
+  "fa": "r.pct?.let { add(\"آستانه \" + fa(fmtNum(it.toDouble())) + \"٪\") }",
+  "en": "",
+  "faRaw": "r.pct?.let { add(\"آستانه \" + fa(fmtNum(it.toDouble())) + \"٪\") }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 291,
+  "kind": "literal",
+  "fa": "r.above?.let { add(\"بالای \" + unit(it)) }",
+  "en": "",
+  "faRaw": "r.above?.let { add(\"بالای \" + unit(it)) }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 292,
+  "kind": "literal",
+  "fa": "r.below?.let { add(\"زیر \" + unit(it)) }",
+  "en": "",
+  "faRaw": "r.below?.let { add(\"زیر \" + unit(it)) }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 300,
+  "kind": "literal",
+  "fa": "Text(if (toman) \"تتر / تومان\" else (coin?.symbol ?: r.id), color = C.Ink, fontSize = 16.sp, fontWeight = FontWeight.Bold)",
+  "en": "",
+  "faRaw": "Text(if (toman) \"تتر / تومان\" else (coin?.symbol ?: r.id), color = C.Ink, fontSize = 16.sp, fontWeight = FontWeight.Bold)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt",
+  "line": 303,
+  "kind": "literal",
+  "fa": "IconButton(onClick = onRemove) { Icon(Icons.Filled.Delete, contentDescription = \"حذف\", tint = C.Crimson) }",
+  "en": "",
+  "faRaw": "IconButton(onClick = onRemove) { Icon(Icons.Filled.Delete, contentDescription = \"حذف\", tint = C.Crimson) }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 100,
+  "kind": "literal",
+  "fa": "if (c.isToman) c.name else c.name + \" · رتبه \" + fa(c.rank.toString()),",
+  "en": "",
+  "faRaw": "if (c.isToman) c.name else c.name + \" · رتبه \" + fa(c.rank.toString()),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 106,
+  "kind": "literal",
+  "fa": "if (starred) Icons.Filled.Star else Icons.Outlined.StarBorder, contentDescription = \"واچ‌لیست\",",
+  "en": "",
+  "faRaw": "if (starred) Icons.Filled.Star else Icons.Outlined.StarBorder, contentDescription = \"واچ‌لیست\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 122,
+  "kind": "literal",
+  "fa": "Tag(\"۲۴ ساعت \" + fmtPct(c.change24h), tone)",
+  "en": "",
+  "faRaw": "Tag(\"۲۴ ساعت \" + fmtPct(c.change24h), tone)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 123,
+  "kind": "literal",
+  "fa": "if (!c.isToman && c.change7d != 0.0) Tag(\"۷ روز \" + fmtPct(c.change7d), if (c.change7d >= 0) C.Up else C.Crimson)",
+  "en": "",
+  "faRaw": "if (!c.isToman && c.change7d != 0.0) Tag(\"۷ روز \" + fmtPct(c.change7d), if (c.change7d >= 0) C.Up else C.Crimson)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 126,
+  "kind": "literal",
+  "fa": "Source.BINANCE -> \"لحظه‌ای · بایننس\"",
+  "en": "",
+  "faRaw": "Source.BINANCE -> \"لحظه‌ای · بایننس\"",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 127,
+  "kind": "literal",
+  "fa": "Source.NOBITEX -> \"لحظه‌ای · صرافی ایرانی\"",
+  "en": "",
+  "faRaw": "Source.NOBITEX -> \"لحظه‌ای · صرافی ایرانی\"",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 137,
+  "kind": "literal",
+  "fa": "if (weekly) \"نمودار ۷ روز گذشته\" else \"نمودار از زمان باز شدن اپ\",",
+  "en": "",
+  "faRaw": "if (weekly) \"نمودار ۷ روز گذشته\" else \"نمودار از زمان باز شدن اپ\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 147,
+  "kind": "literal",
+  "fa": "Text(\"داده‌ی نمودار در حال جمع‌آوری است…\", color = C.Muted, fontSize = 13.sp)",
+  "en": "",
+  "faRaw": "Text(\"داده‌ی نمودار در حال جمع‌آوری است…\", color = C.Muted, fontSize = 13.sp)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 152,
+  "kind": "literal",
+  "fa": "if (c.high24h > 0) add(\"سقف ۲۴ ساعت\" to unit(c.high24h))",
+  "en": "",
+  "faRaw": "if (c.high24h > 0) add(\"سقف ۲۴ ساعت\" to unit(c.high24h))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 153,
+  "kind": "literal",
+  "fa": "if (c.low24h > 0) add(\"کف ۲۴ ساعت\" to unit(c.low24h))",
+  "en": "",
+  "faRaw": "if (c.low24h > 0) add(\"کف ۲۴ ساعت\" to unit(c.low24h))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 154,
+  "kind": "literal",
+  "fa": "if (c.volume24h > 0) add(\"حجم ۲۴ ساعت\" to fmtCap(c.volume24h))",
+  "en": "",
+  "faRaw": "if (c.volume24h > 0) add(\"حجم ۲۴ ساعت\" to fmtCap(c.volume24h))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 155,
+  "kind": "literal",
+  "fa": "if (c.marketCap > 0) add(\"ارزش بازار\" to fmtCap(c.marketCap))",
+  "en": "",
+  "faRaw": "if (c.marketCap > 0) add(\"ارزش بازار\" to fmtCap(c.marketCap))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 156,
+  "kind": "literal",
+  "fa": "if (c.ath > 0) add(\"سقف تاریخی (ATH)\" to unit(c.ath))",
+  "en": "",
+  "faRaw": "if (c.ath > 0) add(\"سقف تاریخی (ATH)\" to unit(c.ath))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 157,
+  "kind": "literal",
+  "fa": "if (c.ath > 0) add(\"فاصله تا ATH\" to fmtPct(c.athChange))",
+  "en": "",
+  "faRaw": "if (c.ath > 0) add(\"فاصله تا ATH\" to fmtPct(c.athChange))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 168,
+  "kind": "literal",
+  "fa": "Text(\"🔔 هشدار اختصاصی \" + c.symbol, color = C.Ink, fontSize = 16.sp, fontWeight = FontWeight.Bold)",
+  "en": "",
+  "faRaw": "Text(\"🔔 هشدار اختصاصی \" + c.symbol, color = C.Ink, fontSize = 16.sp, fontWeight = FontWeight.Bold)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 175,
+  "kind": "literal",
+  "fa": "\"آستانه‌ی نوسان مخصوص این ارز\",",
+  "en": "",
+  "faRaw": "\"آستانه‌ی نوسان مخصوص این ارز\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 176,
+  "kind": "literal",
+  "fa": "if (custom) \"\" else \"الان از تنظیم کلی (\" + fa(fmtNum(defaultPct.toDouble())) + \"٪) استفاده می‌شود\",",
+  "en": "",
+  "faRaw": "if (custom) \"\" else \"الان از تنظیم کلی (\" + fa(fmtNum(defaultPct.toDouble())) + \"٪) استفاده می‌شود\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 180,
+  "kind": "literal",
+  "fa": "Text(fa(fmtNum(pct.toDouble())) + \"٪\", color = C.Ember, fontWeight = FontWeight.Bold, fontSize = 18.sp)",
+  "en": "",
+  "faRaw": "Text(fa(fmtNum(pct.toDouble())) + \"٪\", color = C.Ember, fontWeight = FontWeight.Bold, fontSize = 18.sp)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 186,
+  "kind": "literal",
+  "fa": "val unitLabel = if (c.isToman) \"تومان\" else \"دلار\"",
+  "en": "",
+  "faRaw": "val unitLabel = if (c.isToman) \"تومان\" else \"دلار\"",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 189,
+  "kind": "literal",
+  "fa": "label = { Text(\"اعلان وقتی بالاتر از ({unitLabel})\") },",
+  "en": "",
+  "faRaw": "label = { Text(\"اعلان وقتی بالاتر از ($unitLabel)\") },",
+  "args": [
+   "unitLabel"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 195,
+  "kind": "literal",
+  "fa": "label = { Text(\"اعلان وقتی پایین‌تر از ({unitLabel})\") },",
+  "en": "",
+  "faRaw": "label = { Text(\"اعلان وقتی پایین‌تر از ($unitLabel)\") },",
+  "args": [
+   "unitLabel"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 200,
+  "kind": "literal",
+  "fa": "\"هشدار قیمت هدف یک بار ارسال می‌شود و بعد خودکار پاک می‌شود.\",",
+  "en": "",
+  "faRaw": "\"هشدار قیمت هدف یک بار ارسال می‌شود و بعد خودکار پاک می‌شود.\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 206,
+  "kind": "literal",
+  "fa": "Toast.makeText(ctx, \"هشدار \" + c.symbol + \" ذخیره شد\", Toast.LENGTH_SHORT).show()",
+  "en": "",
+  "faRaw": "Toast.makeText(ctx, \"هشدار \" + c.symbol + \" ذخیره شد\", Toast.LENGTH_SHORT).show()",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/CoinSheet.kt",
+  "line": 210,
+  "kind": "literal",
+  "fa": ") { Text(\"ذخیره هشدار\") }",
+  "en": "",
+  "faRaw": ") { Text(\"ذخیره هشدار\") }",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Format.kt",
+  "line": 71,
+  "kind": "tr",
+  "fa": " ت",
+  "en": " T",
+  "faRaw": " ت",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Format.kt",
+  "line": 82,
+  "kind": "literal",
+  "fa": "for (ch in s) append(if (ch in '0'..'9') '۰' + (ch - '0') else ch)",
+  "en": "",
+  "faRaw": "for (ch in s) append(if (ch in '0'..'9') '۰' + (ch - '0') else ch)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Format.kt",
+  "line": 99,
+  "kind": "literal",
+  "fa": "in '۰'..'۹' -> append('0' + (ch - '۰'))",
+  "en": "",
+  "faRaw": "in '۰'..'۹' -> append('0' + (ch - '۰'))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Format.kt",
+  "line": 100,
+  "kind": "literal",
+  "fa": "in '٠'..'٩' -> append('0' + (ch - '٠'))",
+  "en": "",
+  "faRaw": "in '٠'..'٩' -> append('0' + (ch - '٠'))",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Format.kt",
+  "line": 101,
+  "kind": "literal",
+  "fa": "',', '٬', ' ' -> Unit",
+  "en": "",
+  "faRaw": "',', '٬', ' ' -> Unit",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Format.kt",
+  "line": 102,
+  "kind": "literal",
+  "fa": "'٫' -> append('.')",
+  "en": "",
+  "faRaw": "'٫' -> append('.')",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 63,
+  "kind": "literal",
+  "fa": "RANK(\"رتبه\", \"Rank\"),",
+  "en": "",
+  "faRaw": "RANK(\"رتبه\", \"Rank\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 64,
+  "kind": "literal",
+  "fa": "GAIN(\"بیشترین رشد\", \"Top gainers\"),",
+  "en": "",
+  "faRaw": "GAIN(\"بیشترین رشد\", \"Top gainers\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 65,
+  "kind": "literal",
+  "fa": "LOSS(\"بیشترین افت\", \"Top losers\"),",
+  "en": "",
+  "faRaw": "LOSS(\"بیشترین افت\", \"Top losers\"),",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 66,
+  "kind": "literal",
+  "fa": "VOLUME(\"حجم معاملات\", \"Volume\");",
+  "en": "",
+  "faRaw": "VOLUME(\"حجم معاملات\", \"Volume\");",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 113,
+  "kind": "tr",
+  "fa": "چیزی پیدا نشد",
+  "en": "Nothing found",
+  "faRaw": "چیزی پیدا نشد",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 128,
+  "kind": "tr",
+  "fa": "جستجوی نماد یا نام (مثلاً BTC یا تتر)",
+  "en": "Search symbol or name (e.g. BTC)",
+  "faRaw": "جستجوی نماد یا نام (مثلاً BTC یا تتر)",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 133,
+  "kind": "tr",
+  "fa": "پاک کردن",
+  "en": "Clear",
+  "faRaw": "پاک کردن",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 151,
+  "kind": "tr",
+  "fa": "لحظه‌ای · بایننس",
+  "en": "Live · Binance",
+  "faRaw": "لحظه‌ای · بایننس",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 152,
+  "kind": "tr",
+  "fa": "لحظه‌ای · نوبیتکس",
+  "en": "Live · Nobitex",
+  "faRaw": "لحظه‌ای · نوبیتکس",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 153,
+  "kind": "tr",
+  "fa": "هر ۶۰ ثانیه · CoinGecko",
+  "en": "Every 60 s · CoinGecko",
+  "faRaw": "هر ۶۰ ثانیه · CoinGecko",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 154,
+  "kind": "tr",
+  "fa": "در حال اتصال…",
+  "en": "Connecting…",
+  "faRaw": "در حال اتصال…",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 158,
+  "kind": "tr",
+  "fa": "اتصال برقرار نشد: ",
+  "en": "Connection failed: ",
+  "faRaw": "اتصال برقرار نشد: ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 172,
+  "kind": "tr",
+  "fa": "۲۰۰ ارز برتر + تتر تومانی",
+  "en": "Top 200 coins + USDT/Toman",
+  "faRaw": "۲۰۰ ارز برتر + تتر تومانی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 192,
+  "kind": "tr",
+  "fa": "به‌روزرسانی",
+  "en": "Refresh",
+  "faRaw": "به‌روزرسانی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 196,
+  "kind": "tr",
+  "fa": "به‌روزرسانی",
+  "en": "Refresh",
+  "faRaw": "به‌روزرسانی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 203,
+  "kind": "tr",
+  "fa": "ترس شدید",
+  "en": "Extreme fear",
+  "faRaw": "ترس شدید",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 204,
+  "kind": "tr",
+  "fa": "ترس",
+  "en": "Fear",
+  "faRaw": "ترس",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 205,
+  "kind": "tr",
+  "fa": "خنثی",
+  "en": "Neutral",
+  "faRaw": "خنثی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 206,
+  "kind": "tr",
+  "fa": "طمع",
+  "en": "Greed",
+  "faRaw": "طمع",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 207,
+  "kind": "tr",
+  "fa": "طمع شدید",
+  "en": "Extreme greed",
+  "faRaw": "طمع شدید",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 219,
+  "kind": "tr",
+  "fa": "ارزش کل بازار",
+  "en": "Market cap",
+  "faRaw": "ارزش کل بازار",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 225,
+  "kind": "tr",
+  "fa": "دامیننس بیت‌کوین",
+  "en": "BTC dominance",
+  "faRaw": "دامیننس بیت‌کوین",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt",
+  "line": 232,
+  "kind": "tr",
+  "fa": "ترس و طمع",
+  "en": "Fear & Greed",
+  "faRaw": "ترس و طمع",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Motion.kt",
+  "line": 157,
+  "kind": "tr",
+  "fa": "واچ‌لیست",
+  "en": "Watchlist",
+  "faRaw": "واچ‌لیست",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 69,
+  "kind": "tr",
+  "fa": "همه",
+  "en": "All",
+  "faRaw": "همه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 70,
+  "kind": "tr",
+  "fa": "فقط پراهمیت",
+  "en": "High impact",
+  "faRaw": "فقط پراهمیت",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 76,
+  "kind": "tr",
+  "fa": "امروز · ",
+  "en": "Today · ",
+  "faRaw": "امروز · ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 97,
+  "kind": "literal",
+  "fa": "\"به وقت تهران، از تقویم فدرال رزرو و BLS. ۱۰ دقیقه قبل از هر خبرِ زنگوله‌دار اعلان می‌گیری. \" +",
+  "en": "",
+  "faRaw": "\"به وقت تهران، از تقویم فدرال رزرو و BLS. ۱۰ دقیقه قبل از هر خبرِ زنگوله‌دار اعلان می‌گیری. \" +",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 98,
+  "kind": "literal",
+  "fa": "\"با آیکون ⏰ همان یادآور را در برنامه‌ی ساعت گوشی هم می‌گذاری (برای خبرهای ۲۴ ساعت آینده).\",",
+  "en": "",
+  "faRaw": "\"با آیکون ⏰ همان یادآور را در برنامه‌ی ساعت گوشی هم می‌گذاری (برای خبرهای ۲۴ ساعت آینده).\",",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 115,
+  "kind": "tr",
+  "fa": "روز",
+  "en": "days",
+  "faRaw": "روز",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 115,
+  "kind": "tr",
+  "fa": "ساعت",
+  "en": "hrs",
+  "faRaw": "ساعت",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 115,
+  "kind": "tr",
+  "fa": "دقیقه",
+  "en": "min",
+  "faRaw": "دقیقه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 115,
+  "kind": "tr",
+  "fa": "ثانیه",
+  "en": "sec",
+  "faRaw": "ثانیه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 117,
+  "kind": "tr",
+  "fa": "ساعت",
+  "en": "hrs",
+  "faRaw": "ساعت",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 117,
+  "kind": "tr",
+  "fa": "دقیقه",
+  "en": "min",
+  "faRaw": "دقیقه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 117,
+  "kind": "tr",
+  "fa": "ثانیه",
+  "en": "sec",
+  "faRaw": "ثانیه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 125,
+  "kind": "tr",
+  "fa": "انتشار بعدی",
+  "en": "Next release",
+  "faRaw": "انتشار بعدی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 152,
+  "kind": "literal",
+  "fa": "tr(\"+ \" + fa((sameTime - 1).toString()) + \" انتشار هم‌زمان\", \"+ {sameTime1} at the same time\"),",
+  "en": "",
+  "faRaw": "tr(\"+ \" + fa((sameTime - 1).toString()) + \" انتشار هم‌زمان\", \"+ ${sameTime - 1} at the same time\"),",
+  "args": [
+   "sameTime1"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 186,
+  "kind": "tr",
+  "fa": "پیش‌بینی ",
+  "en": "Forecast ",
+  "faRaw": "پیش‌بینی ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 187,
+  "kind": "tr",
+  "fa": "قبلی ",
+  "en": "Previous ",
+  "faRaw": "قبلی ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 192,
+  "kind": "tr",
+  "fa": "منتشر شد",
+  "en": "Released",
+  "faRaw": "منتشر شد",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 206,
+  "kind": "tr",
+  "fa": "برنامه‌ی ساعت پیدا نشد",
+  "en": "No Clock app found",
+  "faRaw": "برنامه‌ی ساعت پیدا نشد",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 209,
+  "kind": "tr",
+  "fa": "زنگ در برنامه‌ی ساعت",
+  "en": "Set in Clock app",
+  "faRaw": "زنگ در برنامه‌ی ساعت",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt",
+  "line": 215,
+  "kind": "tr",
+  "fa": "یادآور",
+  "en": "Reminder",
+  "faRaw": "یادآور",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 28,
+  "kind": "literal",
+  "fa": "private fun pct(p: Float): String = (p * 100).roundToInt().toString().let { tr(fa(it) + \"٪\", \"{it}%\") }",
+  "en": "",
+  "faRaw": "private fun pct(p: Float): String = (p * 100).roundToInt().toString().let { tr(fa(it) + \"٪\", \"$it%\") }",
+  "args": [
+   "it"
+  ]
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 47,
+  "kind": "tr",
+  "fa": "به‌روزرسانی برنامه",
+  "en": "App update",
+  "faRaw": "به‌روزرسانی برنامه",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 48,
+  "kind": "tr",
+  "fa": "نسخه‌ی نصب‌شده: ",
+  "en": "Installed version: ",
+  "faRaw": "نسخه‌ی نصب‌شده: ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 70,
+  "kind": "tr",
+  "fa": "نسخه‌ی جدید March",
+  "en": "New March version",
+  "faRaw": "نسخه‌ی جدید March",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 78,
+  "kind": "tr",
+  "fa": "بعداً",
+  "en": "Later",
+  "faRaw": "بعداً",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 85,
+  "kind": "tr",
+  "fa": "در حال بررسی…",
+  "en": "Checking…",
+  "faRaw": "در حال بررسی…",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 86,
+  "kind": "tr",
+  "fa": "آخرین نسخه نصب است ✅",
+  "en": "You're on the latest version ✅",
+  "faRaw": "آخرین نسخه نصب است ✅",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 89,
+  "kind": "tr",
+  "fa": "نسخه‌ی ",
+  "en": "Version ",
+  "faRaw": "نسخه‌ی ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 89,
+  "kind": "tr",
+  "fa": " آماده است",
+  "en": " is available",
+  "faRaw": " آماده است",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 92,
+  "kind": "tr",
+  "fa": "بهبودها و رفع اشکال",
+  "en": "Improvements and fixes",
+  "faRaw": "بهبودها و رفع اشکال",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 96,
+  "kind": "tr",
+  "fa": "در حال دانلود… ",
+  "en": "Downloading… ",
+  "faRaw": "در حال دانلود… ",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 105,
+  "kind": "tr",
+  "fa": "دانلود کامل شد. «نصب» را بزن؛ اگر اندروید اجازه‌ی نصب خواست، برای March روشنش کن و برگرد.",
+  "en": "Downloaded. Tap Install; if Android asks, allow installs from March and come back.",
+  "faRaw": "دانلود کامل شد. «نصب» را بزن؛ اگر اندروید اجازه‌ی نصب خواست، برای March روشنش کن و برگرد.",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 117,
+  "kind": "tr",
+  "fa": "بروزرسانی",
+  "en": "Update",
+  "faRaw": "بروزرسانی",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 119,
+  "kind": "tr",
+  "fa": "نصب",
+  "en": "Install",
+  "faRaw": "نصب",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 120,
+  "kind": "tr",
+  "fa": "تلاش دوباره",
+  "en": "Retry",
+  "faRaw": "تلاش دوباره",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 120,
+  "kind": "tr",
+  "fa": "بررسی دوباره",
+  "en": "Check again",
+  "faRaw": "بررسی دوباره",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt",
+  "line": 121,
+  "kind": "tr",
+  "fa": "بررسی نسخه‌ی جدید",
+  "en": "Check for updates",
+  "faRaw": "بررسی نسخه‌ی جدید",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt",
+  "line": 48,
+  "kind": "tr",
+  "fa": "ارزهای من",
+  "en": "My coins",
+  "faRaw": "ارزهای من",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt",
+  "line": 50,
+  "kind": "tr",
+  "fa": "با ستاره از تب بازار اضافه کن",
+  "en": "Add coins with the star on the Market tab",
+  "faRaw": "با ستاره از تب بازار اضافه کن",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt",
+  "line": 62,
+  "kind": "tr",
+  "fa": "یادآورهای خبری",
+  "en": "News reminders",
+  "faRaw": "یادآورهای خبری",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt",
+  "line": 64,
+  "kind": "tr",
+  "fa": "با زنگوله از تب اخبار اضافه کن",
+  "en": "Add reminders with the bell on the News tab",
+  "faRaw": "با زنگوله از تب اخبار اضافه کن",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt",
+  "line": 112,
+  "kind": "tr",
+  "fa": "حذف",
+  "en": "Remove",
+  "faRaw": "حذف",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt",
+  "line": 115,
+  "kind": "tr",
+  "fa": "تتر / تومان",
+  "en": "USDT / Toman",
+  "faRaw": "تتر / تومان",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/update/Updater.kt",
+  "line": 156,
+  "kind": "tr",
+  "fa": "باز کردن نصب‌کننده ممکن نشد",
+  "en": "Couldn't open the installer",
+  "faRaw": "باز کردن نصب‌کننده ممکن نشد",
+  "args": []
+ },
+ {
+  "file": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/update/Updater.kt",
+  "line": 202,
+  "kind": "tr",
+  "fa": "هنوز نسخه‌ای در گیت‌هاب منتشر نشده",
+  "en": "No release published on GitHub yet",
+  "faRaw": "هنوز نسخه‌ای در گیت‌هاب منتشر نشده",
+  "args": []
+ }
+]

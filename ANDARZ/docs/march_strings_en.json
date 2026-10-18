@@ -1,0 +1,741 @@
+{
+ "_note": "Reference only, not packaged. English wording of the ported March strings (K7).",
+ "strings": [
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt:140",
+   "fa": "تم: خودکار",
+   "en": "Theme: system",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt:140",
+   "fa": "تم: روشن",
+   "en": "Theme: light",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt:140",
+   "fa": "تم: تیره",
+   "en": "Theme: dark",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt:161",
+   "fa": "تومان",
+   "en": "Toman",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/MainActivity.kt:161",
+   "fa": "دلار",
+   "en": "USD",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/IranMarket.kt:29",
+   "fa": "نوبیتکس/والکس",
+   "en": "Nobitex/Wallex",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/IranMarket.kt:54",
+   "fa": "نوبیتکس",
+   "en": "Nobitex",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/IranMarket.kt:84",
+   "fa": "والکس",
+   "en": "Wallex",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt:40",
+   "fa": "اینترنت در دسترس نیست",
+   "en": "No internet connection",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt:41",
+   "fa": "زمان اتصال به {service} تمام شد",
+   "en": "{service} timed out",
+   "args": [
+    "service"
+   ]
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt:43",
+   "fa": "محدودیت درخواست {service}؛ کمی صبر کن",
+   "en": "{service} rate limit, please wait",
+   "args": [
+    "service"
+   ]
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt:44",
+   "fa": "دسترسی به {service} از این IP مسدود است",
+   "en": "{service} is blocked from this IP",
+   "args": [
+    "service"
+   ]
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt:45",
+   "fa": "خطای سرور {service} ({code})",
+   "en": "{service} server error ({code})",
+   "args": [
+    "service",
+    "code"
+   ]
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/Net.kt:47",
+   "fa": "خطای شبکه",
+   "en": "Network error",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/PriceHub.kt:139",
+   "fa": "خطای شبکه",
+   "en": "Network error",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/data/PriceHub.kt:306",
+   "fa": "تتر به تومان",
+   "en": "USDT in Toman",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt:73",
+   "fa": "زنگ هشدار قیمت",
+   "en": "Price alarm",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt:74",
+   "fa": "مثل ساعت زنگ‌دار: صفحه‌ی کامل، صدای آلارم و لرزش تا وقتی قطعش کنی",
+   "en": "Rings like an alarm clock: full screen, alarm sound and vibration until you stop it",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt:293",
+   "fa": "قطع زنگ",
+   "en": "Stop",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/AlarmRinger.kt:294",
+   "fa": "تعویق ۵ دقیقه",
+   "en": "Snooze 5 min",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt:43",
+   "fa": "در حال اتصال به بازار…",
+   "en": "Connecting to the market…",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt:53",
+   "fa": "تتر ",
+   "en": "USDT ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt:104",
+   "fa": "پایش زنده‌ی قیمت فعال است",
+   "en": "Live price monitor is on",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt:111",
+   "fa": "توقف",
+   "en": "Stop",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/LiveService.kt:122",
+   "fa": "پایش زنده (پس‌زمینه)",
+   "en": "Live monitor (background)",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:54",
+   "fa": "هشدار نوسان قیمت",
+   "en": "Price move alerts",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:55",
+   "fa": "اعلان فوری وقتی قیمت به آستانه‌ی تو می‌رسد",
+   "en": "Instant notification when a price crosses your threshold",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:144",
+   "fa": "اعلان‌های March فعال است",
+   "en": "March alerts are on",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:145",
+   "fa": "هر وقت ارزی در {label} بیش از {pct}٪ جابه‌جا شد، همین‌طور فوری خبرت می‌کنم.",
+   "en": "Whenever a coin moves more than {pct}% within {label}, you'll hear about it right away.",
+   "args": [
+    "label",
+    "pct"
+   ]
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:157",
+   "fa": "آزمایش زنگ هشدار",
+   "en": "Alarm test",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:158",
+   "fa": "وقتی قیمت به هدفت برسد گوشی همین‌طور زنگ می‌خورد. برای قطع، زنگ را قطع کن.",
+   "en": "This is how your phone rings when a price hits your target. Stop it to silence it.",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:178",
+   "fa": "، ",
+   "en": ", ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:194",
+   "fa": "قیمت الان ",
+   "en": "Now ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:195",
+   "fa": "تغییر ۲۴ ساعته: ",
+   "en": "24h change: ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:196",
+   "fa": "آستانه‌ی تو: ",
+   "en": "your threshold: ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:196",
+   "fa": "٪",
+   "en": "%",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:207",
+   "fa": "{symbol} به قیمت هدفت رسید",
+   "en": "{symbol} hit your target",
+   "args": [
+    "symbol"
+   ]
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:208",
+   "fa": "بالای ",
+   "en": "Above ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:208",
+   "fa": "زیر ",
+   "en": "Below ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:209",
+   "fa": "قیمت الان ",
+   "en": "now ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/PriceAlerts.kt:220",
+   "fa": "، ",
+   "en": ", ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/Reminders.kt:57",
+   "fa": "انتشار اخبار اقتصادی",
+   "en": "Economic releases",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/notify/Reminders.kt:75",
+   "fa": "{LEAD_MINUTES} دقیقه تا انتشار",
+   "en": "{LEAD_MINUTES} minutes to release",
+   "args": [
+    "LEAD_MINUTES"
+   ]
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlarmScreen.kt:90",
+   "fa": "مشاهده‌ی ارز",
+   "en": "Open coin",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlarmScreen.kt:98",
+   "fa": "قطع زنگ",
+   "en": "Stop",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:97",
+   "fa": "زنگ هشدار",
+   "en": "Alarm",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:99",
+   "fa": "وقتی هشدار می‌آید گوشی مثل ساعت زنگ‌دار زنگ می‌زند تا خودت قطعش کنی.",
+   "en": "When an alert fires, the phone rings like an alarm clock until you stop it.",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:108",
+   "fa": "زنگ از برنامه‌ی ساعت گوشی",
+   "en": "Ring through the Clock app",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:109",
+   "fa": "هشدار با تایمر برنامه‌ی ساعت پخش می‌شود، دقیقاً مثل زنگ بیدارباش. اگر ممکن نباشد، زنگ داخلی March پخش می‌شود.",
+   "en": "Uses the Clock app's timer alarm, just like a wake-up alarm. If that's not possible, March's own alarm rings.",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:117",
+   "fa": "برنامه‌ی ساعت سازگار پیدا نشد",
+   "en": "No compatible Clock app found",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:118",
+   "fa": "زنگ داخلی March استفاده می‌شود. می‌توانی Google Clock را نصب کنی.",
+   "en": "March's own alarm will be used. You can install Google Clock.",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:123",
+   "fa": "اجازه‌ی «نمایش روی برنامه‌های دیگر» را بده",
+   "en": "Allow \"Display over other apps\"",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:124",
+   "fa": "بدون این اجازه وقتی اپ بسته است اندروید نمی‌گذارد ساعت باز شود و زنگ داخلی پخش می‌شود. روی شیائومی «نمایش پنجره‌های بازشو در پس‌زمینه» را هم روشن کن.",
+   "en": "Without it Android won't let the closed app open the Clock app, so March's own alarm rings. On Xiaomi also enable \"Display pop-up windows while running in the background\".",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:132",
+   "fa": "اجازه‌ی «اعلان تمام‌صفحه» را بده",
+   "en": "Allow full-screen notifications",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:133",
+   "fa": "تا زنگ روی صفحه‌ی قفل نمایش داده شود.",
+   "en": "So the alarm shows over the lock screen.",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:138",
+   "fa": "اجازه‌ی «آلارم و یادآور» را بده",
+   "en": "Allow alarms & reminders",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:139",
+   "fa": "برای تعویق دقیق و زنگ مطمئن.",
+   "en": "For exact snooze and reliable ringing.",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/AlertsScreen.kt:146",
+   "fa": "آزمایش زنگ هشدار",
+   "en": "Test the alarm",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Format.kt:71",
+   "fa": " ت",
+   "en": " T",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:113",
+   "fa": "چیزی پیدا نشد",
+   "en": "Nothing found",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:128",
+   "fa": "جستجوی نماد یا نام (مثلاً BTC یا تتر)",
+   "en": "Search symbol or name (e.g. BTC)",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:133",
+   "fa": "پاک کردن",
+   "en": "Clear",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:151",
+   "fa": "لحظه‌ای · بایننس",
+   "en": "Live · Binance",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:152",
+   "fa": "لحظه‌ای · نوبیتکس",
+   "en": "Live · Nobitex",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:153",
+   "fa": "هر ۶۰ ثانیه · CoinGecko",
+   "en": "Every 60 s · CoinGecko",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:154",
+   "fa": "در حال اتصال…",
+   "en": "Connecting…",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:158",
+   "fa": "اتصال برقرار نشد: ",
+   "en": "Connection failed: ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:172",
+   "fa": "۲۰۰ ارز برتر + تتر تومانی",
+   "en": "Top 200 coins + USDT/Toman",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:192",
+   "fa": "به‌روزرسانی",
+   "en": "Refresh",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:196",
+   "fa": "به‌روزرسانی",
+   "en": "Refresh",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:203",
+   "fa": "ترس شدید",
+   "en": "Extreme fear",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:204",
+   "fa": "ترس",
+   "en": "Fear",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:205",
+   "fa": "خنثی",
+   "en": "Neutral",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:206",
+   "fa": "طمع",
+   "en": "Greed",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:207",
+   "fa": "طمع شدید",
+   "en": "Extreme greed",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:219",
+   "fa": "ارزش کل بازار",
+   "en": "Market cap",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:225",
+   "fa": "دامیننس بیت‌کوین",
+   "en": "BTC dominance",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/MarketScreen.kt:232",
+   "fa": "ترس و طمع",
+   "en": "Fear & Greed",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/Motion.kt:157",
+   "fa": "واچ‌لیست",
+   "en": "Watchlist",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:69",
+   "fa": "همه",
+   "en": "All",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:70",
+   "fa": "فقط پراهمیت",
+   "en": "High impact",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:76",
+   "fa": "امروز · ",
+   "en": "Today · ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:115",
+   "fa": "روز",
+   "en": "days",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:115",
+   "fa": "ساعت",
+   "en": "hrs",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:115",
+   "fa": "دقیقه",
+   "en": "min",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:115",
+   "fa": "ثانیه",
+   "en": "sec",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:117",
+   "fa": "ساعت",
+   "en": "hrs",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:117",
+   "fa": "دقیقه",
+   "en": "min",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:117",
+   "fa": "ثانیه",
+   "en": "sec",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:125",
+   "fa": "انتشار بعدی",
+   "en": "Next release",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:186",
+   "fa": "پیش‌بینی ",
+   "en": "Forecast ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:187",
+   "fa": "قبلی ",
+   "en": "Previous ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:192",
+   "fa": "منتشر شد",
+   "en": "Released",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:206",
+   "fa": "برنامه‌ی ساعت پیدا نشد",
+   "en": "No Clock app found",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:209",
+   "fa": "زنگ در برنامه‌ی ساعت",
+   "en": "Set in Clock app",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/NewsScreen.kt:215",
+   "fa": "یادآور",
+   "en": "Reminder",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:47",
+   "fa": "به‌روزرسانی برنامه",
+   "en": "App update",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:48",
+   "fa": "نسخه‌ی نصب‌شده: ",
+   "en": "Installed version: ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:70",
+   "fa": "نسخه‌ی جدید March",
+   "en": "New March version",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:78",
+   "fa": "بعداً",
+   "en": "Later",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:85",
+   "fa": "در حال بررسی…",
+   "en": "Checking…",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:86",
+   "fa": "آخرین نسخه نصب است ✅",
+   "en": "You're on the latest version ✅",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:89",
+   "fa": "نسخه‌ی ",
+   "en": "Version ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:89",
+   "fa": " آماده است",
+   "en": " is available",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:92",
+   "fa": "بهبودها و رفع اشکال",
+   "en": "Improvements and fixes",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:96",
+   "fa": "در حال دانلود… ",
+   "en": "Downloading… ",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:105",
+   "fa": "دانلود کامل شد. «نصب» را بزن؛ اگر اندروید اجازه‌ی نصب خواست، برای March روشنش کن و برگرد.",
+   "en": "Downloaded. Tap Install; if Android asks, allow installs from March and come back.",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:117",
+   "fa": "بروزرسانی",
+   "en": "Update",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:119",
+   "fa": "نصب",
+   "en": "Install",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:120",
+   "fa": "تلاش دوباره",
+   "en": "Retry",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:120",
+   "fa": "بررسی دوباره",
+   "en": "Check again",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/UpdateUi.kt:121",
+   "fa": "بررسی نسخه‌ی جدید",
+   "en": "Check for updates",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt:48",
+   "fa": "ارزهای من",
+   "en": "My coins",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt:50",
+   "fa": "با ستاره از تب بازار اضافه کن",
+   "en": "Add coins with the star on the Market tab",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt:62",
+   "fa": "یادآورهای خبری",
+   "en": "News reminders",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt:64",
+   "fa": "با زنگوله از تب اخبار اضافه کن",
+   "en": "Add reminders with the bell on the News tab",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt:112",
+   "fa": "حذف",
+   "en": "Remove",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/ui/WatchScreen.kt:115",
+   "fa": "تتر / تومان",
+   "en": "USDT / Toman",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/update/Updater.kt:156",
+   "fa": "باز کردن نصب‌کننده ممکن نشد",
+   "en": "Couldn't open the installer",
+   "args": []
+  },
+  {
+   "at": "Bazaaryar/app/src/main/java/ir/bazaaryar/app/update/Updater.kt:202",
+   "fa": "هنوز نسخه‌ای در گیت‌هاب منتشر نشده",
+   "en": "No release published on GitHub yet",
+   "args": []
+  }
+ ]
+}

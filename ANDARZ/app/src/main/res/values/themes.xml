@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Compose owns the look; these themes only cover the window before the first frame and the splash
+  (§6.7). No Persian text lives here: the label is the generated string resource (trap 8).
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.Andarz" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/andarz_window_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="27">shortEdges</item>
+    </style>
+
+    <!-- core-splashscreen: background `bg`, the alef mark, no animation (§6.7). -->
+    <style name="Theme.Andarz.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/andarz_window_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_mark</item>
+        <item name="postSplashScreenTheme">@style/Theme.Andarz</item>
+    </style>
+
+</resources>

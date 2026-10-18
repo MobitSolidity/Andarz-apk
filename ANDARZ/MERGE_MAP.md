@@ -1,0 +1,110 @@
+# MERGE_MAP.md — every March file, and what happened to it
+
+One row per file of `march/` (read-only reference, K1). Paths are relative to
+`march/Bazaaryar/app/src/main/java/ir/bazaaryar/app/` unless they start with `res/`, `app/` or `Bazaaryar/`.
+
+**Treatments** (K5) — `PORT` copy, change package and imports, keep the logic · `ADAPT` keep the logic,
+change the structure · `REIMPLEMENT` same information and behaviour, built from Andarz components ·
+`CONVERT` change the data format · `DROP` do not carry over.
+
+**Status** — `todo` · `partial` (what is done is named) · `done`.
+
+A suspected March defect goes in the Notes cell and is **not** silently fixed (D-M23).
+
+Acceptance A12 is met when no row says `todo` and every row has a reason.
+
+---
+
+## Data layer
+
+| March file | Treatment | Goes to | Status | Notes |
+|---|---|---|---|---|
+| `data/Models.kt` | ADAPT | `:market` `model/` | todo (MK1) | Keep `Coin`, `LiveQuote`, `UsdtRate`, `MarketOverview`, `LiveMode`, `MarketState`, `Source`, `AlertSettings`, `CoinRule` and the enums. Every `tr()` and `label` is removed: labels become content keys (law 3). Defaults per D-M08 (alerts, monitor, ring all off). `EconEvent` moves to the calendar loader (see `data/Events.kt`). |
+| `data/Net.kt` | ADAPT | `:market` `net/MarketHttp.kt`, `net/EgressInterceptor.kt` | partial | **M0 done:** the client with March's timeouts (connect 10 s, read 20 s, ping 20 s), `retrying` (2 attempts, 1.5 s pause), the localized `friendly()` replaced by typed `MarketError`/`toMarketError`, and the new egress interceptor of K4. **MK1:** the `num()` helper travels with the parsers that use it. |
+| `data/CoinRepository.kt` | PORT | `:market` | todo (MK1) | Top-200 markets with the 7-day sparkline, global overview, Fear & Greed. Parsers become pure `String -> model` functions testable on the JVM; `org.json` stays and is added as a **test** dependency (D-M28). |
+| `data/BinanceStream.kt` | PORT | `:market` | todo (MK1) | miniTicker WebSocket. The SUBSCRIBE-frame check of K4 is already written (`net.WsPolicy`, M0) and the port must build its frames through it. |
+| `data/IranMarket.kt` | PORT | `:market` | todo (MK1) | USDT/Toman from Nobitex, fallback Wallex. Its `tr()` texts become typed errors (`IRAN_PRIMARY`, `IRAN_FALLBACK`). |
+| `data/PriceHistory.kt` | PORT | `:market` | todo (MK1) | Session samples and range queries behind the 5/15/60-minute windows. |
+| `data/PriceHub.kt` | ADAPT | `:market` | todo (MK1) | The singleton becomes a class built by `MarketModule` with client, prefs, clock and dispatchers injected, so tests drive it with virtual time. Keep every loop and the cadence of K5.2. Add the consent and master-switch gate, drop the language handling, add the `extraSymbols` setter (MK3). |
+| `data/Prefs.kt` | ADAPT | `:market` `MarketPrefs.kt` | partial | DataStore renamed to `market` (D-M17). **M0 done:** the store plus `marketEnabled` and `consentAt`. **MK1/MK2:** `watch`, `alarms`, `toman`, `alert_*`, `user_name`, `coin_rules`. **MK3:** `exportJson`/`importJson`. Dropped: `theme` and `lang` — Andarz owns both. |
+| `data/Events.kt` | CONVERT | `:market` `assets/market_calendar.json` + a loader | todo (MK2) | JSON `{validUntil, events:[{id, at (ISO-8601 with +03:30), country, title, titleEn?, impact, previous, forecast}]}`. Ids are unique per occurrence (e.g. `2026-10-cpi`) so a refreshed list never re-arms an old reminder. The flag-emoji map is dropped and the country becomes an ISO code chip (K6.7). |
+
+## Notifications, alarms, background
+
+| March file | Treatment | Goes to | Status | Notes |
+|---|---|---|---|---|
+| `notify/PriceAlerts.kt` | ADAPT | `:market` | todo (MK2) | Split into a **pure evaluator** (state, history, settings, rules, watch, now → actions) and a **dispatcher**. Text through `MarketTexts`. Keep thresholds, windows, cooldown, scope, direction, one-shot targets, ring modes, at most 3 individual alerts per round plus one summary, and the test buttons. The emoji in the titles become ▲ ▼ and plain words (K6.7). |
+| `notify/AlarmRinger.kt` | PORT | `:market` | todo (MK2) | Also holds `AlarmReceiver` and `ClockApp`. Text through `MarketTexts`. `ClockApp.setAlarm` keeps `ZoneId.systemDefault()`: the Clock app reads hour and minute in device time, not in the app's zone setting. |
+| `notify/ClockRing.kt` | PORT | `:market` | todo (MK2) | `appVisible` is set by `:app`'s lifecycle observer through `MarketModule`. |
+| `notify/LiveService.kt` | ADAPT | `:market` | todo (MK2) | Opt-in only (D-M08). Texts and the open intent come from `MarketHost`. Posts with the notification tag `market` (D-M24). |
+| `notify/Reminders.kt` | ADAPT | `:market` | todo (MK2) | Holds `Reminders`, `ReminderReceiver`, `BootReceiver`. Events come from the calendar loader. `BootReceiver` restores market state only — reminders always, the service only when enabled — after a reboot and after an app update. The 10-minute lead stays. |
+| `AlarmActivity.kt`, `ui/AlarmScreen.kt` | ADAPT | `:market` | todo (MK2) | Its own minimal dark Compose screen with no dependency on `:app`'s theme. Labels through `MarketTexts`. "Open coin" uses `MarketHost.openIntent`. `taskAffinity ${applicationId}.alarm`, `showWhenLocked`, `turnScreenOn`, `excludeFromRecents`. It lives outside the app lock because it shows market data only (K6.11). |
+
+## Screens
+
+| March file | Treatment | Goes to | Status | Notes |
+|---|---|---|---|---|
+| `ui/MarketScreen.kt` | REIMPLEMENT | `:app` `ui/market/PricesScreen` | todo (MK1) | Header (live-mode label, refresh, data age), overview strip (market cap, BTC dominance, Fear & Greed), search, coin rows. Built from Andarz components; the disclaimer `mkt.disclaimer` sits at the bottom. |
+| `ui/CoinSheet.kt` | REIMPLEMENT | `:app` `ui/market/CoinSheet` | todo (MK1 read-only, MK2 rules) | Stats, range chart, star (MK1); per-coin rule editor with percent threshold and above/below targets (MK2). |
+| `ui/WatchScreen.kt` | REIMPLEMENT | `:app` `ui/market/MyCoinsScreen` | todo (MK1) | Starred coins as cards; keeps the block of reminded releases. |
+| `ui/NewsScreen.kt` | REIMPLEMENT | `:app` `ui/market/NewsScreen` | todo (MK2) | Events by day, impact filter, next-release countdown, reminder bell, Clock-app alarm for releases within 24 h, "released" state, plus the expired state of K6.10. Works with the master switch off, because the calendar is local. |
+| `ui/AlertsScreen.kt` | REIMPLEMENT | `:app` `ui/market/AlertsScreen` | todo (MK2) | Alert settings, per-coin rules, permission rows (notifications, full-screen, exact alarms, overlay) with their settings intents, test buttons. Shows its settings with the master switch off plus the note `mkt.link.needMarket`. |
+| `ui/Format.kt` | REIMPLEMENT | `:app` `ui/market/MarketFmt` | todo (MK1) | `MarketFmt` on top of `Fmt` (D-M14): March's price tiers (≥1000 → 0 decimals, ≥1 → 2, ≥0.01 → 4, below that three significant digits, at most 10), market cap with T/B/M, percent with sign **and** arrow. Honours the digit and calendar settings; prices, symbols and hosts are LTR isolates. Input parsing follows §3.10, never March's `parseNum`. |
+| `ui/Components.kt`, `ui/Motion.kt` | DROP | — | done | Andarz has its own components (§6.4) and motion tokens (§6.6); D-M13. |
+| `ui/Theme.kt`, `ui/I18n.kt` | DROP | — | done | Andarz owns theme and language. `I18n.kt`'s `tr()` is exactly what law 3 forbids; its Persian half is extracted into `content_market_fa.json` (K7), its English half into `docs/march_strings_en.json` (D-M11). |
+| `ui/UpdateUi.kt`, `update/Updater.kt` | DROP | — | done | D-M09: no in-app updater, nothing that installs a package. |
+| `MainActivity.kt`, `MainViewModel.kt` | DROP | — | partial | Only the behaviours carry over: notification permission per §7; `EXTRA_COIN` becomes `MarketTarget.Coin`; hub demand by lifecycle (K6.4); `ClockRing.appVisible` from a lifecycle observer; channels created at app start; saved reminders re-registered at start. **M0 done:** `MarketTarget` and the `MarketHost.openIntent` contract. Rest in MK1/MK2. |
+
+## Manifest, resources, build
+
+| March file | Treatment | Goes to | Status | Notes |
+|---|---|---|---|---|
+| `app/src/main/AndroidManifest.xml` | ADAPT | `market/src/main/AndroidManifest.xml` | partial | **M0 done:** the K8.1 permission set and the `SET_TIMER`/`SET_ALARM` queries. **MK2:** `AlarmActivity`, the three receivers and `LiveService` with its `PROPERTY_SPECIAL_USE_FGS_SUBTYPE` — declared only once their classes exist, or lint's `MissingClass` fails the build (D-M36). **Dropped:** `REQUEST_INSTALL_PACKAGES`, the update `FileProvider`, the launcher activity, and the application attributes `allowBackup`/`theme`/`icon`. `usesCleartextTraffic="false"` moves to `:app`, where application attributes belong (D-M35). |
+| `res/drawable/ic_stat_pulse.xml` | PORT | `:market` as `ic_stat_market` | todo (MK2) | Status-bar icon: monochrome with transparency. |
+| `res/drawable/ic_launcher.xml`, `ic_launcher_foreground.xml` | DROP | — | done | Andarz brand assets (§6.7): the alef mark. |
+| `res/mipmap-anydpi-v26/ic_launcher.xml` | DROP | — | done | Same. |
+| `res/values/colors.xml` | DROP | — | done | Colours come from `spec/andarz_design_tokens.json` (D-M13). |
+| `res/values/themes.xml`, `res/values-night/themes.xml` | DROP | — | done | Andarz theme; dark is the default (law 9). |
+| `res/values/strings.xml` | DROP | — | done | The app label is a generated string resource built from `meta.app.name` of the content JSON (Appendix C trap 8). |
+| `res/xml/update_paths.xml` | DROP | — | done | Belonged to the updater (D-M09). |
+| `app/build.gradle.kts` | DROP | — | done | Reference only, for the dependency set (Compose, DataStore, coroutines, core-ktx, OkHttp). Not carried over: the signing block, `fetchFonts` (K7 forbids a build-time font download — see D-M34), `baseVersion` and the CI versioning. |
+| `app/proguard-rules.pro` | DROP | — | done | Andarz owns the build setup. |
+| `Bazaaryar/build.gradle.kts`, `settings.gradle.kts`, `gradle.properties`, `gradle/wrapper/gradle-wrapper.properties`, `.gitignore` | DROP | — | done | Same. |
+| `Bazaaryar/ci/build-and-release.yml`, `Bazaaryar/.github/`, `.github/workflows/build-apk.yml` | DROP | — | done | K8.6: no CI workflow and no release automation is created. |
+| `Bazaaryar/ci/march-ci.jks.b64` | DROP | — | done | **A signing key committed to a public repository.** Treated as compromised: never decoded, copied or reused, and its alias is not reused (D-M10, O-2). |
+| `Bazaaryar-android_2.zip` | DROP | — | done | Never copied (K1, K8.6). *Not present in this clone.* |
+| `Bazaaryar/README.md` | DROP | — | done | Reference for the data-source facts only; its updater and CI sections are obsolete. |
+
+## Files in `march/` that are not March code
+
+| File | Treatment | Status | Notes |
+|---|---|---|---|
+| `march/KICKOFF_MESSAGE.txt` | DROP | done | A copy of the kit's own kickoff message; the authoritative copy is `ANDARZ/KICKOFF_MESSAGE.txt`. |
+| `march/اندرز — معرفی‌نامه و پرامپت ساخت اپلیکیشن.docx` / `.pdf` | DROP | done | The owner's own source documents for the constitution and the prompt. Not code; the delivered `spec/` files are the inputs (§0.2). |
+
+---
+
+## Behaviour that must survive the port unchanged (K5.2)
+
+Checked off when the owning milestone proves it with a test. None of it is redesigned (D-M23).
+
+| Behaviour | Milestone | Status |
+|---|---|---|
+| CoinGecko top 200 every 60 s on screen, every 5 min in background, back-off 2 min on HTTP 429 | MK1 | todo |
+| Nobitex (fallback Wallex) USDT/Toman every 10 s; overview every 5 min | MK1 | todo |
+| Binance ticks ~1 s; Nobitex prices when the socket has been quiet for 15 s; history samples every 5 s; a quote older than 10 min is unused | MK1 | todo |
+| Background-only runs stream watch-list and rule coins only | MK1 | todo |
+| Alert windows 5 min / 15 min / 1 h / 24 h; per-coin percent override; direction up/down/both; cooldown; scope watch-list or all; include USDT/Toman; one-shot absolute targets; ring modes off/targets/all; ≤ 3 individual alerts per round plus one summary; name in the greeting | MK2 | todo |
+| Ringing: looping alarm tone on the ALARM stream, repeating vibration, partial wake lock, full-screen over the lock screen, Stop and Snooze 5 min, auto-stop after 3 min, alarm volume raised to a 70 % floor and restored | MK2 | todo |
+| Clock app first (a 1-second timer, no UI) when allowed; the app's own alarm as the fallback, so the phone always rings | MK2 | todo |
+| Calendar: sorted by time, impact 1–3, countdown, reminder 10 min before (inexact while idle), Clock-app alarm only within 24 h, "released" state, filter all/high, grouping by day, counter for simultaneous releases | MK2 | todo |
+| Live monitor: foreground service of type `specialUse` with a Stop action, notification refreshed at most every 20 s, restarted after boot only when enabled | MK2 | todo |
+| Default stars: `bitcoin`, `ethereum`, `solana`, `ripple`, `usdt-irt` | MK1 | todo |
+
+## Suspected March defects (flagged, not fixed — D-M23)
+
+| Where | Observation | Decision |
+|---|---|---|
+| `data/PriceHub.kt` `wantedSymbols()` | The symbol set is recomputed every 10 s in a watchdog coroutine that throws `Resubscribe` to restart the socket. A set that flaps between two values can resubscribe repeatedly. | Ported as is. Worth a note once MK1 drives the hub with virtual time; not changed as part of the port. |
+| `notify/PriceAlerts.kt` `firedTargets` | The one-shot guard is an in-memory `HashSet`, so a process restart can fire the same target again before `clearTarget` has been written. | Ported as is; `MarketPrefs` already clears the target, so the window is small. Re-check in MK2. |
+| `data/PriceHub.kt` `compose()` | A live quote is accepted only when it is within 30 % of the CoinGecko price. A genuine 30 %+ move would be ignored until the next CoinGecko poll. | Deliberate sanity check in March (same-ticker tokens); kept. |

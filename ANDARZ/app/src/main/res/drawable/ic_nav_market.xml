@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bar chart: the Market tab. Drawn locally because material-icons-extended is not added (K7). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?android:attr/colorControlNormal">
+    <path
+        android:pathData="M4,13h3v7H4z"
+        android:fillColor="@android:color/white" />
+    <path
+        android:pathData="M10.5,8h3v12h-3z"
+        android:fillColor="@android:color/white" />
+    <path
+        android:pathData="M17,4h3v16h-3z"
+        android:fillColor="@android:color/white" />
+</vector>

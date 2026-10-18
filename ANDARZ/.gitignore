@@ -1,0 +1,18 @@
+build/
+.gradle/
+.idea/
+local.properties
+*.jks
+*.keystore
+keystore.properties
+.kotlin/
+captures/
+.externalNativeBuild/
+.cxx/
+*.iml
+.DS_Store
+
+# Copied from spec/ at build time by :app:prepareContentAssets (2.2). The spec files are the source of
+# truth; a tracked copy would be a second one that can drift.
+app/src/main/assets/content_fa.json
+app/src/main/assets/design_tokens.json

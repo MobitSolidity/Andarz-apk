@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Calculator: the Calculator tab. Drawn locally because material-icons-extended is not added (K7). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?android:attr/colorControlNormal">
+    <path
+        android:pathData="M6,2h12a2,2 0 0 1 2,2v16a2,2 0 0 1 -2,2H6a2,2 0 0 1 -2,-2V4a2,2 0 0 1 2,-2zM6,4v16h12V4z"
+        android:fillColor="@android:color/white" />
+    <path
+        android:pathData="M7.5,5.5h9v3h-9z"
+        android:fillColor="@android:color/white" />
+    <path
+        android:pathData="M7.5,11h2.5v2.5h-2.5zM10.75,11h2.5v2.5h-2.5zM14,11h2.5v2.5h-2.5zM7.5,14.75h2.5v2.5h-2.5zM10.75,14.75h2.5v2.5h-2.5zM14,14.75h2.5v2.5h-2.5z"
+        android:fillColor="@android:color/white" />
+</vector>

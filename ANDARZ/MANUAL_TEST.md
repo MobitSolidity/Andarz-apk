@@ -1,0 +1,109 @@
+# MANUAL_TEST.md — acceptance script
+
+Every line is observable on a device. Run it on Android 8 (API 26) and on a current Android.
+Items 1–24 are §12 of `ANDARZ_MASTER_PROMPT.md`; A1–A12 are K11 of `KICKOFF_MESSAGE.txt`.
+
+**Status column** — `pending` nothing to run yet · `blocked` needs a toolchain or device this machine does
+not have (see D-M33) · `pass` / `fail` with the date and what was observed.
+
+> **What has run, as of 2026-10-15.** The toolchain is installed and `./gradlew build` and
+> `./gradlew verifyGuards` are green: 29 unit tests pass (13 egress, 3 zero-traffic, 10 content, plus
+> lint), and all seven Gradle guards were each proven to fail on a planted violation — the table is in
+> `DECISIONS.md`. A debug APK builds.
+>
+> **No emulator or device is available**, so every row below that needs a running app is still `blocked`
+> and none is ticked (K12). The rows a build alone can answer are marked `partial` with what was checked.
+
+---
+
+## Formulas and rules
+
+| # | Step | Expected | Status |
+|---|---|---|---|
+| 1 | Wizard, calculator and journal with the worked example: equity 2000, LONG, entry 100, SL 96, TP 108, leverage 5 | `sld` 4٪, R:R 2, risk $20, position $500, margin $100 (5٪), liquidation 80.50, liq÷SL 4.88×, allowed. Close at 108 with fee 0.6 → gross 40, net 39.40, R 1.97, equity 2039.40, verdict `YES`, compliant. Stop at 96, same fee → net −20.60, R −1.03 | blocked |
+| 2 | Enter a plan that breaks several rules at once | Gate reasons appear in the fixed order DIRECTION, CHECKLIST, LEVERAGE, RR, MARGIN, LIQUIDATION, each with its number and its article; limits compare after 4-decimal rounding (R:R exactly 1.5 passes) | blocked |
+| 3 | Confirm entries with actual sizes just over the cap, up to `Risk_Max`, and far above it | Verdicts `YES`, `GRADE_A_ONLY` (grade-A sizing allowed) or `OVER_CAP` (not allowed), `RED_LINE` above `Risk_Max`; a trade entered through a lock is non-compliant | blocked |
+| 4 | Close a trade with two legs and a fee | Gross is the sum over legs, one total fee, R against the **initial** stop; the equity curve moves only by trade results | blocked |
+| 5 | Insights for a period | KPIs, statuses and break-even win rate match the vectors; the period filters on the **exit** date | blocked |
+| 6 | Stop out once, then twice, then enter a fourth trade in a day | Entry blocked for `Cooldown_Min` 30 minutes; two consecutive stop-outs end the day; the fourth entry of the day is blocked by `TRADE_CAP` | blocked |
+| 7 | Lose 3٪ in a day, 6٪ in a week, 10٪ from the peak | Daily lock until the next local midnight; weekly lock until Saturday **and** a WEEKLY review of that week; drawdown lock ≥ 7 days **and** a review, then risk 0.5٪ for the next 20 trades | blocked |
+| 8 | Record a violation; then three violations inside 30 days | 48 h pause, a report of ≥ 20 characters required, and closing the position while it is still open; three events inside the window cut risk to 0.5٪ for 20 trades | blocked |
+| 9 | Close a trade at R > 3; use a brand-new setup; promote a setup | 24 h hold on raising risk and on grade-A sizing; a new setup trades at 0.25٪ for 20 trades; promotion needs 30 closed real trades with positive expectancy | blocked |
+| 10 | Change a parameter outside and inside a review session | Blocked by an open position and for 2 h after a losing close; tightening applies at once, loosening after 24 h; every change carries a reason and an audit row | blocked |
+
+## Journal features (parity with the Excel workbook)
+
+| # | Step | Expected | Status |
+|---|---|---|---|
+| 11 | Open Rules | All 45 parameters are visible; all are editable except `Chk_N` (locked) and `Start_Equity` (through the ledger baseline); a change moves every screen and every clause number | blocked |
+| 12 | Record one full trade | Symbol, side, kind, setup, higher-timeframe trend, 8-item checklist, emotion, equity, entry, SL, TP, leverage, order type, notional, exit legs, fee, reason, violations, mistake, emotion after, lesson, screenshots and events are all stored | blocked |
+| 13 | Open Today | Six dashboard gauges, the open-positions list, the obligations list and the advice of the day are present | blocked |
+| 14 | Run each review type | Daily, weekly, monthly and drawdown reviews exist; the monthly review proposes and records the withdrawal; the ledger holds baseline, deposits, withdrawals and adjustments | blocked |
+| 15 | Open setups, watch-list, constitution | Setups with the promotion rule; watch-list capped at 10; the mistake and violation lists; the security checklist; the constitution reader with live numbers and the pledge | blocked |
+| 16 | Export and import, offline | CSV in the Excel profile and the full profile, JSON export, CSV import with a preview, the share note, and encrypted backup and restore all work with the network off | blocked |
+
+## Experience and quality
+
+| # | Step | Expected | Status |
+|---|---|---|---|
+| 17 | Switch theme, digits and calendar | Dark is the default; light and system work; RTL is correct; Persian and Latin digits and Jalali/Gregorian display work on every screen | blocked |
+| 18 | Close a winning and a losing trade | The same neutral result card; no confetti, no streaks, no praise | blocked |
+| 19 | 200٪ font, TalkBack, reduced motion on Today, wizard, trade detail, Journal | Nothing is clipped or overlapping; every control is announced; with animations removed nothing moves | blocked |
+| 20 | Open every chart | The x axis runs left → right; a table view is available for screen readers | blocked |
+
+## Security and privacy
+
+| # | Step | Expected | Status |
+|---|---|---|---|
+| 21 | Inspect the release APK (as amended by K2) | `INTERNET` appears **only** through `:market`'s manifest and every guard of K8.4 is green; no analytics, crash or Play Services dependency; `allowBackup=false` | blocked |
+| 22 | Turn the app lock on | Biometric and PIN with the attempt policy (5 free, then 30 s doubling to 30 min); `FLAG_SECURE` hides the app in recents; no journal content is composed while locked | blocked |
+| 23 | Back up, then restore with a wrong password and a corrupted file | AES-256-GCM with PBKDF2 passes the crypto vectors; a wrong password, a flipped tag bit, a truncated file and a bad magic each fail with their own message and change nothing | blocked |
+| 24 | `git grep -nP "[\\x{0600}-\\x{06FF}]" -- "*.kt"` | No hit. All wording comes from the content JSON; `MISSING_COPY.md` is empty or explained | blocked |
+
+---
+
+## Market additions (K11)
+
+| # | Step | Expected | Status |
+|---|---|---|---|
+| A1 | Fresh install; never open Market. Use every journal flow with the network on and off, while watching connections | **Zero** connections. Record how it was checked: `adb shell ss -tnp` / a proxy with the device pointed at it / a firewall log. Journal, engine, backup and every non-Market screen work offline | blocked |
+| A2 | Inspect the merged release manifest | It equals the K8.1 allowlist exactly, plus the three recorded library entries of D-M40; the install-packages permission is absent; `allowBackup=false` | **partial** - guard 1 asserts all of this on every build and prints the merged set; a device install is still unverified |
+| A3 | First open of Market | Prices shows the off state (`mkt.off.*`); its action opens the consent sheet; **"not now"** leaves Market off and silent; **"accept"** turns Market on and starts the hub. With the switch off, News and its release reminders still work | blocked |
+| A4 | Prices with Market on | Top-200 list with rank, price and 24 h change; search by symbol and by name; star; the USDT/Toman card; the overview strip (market cap, BTC dominance, Fear & Greed); the USD/Toman toggle; refresh; the live-mode label; the offline state with the age of the last data; one typed error per service | blocked |
+| A5 | Coin sheet | MK1: stats, range chart, star. MK2: per-coin rule with a percent threshold and above/below targets | blocked |
+| A6 | Alerts | A threshold alert respects window, direction, cooldown and scope; target alerts fire once; each ring mode behaves; the Clock-app path and the own-alarm fallback both ring; Stop, Snooze 5 min, auto-stop at 3 min; it rings over the lock screen; tapping opens the coin **after** the app lock | blocked |
+| A7 | News | Events grouped by day, impact filter, countdown to the next release, reminder 10 min before, Clock-app alarm offered within 24 h, the "released" state, and the expired state after `validUntil` | blocked |
+| A8 | Monitor | Off by default; on shows the foreground notification with Stop; it survives a reboot only when enabled; off leaves no open socket | blocked |
+| A9 | Isolation | Each planted violation of K8.4 fails the build; `git grep` finds no `ir.andarz.engine` or `ir.andarz.data` import under `market/`, and no `ir.andarz.market` import under `engine/` or `data/` | **pass (2026-10-15)** - all seven plants failed as expected (guard log in `DECISIONS.md`); the import grep is clean |
+| A10 | Voice | No emoji; no English UI text; no claim that the app has no internet; no hype wording; no "March" or "Bazaaryar" in any shipped string except `mkt.about.credit` | blocked |
+| A11 | Journal intact | Items 1–24 above pass and every golden vector passes; the diff of `engine/` and `data/` between the end of M4 and the end of the project holds only what the milestones and MK3 require | blocked |
+| A12 | `MERGE_MAP.md` | No row says `todo`; every March source and resource file is ported, adapted, reimplemented, converted or dropped, with a reason | **in progress** — the map is complete, the rows are being closed per milestone |
+
+---
+
+## Device checklist for the ringing features (MK2)
+
+Only a real phone can show these. Each one needs the matching switch turned on first.
+
+| Step | Expected | Status |
+|---|---|---|
+| Alert rings through the phone's Clock app | A 1-second timer is handed over with no UI; the phone rings; the alert details stay in a normal notification | pending (MK2) |
+| Clock-app path unavailable → own alarm | The app's own full-screen alarm rings instead, so the phone always rings | pending (MK2) |
+| Ring over the lock screen | `AlarmActivity` appears over the lock screen, turns the screen on, and is not in recents | pending (MK2) |
+| Snooze | Silences now and rings again after 5 minutes | pending (MK2) |
+| Auto-stop | Ringing stops by itself after 3 minutes; the alarm-stream volume is restored to what it was | pending (MK2) |
+| Alarm volume floor | A muted alarm stream is raised to 70 % while ringing and restored afterwards | pending (MK2) |
+| Monitor start and stop | The foreground notification appears with a Stop action and is refreshed at most every 20 s | pending (MK2) |
+| Reboot | Release reminders come back; the monitor comes back **only** when it was enabled | pending (MK2) |
+| App update (`MY_PACKAGE_REPLACED`) | Same as reboot: reminders are re-registered | pending (MK2) |
+| Deep links through the lock | A price alert opens `market/coin/{id}`, a release reminder `market/news`, the monitor `market` — each after the app lock | pending (MK2) |
+
+## How to check "zero connections" (A1)
+
+Pick one and write down which was used and what it showed:
+
+1. **adb**: `adb shell ss -tnp | grep <pid>` while the journal is used — expect no established socket for the app.
+2. **Proxy**: point the device's Wi-Fi at a logging proxy; expect no request from the app.
+3. **Firewall**: an on-device firewall (e.g. a no-root VPN logger) with the app allowed; expect an empty log.
+
+The same check, repeated after Market has been accepted and then switched back off, must again show nothing.

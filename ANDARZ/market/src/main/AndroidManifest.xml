@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  :market — the only manifest in the project that declares INTERNET (K2, K8.4 guard 2).
+  The permission set is the :market half of the K8.1 allowlist; guard 2 fails the build when this file
+  declares anything else, and guard 1 pins the merged result.
+
+  Deliberately NOT carried over from March (K5): the install-packages permission and the update
+  FileProvider (D-M09, no in-app updater), the launcher activity, and the application attributes
+  allowBackup / theme / icon, which belong to :app. Guard 8 scans every source file for the name of that
+  permission, so it is spelled out nowhere in this repository.
+
+  Components (AlarmActivity, the receivers, LiveService) arrive with MK2 together with their classes;
+  see MERGE_MAP.md.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Market prices. Journal, engine, data layer and backup never use the network (K2). -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Opt-in live monitor (D-M08): a foreground service of type specialUse. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Restores release reminders and, when enabled, the monitor after a reboot or an app update. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Alarm-style ringing for price alerts, all opt-in and requested only when the matching switch
+         is turned on (K6.3). Quiet hours never defer them (D-M18). -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Lets the app hand a timer/alarm to the phone's own Clock app (K5.2). -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SET_TIMER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SET_ALARM" />
+        </intent>
+    </queries>
+
+</manifest>
