@@ -4,6 +4,9 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import ir.andarz.engine.Clause
+import ir.andarz.engine.Params
+import ir.andarz.engine.Ref
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -160,6 +163,41 @@ class ContentBundleTest {
     fun `the K13 market keys are all present`() {
         for (key in K13_KEYS) {
             assertTrue(bundle.uiOrNull(key) != null, "K13 key '" + key + "' is missing")
+        }
+    }
+
+    // ---------------------------------------------------------------- 10.3 content integrity (engine)
+
+    @Test
+    fun `every live clause renders to its original text with the default parameters`() {
+        assertEquals(10, bundle.numberWords.size, "numberWords must hold one to ten (3.11)")
+        val articles = bundle.obj("constitution")!!["articles"]!!.jsonArray
+        var rendered = 0
+        for (a in articles) {
+            for (b in a.jsonObject["blocks"]!!.jsonArray) {
+                val o = b.jsonObject
+                val refs = o["refs"]?.jsonArray ?: continue
+                val text = o["text"]!!.jsonPrimitive.content
+                val list = refs.map {
+                    val r = it.jsonObject
+                    Ref(r["param"]!!.jsonPrimitive.content, r["literal"]!!.jsonPrimitive.content,
+                        r["template"]!!.jsonPrimitive.content, r["fmt"]!!.jsonPrimitive.content)
+                }
+                assertEquals(text, Clause.render(text, list, Params.DEFAULTS, bundle.numberWords), o["id"].toString())
+                rendered++
+            }
+        }
+        assertTrue(rendered > 0, "no clause with refs found")
+    }
+
+    @Test
+    fun `every parameter of the content document exists in Params`() {
+        val keys = bundle.arr("params")!!.map { it.jsonObject["key"]!!.jsonPrimitive.content }
+        assertEquals(Params.KEYS.toSet(), keys.toSet())
+        for (it in bundle.arr("params")!!) {
+            val o = it.jsonObject
+            val k = o["key"]!!.jsonPrimitive.content
+            assertEquals(Params.DEFAULTS[k], o["default"]!!.jsonPrimitive.content.toDouble(), k)
         }
     }
 

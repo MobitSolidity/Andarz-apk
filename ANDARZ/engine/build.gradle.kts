@@ -16,6 +16,8 @@ sourceSets {
 dependencies {
     // Nothing but the test harness: :engine depends on no project module and no runtime library (K4).
     testImplementation(libs.kotlin.test)
+    // JSON reader for the vector runner only (10.1). Test scope: the engine's runtime stays dependency-free.
+    testImplementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit5.jupiter)
     testRuntimeOnly(libs.junit5.platform.launcher)
 }

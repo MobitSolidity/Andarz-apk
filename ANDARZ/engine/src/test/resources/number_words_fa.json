@@ -1,0 +1,15 @@
+{
+  "_note": "Copied from the WORDS table of spec/andarz_ref.py (fmt 'word' of 3.11). Test data only; the app reads the same list from content_market_fa.json (D-38).",
+  "numberWords": [
+    "یک",
+    "دو",
+    "سه",
+    "چهار",
+    "پنج",
+    "شش",
+    "هفت",
+    "هشت",
+    "نه",
+    "ده"
+  ]
+}

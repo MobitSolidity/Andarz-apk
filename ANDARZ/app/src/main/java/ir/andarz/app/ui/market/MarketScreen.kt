@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.market
 
+import ir.andarz.engine.Fmt
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -172,7 +173,7 @@ private fun ConsentSheet(
             Card(colors = CardDefaults.cardColors(containerColor = LocalAndarzColors.current.surfaceAlt)) {
                 Text(
                     // Hosts are Latin tokens inside Persian text: each one is an LTR isolate (trap 9).
-                    text = content.ui("mkt.consent.hosts", "hosts" to hosts.joinToString(ISOLATE_SEPARATOR) { isolate(it) }),
+                    text = content.ui("mkt.consent.hosts", "hosts" to hosts.joinToString(ISOLATE_SEPARATOR) { Fmt.isolate(it) }),
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(16.dp),
                 )
@@ -200,10 +201,3 @@ private fun Placeholder(label: String) {
 
 // A locale-neutral separator, so no punctuation of the UI language lives in code (law 3).
 private const val ISOLATE_SEPARATOR = " · "
-
-// The bidi isolate of Appendix C trap 9, built from code points so no literal bidirectional control
-// character sits in a source file (lint BidiSpoofing). M1 moves this to Fmt.isolate in :engine.
-private val LTR_ISOLATE: String = String(Character.toChars(0x2066))
-private val POP_ISOLATE: String = String(Character.toChars(0x2069))
-
-private fun isolate(text: String): String = LTR_ISOLATE + text + POP_ISOLATE

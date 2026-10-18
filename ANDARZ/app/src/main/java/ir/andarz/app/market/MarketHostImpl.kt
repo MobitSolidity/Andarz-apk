@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import ir.andarz.app.MainActivity
 import ir.andarz.app.content.ContentRepository
+import ir.andarz.engine.Fmt
 import ir.andarz.market.ChannelText
 import ir.andarz.market.MarketChannel
 import ir.andarz.market.MarketError
@@ -90,19 +91,10 @@ internal class AndarzMarketTexts(
         MarketService.IRAN_PRIMARY -> content.ui("mkt.data.nobitex")
         MarketService.IRAN_FALLBACK -> content.ui("mkt.data.wallex")
         // Latin brand names inside Persian text are LTR runs (Appendix C trap 9). The isolate is applied
-        // here rather than stored in the JSON, so the wording file stays plain text. M1 moves this helper
-        // into Fmt.isolate in :engine, where 3.13 puts it.
-        MarketService.COIN_LIST -> isolate("CoinGecko")
-        MarketService.LIVE_TICKS -> isolate("Binance")
-        MarketService.SENTIMENT -> isolate("alternative.me")
+        // here rather than stored in the JSON, so the wording file stays plain text.
+        MarketService.COIN_LIST -> Fmt.isolate("CoinGecko")
+        MarketService.LIVE_TICKS -> Fmt.isolate("Binance")
+        MarketService.SENTIMENT -> Fmt.isolate("alternative.me")
     }
 
-    private companion object {
-        /**
-         * The bidi isolate of Appendix C trap 9, built from its code point so no literal bidirectional
-         * control character sits in a source file (lint BidiSpoofing).
-         */
-        fun isolate(text: String): String =
-            String(Character.toChars(0x2066)) + text + String(Character.toChars(0x2069))
-    }
 }

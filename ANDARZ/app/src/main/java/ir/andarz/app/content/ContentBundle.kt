@@ -75,6 +75,13 @@ class ContentBundle private constructor(
     /** `meta.app.tagline`. */
     val tagline: String get() = str(base, "meta", "app", "tagline") ?: ""
 
+    /**
+     * The Persian words for one … ten used by the `word` clause format (3.11), from the market document's
+     * `numberWords` (D-38). Empty when absent; `Clause.formatRef` then falls back to digits.
+     */
+    val numberWords: List<String>
+        get() = (market?.get("numberWords") as? JsonArray)?.mapNotNull { (it as? JsonPrimitive)?.content } ?: emptyList()
+
     /** A nested object of the base document, e.g. `obj("params")` or `obj("enums")`. */
     fun obj(vararg path: String): JsonObject? = node(base, *path) as? JsonObject
 

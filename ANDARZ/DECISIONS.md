@@ -253,6 +253,48 @@ and `LiveService` only exist from MK2. **Choice.** The manifest carries every K8
 
 ---
 
+## M1 — Engine A (decisions)
+
+### D-38 — `shortest()` by rounding the exact value, and Persian number words passed in as data
+
+**Context.** 3.1 suggests a `String.format("%.pe")` loop for the shortest representation; law 3 forbids
+the words one … ten of the clause `word` format in a `.kt` file, although `andarz_ref.fmt_ref` has them as
+a table. **Choice.** (a) `XlMath.shortest` rounds `BigDecimal(x)` (the exact binary value) to p
+significant digits with HALF_EVEN and returns the smallest p that round-trips through
+`Double.parseDouble`, found by binary search because round-tripping is monotone in p. This is Python's
+`repr` and depends on neither `String.format` nor `Double.toString`. (b) `Clause.render` takes the words
+as a parameter. The app reads them from `numberWords` in `content_market_fa.json` (copied verbatim from
+`WORDS` of the reference); the vector runner reads the same list from
+`engine/src/test/resources/number_words_fa.json`. A content test renders every live clause of the
+constitution with the defaults and the app's words and requires the original text (10.3). **Reason.**
+JDK/ART independence; law 3 without touching the spec file.
+
+### D-39 — Persian digits and separators in `Fmt` are `\u` escapes
+
+**Context.** `Fmt` must emit U+06F0–U+06F9, U+066B, U+066C and U+066A; guard 7 scans source text for
+U+0600–U+06FF. **Choice.** They are written as escapes (`'\u06F0'`), which are ASCII in the file.
+**Reason.** The guard checks source characters, and its purpose (no *wording* in code) is untouched:
+digits and separators are formatting, as 3.10 defines them in code.
+
+### D-40 — Engine data types and nullability
+
+`Plan` fields are nullable exactly where the reference returns `None`; `Fill.rriskp` is null for zero
+equity; `Dashboard.allowed` is derived from the six statuses. `TradeRaw` carries optional persisted
+derived values (`storedVerdict`, `storedNet`, …) that win over recomputation (D-24) — the vectors pass
+none, so they recompute. `Params` keeps every value as `Double` (counts compare as doubles, as in the
+reference) and rejects unknown keys and non-finite values. Sums are taken left to right (`Stats.pySum`) so
+floating-point results are bit-identical to Python's `sum()`.
+
+### D-41 — The vector JSON is read with kotlinx-serialization in test scope only
+
+`:engine` keeps zero runtime dependencies (K4); kotlinx-serialization-json (already in the catalog, 2.1)
+is a `testImplementation`. The vectors are copied to `engine/src/test/resources/` as 10.1 asks.
+
+**M1 result.** 195 vector checks (xlRound 18, plan 16, leverageAdvisor 6, sizeVerdict 12, fill 15, curve 4,
+kpi 5, jalali 53, format 37, renderClause 29) and 14 property/extension tests pass; the Jalali property test
+walks all 73,414 days. Engine tests take about 3 s. Coverage (JaCoCo ≥ 90%) is measured from M2, when the
+governor lands.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |
