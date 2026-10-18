@@ -40,6 +40,14 @@ android {
 
     sourceSets {
         getByName("androidTest") { assets.srcDirs("$projectDir/schemas") }
+        // The crypto vectors live in the same golden file as the engine's (10.1, 10.5).
+        getByName("test") { resources.srcDirs("$rootDir/engine/src/test/resources") }
+    }
+
+    testOptions {
+        // Room's in-memory database runs on the JVM under Robolectric (10.5).
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all { it.systemProperty("robolectric.logging.enabled", "false") }
     }
 }
 
@@ -54,7 +62,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.datastore.preferences)
-    implementation(libs.androidx.room.runtime)
+    api(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
     implementation(libs.hilt.android)
@@ -66,6 +74,8 @@ dependencies {
     testImplementation(libs.turbine)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.room.testing)
+    testImplementation(libs.androidx.test.junit)
 
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.runner)

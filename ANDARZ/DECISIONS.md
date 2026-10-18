@@ -330,6 +330,41 @@ last within its priority, as `INF` sorts.
 M1 all 248 checks of the vector file pass, plus 24 property/extension tests. Engine line coverage 96.6%,
 enforced at ≥ 90% by `:engine:jacocoTestCoverageVerification` in `check`.
 
+## M3 — Data (decisions)
+
+### D-46 — PBKDF2 is our own 20 lines over `Mac("HmacSHA256")`; the password is UTF-8 of its NFC form
+
+10.5 warns that Android's providers differ from the JDK's for non-ASCII passwords and gives this as the
+fallback. Using it from the start removes the platform difference. The `crypto.pbkdf2` and `crypto.aesGcm`
+vectors pass on the JVM; 600,000 iterations seal+open take ~1.4 s here. **Pending:** the instrumented run of
+the same vectors on a device (10.5), which needs an emulator (MANUAL_TEST.md).
+
+### D-47 — Lint runs with K1 UAST (`android.lint.useK2Uast=false`)
+
+Lint's K2 analysis crashed in two of five full builds on `ContentBundleTest.kt` with an internal error that
+lint itself labels a lint bug (D-M41). The same checks run with K1 UAST; three forced lint reruns were
+green. Lint is not disabled for any source set. Revert when AGP is upgraded (M8).
+
+### D-48 — Repository rules that 4.3/4.4 leave open
+
+- `savePlan` stores the governor's `riskCap` and `gradeAAllowed` *at planning* in `riskPctCap`/`gradeA`; the
+  size verdict at entry uses them. A brand-new setup therefore stores the SETUP_TEST cap (0.25%) and the
+  worked example at 1% risk is `OVER_CAP` there — the rule of 12-6; with an established setup it is `YES`
+  and compliant (both in `JournalLifecycleTest`).
+- `confirmEntry` re-runs the governor: a lock that appeared between plan and entry makes `entryAllowed`
+  false (D-08). Auto violations (V01 without exchange stops, V02, V03, V06) set `violationAt` once.
+- A REAL entry ends an open review session with `TRADE_OPENED` (D-06); sessions time out after 60 min.
+- `Start_Equity` changes only through `LedgerRepository.editBaseline` inside a session (D-18); `Chk_N` is
+  always refused.
+- Room is an `api` dependency of `:data` so `:app` can build the database in its Hilt module.
+- `LegRow` lists use hand-written JSON converters: Room's KSP processor cannot see compiler-plugin output.
+
+**M3 result.** 13 tables (schema v1 exported to `data/schemas/`), DAOs, converters, `EngineMapping`,
+`EngineFacade` (+ reactive `observe()` on Room invalidation, boundaries and a 60 s tick, debounced 50 ms),
+`ParamsRepository`, `JournalRepository`, `LedgerRepository`, settings DataStore, audit rows, backup crypto.
+18 data tests pass (Robolectric, in-memory Room), including the worked example headless through the
+repositories. The first migration test arrives with schema v2; the `MIGRATIONS` array is already wired.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |
