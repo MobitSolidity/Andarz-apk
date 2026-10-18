@@ -47,6 +47,9 @@ data class Snapshot(
     val dashboard: Dashboard,
     val governor: GovernorResult,
     val trades: List<ResolvedTrade>,
+    /** The parameters the snapshot was computed with (`paramsAt(now)`). */
+    val params: Params = Params.DEFAULTS,
+    val now: Instant = Instant.EPOCH,
 ) {
     /** `dashboard.allowed ∧ governor.canEnter`: the overall verdict without a plan (5.2). */
     val mayEnter: Boolean get() = dashboard.allowed && governor.canEnter
@@ -374,7 +377,7 @@ object Governor {
         val d = Limits.dashboard(
             g.tradesToday, dnet, wnet, eqNow, sod, sow, g.ddNow, openReal.size, Stats.pySum(openReal.map { it.rrisk }), p,
         )
-        return Snapshot(Equity(eqNow, sod, sow), d, g, trades)
+        return Snapshot(Equity(eqNow, sod, sow), d, g, trades, p, now)
     }
 
     // ------------------------------------------------------------------ sessions and parameter changes

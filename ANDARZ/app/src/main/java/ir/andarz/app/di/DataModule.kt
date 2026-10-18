@@ -69,5 +69,7 @@ object DataModule {
 
     @Provides @Singleton fun setups(db: AndarzDatabase, clock: Clock) = SetupRepository(db, clock)
 
+    @Provides @Singleton fun pledges(db: AndarzDatabase, clock: Clock) = ir.andarz.data.PledgeRepository(db, clock)
+
     @Provides @Singleton fun reviews(db: AndarzDatabase, clock: Clock) = ReviewRepository(db, clock)
 }

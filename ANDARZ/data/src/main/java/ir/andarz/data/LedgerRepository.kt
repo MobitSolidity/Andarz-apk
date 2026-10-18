@@ -99,3 +99,16 @@ class ReviewRepository(private val db: AndarzDatabase, private val clock: Clock)
         return r
     }
 }
+
+/** The pledge (5.1, 5.13): signing stores the filled text and writes an audit row. */
+class PledgeRepository(private val db: AndarzDatabase, private val clock: Clock) {
+    suspend fun sign(version: Int, name: String, startEquity: Double, riskPct: Double, text: String): ir.andarz.data.db.PledgeEntity {
+        val now = clock.now().toEpochMilli()
+        val row = ir.andarz.data.db.PledgeEntity(UUID.randomUUID().toString(), version, name, now, startEquity, riskPct, text)
+        db.withTransaction {
+            db.pledges().insert(row)
+            db.audit().log(now, AuditType.PLEDGE_SIGNED, row.id, mapOf("version" to version))
+        }
+        return row
+    }
+}

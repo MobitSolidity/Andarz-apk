@@ -201,6 +201,33 @@ class ContentBundleTest {
         }
     }
 
+    @Test
+    fun `every literal ui key used in Kotlin exists`() {
+        val roots = listOf(File("src/main/java"), File("app/src/main/java")).filter { it.isDirectory }
+        assertTrue(roots.isNotEmpty(), "source root not found")
+        val call = Regex("""(?:\.t|\.ui|uiOrNull)\(\s*"([a-zA-Z0-9_]+(?:\.[a-zA-Z0-9_]+)+)"""")
+        val missing = roots.first().walkTopDown().filter { it.extension == "kt" }.flatMap { f ->
+            call.findAll(f.readText()).map { it.groupValues[1] }.filter { bundle.uiOrNull(it) == null }.map { f.name + ": " + it }
+        }.toList()
+        assertTrue(missing.isEmpty(), "ui keys used in code but defined nowhere:\n" + missing.joinToString("\n"))
+    }
+
+    @Test
+    fun `dynamic ui keys resolve for every enum id`() {
+        val enums = bundle.obj("enums")!!
+        fun ids(e: String) = enums[e]!!.jsonArray.map { it.jsonObject["id"]!!.jsonPrimitive.content }
+        val prefixes = mapOf(
+            "trade.status." to ids("tradeStatus"), "trade.account." to ids("account"), "trade.event." to ids("tradeEvent"),
+            "wiz.gate.reason." to ids("gateReason"), "wiz.gate.detail." to ids("gateReason"), "wiz.gate.fix." to ids("gateReason"),
+            "size.short." to ids("sizeVerdict"), "close.reason." to ids("exitReason"), "wiz.entryOrder." to ids("entryOrder"),
+            "lock." to ids("lockCode").map { "$it.title" }, "need." to ids("lockNeed"), "reduction." to ids("reductionCode"),
+            "wiz.gate.slWhere." to ids("side"), "wiz.gate.tpWhere." to ids("side"),
+            "today.status." to ir.andarz.engine.DashStatus.entries.map { it.name },
+        )
+        val missing = prefixes.flatMap { (pre, list) -> list.map { pre + it }.filter { bundle.uiOrNull(it) == null } }
+        assertTrue(missing.isEmpty(), "missing dynamic keys: $missing")
+    }
+
     private companion object {
         val OVERRIDE_KEYS = listOf("about.privacy", "onb.privacy.body")
 

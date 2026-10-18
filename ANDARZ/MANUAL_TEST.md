@@ -107,3 +107,13 @@ Pick one and write down which was used and what it showed:
 3. **Firewall**: an on-device firewall (e.g. a no-root VPN logger) with the app allowed; expect an empty log.
 
 The same check, repeated after Market has been accepted and then switched back off, must again show nothing.
+
+## M4 core flows (pending: needs an emulator or device; nothing below has been run)
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| F1 | Onboard (equity 2000, risk 1%), sign the pledge, create a setup, wizard: LONG 100/96/108, 5x, all 8 items, isolated + exchange stops + can monitor; enter; confirm 100 / $500; close at 108 fee 0.6; review M00 + lesson | Result net +$39.40, R +1.97; Today equity $2,039.40. A brand-new setup shows `OVER_CAP` (SETUP_TEST 0.25%, D-48) | pending |
+| F2 | Wizard with TP 105.2 (R:R 1.3) | Strip "denied: R:R", detail with 1.5 and article 4 item 6; "save as rejected" stores REJECTED | pending |
+| F3 | Close a trade at its stop | Cool-down banner with minutes left; FAB muted with lock; 30 min later allowed | pending |
+| F4 | Move the stop away, confirm | V04; VIOLATION lock needs close + report; after close only report; 20-char report → lock until +48 h | pending |
+| 6.9-1..4 | 360×800 dp, dark/light, 100%/200% | Hero + six gauges + verdict visible without scrolling; isolates keep `BTCUSDT`, `+$39.40`, `−0.5R` readable | pending |

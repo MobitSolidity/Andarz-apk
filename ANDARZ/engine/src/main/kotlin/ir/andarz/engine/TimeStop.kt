@@ -66,4 +66,30 @@ object Management {
         val d = kotlin.math.abs(entry - sl)
         return if (side == Side.LONG) entry + r * d else entry - r * d
     }
+
+    /**
+     * Close-sheet guess from the final leg (5.5): at the current stop → STOP_LOSS (BREAKEVEN when the stop sits
+     * at entry, TRAILING_STOP when beyond it), at the take-profit → TAKE_PROFIT, otherwise MANUAL. LIQUIDATED
+     * and EMERGENCY are manual choices.
+     */
+    fun guessExitReason(side: Side, entry: Double, slCurrent: Double?, tp: Double, finalPrice: Double): String {
+        val eps = 1e-9 * maxOf(1.0, kotlin.math.abs(entry))
+        if (slCurrent != null && kotlin.math.abs(finalPrice - slCurrent) <= eps) {
+            return when {
+                kotlin.math.abs(slCurrent - entry) <= eps -> "BREAKEVEN"
+                (side == Side.LONG && slCurrent > entry) || (side == Side.SHORT && slCurrent < entry) -> "TRAILING_STOP"
+                else -> "STOP_LOSS"
+            }
+        }
+        if (kotlin.math.abs(finalPrice - tp) <= eps) return "TAKE_PROFIT"
+        return "MANUAL"
+    }
+
+    /** Suggested violations at review (3.9): V07 entry inside a cool-down or with REVENGE; V09 losing and held > 3× the time stop. */
+    fun suggestedViolations(emotion: String, enteredInCooldown: Boolean, losing: Boolean, heldMinutes: Long, timeframe: String, p: Params): List<String> {
+        val out = ArrayList<String>()
+        if (enteredInCooldown || emotion == "REVENGE") out += "V07"
+        if (losing && heldMinutes > 3 * p.timeStopCandles.toLong() * Timeframes.minutes(timeframe)) out += "V09"
+        return out
+    }
 }

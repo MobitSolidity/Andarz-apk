@@ -41,6 +41,13 @@ object AndarzNav {
     /** Insights keeps its own route; it is reached from More and from a Journal action (D-M07). */
     const val INSIGHTS = "insights"
 
+    const val WIZARD = "wizard"
+    const val TRADE = "trade/{id}"
+    const val REVIEWS = "reviews"
+    const val ONBOARDING = "onboarding"
+
+    fun trade(id: String) = "trade/$id"
+
     val bottomBar: List<AndarzDestination> = listOf(
         AndarzDestination(TODAY, "nav.today", icon = Icons.Filled.Home),
         AndarzDestination(JOURNAL, "nav.journal", icon = Icons.AutoMirrored.Filled.List),

@@ -365,6 +365,45 @@ green. Lint is not disabled for any source set. Revert when AGP is upgraded (M8)
 18 data tests pass (Robolectric, in-memory Room), including the worked example headless through the
 repositories. The first migration test arrives with schema v2; the `MIGRATIONS` array is already wired.
 
+## M4 — Core flows (decisions)
+
+### D-49 — What M4 ships, and what is device-only
+
+Onboarding (7 pages; BASELINE + NEUTRAL Start_Equity/Risk_Pct; pledge signed with an audit row), Today (hero
+with khatam pattern, lock banners with live countdown and need buttons, reductions/hold chips, six gauges,
+overall verdict, open positions with time stop and "I checked", advice of the day), the 5-step wizard
+(verdict strip, reasons with number + article + fix, leverage advisor, derived items 6–7, emotion gating,
+counter-trend half risk, confirmation sheet with slippage and silent-growth warning, the D-28 path), trade
+detail (plan, execution, management: floating R, stop moves with V04 confirm, break-even, partial exit,
+prayer, "I added", notes/news, monitor), close sheet (legs, sum check, auto reason, preview), neutral result
+card, post-trade review (auto and suggested violations, report counter, one mistake) and the Journal list
+(day groups with net, search, status/violation filters, four sorts).
+
+**Not verified, needs an emulator:** F1–F4 of 10.6 and the visual checklist 1–4 of 6.9. They are written as
+manual steps in MANUAL_TEST.md and marked pending; JVM tests cover the same rules (`JournalLifecycleTest`:
+F1 numbers, F2 rejection, F4 lock sequence; `GovernorVectorTest`: F3 cool-down).
+
+### D-50 — No formula in a composable (trap 16)
+
+The wizard's numbers come from `WizardCalc` (a pure class over the engine, tested in `WizardCalcTest`); the
+close-reason guess, suggested violations, time stop, floating R and break-even live in `engine.Management`
+(tested in `ManagementTest`). Composables only format.
+
+### D-51 — The close-sheet exit time is "minutes ago", default now
+
+M4 has no time picker yet; the field is minutes before now, shown as the resulting date-time and validated
+against the entry time. The Jalali date picker of 6.3 replaces it in M6, together with the entry-time picker
+of the confirmation sheet (which defaults to now).
+
+### D-52 — Engine `Snapshot` carries the params and `now` it was computed with
+
+So every screen shows the caps the snapshot actually used (`paramsAt(now)`), never DEFAULTS.
+
+### D-53 — Lint found an API-31 call (`Duration.toSeconds`) in app code
+
+Replaced by `Duration.seconds` (API 26). `:engine` is JVM-only and not linted for Android API levels; a scan
+found no API-31+ `java.time` calls there. M8 adds an API check for the engine.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |
