@@ -118,6 +118,23 @@ The same check, repeated after Market has been accepted and then switched back o
 | F4 | Move the stop away, confirm | V04; VIOLATION lock needs close + report; after close only report; 20-char report → lock until +48 h | pending |
 | 6.9-1..4 | 360×800 dp, dark/light, 100%/200% | Hero + six gauges + verdict visible without scrolling; isolates keep `BTCUSDT`, `+$39.40`, `−0.5R` readable | pending |
 
+## M5 analysis and governance (pending: needs an emulator or device; nothing below has been run)
+
+JVM tests cover the calculator numbers and the fee impact (vector D-36), period ranges, the Insights series,
+rule validation and reset order, the liquidity filter and due reviews (`AnalysisLogicTest`), and the
+repository side of F5, setups and the watch-list (`JournalLifecycleTest`). These rows are the device part.
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| F5 | Open a position; Rules -> start session. Close it; start again; Risk_Pct 1 -> 0.5 with a reason; then 0.5 -> 1.5 | Blocked with `rev.session.blocked.OPEN_POSITION` (and `RECENT_LOSS` with its time after a losing close); 0.5 applies now (chip "tighter"); 1.5 shows "in 24 hours", the loosen warning, and a row under pending changes; *cancel* removes it and the history shows both | pending |
+| M5-1 | Calculator with 2000 / LONG / 100 / 96 / 108 / 5x, fee 0.12 | Nine numbers as in the wizard, allowed banner, advisor 1-9 recommending 5, "from 2.00 to 1.91"; *build a trade* opens the wizard at step 1 with the numbers filled and the symbol empty | pending |
+| M5-2 | Insights with the 12 trades of K01 imported, each period chip, dark and light theme | 13 tiles with status and target; equity, drawdown, R histogram, weekly compliance, hour/symbol/setup bars, mistakes, violations; no clipped labels; TalkBack reads one summary per chart (`ins.chart.alt`) | pending |
+| M5-3 | Reviews: daily, weekly (pick an earlier week), monthly with a positive month, drawdown | Each saves once; weekly needs the rule; monthly offers the withdrawal and records it in the ledger after *yes*; a WEEKLY_LOSS lock of that week clears | pending |
+| M5-4 | Setups: create three, promote a new one | `setups.limit` hint at three; promote disabled with `setups.notEligibleA`; archive and undo | pending |
+| M5-5 | Watch-list: add ten symbols, then an eleventh; thresholds outside and inside a session | Add disabled at ten with `wl.full`; thresholds editable only inside a session | pending |
+| M5-6 | Ledger: withdraw more than equity; edit the baseline outside, then inside a session | `ledger.negative`; baseline shows `ledger.baseline.locked` outside; inside, the edit also moves `Start_Equity` (one audit row each) | pending |
+| A11y-1 | TalkBack over Rules rows, review checkboxes, chart cards; 200% font on Calculator and Insights | Each row is one node with label and value; checkboxes announce on/off; nothing clipped | pending |
+
 ## MK1 market data and prices (pending: needs a device with a network; nothing below has been run)
 
 JVM tests cover parsing, merge, cadence, demand, zero traffic and formatting (D-M48). These rows are the

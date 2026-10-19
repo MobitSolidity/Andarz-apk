@@ -404,6 +404,49 @@ So every screen shows the caps the snapshot actually used (`paramsAt(now)`), nev
 Replaced by `Duration.seconds` (API 26). `:engine` is JVM-only and not linted for Android API levels; a scan
 found no API-31+ `java.time` calls there. M8 adds an API check for the engine.
 
+## M5 — Analysis and governance (decisions)
+
+### D-54 — Analysis logic is one pure file, tested on the JVM
+
+`ui/analysis/AnalysisLogic.kt` holds the calculator (`CalcLogic`), periods (`Periods`), Insights series
+(`InsightsLogic`), rule validation (`RulesLogic`), the liquidity filter (`WatchLogic`) and due reviews
+(`ReviewLogic`). Composables only format (trap 16). Every number comes from the engine: `Planner.plan`,
+`gate`, `leverageAdvisor`, `rrAfterFees`, `Trades.kpis`, `Governor.classifyChange` and `gradeAEligible`.
+Insights uses `Trades.kpis` so the period's drawdown is read from the all-time curve, as in the reference.
+
+### D-55 — The calculator judges numbers, not ticks
+
+The calculator has no checklist, so its gate runs with `chk = Chk_N` (all items): the verdict and the
+advisor say whether the numbers pass. The risk field defaults to the governor's `riskCap`. The fee impact
+uses the plan's `notionalMax`. *Build a trade* hands the draft to the wizard through a process-local
+singleton (`WizardPrefill`), taken once; the route carries no numbers.
+
+### D-56 — Rules: percent typed as percent; reset tightens first
+
+Percent parameters are typed as percent numbers (1 for 1%) and rounded to 10 places after dividing, so 0.7
+becomes 0.007 exactly. Values are shown in the clause format of 3.11 (trailing zeros trimmed). Reset to
+defaults is a batch of ordinary changes through `ParamsRepository.apply`; tightening and neutral changes go
+first so `Risk_Max >= Risk_Pct` holds after each single step, loosening last (delayed as usual). The session
+card is shared by Rules and Reviews and polls every 30 s so the 60-minute timeout shows.
+
+### D-57 — Reviews: due rules and what is frozen
+
+Daily is due while today has no DAILY review. Weekly is due for the just-ended week, or for the current one
+on Friday; the user may pick any of the last eight unreviewed weeks. Monthly is due for the previous display
+month. Each review freezes the KPIs of its period into `kpiSnapshot` (numbers and codes only, law 6); the
+payload holds the answers. The drawdown review opens on its own while a DRAWDOWN lock needs REVIEW. The
+monthly withdrawal is recorded only after an explicit yes, as a WITHDRAWAL ledger row; marking the security
+item sets `lastSecurityReviewAt`.
+
+### D-58 — Watch-list and setups
+
+`WatchRepository` enforces `Watchlist_Max`, upper-cases symbols and refuses duplicates; entering volume or
+relative volume counts as a liquidity check. No document names the relative-volume field alone, so the D-22
+sentence with the live band labels it (no new wording). Thresholds are DataStore settings editable only
+inside a session, with no delay. `SetupRepository.setGrade` refuses grade A unless the engine's
+`gradeAEligible` holds; demotion is always allowed; setups are archived, never deleted. Date fields in M5
+are day steppers (today, yesterday, minus one day); the Jalali date pickers of 5.15 arrive with M6.
+
 ## MK1 — Market data and prices (decisions)
 
 ### D-M42 — The WebSocket handshake headers are allowed, on the live-ticks host only

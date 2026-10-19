@@ -236,4 +236,23 @@ class JournalLifecycleTest {
         assertTrue(db.events().forTrade(t.id).isEmpty())
         assertEquals(1, db.audit().all().count { it.type == "TRADE_DELETE" })
     }
+
+    @Test
+    fun gradeAOnlyWhenEligibleAndTheWatchListHasItsLimit() = runBlocking {
+        val s = onboarded()
+        assertFalse(setups.setGrade(s, "A", eligibleA = false))
+        assertEquals("B", db.setups().get(s)!!.grade)
+        assertTrue(setups.setGrade(s, "A", eligibleA = true))
+        assertTrue(setups.setGrade(s, "B", eligibleA = false), "demotion is always allowed")
+        setups.setArchived(s, true)
+        assertTrue(db.setups().get(s)!!.archived)
+
+        val watch = WatchRepository(db, clock, params)
+        assertEquals(WatchError.EMPTY_SYMBOL, watch.add("  ", null, null, "", ""))
+        assertNull(watch.add("btcusdt", 2e8, 1.2, "100k", ""))
+        assertEquals(WatchError.DUPLICATE, watch.add("BTCUSDT", null, null, "", ""))
+        assertNotNull(db.watch().all().single().checkedAt)
+        for (i in 1 until 10) assertNull(watch.add("C${i}USDT", null, null, "", ""))
+        assertEquals(WatchError.FULL, watch.add("XUSDT", null, null, "", ""), "Watchlist_Max is 10")
+    }
 }

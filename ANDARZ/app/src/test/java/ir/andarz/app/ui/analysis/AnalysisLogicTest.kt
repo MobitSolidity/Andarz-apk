@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.data.db.LegRow
 import ir.andarz.data.db.PlanSnapshot
 import ir.andarz.data.db.TradeEntity
 import ir.andarz.engine.ChangeKind
@@ -83,7 +84,7 @@ class AnalysisLogicTest {
             gradeA = true, entryOrder = "LIMIT", isolated = true, slTpOnExchange = true, canMonitor = true,
             plan = PlanSnapshot(0.04, 2.0, 20.0, 500.0, 100.0, 0.05, 80.5, 0.195, 4.875), gateReasons = "", gatePlanOk = true,
             entryAllowed = true, gateAllowed = true, entry = 100.0, notional = 500.0, entryTime = exitT - 3_600_000, slCurrent = 96.0,
-            rrisk = 20.0, rriskp = 0.01, verdict = "YES", exitTime = exitT, net = net, r = r, ok = ok, mistake = mistake,
+            rrisk = 20.0, rriskp = 0.01, verdict = "YES", exitTime = exitT, legs = listOf(LegRow(100.0 + 4 * r, 1.0)), net = net, r = r, ok = ok, mistake = mistake,
             createdAt = exitT - 3_700_000, updatedAt = exitT,
         )
     }
