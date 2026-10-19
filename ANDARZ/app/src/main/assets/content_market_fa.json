@@ -9,6 +9,53 @@
  },
  "ui": {
   "mkt.about.credit": "بخش بازار بر پایهٔ برنامهٔ March ساخته شده است.",
+  "mkt.alarm.openCoin": "مشاهده‌ی ارز",
+  "mkt.alarm.snooze": "تعویق ۵ دقیقه",
+  "mkt.alarm.stop": "قطع زنگ",
+  "mkt.alert.change24": "تغییر ۲۴ ساعته: ",
+  "mkt.alert.move.down": "{symbol} در {window} {pct}٪ ریزش کرد",
+  "mkt.alert.move.up": "{symbol} در {window} {pct}٪ رشد کرد",
+  "mkt.alert.now": "قیمت الان ",
+  "mkt.alert.summary": "نوسان شدید در {n} ارز دیگر",
+  "mkt.alert.target.title": "{symbol} به قیمت هدفت رسید",
+  "mkt.alert.test.body": "هر وقت ارزی در {window} بیش از {pct}٪ جابه‌جا شد، همین‌طور فوری خبرت می‌کنم.",
+  "mkt.alert.test.title": "اعلان‌های اندرز فعال است",
+  "mkt.alert.testAlarm.body": "وقتی قیمت به هدفت برسد گوشی همین‌طور زنگ می‌خورد. برای قطع، زنگ را قطع کن.",
+  "mkt.alert.yourThreshold": "آستانه‌ی تو: ",
+  "mkt.alerts.battery": "حذف محدودیت باتری برای اندرز",
+  "mkt.alerts.bg": "پایش زنده در پس‌زمینه",
+  "mkt.alerts.bg.all": "پایش همه‌ی ۲۰۰ ارز در پس‌زمینه اینترنت بیشتری مصرف می‌کند.",
+  "mkt.alerts.bg.hint": "تا وقتی اپ بسته است هم اعلان فوری بگیری. یک اعلان ثابت کوچک نمایش داده می‌شود.",
+  "mkt.alerts.bg.watch": "در پس‌زمینه فقط ارزهای واچ‌لیست و هشدارهای اختصاصی پایش می‌شوند (کم‌مصرف).",
+  "mkt.alerts.clock": "زنگ از برنامه‌ی ساعت گوشی",
+  "mkt.alerts.clock.hint": "هشدار با تایمر برنامه‌ی ساعت پخش می‌شود، دقیقاً مثل زنگ بیدارباش. اگر ممکن نباشد، زنگ داخلی اندرز پخش می‌شود.",
+  "mkt.alerts.cooldown": "فاصله‌ی دو اعلان برای یک ارز",
+  "mkt.alerts.direction": "جهت حرکت",
+  "mkt.alerts.enable": "هشدار نوسان شدید",
+  "mkt.alerts.enable.hint": "اعلان فوری و شخصی وقتی قیمت در یک بازه‌ی کوتاه تند حرکت کند",
+  "mkt.alerts.exact": "اجازه‌ی «آلارم و یادآور» را بده",
+  "mkt.alerts.exact.hint": "برای تعویق دقیق و زنگ مطمئن.",
+  "mkt.alerts.fullscreen": "اجازه‌ی «اعلان تمام‌صفحه» را بده",
+  "mkt.alerts.fullscreen.hint": "تا زنگ روی صفحه‌ی قفل نمایش داده شود.",
+  "mkt.alerts.minutes": "{n} دقیقه",
+  "mkt.alerts.name": "اسمت (اختیاری)",
+  "mkt.alerts.noClock": "برنامه‌ی ساعت سازگار پیدا نشد",
+  "mkt.alerts.noClock.hint": "زنگ داخلی اندرز استفاده می‌شود. می‌توانی Google Clock را نصب کنی.",
+  "mkt.alerts.overlay": "اجازه‌ی «نمایش روی برنامه‌های دیگر» را بده",
+  "mkt.alerts.overlay.hint": "بدون این اجازه وقتی اپ بسته است اندروید نمی‌گذارد ساعت باز شود و زنگ داخلی پخش می‌شود. روی شیائومی «نمایش پنجره‌های بازشو در پس‌زمینه» را هم روشن کن.",
+  "mkt.alerts.personal": "شخصی‌سازی اعلان",
+  "mkt.alerts.preview": "پیش‌نمایش: ",
+  "mkt.alerts.ring": "زنگ هشدار",
+  "mkt.alerts.ring.hint": "وقتی هشدار می‌آید گوشی مثل ساعت زنگ‌دار زنگ می‌زند تا خودت قطعش کنی.",
+  "mkt.alerts.rules": "هشدارهای اختصاصی ارزها",
+  "mkt.alerts.rules.empty": "در تب بازار روی هر ارز بزن تا آستانه یا قیمت هدف مخصوص خودش را بگذاری.",
+  "mkt.alerts.scope": "برای کدام ارزها",
+  "mkt.alerts.test": "ارسال اعلان آزمایشی",
+  "mkt.alerts.testAlarm": "آزمایش زنگ هشدار",
+  "mkt.alerts.threshold": "حداقل درصد تغییر",
+  "mkt.alerts.usdt": "نوسان تتر / تومان هم اعلام شود",
+  "mkt.alerts.usdt.hint": "حتی اگر تتر در واچ‌لیستت نباشد",
+  "mkt.alerts.window": "در چه بازه‌ای",
   "mkt.cal.expired.body": "فهرست این بخش دستی است و تا {date} را پوشش می‌داد. بعد از به‌روزرسانی فهرست، رویدادهای تازه اینجا می‌آیند.",
   "mkt.cal.expired.title": "برنامهٔ انتشارها تمام شده است",
   "mkt.cal.validUntil": "فهرست تا {date} معتبر است",
@@ -35,6 +82,9 @@
   "mkt.data.iran": "نوبیتکس و والکس",
   "mkt.data.nobitex": "نوبیتکس",
   "mkt.data.wallex": "والکس",
+  "mkt.dir.BOTH": "رشد و ریزش",
+  "mkt.dir.DOWN": "فقط ریزش",
+  "mkt.dir.UP": "فقط رشد",
   "mkt.disclaimer": "قیمت‌ها از سرویس‌های بیرونی می‌آیند و ممکن است دیر برسند یا با قیمت صرافی‌ات فرق داشته باشند. ماشین‌حساب و قوانین اندرز از آن‌ها استفاده نمی‌کنند.",
   "mkt.err.badData": "خطای شبکه",
   "mkt.err.blocked": "دسترسی به {service} از این IP مسدود است",
@@ -61,10 +111,28 @@
   "mkt.live.CONNECTING": "در حال اتصال…",
   "mkt.live.NOBITEX": "لحظه‌ای · نوبیتکس",
   "mkt.live.POLLING": "هر ۶۰ ثانیه · CoinGecko",
+  "mkt.monitor.connecting": "در حال اتصال به بازار…",
+  "mkt.monitor.stop": "توقف",
+  "mkt.monitor.title": "پایش زنده‌ی قیمت فعال است",
+  "mkt.monitor.usdt": "تتر ",
   "mkt.nav.market": "بازار",
   "mkt.net.body": "ژورنال، قوانین و پشتیبان‌گیری بدون اینترنت کار می‌کنند. فقط بخش بازار، اگر روشنش کرده باشی، برای خواندن قیمت‌ها به اینترنت وصل می‌شود.",
   "mkt.net.sent": "درخواست‌ها فقط می‌خوانند و جز نماد ارزها چیزی با خود نمی‌برند.",
   "mkt.net.title": "اینترنت در اندرز",
+  "mkt.news.cd.d": "روز",
+  "mkt.news.cd.h": "ساعت",
+  "mkt.news.cd.m": "دقیقه",
+  "mkt.news.cd.s": "ثانیه",
+  "mkt.news.clock": "زنگ در برنامه‌ی ساعت",
+  "mkt.news.footer": "به وقت تهران، از تقویم فدرال رزرو و BLS. ۱۰ دقیقه قبل از هر خبرِ زنگوله‌دار اعلان می‌گیری. با آیکون همان یادآور را در برنامه‌ی ساعت گوشی هم می‌گذاری (برای خبرهای ۲۴ ساعت آینده).",
+  "mkt.news.forecast": "پیش‌بینی ",
+  "mkt.news.high": "فقط پراهمیت",
+  "mkt.news.next": "انتشار بعدی",
+  "mkt.news.noClock": "برنامه‌ی ساعت پیدا نشد",
+  "mkt.news.previous": "قبلی ",
+  "mkt.news.released": "منتشر شد",
+  "mkt.news.reminder": "یادآور",
+  "mkt.news.sameTime": "+ {n} انتشار هم‌زمان",
   "mkt.off.action": "روشن کردن",
   "mkt.off.body": "تا روشنش نکنی، اندرز هیچ درخواستی به اینترنت نمی‌فرستد.",
   "mkt.off.title": "بازار خاموش است",
@@ -77,6 +145,22 @@
   "mkt.prices.refresh": "به‌روزرسانی",
   "mkt.prices.search": "جستجوی نماد یا نام (مثلاً BTC یا تتر)",
   "mkt.prices.title": "۲۰۰ ارز برتر + تتر تومانی",
+  "mkt.rem.body": "{n} دقیقه تا انتشار",
+  "mkt.ring.ALL": "زنگ برای همه",
+  "mkt.ring.OFF": "فقط اعلان",
+  "mkt.ring.TARGETS": "زنگ برای قیمت هدف",
+  "mkt.rule.aboveField": "اعلان وقتی بالاتر از ({unit})",
+  "mkt.rule.belowField": "اعلان وقتی پایین‌تر از ({unit})",
+  "mkt.rule.custom": "آستانه‌ی نوسان مخصوص این ارز",
+  "mkt.rule.once": "هشدار قیمت هدف یک بار ارسال می‌شود و بعد خودکار پاک می‌شود.",
+  "mkt.rule.pct": "آستانه {pct}٪",
+  "mkt.rule.save": "ذخیره هشدار",
+  "mkt.rule.saved": "هشدار {symbol} ذخیره شد",
+  "mkt.rule.title": "هشدار اختصاصی ",
+  "mkt.rule.usingDefault": "الان از تنظیم کلی ({pct}٪) استفاده می‌شود",
+  "mkt.scope.ALL": "همه‌ی ۲۰۰ ارز",
+  "mkt.scope.WATCHLIST": "واچ‌لیست من",
+  "mkt.sep.comma": "، ",
   "mkt.set.enable": "دریافت قیمت‌ها از اینترنت",
   "mkt.set.enable.hint": "با خاموش کردن، همهٔ اتصال‌ها، هشدارهای قیمت و پایش پس‌زمینه متوقف می‌شود.",
   "mkt.set.quiet": "بی‌صدا کردن هشدارهای قیمت در ساعت سکوت",
@@ -107,9 +191,38 @@
   "mkt.unit.toman": "تومان",
   "mkt.unit.tomanSuffix": " ت",
   "mkt.unit.usd": "دلار",
-  "mkt.usdt.name": "تتر به تومان"
+  "mkt.usdt.name": "تتر به تومان",
+  "mkt.win.H1": "۱ ساعت",
+  "mkt.win.H24": "۲۴ ساعت",
+  "mkt.win.M15": "۱۵ دقیقه",
+  "mkt.win.M5": "۵ دقیقه",
+  "mkt.word.above": "بالای ",
+  "mkt.word.below": "زیر "
  },
  "uiArgs": {
+  "mkt.alert.move.down": [
+   "pct",
+   "symbol",
+   "window"
+  ],
+  "mkt.alert.move.up": [
+   "pct",
+   "symbol",
+   "window"
+  ],
+  "mkt.alert.summary": [
+   "n"
+  ],
+  "mkt.alert.target.title": [
+   "symbol"
+  ],
+  "mkt.alert.test.body": [
+   "pct",
+   "window"
+  ],
+  "mkt.alerts.minutes": [
+   "n"
+  ],
   "mkt.cal.expired.body": [
    "date"
   ],
@@ -154,6 +267,27 @@
   ],
   "mkt.link.tp": [
    "price"
+  ],
+  "mkt.news.sameTime": [
+   "n"
+  ],
+  "mkt.rem.body": [
+   "n"
+  ],
+  "mkt.rule.aboveField": [
+   "unit"
+  ],
+  "mkt.rule.belowField": [
+   "unit"
+  ],
+  "mkt.rule.pct": [
+   "pct"
+  ],
+  "mkt.rule.saved": [
+   "symbol"
+  ],
+  "mkt.rule.usingDefault": [
+   "pct"
   ]
  },
  "overrides": {
