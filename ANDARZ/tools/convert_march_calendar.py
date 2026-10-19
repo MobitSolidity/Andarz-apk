@@ -84,7 +84,7 @@ def main() -> int:
         raise SystemExit("duplicate ids")
     doc = {
         "validUntil": events[-1]["at"][:10] + "T23:59:59" + OFFSET,
-        "source": "Converted from March data/Events.kt (Federal Reserve calendar, BLS release schedule). "
+        "source": "Federal Reserve calendar, BLS release schedule. Converted by tools/convert_march_calendar.py. "
                   "Refresh by hand; see README.md.",
         "events": events,
     }

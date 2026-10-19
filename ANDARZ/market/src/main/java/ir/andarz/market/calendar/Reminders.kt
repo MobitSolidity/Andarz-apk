@@ -81,11 +81,7 @@ class ReminderReceiver : BroadcastReceiver() {
             .setContentIntent(open)
             .setAutoCancel(true)
             .build()
-        try {
-            NotificationManagerCompat.from(context).notify(Channels.TAG, (intent.getStringExtra("id") ?: title).hashCode(), n)
-        } catch (_: SecurityException) {
-            // Notification permission denied by the user.
-        }
+        Channels.notify(context, (intent.getStringExtra("id") ?: title).hashCode(), n)
     }
 }
 

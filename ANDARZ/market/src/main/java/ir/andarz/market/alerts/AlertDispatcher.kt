@@ -83,10 +83,6 @@ internal class AlertDispatcher(
             .setContentIntent(open)
             .setAutoCancel(true)
             .build()
-        try {
-            NotificationManagerCompat.from(context).notify(Channels.TAG, key.hashCode(), n)
-        } catch (_: SecurityException) {
-            // Notification permission denied by the user.
-        }
+        Channels.notify(context, key.hashCode(), n)
     }
 }

@@ -1,5 +1,6 @@
 package ir.andarz.market.alarm
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -74,6 +75,7 @@ object AlarmRinger {
         main.post { start(ctx, Info(title, body, coinId, System.currentTimeMillis())) }
     }
 
+    @SuppressLint("MissingPermission") // vibrator.cancel(); see vibrate() (D-M53)
     fun stop(context: Context) {
         val ctx = context.applicationContext
         main.post {
@@ -235,6 +237,9 @@ object AlarmRinger {
         }
     }
 
+    // VIBRATE is an install-time permission declared by :app (K8.1), so it is always granted in the merged
+    // app; lint analyses :market alone and cannot see it (D-M53). Not a runtime permission: nothing to check.
+    @SuppressLint("MissingPermission")
     private fun vibrate(ctx: Context) {
         if (vibrator != null) return
         val v: Vibrator? = if (Build.VERSION.SDK_INT >= 31) {
@@ -277,11 +282,8 @@ object AlarmRinger {
             .addAction(0, texts.alarmStop(), stop)
             .addAction(0, texts.alarmSnooze(), snooze)
             .build()
-        try {
-            NotificationManagerCompat.from(ctx).notify(Channels.TAG, NOTIF_ID, n)
-        } catch (_: SecurityException) {
-            // Notification permission denied: the tone, vibration and alarm screen still work.
-        }
+        // Without the notification permission the tone, vibration and alarm screen still work.
+        Channels.notify(ctx, NOTIF_ID, n)
     }
 }
 

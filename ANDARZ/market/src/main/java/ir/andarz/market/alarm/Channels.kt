@@ -1,10 +1,15 @@
 package ir.andarz.market.alarm
 
+import android.Manifest
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import ir.andarz.market.MarketChannel
 import ir.andarz.market.MarketTexts
 
@@ -13,6 +18,22 @@ import ir.andarz.market.MarketTexts
  * come from content through [MarketTexts]. Settings per channel are March's.
  */
 internal object Channels {
+
+    /**
+     * Posts a market notification with the tag "market". POST_NOTIFICATIONS is declared by :app (K8.1), so
+     * the runtime grant is checked here explicitly; without it nothing is posted (the user said no, §7).
+     */
+    fun notify(context: Context, id: Int, n: Notification) {
+        if (Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+        ) return
+        try {
+            NotificationManagerCompat.from(context).notify(TAG, id, n)
+        } catch (_: SecurityException) {
+            // Revoked between the check and the call.
+        }
+    }
+
     const val GROUP = "market"
 
     /** Every market notification is posted with this tag, so its ids cannot collide with the discipline ones. */

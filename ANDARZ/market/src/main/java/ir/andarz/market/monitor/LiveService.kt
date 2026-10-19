@@ -53,10 +53,7 @@ class LiveService : Service() {
                 if (now - last < REFRESH_MS) return@collect
                 val line = texts.monitorLine(st) ?: return@collect
                 last = now
-                try {
-                    NotificationManagerCompat.from(this@LiveService).notify(Channels.TAG, ID, build(line))
-                } catch (_: SecurityException) {
-                }
+                Channels.notify(this@LiveService, ID, build(line))
             }
         }
     }
