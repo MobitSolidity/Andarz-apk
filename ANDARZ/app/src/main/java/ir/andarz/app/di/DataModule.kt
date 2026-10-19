@@ -72,4 +72,6 @@ object DataModule {
     @Provides @Singleton fun pledges(db: AndarzDatabase, clock: Clock) = ir.andarz.data.PledgeRepository(db, clock)
 
     @Provides @Singleton fun reviews(db: AndarzDatabase, clock: Clock) = ReviewRepository(db, clock)
+
+    @Provides @Singleton fun watch(db: AndarzDatabase, clock: Clock, p: ParamsRepository) = ir.andarz.data.WatchRepository(db, clock, p)
 }

@@ -29,6 +29,14 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import javax.inject.Inject
 
+/** One-shot hand-off from the calculator to the wizard (5.7). Process-local; ids and numbers only. */
+@javax.inject.Singleton
+class WizardPrefill @Inject constructor() {
+    @Volatile private var pending: WizardDraft? = null
+    fun offer(d: WizardDraft) { pending = d }
+    fun take(): WizardDraft? = pending.also { pending = null }
+}
+
 /** Wizard draft (5.3). Plain strings for numbers keep the user's raw text; ids only, so it survives death. */
 data class WizardDraft(
     val step: Int = 1,
@@ -87,6 +95,7 @@ class WizardViewModel @Inject constructor(
     private val journal: JournalRepository,
     private val setups: SetupRepository,
     db: AndarzDatabase,
+    prefill: WizardPrefill,
 ) : ViewModel() {
     private val _draft = MutableStateFlow(state.get<WizardDraft>(KEY) ?: WizardDraft())
     val draft: StateFlow<WizardDraft> = _draft
@@ -101,7 +110,11 @@ class WizardViewModel @Inject constructor(
     val pendingEntry = MutableStateFlow<TradeEntity?>(null)
     val done = MutableStateFlow<String?>(null)
 
-    init { refresh() }
+    init {
+        // The calculator's numbers (5.7 `calc.toPlan`): taken once, symbol left empty.
+        prefill.take()?.let { pre -> _draft.value = pre; state[KEY] = pre }
+        refresh()
+    }
 
     fun refresh() = viewModelScope.launch {
         val s = facade.snapshot(Instant.now(), _draft.value.setupId)

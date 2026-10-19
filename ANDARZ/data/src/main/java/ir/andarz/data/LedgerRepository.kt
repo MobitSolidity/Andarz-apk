@@ -89,6 +89,47 @@ class SetupRepository(private val db: AndarzDatabase, private val clock: Clock) 
     }
 
     suspend fun update(s: SetupEntity) = db.setups().upsert(s.copy(updatedAt = clock.now().toEpochMilli()))
+
+    /**
+     * Grade A only when the engine says so (3.9 `gradeAEligible`); demotion is always allowed (5.11).
+     * Returns false when a promotion was refused.
+     */
+    suspend fun setGrade(id: String, grade: String, eligibleA: Boolean): Boolean {
+        require(grade == "A" || grade == "B")
+        val s = db.setups().get(id) ?: return false
+        if (grade == "A" && !eligibleA) return false
+        update(s.copy(grade = grade))
+        return true
+    }
+
+    /** Setups are archived, never deleted, so trades keep their reference (5.11). */
+    suspend fun setArchived(id: String, archived: Boolean) {
+        val s = db.setups().get(id) ?: return
+        update(s.copy(archived = archived))
+    }
+}
+
+enum class WatchError { FULL, EMPTY_SYMBOL, DUPLICATE }
+
+/** Watch-list of 5.11: at most `Watchlist_Max` symbols; the liquidity numbers are informational (D-22). */
+class WatchRepository(private val db: AndarzDatabase, private val clock: Clock, private val params: ParamsRepository) {
+    suspend fun add(symbol: String, volume24hUsd: Double?, relVolume: Double?, levels: String, notes: String): WatchError? {
+        val sym = symbol.trim().uppercase(java.util.Locale.ROOT)
+        if (sym.isEmpty()) return WatchError.EMPTY_SYMBOL
+        val all = db.watch().all()
+        if (all.any { it.symbol == sym }) return WatchError.DUPLICATE
+        if (all.size >= params.current().watchlistMax.toInt()) return WatchError.FULL
+        val now = clock.now().toEpochMilli()
+        val checked = if (volume24hUsd != null || relVolume != null) now else null
+        db.watch().upsert(ir.andarz.data.db.WatchSymbolEntity(UUID.randomUUID().toString(), sym, volume24hUsd, relVolume, levels.trim(), notes.trim(), checked, now))
+        return null
+    }
+
+    /** Editing the liquidity numbers counts as a liquidity check. */
+    suspend fun update(w: ir.andarz.data.db.WatchSymbolEntity, liquidityChanged: Boolean) =
+        db.watch().upsert(if (liquidityChanged) w.copy(checkedAt = clock.now().toEpochMilli()) else w)
+
+    suspend fun delete(w: ir.andarz.data.db.WatchSymbolEntity) = db.watch().delete(w)
 }
 
 class ReviewRepository(private val db: AndarzDatabase, private val clock: Clock) {
