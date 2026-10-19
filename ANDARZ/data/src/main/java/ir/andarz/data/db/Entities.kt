@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 
 /*
  * Tables of 4.2. Ids are random UUID strings, instants are epoch milliseconds (UTC), enumerations are the
@@ -14,9 +15,11 @@ import androidx.room.PrimaryKey
  */
 
 /** One exit leg: price, fraction of the original position, optional time and fee (4.2). */
+@Serializable
 data class LegRow(val price: Double, val fraction: Double, val time: Long? = null, val fee: Double = 0.0)
 
 /** The engine plan, frozen when the plan is saved (4.4). */
+@Serializable
 data class PlanSnapshot(
     val sld: Double?,
     val rr: Double?,
@@ -29,6 +32,7 @@ data class PlanSnapshot(
     val liqX: Double?,
 )
 
+@Serializable
 @Entity(
     tableName = "trade",
     indices = [Index("status"), Index("entryTime"), Index("exitTime"), Index("setupId"), Index("account")],
@@ -101,6 +105,7 @@ data class TradeEntity(
     val updatedAt: Long,
 )
 
+@Serializable
 @Entity(
     tableName = "trade_event",
     foreignKeys = [ForeignKey(entity = TradeEntity::class, parentColumns = ["id"], childColumns = ["tradeId"], onDelete = ForeignKey.CASCADE)],
@@ -115,6 +120,7 @@ data class TradeEventEntity(
     val payload: String,
 )
 
+@Serializable
 @Entity(
     tableName = "attachment",
     foreignKeys = [ForeignKey(entity = TradeEntity::class, parentColumns = ["id"], childColumns = ["tradeId"], onDelete = ForeignKey.CASCADE)],
@@ -131,6 +137,7 @@ data class AttachmentEntity(
     val createdAt: Long,
 )
 
+@Serializable
 @Entity(tableName = "setup")
 data class SetupEntity(
     @PrimaryKey val id: String,
@@ -146,6 +153,7 @@ data class SetupEntity(
     val updatedAt: Long,
 )
 
+@Serializable
 @Entity(tableName = "watch_symbol", indices = [Index(value = ["symbol"], unique = true)])
 data class WatchSymbolEntity(
     @PrimaryKey val id: String,
@@ -158,6 +166,7 @@ data class WatchSymbolEntity(
     val addedAt: Long,
 )
 
+@Serializable
 @Entity(tableName = "ledger_entry", indices = [Index("time")])
 data class LedgerEntryEntity(
     @PrimaryKey val id: String,
@@ -169,6 +178,7 @@ data class LedgerEntryEntity(
     val createdAt: Long,
 )
 
+@Serializable
 @Entity(tableName = "review", indices = [Index("type"), Index("periodStart")])
 data class ReviewEntity(
     @PrimaryKey val id: String,
@@ -182,6 +192,7 @@ data class ReviewEntity(
     val kpiSnapshot: String,
 )
 
+@Serializable
 @Entity(tableName = "param_change", indices = [Index("key"), Index("effectiveAt")])
 data class ParamChangeEntity(
     @PrimaryKey val id: String,
@@ -197,6 +208,7 @@ data class ParamChangeEntity(
     val createdAt: Long,
 )
 
+@Serializable
 @Entity(tableName = "review_session")
 data class ReviewSessionEntity(
     @PrimaryKey val id: String,
@@ -206,6 +218,7 @@ data class ReviewSessionEntity(
     val endReason: String?,
 )
 
+@Serializable
 @Entity(tableName = "pledge")
 data class PledgeEntity(
     @PrimaryKey val id: String,
@@ -217,6 +230,7 @@ data class PledgeEntity(
     val textSnapshot: String,
 )
 
+@Serializable
 @Entity(tableName = "security_check")
 data class SecurityCheckEntity(
     @PrimaryKey val clauseId: String,
@@ -224,6 +238,7 @@ data class SecurityCheckEntity(
     val checkedAt: Long?,
 )
 
+@Serializable
 @Entity(tableName = "spot_asset")
 data class SpotAssetEntity(
     @PrimaryKey val id: String,
@@ -237,6 +252,7 @@ data class SpotAssetEntity(
     val createdAt: Long,
 )
 
+@Serializable
 @Entity(tableName = "audit_log", indices = [Index("time"), Index("type")])
 data class AuditLogEntity(
     @PrimaryKey val id: String,

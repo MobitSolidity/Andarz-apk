@@ -47,7 +47,10 @@ android {
     testOptions {
         // Room's in-memory database runs on the JVM under Robolectric (10.5).
         unitTests.isIncludeAndroidResources = true
-        unitTests.all { it.systemProperty("robolectric.logging.enabled", "false") }
+        unitTests.all {
+            it.systemProperty("robolectric.logging.enabled", "false")
+            it.systemProperty("andarz.content", "$rootDir/spec/andarz_content_fa.json")
+        }
     }
 }
 

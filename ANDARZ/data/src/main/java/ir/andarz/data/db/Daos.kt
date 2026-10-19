@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TradeDao {
+    @Insert suspend fun insertAll(rows: List<TradeEntity>)
     @Insert suspend fun insert(t: TradeEntity)
     @Update suspend fun update(t: TradeEntity)
     @Delete suspend fun delete(t: TradeEntity)
@@ -27,6 +28,8 @@ interface TradeDao {
 
 @Dao
 interface TradeEventDao {
+    @Insert suspend fun insertAll(rows: List<TradeEventEntity>)
+    @Query("DELETE FROM trade_event") suspend fun deleteAll()
     @Insert suspend fun insert(e: TradeEventEntity)
     @Query("SELECT * FROM trade_event WHERE tradeId = :tradeId ORDER BY time") suspend fun forTrade(tradeId: String): List<TradeEventEntity>
     @Query("SELECT * FROM trade_event WHERE tradeId = :tradeId ORDER BY time DESC") fun observeForTrade(tradeId: String): Flow<List<TradeEventEntity>>
@@ -35,6 +38,8 @@ interface TradeEventDao {
 
 @Dao
 interface AttachmentDao {
+    @Insert suspend fun insertAll(rows: List<AttachmentEntity>)
+    @Query("DELETE FROM attachment") suspend fun deleteAll()
     @Insert suspend fun insert(a: AttachmentEntity)
     @Delete suspend fun delete(a: AttachmentEntity)
     @Query("SELECT * FROM attachment WHERE tradeId = :tradeId ORDER BY createdAt") suspend fun forTrade(tradeId: String): List<AttachmentEntity>
@@ -43,6 +48,8 @@ interface AttachmentDao {
 
 @Dao
 interface SetupDao {
+    @Insert suspend fun insertAll(rows: List<SetupEntity>)
+    @Query("DELETE FROM setup") suspend fun deleteAll()
     @Upsert suspend fun upsert(s: SetupEntity)
     @Query("SELECT * FROM setup WHERE id = :id") suspend fun get(id: String): SetupEntity?
     @Query("SELECT * FROM setup ORDER BY archived, name") fun observeAll(): Flow<List<SetupEntity>>
@@ -51,6 +58,8 @@ interface SetupDao {
 
 @Dao
 interface WatchSymbolDao {
+    @Insert suspend fun insertAll(rows: List<WatchSymbolEntity>)
+    @Query("DELETE FROM watch_symbol") suspend fun deleteAll()
     @Upsert suspend fun upsert(w: WatchSymbolEntity)
     @Delete suspend fun delete(w: WatchSymbolEntity)
     @Query("SELECT * FROM watch_symbol ORDER BY addedAt") fun observeAll(): Flow<List<WatchSymbolEntity>>
@@ -60,6 +69,8 @@ interface WatchSymbolDao {
 
 @Dao
 interface LedgerDao {
+    @Insert suspend fun insertAll(rows: List<LedgerEntryEntity>)
+    @Query("DELETE FROM ledger_entry") suspend fun deleteAll()
     @Insert suspend fun insert(e: LedgerEntryEntity)
     @Update suspend fun update(e: LedgerEntryEntity)
     @Delete suspend fun delete(e: LedgerEntryEntity)
@@ -71,6 +82,8 @@ interface LedgerDao {
 
 @Dao
 interface ReviewDao {
+    @Insert suspend fun insertAll(rows: List<ReviewEntity>)
+    @Query("DELETE FROM review") suspend fun deleteAll()
     @Insert suspend fun insert(r: ReviewEntity)
     @Query("SELECT * FROM review ORDER BY completedAt DESC") fun observeAll(): Flow<List<ReviewEntity>>
     @Query("SELECT * FROM review") suspend fun all(): List<ReviewEntity>
@@ -78,6 +91,8 @@ interface ReviewDao {
 
 @Dao
 interface ParamChangeDao {
+    @Insert suspend fun insertAll(rows: List<ParamChangeEntity>)
+    @Query("DELETE FROM param_change") suspend fun deleteAll()
     @Insert suspend fun insert(c: ParamChangeEntity)
     @Update suspend fun update(c: ParamChangeEntity)
     @Query("SELECT * FROM param_change WHERE id = :id") suspend fun get(id: String): ParamChangeEntity?
@@ -87,6 +102,8 @@ interface ParamChangeDao {
 
 @Dao
 interface ReviewSessionDao {
+    @Insert suspend fun insertAll(rows: List<ReviewSessionEntity>)
+    @Query("DELETE FROM review_session") suspend fun deleteAll()
     @Insert suspend fun insert(s: ReviewSessionEntity)
     @Update suspend fun update(s: ReviewSessionEntity)
     @Query("SELECT * FROM review_session WHERE endedAt IS NULL ORDER BY startedAt DESC LIMIT 1") suspend fun open(): ReviewSessionEntity?
@@ -96,6 +113,8 @@ interface ReviewSessionDao {
 
 @Dao
 interface PledgeDao {
+    @Insert suspend fun insertAll(rows: List<PledgeEntity>)
+    @Query("DELETE FROM pledge") suspend fun deleteAll()
     @Insert suspend fun insert(p: PledgeEntity)
     @Query("SELECT * FROM pledge ORDER BY signedAt DESC LIMIT 1") fun observeLatest(): Flow<PledgeEntity?>
     @Query("SELECT * FROM pledge") suspend fun all(): List<PledgeEntity>
@@ -103,6 +122,8 @@ interface PledgeDao {
 
 @Dao
 interface SecurityCheckDao {
+    @Insert suspend fun insertAll(rows: List<SecurityCheckEntity>)
+    @Query("DELETE FROM security_check") suspend fun deleteAll()
     @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun put(c: SecurityCheckEntity)
     @Query("SELECT * FROM security_check") fun observeAll(): Flow<List<SecurityCheckEntity>>
     @Query("SELECT * FROM security_check") suspend fun all(): List<SecurityCheckEntity>
@@ -110,12 +131,16 @@ interface SecurityCheckDao {
 
 @Dao
 interface SpotAssetDao {
+    @Insert suspend fun insertAll(rows: List<SpotAssetEntity>)
+    @Query("DELETE FROM spot_asset") suspend fun deleteAll()
     @Upsert suspend fun upsert(a: SpotAssetEntity)
     @Query("SELECT * FROM spot_asset") suspend fun all(): List<SpotAssetEntity>
 }
 
 @Dao
 interface AuditDao {
+    @Insert suspend fun insertAll(rows: List<AuditLogEntity>)
+    @Query("DELETE FROM audit_log") suspend fun deleteAll()
     @Insert suspend fun insert(a: AuditLogEntity)
     @Query("SELECT * FROM audit_log ORDER BY time DESC") fun observeAll(): Flow<List<AuditLogEntity>>
     @Query("SELECT * FROM audit_log ORDER BY time") suspend fun all(): List<AuditLogEntity>
