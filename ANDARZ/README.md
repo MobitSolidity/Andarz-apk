@@ -41,3 +41,26 @@ Standalone build (no March): unzip the kit into an empty git repository and past
 - The name «اندرز» and the placeholder `applicationId` (`ir.andarz.app`) were not checked against Bazaar, Myket or Google Play.
 - The governor (locks, risk reductions, big-win hold) has no Excel twin: `andarz_ref.py` and 33 scenarios define it. The imported-history rule (section 3.9, D-14) has no vector; the prompt asks for dedicated tests.
 - A personal discipline tool, not financial advice. The app never trades and never connects to an exchange account.
+
+## Refreshing the release calendar
+
+The News section reads `market/src/main/assets/market_calendar.json`. There is no network source on purpose.
+After `validUntil`, News shows the expired state (`mkt.cal.expired.*`) and everything else keeps working.
+
+Format:
+
+```json
+{
+  "validUntil": "2026-10-29T23:59:59+03:30",
+  "source": "free text, not shown",
+  "events": [
+    {"id": "2026-10-cpi", "at": "2026-10-14T16:00:00+03:30", "country": "US",
+     "title": "Persian title", "titleEn": "optional", "impact": 3, "previous": "", "forecast": ""}
+  ]
+}
+```
+
+- `id` must be unique per occurrence (`yyyy-MM-name`), so a refreshed list never re-arms an old reminder.
+- `at` is ISO-8601 with its offset; `impact` is 1 to 3; `country` is an ISO 3166 alpha-2 code.
+- Edit the JSON by hand, or update March's `data/Events.kt` and run `python -I tools/convert_march_calendar.py`.
+- Set `validUntil` to the end of the last day the list covers, then rebuild.

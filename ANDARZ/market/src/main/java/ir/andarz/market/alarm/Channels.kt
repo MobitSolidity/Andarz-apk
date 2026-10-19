@@ -1,6 +1,7 @@
 package ir.andarz.market.alarm
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
@@ -23,6 +24,9 @@ internal object Channels {
      * Posts a market notification with the tag "market". POST_NOTIFICATIONS is declared by :app (K8.1), so
      * the runtime grant is checked here explicitly; without it nothing is posted (the user said no, §7).
      */
+    // The grant is checked on the line below; lint analyses :market alone and cannot see that :app declares
+    // POST_NOTIFICATIONS (K8.1), so it is suppressed at this one call site and nowhere else (D-M53).
+    @SuppressLint("MissingPermission")
     fun notify(context: Context, id: Int, n: Notification) {
         if (Build.VERSION.SDK_INT >= 33 &&
             ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED

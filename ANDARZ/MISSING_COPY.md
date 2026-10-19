@@ -31,6 +31,7 @@ March wording behind MK1 and MK2 is **moved, not written**: it is extracted from
 | MK1 | The offline state with the age of the last data (K6.2) | March shows a data age; the exact sentence comes from the extraction |
 | MK2 | Channel names and descriptions for `price_alerts`, `price_alarm`, `live_monitor`, `releases` (K6.6) | March has all four; they move with `PriceAlerts.ensureChannel` and `AlarmRinger.ensureChannel` |
 | MK2 | The ISO country chip that replaces the flag emoji (K6.7) | A code, not a word: no new Persian needed |
+| MK2 | Done: every MK2 string was moved from March by the script (D-M50); none was written | |
 | MK3 | Nothing expected — K13 already supplies `mkt.link.*`, `mkt.chip.*` and `mkt.set.quiet` | |
 
 ## Keys that exist and are deliberately not used yet

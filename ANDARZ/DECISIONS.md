@@ -475,6 +475,65 @@ real hosts. They are rows A3/A4/A5-MK1 in MANUAL_TEST.md, marked pending. JVM te
 (fixtures for all five services), PriceHistory, the merge, cadence, demand and zero traffic, error mapping,
 MarketFmt and the Prices filter/sort.
 
+## MK2 — Alerts, ringing, calendar (decisions)
+
+### D-M49 — The alert evaluator is pure; the dispatcher is the only Android half
+
+`AlertEvaluator.evaluate(state, history, settings, rules, watch, now)` returns typed actions (`Target`, `Move`,
+`Summary`) and the one-shot targets to clear; `AlertDispatcher` posts them. March's rules are kept line for
+line (K5.2), including its memory: cooldown per coin and direction, fired targets per coin+side+price, at
+most three moves per round plus a summary, only the strongest move rings. The hub calls the evaluator after
+each published snapshot, so with the gate closed no price alert can fire (K4). Table tests in
+`AlertEvaluatorTest` (16 cases). K6.5 holds by construction: :market cannot reach :data or :engine.
+
+### D-M50 — Notification wording is assembled in :app from moved pieces
+
+March built titles by concatenation. `tools/move_march_strings.py` gained `join` (a key made of March's
+pieces in order, with `{placeholders}` where March inserted a value) and `rename` (a Kotlin template variable
+renamed to a neutral placeholder). Every Persian piece is byte-identical to March. K7 transformations: emoji
+removed with the one space that followed it, "March" replaced by the app name (it also appears in Latin in
+five strings). K6.7: move titles start with ▲/▼, the target title has no emoji, the permission rows show a
+core warning icon. 150 market keys in total; none written by hand except `mkt.data.iran` (MK1).
+
+### D-M51 — Calendar asset generated from March's source, ids per occurrence
+
+`tools/convert_march_calendar.py` reads March's `data/Events.kt` and writes
+`market/src/main/assets/market_calendar.json` (15 releases, `validUntil` 2026-10-29T23:59:59+03:30, the last
+release day). Ids are `yyyy-MM-<march id>` (`2026-10-cpi`), unique per occurrence, so a refreshed list never
+re-arms an old reminder: restore ignores saved ids that are not in the current list (`CalendarTest`). A
+malformed row is skipped and a broken file gives the expired/empty state; nothing else breaks (K6.10).
+The format and the refresh steps are in README.md.
+
+### D-M52 — Who holds the hub, and the monitor follows the switch and the gate
+
+`MarketModule.start()` (from `install`) adds the two non-UI demand reasons of K6.4: (b) while the process is in
+the foreground (`ProcessLifecycleOwner`) and sharp-move alerts are on or a target is armed, the hub is held
+with `ui = false`; (c) the monitor service runs exactly while `alerts.background && gate.mayUseNetwork`, so
+switching Market off also stops the service (K4). After a reboot or an app update `BootReceiver` re-arms the
+reminders and starts the monitor only under the same condition (K5.2).
+
+### D-M53 — Lint `MissingPermission` in :market, resolved at one call site
+
+Lint analyses :market alone and does not see POST_NOTIFICATIONS and VIBRATE, which :app declares (K8.1
+keeps them there). All market notifications now go through `Channels.notify`, which checks the
+POST_NOTIFICATIONS grant at runtime and suppresses the lint id on that one method. VIBRATE is an
+install-time permission, always granted in the merged app; the two vibrator calls carry the same
+suppression with this reason. No lint check was disabled for the module.
+
+### D-M54 — Quiet hours and the settings the texts use
+
+Price alerts and release reminders are never deferred by quiet hours (K6.6). The P1 switch
+`mkt.set.quiet` exists in the dispatcher (`quiet` posts silently and does not ring) and is wired to the
+Settings screen in M6. `MarketHostImpl` follows the settings flow for the life of the process, so a
+notification built by a receiver uses the user's digit, calendar and zone settings without blocking.
+
+### D-M55 — Device-only checks of MK2
+
+Ringing through the Clock app, the own-alarm fallback, over the lock screen, snooze, auto-stop, the volume
+floor, the monitor and reboot restore need a device. They are rows of "Device checklist for the ringing
+features (MK2)" in MANUAL_TEST.md, all pending. The JVM covers the evaluator, reminder time math, boot
+restore through a fake scheduler and the calendar loader.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |
