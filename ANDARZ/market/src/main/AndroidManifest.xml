@@ -9,8 +9,8 @@
   allowBackup / theme / icon, which belong to :app. Guard 8 scans every source file for the name of that
   permission, so it is spelled out nowhere in this repository.
 
-  Components (AlarmActivity, the receivers, LiveService) arrive with MK2 together with their classes;
-  see MERGE_MAP.md.
+  Components (K8.2): everything exported=false except BootReceiver (BOOT_COMPLETED and
+  MY_PACKAGE_REPLACED only, as in March: an app update wipes alarms).
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -41,5 +41,37 @@
             <action android:name="android.intent.action.SET_ALARM" />
         </intent>
     </queries>
+
+    <application>
+        <!-- Full-screen ringing alarm over the lock screen. Outside the app lock: market data only (K6.11). -->
+        <activity
+            android:name=".alarm.AlarmActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity="${applicationId}.alarm"
+            android:excludeFromRecents="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:theme="@style/Theme.AndarzMarket.Alarm" />
+
+        <receiver android:name=".calendar.ReminderReceiver" android:exported="false" />
+        <receiver android:name=".alarm.AlarmReceiver" android:exported="false" />
+        <receiver android:name=".calendar.BootReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Opt-in live monitor (D-M08). The subtype text is March's, a manifest property for store review. -->
+        <service
+            android:name=".monitor.LiveService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Real-time cryptocurrency price monitoring for user-configured instant price alerts" />
+        </service>
+    </application>
 
 </manifest>

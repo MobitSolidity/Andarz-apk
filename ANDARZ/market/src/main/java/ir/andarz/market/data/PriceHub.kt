@@ -48,6 +48,16 @@ import kotlin.math.abs
  * - dropped: the language handling (Andarz owns it) and the alert evaluation, which MK2 hooks in through
  *   [onPublish].
  */
+/** Everything one alert round needs, handed over after a snapshot is published. */
+internal class PublishRound(
+    val state: MarketState,
+    val history: PriceHistory,
+    val settings: AlertSettings,
+    val rules: Map<String, CoinRule>,
+    val watch: Set<String>,
+    val now: Long,
+)
+
 internal class PriceHub(
     private val sources: MarketSources,
     private val scope: CoroutineScope,
@@ -61,9 +71,9 @@ internal class PriceHub(
     val state: StateFlow<MarketState> = _state.asStateFlow()
     val history = PriceHistory()
 
-    /** Called after each published snapshot. MK2 installs the alert evaluator here. */
+    /** Called after each published snapshot with the inputs of the alert evaluator (MK2). */
     @Volatile
-    var onPublish: ((MarketState, PriceHistory) -> Unit)? = null
+    var onPublish: ((PublishRound) -> Unit)? = null
 
     private val kick = Channel<Unit>(Channel.CONFLATED)
     private val lock = Any()
@@ -296,7 +306,7 @@ internal class PriceHub(
                 lastSample = t
                 for (c in snap.coins) history.add(c.id, t, c.price)
             }
-            onPublish?.invoke(snap, history)
+            onPublish?.invoke(PublishRound(snap, history, settings, rules, watch, t))
         }
     }
 

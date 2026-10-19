@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The alarm screen's own dark window, independent of :app's theme (K5). Colour is the Andarz dark `bg`. -->
+<resources>
+    <style name="Theme.AndarzMarket.Alarm" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">#0A1016</item>
+        <item name="android:statusBarColor">#0A1016</item>
+        <item name="android:navigationBarColor">#0A1016</item>
+    </style>
+</resources>

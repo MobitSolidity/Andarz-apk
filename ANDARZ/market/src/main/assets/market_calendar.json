@@ -1,0 +1,130 @@
+{
+ "validUntil": "2026-10-29T23:59:59+03:30",
+ "source": "Converted from March data/Events.kt (Federal Reserve calendar, BLS release schedule). Refresh by hand; see README.md.",
+ "events": [
+  {
+   "id": "2026-10-nfp",
+   "at": "2026-10-02T16:00:00+03:30",
+   "country": "US",
+   "title": "اشتغال بخش غیرکشاورزی (NFP)",
+   "impact": 3,
+   "titleEn": "Nonfarm Payrolls (NFP)"
+  },
+  {
+   "id": "2026-10-unemp",
+   "at": "2026-10-02T16:00:00+03:30",
+   "country": "US",
+   "title": "نرخ بیکاری",
+   "impact": 3,
+   "titleEn": "Unemployment Rate"
+  },
+  {
+   "id": "2026-10-ism-s",
+   "at": "2026-10-05T17:30:00+03:30",
+   "country": "US",
+   "title": "شاخص مدیران خرید خدماتی ISM",
+   "impact": 3,
+   "titleEn": "ISM Services PMI"
+  },
+  {
+   "id": "2026-10-trade",
+   "at": "2026-10-06T16:00:00+03:30",
+   "country": "US",
+   "title": "تراز تجاری",
+   "impact": 1,
+   "titleEn": "Trade Balance"
+  },
+  {
+   "id": "2026-10-adp",
+   "at": "2026-10-07T15:45:00+03:30",
+   "country": "US",
+   "title": "اشتغال بخش خصوصی ADP",
+   "impact": 2,
+   "titleEn": "ADP Employment Change"
+  },
+  {
+   "id": "2026-10-fomc-min",
+   "at": "2026-10-07T21:30:00+03:30",
+   "country": "US",
+   "title": "صورتجلسه فدرال رزرو (FOMC Minutes)",
+   "impact": 3,
+   "titleEn": "FOMC Meeting Minutes"
+  },
+  {
+   "id": "2026-10-claims",
+   "at": "2026-10-08T16:00:00+03:30",
+   "country": "US",
+   "title": "مدعیان بیمه بیکاری",
+   "impact": 2,
+   "titleEn": "Initial Jobless Claims",
+   "previous": "197K"
+  },
+  {
+   "id": "2026-10-umich",
+   "at": "2026-10-09T17:30:00+03:30",
+   "country": "US",
+   "title": "اطمینان مصرف‌کننده میشیگان (اولیه)",
+   "impact": 2,
+   "titleEn": "UMich Consumer Sentiment (Prelim)",
+   "previous": "51.7",
+   "forecast": "54.1"
+  },
+  {
+   "id": "2026-10-cpi",
+   "at": "2026-10-14T16:00:00+03:30",
+   "country": "US",
+   "title": "شاخص قیمت مصرف‌کننده (CPI) سپتامبر",
+   "impact": 3,
+   "titleEn": "CPI (September)"
+  },
+  {
+   "id": "2026-10-beige",
+   "at": "2026-10-14T21:30:00+03:30",
+   "country": "US",
+   "title": "گزارش کتاب بژ فدرال رزرو",
+   "impact": 2,
+   "titleEn": "Fed Beige Book"
+  },
+  {
+   "id": "2026-10-ppi",
+   "at": "2026-10-15T16:00:00+03:30",
+   "country": "US",
+   "title": "شاخص قیمت تولیدکننده (PPI)",
+   "impact": 2,
+   "titleEn": "Producer Price Index (PPI)"
+  },
+  {
+   "id": "2026-10-indpro",
+   "at": "2026-10-16T16:45:00+03:30",
+   "country": "US",
+   "title": "تولید صنعتی",
+   "impact": 1,
+   "titleEn": "Industrial Production"
+  },
+  {
+   "id": "2026-10-fomc",
+   "at": "2026-10-28T21:30:00+03:30",
+   "country": "US",
+   "title": "تصمیم نرخ بهره فدرال رزرو",
+   "impact": 3,
+   "titleEn": "Fed Interest Rate Decision",
+   "previous": "3.75–4.00%"
+  },
+  {
+   "id": "2026-10-presser",
+   "at": "2026-10-28T22:00:00+03:30",
+   "country": "US",
+   "title": "کنفرانس خبری رئیس فدرال رزرو",
+   "impact": 3,
+   "titleEn": "Fed Chair Press Conference"
+  },
+  {
+   "id": "2026-10-pce",
+   "at": "2026-10-29T16:00:00+03:30",
+   "country": "US",
+   "title": "شاخص هسته PCE",
+   "impact": 3,
+   "titleEn": "Core PCE Price Index"
+  }
+ ]
+}

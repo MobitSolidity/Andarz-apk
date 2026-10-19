@@ -2,6 +2,9 @@ package ir.andarz.market
 
 import android.content.Context
 import android.content.Intent
+import ir.andarz.market.alerts.AlertAction
+import ir.andarz.market.model.AlertSettings
+import ir.andarz.market.model.MarketState
 
 /**
  * A place inside the app that a Market notification can open (K4). Route arguments are ids only, so the
@@ -56,7 +59,45 @@ interface MarketTexts {
 
     /** One sentence for a typed failure, from `mkt.err.*`. */
     fun error(error: MarketError): String
+
+    // ---------------------------------------------------------------- MK2: notifications and the alarm screen
+
+    /** A sharp move (`mkt.alert.move.*`). K6.7: arrow and plain words, no emoji. */
+    fun move(m: AlertAction.Move, s: AlertSettings, usdtToman: Double?): NotifText
+
+    /** A one-shot target price (`mkt.alert.target.title`). */
+    fun target(t: AlertAction.Target, s: AlertSettings, usdtToman: Double?): NotifText
+
+    /** Moves beyond the first three of a round (`mkt.alert.summary`). */
+    fun summary(rest: List<AlertAction.Move>, s: AlertSettings): NotifText
+
+    /** The "send a test notification" button. */
+    fun testAlert(s: AlertSettings): NotifText
+
+    /** The "test the alarm" button. */
+    fun testAlarm(s: AlertSettings): NotifText
+
+    /** Labels of the ringing notification and the alarm screen. */
+    fun alarmStop(): String
+    fun alarmSnooze(): String
+    fun alarmOpenCoin(): String
+
+    /** HH:mm and the weekday/date of the alarm screen, in the app's digit, calendar and zone settings. */
+    fun clock(ms: Long): String
+    fun day(ms: Long): String
+
+    /** The live-monitor notification (K5.2). [monitorLine] is null while no price is known yet. */
+    fun monitorTitle(): String
+    fun monitorConnecting(): String
+    fun monitorStop(): String
+    fun monitorLine(state: MarketState): String?
+
+    /** The body of a release reminder (`mkt.rem.body`). The title is the release's own title. */
+    fun reminderBody(leadMinutes: Int): String
 }
+
+/** A finished notification text. */
+data class NotifText(val title: String, val body: String)
 
 /**
  * The bridge :market uses to reach the app: wording and deep links. Installed once from
