@@ -63,6 +63,11 @@ fun MarketScreen(
     val toman by viewModel.toman.collectAsStateWithLifecycle()
     val sectionName by viewModel.section.collectAsStateWithLifecycle()
     val openCoin by viewModel.openCoin.collectAsStateWithLifecycle()
+    val alertsVm: AlertsNewsViewModel = hiltViewModel()
+    val alertSettings by alertsVm.settings.collectAsStateWithLifecycle()
+    val rules by alertsVm.rules.collectAsStateWithLifecycle()
+    val reminded by alertsVm.reminded.collectAsStateWithLifecycle()
+    val calendarData by alertsVm.calendarData.collectAsStateWithLifecycle()
     val section = MarketSection.entries.firstOrNull { it.name == sectionName } ?: MarketSection.PRICES
     var consentOpen by rememberSaveable { mutableStateOf(false) }
     val u = ui()
@@ -115,6 +120,9 @@ fun MarketScreen(
                             onOpen = { viewModel.openCoin(it) },
                             onGoPrices = { viewModel.setSection(MarketSection.PRICES) },
                             onGoNews = { viewModel.setSection(MarketSection.NEWS) },
+                            reminders = calendarData.events
+                                .filter { it.id in reminded && it.at > System.currentTimeMillis() }
+                                .map { e -> e.title to (u.date(u.localDate(java.time.Instant.ofEpochMilli(e.at))) + SEP + u.time(java.time.Instant.ofEpochMilli(e.at))) },
                         )
                     }
                 } else {
@@ -127,8 +135,16 @@ fun MarketScreen(
                     )
                 }
 
-            MarketSection.NEWS -> Placeholder(content.ui("mkt.tab.news"))
-            MarketSection.ALERTS -> Placeholder(content.ui("mkt.tab.alerts"))
+            // News is local and keeps working with Market off (K4).
+            MarketSection.NEWS -> NewsScreen(
+                content = content, data = calendarData, reminded = reminded,
+                onToggle = { alertsVm.toggleReminder(it) }, onClock = { alertsVm.setClockAlarm(it) },
+            )
+            // Alerts shows its settings with Market off, with a note that price alerts need it on (K4).
+            MarketSection.ALERTS -> AlertsScreen(
+                content = content, fmt = fmt, marketOn = gate.mayUseNetwork, s = alertSettings, rules = rules,
+                coins = state.coins, vm = alertsVm, onOpen = { viewModel.openCoin(it) },
+            )
         }
     }
 
@@ -139,6 +155,9 @@ fun MarketScreen(
             starred = coin.id in watch, session = viewModel.session(coin.id),
             onToggleStar = { viewModel.toggleStar(coin.id) },
             onDismiss = { viewModel.openCoin(null) },
+            rule = rules[coin.id],
+            defaultPct = alertSettings.thresholdPct,
+            onSaveRule = { alertsVm.setRule(it) },
         )
     }
 
@@ -249,16 +268,6 @@ private fun ConsentSheet(
     }
 }
 
-@Composable
-private fun Placeholder(label: String) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Text(label, style = MaterialTheme.typography.titleMedium)
-    }
-}
 
 // A locale-neutral separator, so no punctuation of the UI language lives in code (law 3).
 private const val ISOLATE_SEPARATOR = " · "

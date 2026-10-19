@@ -32,8 +32,7 @@ import ir.andarz.market.model.Coin
 
 /**
  * My coins (March's `ui/WatchScreen.kt`, REIMPLEMENT): starred coins as cards, two per row. The block of
- * reminded releases is kept; its content (the calendar) arrives with MK2, so the block shows March's empty
- * line until then.
+ * reminded releases still ahead is kept (MK2).
  */
 @Composable
 internal fun MyCoinsScreen(
@@ -47,6 +46,7 @@ internal fun MyCoinsScreen(
     onOpen: (String) -> Unit,
     onGoPrices: () -> Unit,
     onGoNews: () -> Unit,
+    reminders: List<Pair<String, String>> = emptyList(),
 ) {
     val mine = coins.filter { it.id in watch }
     LazyColumn(Modifier.fillMaxWidth().padding(horizontal = 12.dp)) {
@@ -65,7 +65,21 @@ internal fun MyCoinsScreen(
             }
         }
         item { SectionHeader(content.ui("mkt.coins.reminders")) }
-        item { EmptyState(content.ui("mkt.coins.remindersEmpty"), content.ui("mkt.tab.news") to onGoNews) }
+        // March's block of reminded releases still ahead: title and time; tapping opens News.
+        if (reminders.isEmpty()) {
+            item { EmptyState(content.ui("mkt.coins.remindersEmpty"), content.ui("mkt.tab.news") to onGoNews) }
+        } else {
+            reminders.forEach { (title, whenText) ->
+                item {
+                    Surface(Modifier.fillMaxWidth().padding(bottom = 6.dp).clickable(onClick = onGoNews), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
+                        Column(Modifier.padding(12.dp)) {
+                            Text(title, style = MaterialTheme.typography.bodyLarge)
+                            Text(whenText, style = MaterialTheme.typography.bodySmall, color = LocalAndarzColors.current.textMuted)
+                        }
+                    }
+                }
+            }
+        }
         item { Spacer(Modifier.height(24.dp)) }
     }
 }
