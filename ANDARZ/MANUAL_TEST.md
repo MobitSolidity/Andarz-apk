@@ -135,6 +135,24 @@ repository side of F5, setups and the watch-list (`JournalLifecycleTest`). These
 | M5-6 | Ledger: withdraw more than equity; edit the baseline outside, then inside a session | `ledger.negative`; baseline shows `ledger.baseline.locked` outside; inside, the edit also moves `Start_Equity` (one audit row each) | pending |
 | A11y-1 | TalkBack over Rules rows, review checkboxes, chart cards; 200% font on Calculator and Insights | Each row is one node with label and value; checkboxes announce on/off; nothing clipped | pending |
 
+## M6 platform features (pending: needs an emulator or device; nothing below has been run)
+
+JVM tests cover the backup round trip, atomic restore, payload compatibility and validation, wipe, both CSV
+profiles with duplicates and row errors, Jalali dates, the PIN policy (`PlatformDataTest`), the share-note field
+counts, quiet hours and the reminder plan (`PlatformLogicTest`).
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| F6 | Settings -> backup with a password; wipe (type the word); restore with a wrong password, then the right one | Wrong password shows `err.backup.wrongPassword` and changes nothing; the right one shows the summary, then all trades, ledger and reviews are back and Today shows the same equity | pending |
+| F7 | Turn the lock on with a PIN; background past the timeout; enter a wrong PIN five times | Lock screen with no journal content; after the fifth failure a 30 s wait that survives killing the app; biometric prompt when chosen | pending |
+| F8 | Digits Persian/Latin and Jalali/Gregorian in Settings | Today, Journal, Insights and dates switch at once | pending |
+| M6-1 | Export CSV (excel and full), open in a spreadsheet, import both into a fresh install | 27 and 50 columns, BOM, Persian headers; preview counts; imported trades counted in Insights, no lock created | pending |
+| M6-2 | Constitution: open article 3, tap a live number, "open in calculator"; sign the pledge | Values follow current Rules; calculator prefilled with 2000/100/96/108/5x; pledge stored with date | pending |
+| M6-3 | Close a trade at a stop, wait for the cool-down; open a trade on 15m and wait 10 candles; set quiet hours around now | `cooldown-end` and `time-stop` notifications arrive (deferred to the end of quiet hours); text on the lock screen shows only the app name; tapping opens the trade after the lock screen | pending |
+| M6-4 | Settings -> Market: switch off while Prices is open; About -> network page | Off state at once, no connection; hosts listed and the credit line present | pending |
+| A9 | Plant each K8.4 violation | Each fails the build (guard log) | done on the JVM guards; re-run before release |
+| A10 | Read every shipped string | No emoji, no English UI text, no "no internet" claim, no March name outside the credit | done by guard 9 |
+
 ## MK1 market data and prices (pending: needs a device with a network; nothing below has been run)
 
 JVM tests cover parsing, merge, cadence, demand, zero traffic and formatting (D-M48). These rows are the

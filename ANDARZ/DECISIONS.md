@@ -447,6 +447,71 @@ inside a session, with no delay. `SetupRepository.setGrade` refuses grade A unle
 `gradeAEligible` holds; demotion is always allowed; setups are archived, never deleted. Date fields in M5
 are day steppers (today, yesterday, minus one day); the Jalali date pickers of 5.15 arrive with M6.
 
+## M6 — Platform features (decisions)
+
+### D-59 — Backup payload from serializable entities
+
+Every Room entity is `@Serializable`, so the payload of 8.3 is the entity fields by name. The decoder ignores
+unknown keys and fills missing optional fields from their defaults (forward and backward compatible).
+`BackupService` builds, validates (one BASELINE, unique ids, legs summing to 1, known enums, no orphan events or
+attachments) and restores in one Room transaction; a failure halfway leaves the database untouched (tested by
+throwing inside the transaction). Settings travel as an opaque object owned by `:app` without PIN, lock state or
+permission state; `market` is reserved for MK3. Screenshots are not part of the payload yet: attachments have no
+picker in this build (D-13 stays open; the `files` map and flag bit are implemented and empty).
+
+### D-60 — Restore is confirmed with the wipe word
+
+The summary dialog (counts, date range, creation time) needs the typed word of `set.wipe.confirm` before the
+replace-all, the same word as the wipe itself, so one Persian word guards both destructive actions and no new
+wording is needed.
+
+### D-61 — CSV vocabulary from content, codec in `:data`
+
+Persian headers, enum `csv` labels and yes/no/dash are read from the content document into `CsvVocab`
+(`fromContent`) and passed to the codec, so `:data` holds no wording (law 3) and its tests read the spec file
+through a system property. Numbers use `shortest()` in plain notation. Formula protection applies to free-text
+cells only. The excel import follows 9.2 steps 1-7; the full import trusts persisted derived columns (D-24).
+Duplicates use the key of 9.2 step 6 against stored trades and earlier rows of the same file. The baseline move
+of step 7 is a switch in the preview with an editable amount, never applied silently.
+
+### D-62 — PIN and attempt policy
+
+PBKDF2-HMAC-SHA256 (the backup's own implementation, D-46) over the ASCII digits, 16-byte salt, 120,000
+iterations, constant-time compare. Five free attempts; after the fifth failure 30 s, doubling per failure up to
+30 min; count and deadline persist in DataStore. The app locks on cold start and after the chosen timeout in the
+background; `FLAG_SECURE` follows "hide in recents". `MainActivity` is a `FragmentActivity` for `BiometricPrompt`
+(strong biometrics, the PIN as fallback). The PIN-setup dialog shows `set.backup.warn` as the "no recovery"
+notice: losing the PIN means wipe and restore from a backup.
+
+### D-63 — Reminders: a pure planner and a reconciler
+
+`ReminderPlanner.plan(snapshot, trades, reviews, settings, now)` returns the desired set of 7 with unique work
+names; quiet hours move instants to the window end. `ScheduleReconciler` diffs it against WorkManager jobs by tag
+and runs at start, after writes to the rule tables (debounced 2 s), after restore and settings changes, and once a
+day. A worker recomputes the plan one second before its instant and posts only when the reminder is still in it,
+so stale reminders are suppressed. Report reminders have no own toggle because they belong to a VIOLATION lock.
+`POST_NOTIFICATIONS` is requested only when a reminder switch is turned on.
+
+### D-64 — Share note by line index
+
+`ShareNote.fields` splits each template line on runs of two or more spaces and keeps each field's text up to its
+last delimiter (`:` or `\u061F`); the test asserts 1,1,1,1,1,1,2,4,4,1,0,4,1,1,1 on the real template. Values come
+from content and the user's digit setting; the note is shared as plain text.
+
+### D-65 — Constitution reader
+
+Clauses and list items are rendered with `Clause.render` and live parameters; the rendered values are bold and
+coloured and the clause opens Rules (the "comes from setting X" sheet is simplified to a hint line plus the Rules
+screen, which shows value, default and article). Search covers clause and paragraph text. "Open in calculator"
+prefills vector P01. Amendments open Rules (a session is required there). Re-signing appears when the pledge
+version changes.
+
+### D-66 — What M6 leaves for later
+
+Demo data (P1), the 3-step font slider (the system scale already applies), screenshots in backups (D-13), the
+learn pages (P1), the spot portfolio (P2) and full Jalali date pickers: dates are entered with day steppers in
+M5/M6 screens and CSV accepts Jalali dates. `mkt.set.quiet` and market settings in backups are MK3.
+
 ## MK1 — Market data and prices (decisions)
 
 ### D-M42 — The WebSocket handshake headers are allowed, on the live-ticks host only

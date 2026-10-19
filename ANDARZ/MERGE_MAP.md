@@ -101,6 +101,16 @@ Checked off when the owning milestone proves it with a test. None of it is redes
 | Live monitor: foreground service of type `specialUse` with a Stop action, notification refreshed at most every 20 s, restarted after boot only when enabled | MK2 | done (tested on the JVM; device part pending in MANUAL_TEST.md) |
 | Default stars: `bitcoin`, `ethereum`, `solana`, `ripple`, `usdt-irt` | MK1 | done (`DEFAULT_WATCH`) |
 
+## M6 integration rows (K6.6, K6.9, K6.11)
+
+| Item | Status | Notes |
+|---|---|---|
+| Settings -> Market section (K6.9) | done | Master switch (`mkt.set.enable` with its hint), USD/Toman default, background monitor (enabled only while the gate is open), link to Alerts, sources list built from `MarketHosts`. The quiet-hours mute (`mkt.set.quiet`, P1) lands with MK3. |
+| About -> network page (K6.9) | done | `mkt.net.title/body/sent`, the host list from `MarketModule.hosts`, the credit line `mkt.about.credit`; the threat-model comment states that Market uses the internet. |
+| Channel groups (K6.6) | done | Discipline group with `discipline`, `reviews`, `system` (tag `discipline`); Market group unchanged (tag `market`). |
+| Deep links through the lock (K6.11) | done | `MainActivity` keeps the notification route while locked and hands it to the nav host after unlock; `onNewIntent` covers a running app. `AlarmActivity` stays outside the lock. |
+| Backup of market settings | MK3 | `BackupDocument.market` is reserved (null until `exportJson/importJson`). |
+
 ## Suspected March defects (flagged, not fixed — D-M23)
 
 | Where | Observation | Decision |
