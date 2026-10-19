@@ -44,6 +44,10 @@ object AndarzNav {
     const val WIZARD = "wizard"
     const val TRADE = "trade/{id}"
     const val REVIEWS = "reviews"
+    const val RULES = "rules"
+    const val SETUPS = "setups"
+    const val WATCHLIST = "watchlist"
+    const val LEDGER = "ledger"
     const val ONBOARDING = "onboarding"
 
     fun trade(id: String) = "trade/$id"

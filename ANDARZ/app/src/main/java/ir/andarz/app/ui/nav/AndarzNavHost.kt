@@ -1,11 +1,7 @@
 package ir.andarz.app.ui.nav
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -13,10 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -28,6 +22,14 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.andarz.app.content.ContentRepository
 import ir.andarz.app.ui.AppViewModel
+import ir.andarz.app.ui.analysis.CalculatorScreen
+import ir.andarz.app.ui.analysis.InsightsScreen
+import ir.andarz.app.ui.analysis.LedgerScreen
+import ir.andarz.app.ui.analysis.MoreScreen
+import ir.andarz.app.ui.analysis.ReviewsScreen
+import ir.andarz.app.ui.analysis.RulesScreen
+import ir.andarz.app.ui.analysis.SetupsScreen
+import ir.andarz.app.ui.analysis.WatchlistScreen
 import ir.andarz.app.ui.journal.JournalScreen
 import ir.andarz.app.ui.market.MarketScreen
 import ir.andarz.app.ui.today.TodayScreen
@@ -111,7 +113,6 @@ fun AndarzNavHost(
                     onNeed = { need, tradeId ->
                         when (need) {
                             LockNeed.REPORT, LockNeed.CLOSE_POSITION -> tradeId?.let { navController.navigate(AndarzNav.trade(it)) }
-                            // Reviews arrive with M5; until then the need is shown and the button does nothing harmful.
                             LockNeed.REVIEW, LockNeed.WEEKLY_REVIEW -> navController.navigate(AndarzNav.REVIEWS)
                         }
                     },
@@ -130,10 +131,27 @@ fun AndarzNavHost(
             composable(AndarzNav.MARKET_COIN) { entry ->
                 MarketScreen(content = content, initialCoin = entry.arguments?.getString("id"))
             }
-            composable(AndarzNav.CALCULATOR) { Placeholder(content.ui("nav.calculator")) }
-            composable(AndarzNav.MORE) { Placeholder(content.ui("nav.more")) }
-            composable(AndarzNav.INSIGHTS) { Placeholder(content.ui("nav.insights")) }
-            composable(AndarzNav.REVIEWS) { Placeholder(content.ui("rev.title")) }
+            composable(AndarzNav.CALCULATOR) { CalculatorScreen(onToPlan = { navController.navigate(AndarzNav.WIZARD) }) }
+            composable(AndarzNav.MORE) {
+                val go = { route: String -> { navController.navigate(route); Unit } }
+                MoreScreen(
+                    listOf(
+                        "ins.title" to go(AndarzNav.INSIGHTS), "rev.title" to go(AndarzNav.REVIEWS), "params.title" to go(AndarzNav.RULES),
+                        "setups.title" to go(AndarzNav.SETUPS), "wl.title" to go(AndarzNav.WATCHLIST), "ledger.title" to go(AndarzNav.LEDGER),
+                    ),
+                )
+            }
+            composable(AndarzNav.INSIGHTS) { InsightsScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.REVIEWS) {
+                ReviewsScreen(
+                    onBack = { navController.popBackStack() }, onOpenTrade = { navController.navigate(AndarzNav.trade(it)) },
+                    onRules = { navController.navigate(AndarzNav.RULES) }, onThresholds = { navController.navigate(AndarzNav.WATCHLIST) },
+                )
+            }
+            composable(AndarzNav.RULES) { RulesScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.SETUPS) { SetupsScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.WATCHLIST) { WatchlistScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.LEDGER) { LedgerScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.WIZARD) {
                 WizardScreen(
                     pledgeSigned = pledge != null,
@@ -143,12 +161,5 @@ fun AndarzNavHost(
             }
             composable(AndarzNav.TRADE) { TradeScreen(onBack = { navController.popBackStack() }) }
         }
-    }
-}
-
-@Composable
-private fun Placeholder(label: String) {
-    Column(Modifier.fillMaxSize().padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-        Text(label, style = MaterialTheme.typography.titleMedium)
     }
 }
