@@ -47,13 +47,28 @@ import javax.inject.Inject
 import kotlin.math.ceil
 import kotlin.math.floor
 
+/** One-shot hand-off into the calculator (5.13 `con.example.try`). */
+@javax.inject.Singleton
+class CalcPrefill @Inject constructor() {
+    @Volatile private var pending: CalcDraft? = null
+    fun offer(d: CalcDraft) { pending = d }
+    fun take(): CalcDraft? = pending.also { pending = null }
+}
+
+/** Offers the worked example of article 3 (vector P01: 2000 / LONG / 100 / 96 / 108 / 5x, risk 1%). */
+@HiltViewModel
+class CalculatorPrefillViewModel @Inject constructor(private val prefill: CalcPrefill) : ViewModel() {
+    fun workedExample() = prefill.offer(CalcDraft(Side.LONG, "2000", "100", "96", "108", "5", "1", ""))
+}
+
 @HiltViewModel
 class CalculatorViewModel @Inject constructor(
     private val state: SavedStateHandle,
     private val facade: EngineFacade,
     private val prefill: WizardPrefill,
+    calcPrefill: CalcPrefill,
 ) : ViewModel() {
-    private val _draft = MutableStateFlow(state.get<CalcDraft>(KEY) ?: CalcDraft())
+    private val _draft = MutableStateFlow(calcPrefill.take()?.also { state[KEY] = it } ?: state.get<CalcDraft>(KEY) ?: CalcDraft())
     val draft: StateFlow<CalcDraft> = _draft
     private val _snapshot = MutableStateFlow<Snapshot?>(null)
     val snapshot: StateFlow<Snapshot?> = _snapshot

@@ -30,6 +30,12 @@ import ir.andarz.app.ui.analysis.ReviewsScreen
 import ir.andarz.app.ui.analysis.RulesScreen
 import ir.andarz.app.ui.analysis.SetupsScreen
 import ir.andarz.app.ui.analysis.WatchlistScreen
+import ir.andarz.app.ui.analysis.CalculatorPrefillViewModel
+import ir.andarz.app.ui.platform.AboutScreen
+import ir.andarz.app.ui.platform.ConstitutionScreen
+import ir.andarz.app.ui.platform.LicensesScreen
+import ir.andarz.app.ui.platform.SecurityScreen
+import ir.andarz.app.ui.platform.SettingsScreen
 import ir.andarz.app.ui.journal.JournalScreen
 import ir.andarz.app.ui.market.MarketScreen
 import ir.andarz.app.ui.today.TodayScreen
@@ -146,6 +152,8 @@ fun AndarzNavHost(
                     listOf(
                         "ins.title" to go(AndarzNav.INSIGHTS), "rev.title" to go(AndarzNav.REVIEWS), "params.title" to go(AndarzNav.RULES),
                         "setups.title" to go(AndarzNav.SETUPS), "wl.title" to go(AndarzNav.WATCHLIST), "ledger.title" to go(AndarzNav.LEDGER),
+                        "con.title" to go(AndarzNav.CONSTITUTION), "sec.title" to go(AndarzNav.SECURITY), "set.title" to go(AndarzNav.SETTINGS),
+                        "about.title" to go(AndarzNav.ABOUT),
                     ),
                 )
             }
@@ -160,6 +168,23 @@ fun AndarzNavHost(
             composable(AndarzNav.SETUPS) { SetupsScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.WATCHLIST) { WatchlistScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.LEDGER) { LedgerScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.SETTINGS) {
+                SettingsScreen(
+                    onBack = { navController.popBackStack() }, onAbout = { navController.navigate(AndarzNav.ABOUT) },
+                    onMarketAlerts = { navController.navigate(AndarzNav.MARKET_ALERTS) },
+                )
+            }
+            composable(AndarzNav.CONSTITUTION) {
+                val prefill: CalculatorPrefillViewModel = hiltViewModel()
+                ConstitutionScreen(
+                    onBack = { navController.popBackStack() }, onRules = { navController.navigate(AndarzNav.RULES) },
+                    onExample = { prefill.workedExample(); navController.navigate(AndarzNav.CALCULATOR) },
+                    onAmend = { navController.navigate(AndarzNav.RULES) },
+                )
+            }
+            composable(AndarzNav.SECURITY) { SecurityScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.ABOUT) { AboutScreen(onBack = { navController.popBackStack() }, onLicenses = { navController.navigate(AndarzNav.LICENSES) }) }
+            composable(AndarzNav.LICENSES) { LicensesScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.WIZARD) {
                 WizardScreen(
                     pledgeSigned = pledge != null,

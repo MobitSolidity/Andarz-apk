@@ -57,6 +57,7 @@ import ir.andarz.engine.Planner
 import ir.andarz.engine.Side
 import java.time.Duration
 import java.time.Instant
+import kotlinx.serialization.json.jsonPrimitive
 
 /** Trade detail (5.4), close sheet (5.5), result card and post-trade review. */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,6 +82,16 @@ fun TradeScreen(onBack: () -> Unit, vm: TradeViewModel = hiltViewModel()) {
             TagChip(u.t("trade.status.${trade.status}"))
             TagChip(u.t("trade.account.${trade.account}"))
             if (trade.imported) TagChip(u.t("trade.imported"))
+            Spacer(Modifier.weight(1f))
+            val ctx = androidx.compose.ui.platform.LocalContext.current
+            val setupName by vm.setupName.collectAsState()
+            // 9.5 share note: plain text from the quick template, filled by line index.
+            TextButton(onClick = {
+                val tpl = u.content.obj("learn", "journal")?.get("quickTemplate")?.jsonPrimitive?.content ?: return@TextButton
+                val text = ir.andarz.app.platform.ShareNote.fill(tpl, ir.andarz.app.platform.ShareNote.values(u, trade, setupName))
+                val send = android.content.Intent(android.content.Intent.ACTION_SEND).setType("text/plain").putExtra(android.content.Intent.EXTRA_TEXT, text)
+                ctx.startActivity(android.content.Intent.createChooser(send, u.t("trade.shareNote")))
+            }) { Text(u.t("trade.shareNote")) }
         }
         if (err != null) Text(u.t("err.generic"), color = LocalAndarzColors.current.redline)
 

@@ -48,6 +48,11 @@ object AndarzNav {
     const val SETUPS = "setups"
     const val WATCHLIST = "watchlist"
     const val LEDGER = "ledger"
+    const val SETTINGS = "settings"
+    const val CONSTITUTION = "constitution"
+    const val SECURITY = "security"
+    const val ABOUT = "about"
+    const val LICENSES = "licenses"
     const val ONBOARDING = "onboarding"
 
     fun trade(id: String) = "trade/$id"

@@ -32,4 +32,31 @@ object ShareNote {
             }
         }
     }
+
+    /**
+     * The 9.5 values of one trade, line by line. [u] formats numbers per the user's digit setting;
+     * every label comes from content through [u].
+     */
+    fun values(u: ir.andarz.app.ui.Ui, t: ir.andarz.data.db.TradeEntity, setupName: String?): List<List<List<String>>> {
+        val entryAt = t.entryTime?.let { u.dateTime(java.time.Instant.ofEpochMilli(it)) } ?: ""
+        val exitAvg = if (t.legs.isEmpty()) null else t.legs.sumOf { it.price * it.fraction } / t.legs.sumOf { it.fraction }
+        val closed = t.status == "CLOSED"
+        return listOf(
+            listOf(listOf(entryAt)),
+            listOf(listOf(u.symbol(t.symbol), u.enumLabel("side", t.side))),
+            listOf(listOf(u.enumLabel("kind", t.kind))),
+            listOf(listOf(setupName ?: "")),
+            listOf(listOf(u.enumLabel("htfTrend", t.htfTrend))),
+            listOf(listOf(u.int(t.chk))),
+            listOf(listOf(u.money(t.equity)), listOf(u.pct(t.riskPctChosen, 2))),
+            listOf(listOf(u.price(t.entry ?: t.plannedEntry)), listOf(u.price(t.slInitial)), listOf(u.price(t.tp)), listOf(u.num(t.plan.rr))),
+            listOf(listOf(u.mult(t.lev)), listOf(u.money(t.plan.margin)), listOf(u.money(t.notional ?: t.plan.notionalMax)), listOf(u.price(t.plan.liq))),
+            listOf(listOf(u.enumLabel("emotion", t.emotion))),
+            emptyList(),
+            if (closed) listOf(listOf(u.price(exitAvg)), listOf(u.money(t.fee + t.legs.sumOf { it.fee })), listOf(u.signedMoney(t.net)), listOf(u.rChip(t.r))) else emptyList(),
+            if (closed) listOf(listOf(u.t(if (t.ok == true) "common.yes" else "common.no"))) else emptyList(),
+            listOf(listOf(t.mistake?.let { u.enumLabel("mistake", it) } ?: "")),
+            listOf(listOf(t.lesson ?: "")),
+        )
+    }
 }
