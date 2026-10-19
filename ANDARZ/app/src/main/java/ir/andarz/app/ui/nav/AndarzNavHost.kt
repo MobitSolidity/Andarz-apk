@@ -66,7 +66,15 @@ fun AndarzNavHost(
     startRoute: String = AndarzNav.TODAY,
     navController: NavHostController = rememberNavController(),
     app: AppViewModel = hiltViewModel(),
+    deepLink: String? = null,
+    onDeepLinkConsumed: () -> Unit = {},
 ) {
+    // Notification routes arrive here only after the lock screen has gone (7, K6.11).
+    androidx.compose.runtime.LaunchedEffect(deepLink) {
+        val r = deepLink ?: return@LaunchedEffect
+        runCatching { navController.navigate(r) { launchSingleTop = true } }
+        onDeepLinkConsumed()
+    }
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
     val snapshot by app.snapshot.collectAsState()

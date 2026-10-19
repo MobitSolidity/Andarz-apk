@@ -73,5 +73,9 @@ object DataModule {
 
     @Provides @Singleton fun reviews(db: AndarzDatabase, clock: Clock) = ReviewRepository(db, clock)
 
+    @Provides @Singleton fun backup(db: AndarzDatabase, clock: Clock) = ir.andarz.data.backup.BackupService(db, clock)
+
+    @Provides @Singleton fun csv(db: AndarzDatabase, clock: Clock, p: ParamsRepository) = ir.andarz.data.csv.CsvRepository(db, clock, p)
+
     @Provides @Singleton fun watch(db: AndarzDatabase, clock: Clock, p: ParamsRepository) = ir.andarz.data.WatchRepository(db, clock, p)
 }
