@@ -263,6 +263,8 @@ class SettingsViewModel @Inject constructor(
 
     // ---- market (K6.9)
     fun setMarketEnabled(on: Boolean) = viewModelScope.launch { MarketModule.setEnabled(on) }
+    /** Settings -> Internet switch, first time on: records the consent and turns the connection on (D-76). */
+    fun acceptMarketConsent() = viewModelScope.launch { MarketModule.acceptConsent(System.currentTimeMillis()) }
     fun setMarketToman(on: Boolean) = viewModelScope.launch { MarketModule.repository.setToman(on) }
     fun setMarketMonitor(on: Boolean) = viewModelScope.launch { MarketModule.setMonitor(on) }
     fun setMarketQuietMute(on: Boolean) = viewModelScope.launch { MarketModule.alerts.update { it.copy(muteInQuiet = on) } }

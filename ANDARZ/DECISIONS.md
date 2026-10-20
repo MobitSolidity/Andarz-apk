@@ -18,15 +18,17 @@ store release.
 |---|---|---|---|
 | O-1 | **Final `applicationId`** (today the placeholder `ir.andarz.app`) and a name check for «اندرز» on Bazaar, Myket and Google Play | D-11, D-M02: availability was never verified. Changing the id after a release breaks updates | owner, before the first release |
 | O-2 | **Release signing key**: create a new keystore and set `ANDARZ_KEYSTORE`, `ANDARZ_KEYSTORE_PASSWORD`, `ANDARZ_KEY_ALIAS`, `ANDARZ_KEY_PASSWORD` (env or a git-ignored `keystore.properties`) | D-M10: March's committed key is compromised and is never reused. Without these the release build is debug-signed and prints `NOT PUBLISHABLE` | owner |
-| O-3 | **Economic-release calendar refresh**: the shipped list ends on 2026-10-29 (7 Aban 1405); after that date News shows the expired state | D-M16, K6.10: the calendar is a static asset with no network source. Format and refresh steps are in `README.md` | owner, before 2026-10-29 |
-| O-4 | **Store policy for the alarm-style permissions** of K8.1 (`USE_FULL_SCREEN_INTENT`, `SCHEDULE_EXACT_ALARM`, `SET_ALARM`, `SYSTEM_ALERT_WINDOW`, `FOREGROUND_SERVICE_SPECIAL_USE`) on every target store | Each store judges these differently; all are opt-in and off by default (D-M08), but a store may still ask for a justification | owner, before publishing |
-| O-5 | **`ACCESS_NETWORK_STATE` in the merged manifest** — keep it, or strip it with `tools:node="remove"` | D-M40: WorkManager declares it for network constraints, which Andarz never uses. It grants no internet access, only connectivity state. Removing it tightens the permission surface but risks a `SecurityException` from WorkManager's constraint tracker, which cannot be tested without a device | owner, before publishing |
-| O-6 | **Dependency mirrors** (`maven.myket.ir`, `maven.aliyun.com`) are in `settings.gradle.kts` | D-M38: `dl.google.com` answers 404 from this network, so androidx cannot be fetched without them. A mirror is a supply-chain trust decision; consider Gradle dependency verification (checksum pinning) before release | owner |
+
+**Decided by the agent at the owner's request (2026-10-20, D-77); O-1 and O-2 stay open.**
 
 **Closed since the first draft**
 
 | # | Was | Now |
 |---|---|---|
+| ~~O-3~~ | Calendar refresh before 2026-10-29 | **Decided (D-77).** No network source is added; after `validUntil` News shows the expired state and everything else keeps working. Refresh by hand per `README.md` when a new list is available |
+| ~~O-4~~ | Store policy for alarm-style permissions | **Decided (D-77).** Keep all five, each opt-in and off by default; the store listing must justify them (price alarms the user arms). If a store refuses, remove them from `:market`'s manifest and the guard allowlist together |
+| ~~O-5 (network state)~~ | Keep or strip `ACCESS_NETWORK_STATE` | **Decided (D-77).** Keep it: it grants no internet access, WorkManager declares it, and stripping it cannot be verified without a device |
+| ~~O-6 (mirrors)~~ | Dependency mirrors in `settings.gradle.kts` | **Decided (D-77).** Keep them as fallbacks after `google()` and `mavenCentral()`, which win when reachable. Artifacts are the same coordinates; checksum pinning is a later hardening step |
 | ~~O-5~~ | Vazirmatn TTFs missing | **Closed.** The owner added Regular/Medium/Bold; they were renamed to `vazirmatn_regular/medium/bold.ttf` because Android resource names must be lowercase (D-M34). |
 | ~~O-6~~ | No build toolchain | **Closed.** JDK 17 (Temurin), the Android SDK at `C:\Android` (platforms 34/35, licenses accepted) and Gradle 8.9 are installed; `./gradlew build` is green (D-M33). |
 
@@ -511,6 +513,28 @@ version changes.
 Demo data (P1, done in M7: D-68), the 3-step font slider (the system scale already applies), screenshots in
 backups (D-13), the learn pages (P1, done in M7: D-69), the spot portfolio (P2) and full Jalali date pickers: dates are entered with day steppers in
 M5/M6 screens and CSV accepts Jalali dates. `mkt.set.quiet` and market settings in backups are MK3.
+
+## Owner request — internet switch in Settings (decisions)
+
+### D-76 — One internet switch, first on the Settings page
+
+The owner asked for the internet connection to be controlled by a switch in the app's settings. Settings now
+opens with an "Internet in Andarz" card (`mkt.net.title`) whose switch (`mkt.set.enable`) is the master gate
+of `:market`, the only module allowed to open a connection (guards 2-4). The switch shows the real state
+(`mayUseNetwork` = switch on and consent recorded). Off: no request of any kind leaves the app, and the card
+says so (`mkt.off.body`). On for the first time: the consent text and host list appear in a dialog and
+accepting records consent and opens the gate in one write (`acceptConsent`); later toggles only flip the gate.
+The Market card keeps unit, background monitor, quiet mute and sources; the duplicate switch was removed.
+Default stays off (D-M08); backups never carry the switch or the consent (K6.12). All wording is existing
+K13 copy, so nothing new is missing.
+
+### D-77 — The open owner items the agent was asked to decide
+
+O-3 (calendar), O-4 (alarm permissions), O-5 (`ACCESS_NETWORK_STATE`) and O-6 (mirrors) are decided as listed
+under "Closed" at the top: keep the static calendar with its expired state, keep the opt-in alarm
+permissions, keep the network-state permission, keep the mirrors as fallbacks. Each choice keeps current,
+tested behaviour and avoids a change that cannot be verified without a device. O-1 (application id) and O-2
+(signing key) stay open: the owner does not have them yet; the build stays `-unsigned` and NOT PUBLISHABLE.
 
 ## M8 — Release preparation (decisions)
 

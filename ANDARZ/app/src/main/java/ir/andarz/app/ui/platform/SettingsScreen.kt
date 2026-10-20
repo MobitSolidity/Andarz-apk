@@ -84,6 +84,8 @@ fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -
         if (busy) LinearProgressIndicator(Modifier.fillMaxWidth())
         message?.let { Text(u.t(it), color = if (it.startsWith("err.")) c.redline else c.allowed) }
 
+        // D-76: the one switch that allows or forbids every internet connection, first on the page.
+        InternetSettings(u, vm)
         Appearance(u, s, vm)
         Security(u, s, vm)
         Notifications(u, s, vm)
@@ -337,13 +339,51 @@ private fun Data(u: Ui, vm: SettingsViewModel) {
     )
 }
 
+/**
+ * Settings -> Internet (D-76). The switch is the master gate of `:market`, the only module that may open a
+ * connection: off means no request of any kind leaves the app. Turning it on the first time shows the consent
+ * text and the host list; accepting records the consent and opens the gate in one write.
+ */
+@Composable
+private fun InternetSettings(u: Ui, vm: SettingsViewModel) {
+    val gate by vm.marketGate.collectAsState()
+    var ask by rememberSaveable { mutableStateOf(false) }
+    val c = LocalAndarzColors.current
+    SectionCard(u.t("mkt.net.title")) {
+        SwitchRow(
+            u.t("mkt.set.enable"), gate.mayUseNetwork,
+            { on -> if (on && gate.consentAt == null) ask = true else vm.setMarketEnabled(on) },
+            hint = u.t("mkt.set.enable.hint"),
+        )
+        Text(
+            if (gate.mayUseNetwork) u.t("mkt.net.sent") else u.t("mkt.off.body"),
+            style = MaterialTheme.typography.bodyMedium, color = if (gate.mayUseNetwork) c.textMuted else c.allowed,
+        )
+        Text(u.t("mkt.net.body"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)
+    }
+    if (ask) AlertDialog(
+        onDismissRequest = { ask = false },
+        title = { Text(u.t("mkt.consent.title")) },
+        text = {
+            Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Text(u.t("mkt.consent.body"))
+                Text(
+                    u.t("mkt.consent.hosts", "hosts" to ir.andarz.market.MarketModule.hosts.joinToString(" \u00B7 ") { Fmt.isolate(it) }),
+                    style = MaterialTheme.typography.labelMedium, color = c.textMuted,
+                )
+            }
+        },
+        confirmButton = { TextButton(onClick = { vm.acceptMarketConsent(); ask = false }) { Text(u.t("mkt.consent.accept")) } },
+        dismissButton = { TextButton(onClick = { ask = false }) { Text(u.t("mkt.consent.decline")) } },
+    )
+}
+
 @Composable
 private fun MarketSettings(u: Ui, vm: SettingsViewModel, onMarketAlerts: () -> Unit) {
     val gate by vm.marketGate.collectAsState()
     val alerts by vm.marketAlerts.collectAsState()
     val toman by vm.marketToman.collectAsState()
     SectionCard(u.t("mkt.nav.market")) {
-        SwitchRow(u.t("mkt.set.enable"), gate.enabled, { vm.setMarketEnabled(it) }, hint = u.t("mkt.set.enable.hint"))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             FilterChip(selected = !toman, onClick = { vm.setMarketToman(false) }, label = { Text(u.t("mkt.unit.usd")) })
             FilterChip(selected = toman, onClick = { vm.setMarketToman(true) }, label = { Text(u.t("mkt.unit.toman")) })

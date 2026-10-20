@@ -232,3 +232,12 @@ F9 and F10 under Robolectric (`AccessibilityLayoutTest`, D-71).
 | R-3 | Build with a real keystore in `keystore.properties` | No `NOT PUBLISHABLE` box; version without `-unsigned`; `apksigner verify --print-certs` shows the new certificate, not March's | pending (owner, O-2) |
 | R-4 | Name a keystore but omit its password | Configuration fails naming `ANDARZ_KEYSTORE_PASSWORD` | pass (M8): `ANDARZ_KEYSTORE=<file> ./gradlew help` fails with "release signing: ANDARZ_KEYSTORE_PASSWORD (or storePassword in keystore.properties) is missing" |
 
+## Internet switch (D-76, pending: needs a device)
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| N-1 | Fresh install, open Settings | First card "Internet in Andarz", switch off, text says no request is sent | pending |
+| N-2 | Turn the switch on | Consent dialog with the host list; "not now" leaves it off; accept turns it on and Market loads prices | pending |
+| N-3 | Turn it off with Prices open and an alert armed | Prices stop updating, no alert fires, a proxy shows zero requests | pending |
+| N-4 | Back up, wipe, restore | Switch is off after restore | pending |
+
