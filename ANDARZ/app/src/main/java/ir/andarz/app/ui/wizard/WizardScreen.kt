@@ -156,7 +156,7 @@ private fun reasonDetail(u: Ui, r: GateReason, c: WizardResult, p: Params): Stri
 
 @Composable
 private fun StepGate(u: Ui, snap: ir.andarz.engine.Snapshot?, pledgeSigned: Boolean) {
-    if (snap == null) return
+    if (snap == null) { ir.andarz.app.ui.components.LoadingState(); return }
     if (!pledgeSigned) Text(u.t("err.noPledge"), color = LocalAndarzColors.current.redline)
     val g = snap.governor
     if (g.locks.isNotEmpty()) {
@@ -218,20 +218,11 @@ private fun StepChecklist(u: Ui, vm: WizardViewModel, d: WizardDraft, c: WizardR
             7 -> c.item7
             else -> (d.manualMask shr (n - 1)) and 1 == 1 && !(n == 8 && !c.calm)
         }
-        val state = u.t(if (checked) "a11y.toggleOn" else "a11y.toggleOff")
-        Row(
-            Modifier.fillMaxWidth().heightIn(min = 56.dp).clickable(enabled = !disabled, role = Role.Checkbox) { vm.toggleItem(n) }
-                .semantics(mergeDescendants = true) { stateDescription = state },
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Checkbox(checked = checked, onCheckedChange = null, enabled = !disabled)
-            Column(Modifier.weight(1f)) {
-                Text(o["short"]!!.jsonPrimitive.content, style = MaterialTheme.typography.bodyLarge)
-                Text(o["full"]!!.jsonPrimitive.content, style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
-                if (n == 8 && !c.calm) Text(u.t("wiz.emotion.warn", "emotion" to u.enumLabel("emotion", d.emotion)), style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.caution)
-            }
-            if (derived) TagChip(u.t("common.details"))
-        }
+        ir.andarz.app.ui.components.ChecklistRow(
+            title = o["short"]!!.jsonPrimitive.content, detail = o["full"]!!.jsonPrimitive.content, checked = checked, enabled = !disabled,
+            warning = if (n == 8 && !c.calm) u.t("wiz.emotion.warn", "emotion" to u.enumLabel("emotion", d.emotion)) else null,
+            tag = if (derived) u.t("common.details") else null, onToggle = { vm.toggleItem(n) },
+        )
     }
     Text(u.t("wiz.checklist.score", "n" to u.int(c.chk), "total" to u.int(items.size)), style = MaterialTheme.typography.titleMedium)
     Text(u.t(if (c.chk < items.size) "wiz.checklist.incomplete" else "wiz.checklist.rule"), style = MaterialTheme.typography.bodyMedium)
@@ -330,6 +321,10 @@ private fun ConfirmSheet(u: Ui, vm: WizardViewModel, t: ir.andarz.data.db.TradeE
     var entry by rememberSaveable { mutableStateOf(Fmt.number(t.plannedEntry, Ui.priceDecimals(t.plannedEntry), false, false, true)) }
     var notional by rememberSaveable { mutableStateOf(t.plan.notionalMax?.let { Fmt.number(it, 2, false, false, true) } ?: "") }
     var anyway by remember { mutableStateOf(false) }
+    // Late logging (D-26, D-67): the entry may have happened earlier; minutes ago, like the close sheet.
+    var minutesAgo by rememberSaveable { mutableStateOf("0") }
+    val ago = Fmt.normalizeInput(minutesAgo)?.takeIf { it >= 0 && it <= 60.0 * 24 * 30 }
+    val at = Instant.now().minus(java.time.Duration.ofMinutes(ago?.toLong() ?: 0))
     val e = Fmt.normalizeInput(entry)?.takeIf { it > 0 }
     val n = Fmt.normalizeInput(notional)?.takeIf { it > 0 }
     Column(Modifier.padding(16.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -342,13 +337,17 @@ private fun ConfirmSheet(u: Ui, vm: WizardViewModel, t: ir.andarz.data.db.TradeE
             Text(u.t("size.actualPct") + " " + u.pct(rriskp))
             if (rriskp > t.riskPctCap * 1.05) Text(u.t("size.silentGrowth"), color = LocalAndarzColors.current.caution)
         }
+        NumberField(
+            u.t("wiz.confirm.time"), minutesAgo, { minutesAgo = it },
+            error = if (ago == null) u.t("err.number") else null, hint = u.dateTime(at),
+        )
         if (!t.slTpOnExchange) {
             Text(u.t("err.slTpRequired"), color = LocalAndarzColors.current.redline)
             SwitchRow(u.t("review.autoViolation.V01"), anyway, { anyway = it })
         }
         Button(
-            onClick = { vm.confirm(e!!, n!!, Instant.now(), withoutStops = !t.slTpOnExchange) },
-            enabled = e != null && n != null && t.canMonitor && (t.slTpOnExchange || anyway),
+            onClick = { vm.confirm(e!!, n!!, at, withoutStops = !t.slTpOnExchange) },
+            enabled = e != null && n != null && ago != null && t.canMonitor && (t.slTpOnExchange || anyway),
             modifier = Modifier.fillMaxWidth(),
         ) { Text(u.t("common.confirm")) }
         Spacer(Modifier.height(24.dp))

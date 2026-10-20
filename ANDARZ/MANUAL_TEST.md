@@ -185,3 +185,42 @@ real-host and device part of A3, A4 and the MK1 part of A5.
 | MK1-6 | USD/Toman toggle, search "btc" and "Bitcoin", each sort pill, star and unstar | Prices switch units; USDT/Toman stays pinned; stars appear in My coins | pending |
 | MK1-7 | Open a coin, then rotate or kill the process from the recents screen and reopen | The sheet shows stats, 7-day chart and star; section and sheet survive process death | pending |
 | MK1-8 | Settings off (master switch) while Prices is open | Off state at once; the socket closes | pending (switch UI in M6; testable via the off state's action once M6 lands) |
+
+## M7 polish (device items pending: needs an emulator or device)
+
+JVM tests: late logging and demo data (`JournalLifecycleTest`), expectancy and decimation (`PolishLogicTest`),
+F9 and F10 under Robolectric (`AccessibilityLayoutTest`, D-71).
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| F9 | Light theme, font 200%, 360 x 800 dp: Today, wizard step 4, Journal | No clipped or overlapping text | partial: Today, journal row and checklist row pass on Robolectric; wizard step 4 on a device pending |
+| F10 | TalkBack on the verdict banner, gauges, checklist rows | Label plus state word read | partial: semantics asserted on Robolectric; spoken output pending |
+| M7-1 | Confirm an entry with "minutes ago" = 120 after a stop-out 10 minutes ago | Entry recorded with `loggedLate` (visible tag waits for `trade.loggedLate`), judged by the rules at that time | pending |
+| M7-2 | Settings > data > load sample trades; open Journal, Insights; remove | Twelve demo rows with the demo chip; equity, limits and KPIs unchanged; removal leaves hand-made demo trades | pending |
+| M7-3 | More > learn pages; expectancy calculator 40 / 2 | All five sections readable at 200%; result +0.20R, break-even about 33% | pending |
+| M7-4 | Insights: toggle the table view on each chart | The canvas is replaced by a readable list; TalkBack reads it line by line | pending |
+| M7-5 | Reduce motion on (in-app and system) | The verdict banner changes size without animation | pending |
+| M7-6 | Launcher icon on light, dark and themed launchers; cold start | Alef mark readable; splash shows the mark on `bg` with no animation | pending |
+
+### §6.9 visual checklist (dark and light, 100% and 200%, RTL)
+
+| # | Item | State |
+|---|---|---|
+| 1 | Today fits hero, six gauges and verdict on 360 x 800 without scrolling | pending (device) |
+| 2 | Digits and Latin symbols never reorder (`BTCUSDT`, `+$39.40`, `−0.5R`, `80.50`) | partial: every value goes through `Fmt.isolate` (unit-tested); visual check pending |
+| 3 | Every "no" shows reason + number + article; no gray-on-gray; khatam contrast | partial: gate reasons carry all three (M4 tests); contrast check pending |
+| 4 | Price ladder labels apart for very close and very wide stops | pending (device) |
+| 5 | Charts read left to right, labels apart, TalkBack summary | partial: LTR plot and summary node in code (D-70); visual check pending |
+| 6 | Lock, unlock and denied verdict understandable by screen reader alone | partial: live regions and state words (F10); spoken check pending |
+| 7 | No animation over 400 ms; nothing moves with animations removed | partial: one 250 ms animation, removed by reduce motion (D-72) |
+
+### Quality gates (10.7)
+
+| Gate | State |
+|---|---|
+| Lint zero errors | `./gradlew build` runs lint: green |
+| Engine coverage >= 90% | measured in M1 (JaCoCo); engine unchanged since |
+| Snapshot <= 50 ms with 5,000 trades | JVM test measures it on every build (printed); device timing pending |
+| Cold start <= 1.5 s, Today first frame <= 300 ms | pending (device) |
+| Release APK <= 25 MB, no `INTERNET` outside `:market`, no Persian literal in `.kt` | guards in every build; APK size measured in M8 |
+

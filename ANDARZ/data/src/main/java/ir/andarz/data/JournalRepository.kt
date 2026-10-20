@@ -119,9 +119,13 @@ class JournalRepository(
         val t = db.trades().get(id) ?: throw TradeStateException("no trade $id")
         if (t.status != "PLANNED" && t.status != "REJECTED") throw TradeStateException("trade $id is ${t.status}")
         if (!t.canMonitor) throw TradeStateException("canMonitor is off (article 6-7)")
+        require(!c.entryTime.isAfter(clock.now())) { "entry in the future" }
         val p = params.paramsAt(c.entryTime)
-        // re-evaluate the governor at confirmation: a lock that arrived since the plan counts (D-08)
-        val snap = facade.snapshot(clock.now(), t.setupId)
+        // Late logging (D-26, D-67): an entry confirmed more than LATE_AFTER after it happened is judged with the
+        // governor snapshot at its own entry time and flagged loggedLate. Otherwise the governor is re-evaluated
+        // at confirmation: a lock that arrived since the plan counts (D-08).
+        val late = isLate(c.entryTime, clock.now())
+        val snap = facade.snapshot(if (late) c.entryTime else clock.now(), t.setupId)
         val entryAllowed = t.gatePlanOk && snap.mayEnter
         val sld = abs(c.entry - t.slInitial) / c.entry
         val rrisk = c.notional * sld
@@ -139,7 +143,7 @@ class JournalRepository(
             entryAllowed = entryAllowed, gateAllowed = t.gatePlanOk && entryAllowed,
             violations = (t.violations + auto).distinct(),
             violationAt = if (auto.isNotEmpty()) (t.violationAt ?: n) else t.violationAt,
-            updatedAt = n,
+            loggedLate = late, updatedAt = n,
         )
         db.withTransaction {
             db.trades().update(out)
@@ -296,5 +300,11 @@ class JournalRepository(
 
     companion object {
         val PLAN_EXPIRY: Duration = Duration.ofHours(12)
+
+        /** An entry confirmed later than this after it happened is a late log (D-67). */
+        val LATE_AFTER: Duration = Duration.ofMinutes(15)
+
+        fun isLate(entryTime: Instant, confirmedAt: Instant): Boolean =
+            Duration.between(entryTime, confirmedAt) > LATE_AFTER
     }
 }

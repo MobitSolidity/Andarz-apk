@@ -70,7 +70,7 @@ fun TodayScreen(
     var now by remember { mutableStateOf(Instant.now()) }
     LaunchedEffect(Unit) { while (true) { delay(1_000); now = Instant.now() } }
 
-    if (snapshot == null) { Box(Modifier.fillMaxSize()); return }
+    if (snapshot == null) { ir.andarz.app.ui.components.LoadingState(); return }
     val p = snapshot.params
     val g = snapshot.governor
     val d = snapshot.dashboard

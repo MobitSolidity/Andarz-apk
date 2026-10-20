@@ -100,6 +100,7 @@ class SettingsViewModel @Inject constructor(
     private val content: ContentRepository,
     private val reconciler: ScheduleReconciler,
     private val db: AndarzDatabase,
+    private val demo: ir.andarz.data.DemoData,
 ) : ViewModel() {
     val settings: StateFlow<Settings?> = repo.settings.stateIn(viewModelScope, SharingStarted.Eagerly, null)
     val marketGate = MarketModule.gate.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), ir.andarz.market.MarketGate())
@@ -245,9 +246,19 @@ class SettingsViewModel @Inject constructor(
     fun wipe() = viewModelScope.launch {
         backup.wipe()
         repo.setOnboardingDone(false)
+        repo.setDemoLoaded(false)
         lock.disable()
         reconciler.reconcile(ctx)
         message.value = "common.deleted"
+    }
+
+    // ---- demo data (5.14, D-68)
+    fun loadDemo() = viewModelScope.launch {
+        demo.load(); repo.setDemoLoaded(true); message.value = "common.done"
+    }
+
+    fun removeDemo() = viewModelScope.launch {
+        demo.remove(); repo.setDemoLoaded(false); message.value = "common.deleted"
     }
 
     // ---- market (K6.9)

@@ -187,10 +187,10 @@ fun InsightsScreen(onBack: () -> Unit, vm: InsightsViewModel = hiltViewModel()) 
         }
 
         val summaryEq = if (ins.equity.isEmpty()) "" else u.t("ins.chart.point", "label" to u.t("common.from"), "value" to u.money(ins.equity.first())) + "\u060C " + u.t("ins.chart.point", "label" to u.t("common.to"), "value" to u.money(ins.equity.last()))
-        ChartCard(u.t("ins.chart.equity"), summaryEq, ins.equity.size < 2, u.t("ins.chart.equity.note")) {
+        ChartCard(u.t("ins.chart.equity"), summaryEq, ins.equity.size < 2, u.t("ins.chart.equity.note"), rows = ins.equity.mapIndexed { i, v -> u.int(i) to u.money(v) }) {
             LineChart(ins.equity, c.chartSeries[0], baseline = ins.equity.firstOrNull(), fillDown = true)
         }
-        ChartCard(u.t("ins.chart.drawdown"), u.t("ins.chart.point", "label" to u.t("ins.kpi.maxDD"), "value" to u.pct(ins.drawdown.maxOrNull(), 1)), ins.drawdown.size < 2) {
+        ChartCard(u.t("ins.chart.drawdown"), u.t("ins.chart.point", "label" to u.t("ins.kpi.maxDD"), "value" to u.pct(ins.drawdown.maxOrNull(), 1)), ins.drawdown.size < 2, rows = ins.drawdown.mapIndexed { i, v -> u.int(i) to u.pct(v, 1) }) {
             LineChart(ins.drawdown, c.redline, invert = true, fillDown = true)
         }
         ChartCard(u.t("ins.chart.rHist"), ins.rHistogram.joinToString("\u060C ") { u.t("ins.chart.point", "label" to binLabel(u, it.label), "value" to u.int(it.count)) }, ins.empty) {

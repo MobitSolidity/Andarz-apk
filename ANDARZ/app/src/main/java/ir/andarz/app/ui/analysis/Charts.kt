@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -38,26 +40,64 @@ import ir.andarz.app.ui.ui
  * `ins.chart.alt` with a short summary, so a screen-reader user gets the same facts (accessibility pass 1).
  */
 
-/** A chart card: title, optional note, the chart, or `ins.chart.empty`. */
+/**
+ * A chart card: title, optional note, the chart, or `ins.chart.empty`. The toggle (6.5 "table view") swaps the
+ * canvas for an accessible list of the same data: [rows] when given, else the summary split at its Persian
+ * commas. The toggle is labelled `common.details` / `common.less` until a dedicated key exists (D-70).
+ */
 @Composable
-fun ChartCard(title: String, summary: String, empty: Boolean, note: String? = null, chart: @Composable () -> Unit) {
+fun ChartCard(title: String, summary: String, empty: Boolean, note: String? = null, rows: List<Pair<String, String>>? = null, chart: @Composable () -> Unit) {
     val u = ui()
-    SectionCard(title) {
+    var table by androidx.compose.runtime.saveable.rememberSaveable { androidx.compose.runtime.mutableStateOf(false) }
+    SectionCard(
+        title,
+        action = if (empty) null else ({
+            androidx.compose.material3.TextButton(onClick = { table = !table }) {
+                Text(u.t(if (table) "common.less" else "common.details"))
+            }
+        }),
+    ) {
         if (note != null) Text(note, style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
         if (empty) {
             Text(u.t("ins.chart.empty"), style = MaterialTheme.typography.bodyMedium, color = LocalAndarzColors.current.textMuted)
+        } else if (table) {
+            val lines = rows?.map { (l, v) -> u.t("ins.chart.point", "label" to l, "value" to v) } ?: summary.split("\u060C ")
+            Column(Modifier.fillMaxWidth().padding(top = 8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                lines.forEach { Text(it, style = MaterialTheme.typography.bodyMedium) }
+            }
         } else {
             Box(Modifier.fillMaxWidth().padding(top = 8.dp).clearAndSetSemantics { contentDescription = u.t("ins.chart.alt", "title" to title, "summary" to summary) }) {
-                chart()
+                // 6.5: time runs left to right even in RTL.
+                androidx.compose.runtime.CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) { chart() }
             }
         }
     }
+}
+
+/** Min/max decimation per bucket to at most [max] points, keeping first and last (6.5 performance, D-70). */
+fun decimate(points: List<Double>, max: Int = 600): List<Double> {
+    if (points.size <= max || max < 4) return points
+    val buckets = (max - 2) / 2
+    val out = ArrayList<Double>(max)
+    out += points.first()
+    val inner = points.subList(1, points.size - 1)
+    for (b in 0 until buckets) {
+        val from = b * inner.size / buckets
+        val to = ((b + 1) * inner.size / buckets).coerceAtLeast(from + 1)
+        val seg = inner.subList(from, to)
+        var iMin = 0; var iMax = 0
+        seg.forEachIndexed { i, v -> if (v < seg[iMin]) iMin = i; if (v > seg[iMax]) iMax = i }
+        if (iMin <= iMax) { out += seg[iMin]; if (iMax != iMin) out += seg[iMax] } else { out += seg[iMax]; out += seg[iMin] }
+    }
+    out += points.last()
+    return out
 }
 
 /** A line over [points]; [baseline] draws a dashed reference (e.g. the start equity), [fillDown] shades below. */
 @Composable
 fun LineChart(points: List<Double>, color: Color, modifier: Modifier = Modifier, baseline: Double? = null, invert: Boolean = false, fillDown: Boolean = false) {
     val grid = LocalAndarzColors.current.divider
+    val points = androidx.compose.runtime.remember(points) { decimate(points) }
     Canvas(modifier.fillMaxWidth().height(160.dp)) {
         if (points.size < 2) return@Canvas
         val all = if (baseline != null) points + baseline else points

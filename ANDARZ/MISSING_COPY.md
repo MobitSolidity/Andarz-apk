@@ -11,7 +11,12 @@ listed here renders as `[[key]]` in debug builds only; the owner supplies the Pe
 
 ## Open
 
-*(nothing yet)*
+    trade.loggedLate — journal row and trade header chip for a late-logged trade (D-67) — a short tag meaning "logged afterwards"
+    wiz.confirm.late — entry confirmation sheet, when the entry time is more than 15 minutes ago (D-67) — one sentence: this entry will be judged with the rules at its own time and marked as logged late
+    ins.chart.table — chart card toggle for the table view of 6.5 (D-70) — "show as table"; `common.details` / `common.less` stand in today
+
+Until supplied, the late tag and hint are not drawn (the flag is stored); the content test forbids code that
+names an undefined key, so wiring them is a one-line change once the wording exists.
 
 The wording of M0 is complete: the base document `spec/andarz_content_fa.json` covers the journal, and
 `app/src/main/assets/content_market_fa.json` carries the K13 copy for the Market section, its `uiArgs` and

@@ -51,6 +51,7 @@ object AndarzNav {
     const val SETTINGS = "settings"
     const val CONSTITUTION = "constitution"
     const val SECURITY = "security"
+    const val LEARN = "learn"
     const val ABOUT = "about"
     const val LICENSES = "licenses"
     const val ONBOARDING = "onboarding"

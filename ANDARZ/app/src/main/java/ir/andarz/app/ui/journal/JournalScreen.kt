@@ -132,18 +132,20 @@ fun JournalScreen(onOpen: (String) -> Unit, onInsights: () -> Unit, vm: JournalV
                         if (net.isNotEmpty()) Text(u.signedMoney(net.sum()), style = MaterialTheme.typography.titleSmall)
                     }
                 }
-                items(list, key = { it.id }) { t -> Row(t, names[t.setupId], onOpen); HorizontalDivider() }
+                items(list, key = { it.id }) { t -> JournalRow(t, names[t.setupId], onOpen); HorizontalDivider() }
             }
         }
     }
 }
 
+/** One journal row (5.7). Both lines wrap (FlowRow) so nothing clips at 200% font (6.8, F9). */
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
-private fun Row(t: TradeEntity, setup: String?, onOpen: (String) -> Unit) {
+internal fun JournalRow(t: TradeEntity, setup: String?, onOpen: (String) -> Unit) {
     val u = ui()
     val c = LocalAndarzColors.current
     Column(Modifier.fillMaxWidth().clickable { onOpen(t.id) }.padding(horizontal = 16.dp, vertical = 10.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(u.symbol(t.symbol), style = MaterialTheme.typography.titleSmall)
             TagChip(u.enumLabel("side", t.side))
             if (t.status == "CLOSED") RChip(t.r)
@@ -151,7 +153,7 @@ private fun Row(t: TradeEntity, setup: String?, onOpen: (String) -> Unit) {
             if (t.ok == true) Icon(Icons.Filled.Check, u.t("result.compliant.yes"), tint = c.allowed)
             if (t.ok == false) Icon(Icons.Filled.Close, u.t("result.compliant.no"), tint = c.redline)
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             setup?.let { Text(it, style = MaterialTheme.typography.labelMedium, color = c.textMuted) }
             if (t.account == "DEMO") TagChip(u.t("common.demo"))
             if (t.imported) TagChip(u.t("trade.imported"))

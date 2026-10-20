@@ -508,9 +508,68 @@ version changes.
 
 ### D-66 — What M6 leaves for later
 
-Demo data (P1), the 3-step font slider (the system scale already applies), screenshots in backups (D-13), the
-learn pages (P1), the spot portfolio (P2) and full Jalali date pickers: dates are entered with day steppers in
+Demo data (P1, done in M7: D-68), the 3-step font slider (the system scale already applies), screenshots in
+backups (D-13), the learn pages (P1, done in M7: D-69), the spot portfolio (P2) and full Jalali date pickers: dates are entered with day steppers in
 M5/M6 screens and CSV accepts Jalali dates. `mkt.set.quiet` and market settings in backups are MK3.
+
+## M7 — Polish (decisions)
+
+### D-67 — Late logging: a 15-minute threshold, judged at the entry time
+
+**Context.** D-26 says a trade logged after the fact is judged with the governor snapshot at its own entry time
+and flagged `loggedLate`, but gives no threshold. **Decision.** The confirmation sheet asks for the entry time as
+"minutes ago" (like the close sheet). An entry confirmed more than `LATE_AFTER = 15 min` after it happened is
+late: `confirmEntry` evaluates `entryAllowed` with `snapshot(entryTime)` instead of `snapshot(now)` and stores
+`loggedLate = true`. Up to 15 minutes is "typing time" and keeps D-08 (a lock that arrived since the plan
+counts). Entries in the future are refused. Size verdict and parameters were already `paramsAt(entryTime)`.
+**Reason.** Honest history without letting a user dodge a fresh cool-down by back-dating a few minutes: a
+back-dated entry is stored with the flag (backup, full CSV). **Copy.** No key for a visible tag or a late hint
+exists, and the content test forbids code that names an undefined key, so the chip and hint are not drawn yet;
+they are listed in MISSING_COPY and need one line each once `trade.loggedLate` / `wiz.confirm.late` exist.
+
+### D-68 — Demo data: twelve scripted DEMO rows with a reserved id prefix
+
+`DemoData.load()` inserts twelve CLOSED rows (`account = DEMO`, `imported = false`) shaped like vector K01
+(entry 100, stop 96, target 108, equity 2000; wins, stop-outs, a partial exit, manual exits, one V06, two shorts),
+dated over the twelve days before loading, all reviewed. Ids start with `demo-`, so `remove()` deletes exactly
+these rows and never a demo trade the user logged. Both write `DEMO_LOAD` / `DEMO_REMOVE` audit rows; the
+`demoLoaded` setting drives the button; wipe resets it. D-15 keeps them out of every rule, limit and KPI, which
+the test asserts on the snapshot.
+
+### D-69 — Learn pages: five sections, rendered from `content.learn`
+
+Summary, review of experiences, additions, journal guide and the expectancy explainer are one screen with a
+vertical section list (it wraps at 200% font; tabs would clip). Every word is `content.learn.*` or `ui.learn.*`;
+static digits follow the digit setting. The mini calculator takes the win rate in percent and R, shows
+`learn.calc.result` and the break-even win rate (`ins.breakEven`); `LearnLogic` is pure and tested against the
+worked example of the page (0.4 x 2 - 0.6 = 0.2). Reached from More.
+
+### D-70 — Charts: table view, LTR plot, decimation
+
+`ChartCard` gains the "table view" toggle of 6.5 (labelled `common.details` / `common.less`; no dedicated key
+exists): it replaces the canvas with a text list of the same points. The plot area is wrapped in an LTR layout
+direction (D-10). Line charts decimate to at most 600 points (min/max per bucket, ends kept), remembered per
+data list. Crosshair and haptic ticks remain a device-polish item (not required by an exit criterion).
+
+### D-71 — F9 and F10 run under Robolectric
+
+There is no emulator, so `connectedCheck` cannot run. F9 (light theme, 200% font, 360 x 800 dp: no text node
+outside the window horizontally; vertical overflow scrolls) and F10 (verdict banner, gauges and checklist rows
+expose a label and a state word) are Compose tests in `app/src/test` on Robolectric, with a plain
+`Application` so Hilt does not start. They cover Today, a journal row and the checklist row; the full wizard
+step 4 needs its ViewModel and stays a device check. To make them pass, the journal row wraps (FlowRow), the
+checklist row became the shared `ChecklistRow`, and the verdict banner merges its children and carries a state
+description (`a11y.*State`). TalkBack itself remains on the device list. They run in `testDebugUnitTest` (the Compose test
+activity is debug-only) and are skipped by assumption in the release unit-test variant.
+
+### D-72 — Empty, loading and error states; motion; icon and splash
+
+`LoadingState` (`common.loading`, polite live region, no spinner) replaces the blank boxes of Today and the
+wizard gate; `ErrorState` (assertive, `common.retry`) is available; existing empty states already use the
+`*.empty` keys. The only animation (verdict banner size) is 250 ms and is removed by the in-app reduce-motion
+switch; the system "remove animations" scale is honored by Compose. Icon, monochrome layer, notification icon
+and splash (core-splashscreen, `bg`, alef, no animation) were already in place from M0/M6; their visual check on
+light, dark and themed launchers is a device item.
 
 ## MK1 — Market data and prices (decisions)
 

@@ -79,6 +79,12 @@ android {
         buildConfig = true
     }
 
+    testOptions {
+        // F9/F10 run as Robolectric Compose tests on the JVM (D-71).
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all { it.systemProperty("robolectric.logging.enabled", "false") }
+    }
+
     lint {
         abortOnError = true
         warningsAsErrors = false
@@ -137,6 +143,8 @@ dependencies {
     testImplementation(libs.turbine)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.compose.ui.test.junit4)
 
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.androidx.test.runner)
@@ -295,4 +303,9 @@ androidComponents {
 tasks.register("verifyMergedManifest") {
     group = "verification"
     description = "K8.4 guard 1 on the release variant."
+}
+
+// D-71: the Compose UI tests need the debug-only ui-test-manifest activity; the release unit-test task skips them.
+tasks.matching { it.name == "testReleaseUnitTest" }.configureEach {
+    (this as Test).filter.excludeTestsMatching("ir.andarz.app.ui.AccessibilityLayoutTest")
 }

@@ -280,6 +280,11 @@ private fun Data(u: Ui, vm: SettingsViewModel) {
         OutlinedButton(onClick = { pick.launch(arrayOf("text/*", "application/csv", "*/*")) }, modifier = Modifier.fillMaxWidth()) { Text(u.t("journal.import.csv")) }
         Text(u.t("journal.import.hint"), style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
         OutlinedButton(onClick = { jsonAsk = true }, modifier = Modifier.fillMaxWidth()) { Text(u.t("set.exportAll")) }
+        Text(u.t("set.demoData"), style = MaterialTheme.typography.labelLarge)
+        Text(u.t("wiz.demo.hint"), style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
+        val demoLoaded = vm.settings.collectAsState().value?.demoLoaded == true
+        if (demoLoaded) OutlinedButton(onClick = { vm.removeDemo() }, modifier = Modifier.fillMaxWidth()) { Text(u.t("set.demoData.remove")) }
+        else OutlinedButton(onClick = { vm.loadDemo() }, modifier = Modifier.fillMaxWidth()) { Text(u.t("set.demoData.load")) }
         TextButton(onClick = { wipeAsk = true }) { Text(u.t("set.wipe"), color = LocalAndarzColors.current.redline) }
     }
     preview?.let { p ->

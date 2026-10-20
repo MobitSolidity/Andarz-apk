@@ -83,8 +83,21 @@ private fun verdictIcon(v: Verdict): ImageVector = when (v) {
 fun VerdictBanner(state: Verdict, title: String, numbers: String?, why: List<String> = emptyList(), modifier: Modifier = Modifier) {
     val color = verdictColor(state)
     var open by remember { mutableStateOf(state == Verdict.DENIED) }
+    // 6.6: 250 ms standard easing; the in-app reduce-motion switch removes it (the system scale is honored by Compose).
+    val reduce = ui().settings.reduceMotion
+    val verdictState = ui().t(
+        when (state) {
+            Verdict.ALLOWED -> "a11y.allowedState"; Verdict.CAUTION -> "a11y.cautionState"
+            Verdict.DENIED -> "a11y.redState"; Verdict.LOCKED -> "a11y.lockedState"
+        },
+    )
+    val sized = if (reduce) Modifier else Modifier.animateContentSize(androidx.compose.animation.core.tween(250))
     Surface(
-        modifier = modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite }.animateContentSize(),
+        modifier = modifier.fillMaxWidth().semantics(mergeDescendants = true) {
+            liveRegion = LiveRegionMode.Polite
+            // 6.8 / F10: the verdict exposes a state word, not only a colour.
+            stateDescription = verdictState
+        }.then(sized),
         shape = RoundedCornerShape(14.dp),
         color = color.copy(alpha = 0.12f),
         border = BorderStroke(1.dp, color.copy(alpha = 0.4f)),
@@ -242,6 +255,51 @@ fun StatTile(label: String, value: String, status: String?, statusOk: Boolean?, 
             if (status != null) TagChip(status, if (statusOk == true) c.allowed else if (statusOk == false) c.caution else c.textMuted)
             if (target != null) Text(target, style = MaterialTheme.typography.labelMedium, color = c.textMuted)
         }
+    }
+}
+
+/**
+ * A checklist row (5.3 step 3): fully tappable, at least 56 dp, one TalkBack node with the on/off state word
+ * (6.8, F10). Disabled rows (derived items) still read their state.
+ */
+@Composable
+fun ChecklistRow(title: String, detail: String?, checked: Boolean, enabled: Boolean, warning: String? = null, tag: String? = null, onToggle: () -> Unit) {
+    val u = ui()
+    val state = u.t(if (checked) "a11y.toggleOn" else "a11y.toggleOff")
+    Row(
+        Modifier.fillMaxWidth().heightIn(min = 56.dp).clickable(enabled = enabled, role = androidx.compose.ui.semantics.Role.Checkbox, onClick = onToggle)
+            .semantics(mergeDescendants = true) { stateDescription = state },
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        androidx.compose.material3.Checkbox(checked = checked, onCheckedChange = null, enabled = enabled)
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyLarge)
+            if (detail != null) Text(detail, style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
+            if (warning != null) Text(warning, style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.caution)
+        }
+        if (tag != null) TagChip(tag)
+    }
+}
+
+/** A neutral loading state (M7 empty/error pass): one muted line, announced politely; no spinner animation. */
+@Composable
+fun LoadingState() {
+    val u = ui()
+    Box(Modifier.fillMaxSize().padding(24.dp), contentAlignment = Alignment.Center) {
+        Text(
+            u.t("common.loading"), style = MaterialTheme.typography.bodyMedium, color = LocalAndarzColors.current.textMuted,
+            modifier = Modifier.semantics { liveRegion = LiveRegionMode.Polite },
+        )
+    }
+}
+
+/** An error line with a retry action (`err.generic` + `common.retry`). */
+@Composable
+fun ErrorState(text: String, onRetry: (() -> Unit)? = null) {
+    val u = ui()
+    Column(Modifier.fillMaxWidth().padding(24.dp).semantics { liveRegion = LiveRegionMode.Assertive }, horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text, style = MaterialTheme.typography.bodyMedium, color = LocalAndarzColors.current.redline)
+        if (onRetry != null) TextButton(onClick = onRetry) { Text(u.t("common.retry")) }
     }
 }
 

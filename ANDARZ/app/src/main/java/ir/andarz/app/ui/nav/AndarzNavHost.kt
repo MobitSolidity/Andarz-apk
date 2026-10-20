@@ -152,7 +152,7 @@ fun AndarzNavHost(
                     listOf(
                         "ins.title" to go(AndarzNav.INSIGHTS), "rev.title" to go(AndarzNav.REVIEWS), "params.title" to go(AndarzNav.RULES),
                         "setups.title" to go(AndarzNav.SETUPS), "wl.title" to go(AndarzNav.WATCHLIST), "ledger.title" to go(AndarzNav.LEDGER),
-                        "con.title" to go(AndarzNav.CONSTITUTION), "sec.title" to go(AndarzNav.SECURITY), "set.title" to go(AndarzNav.SETTINGS),
+                        "con.title" to go(AndarzNav.CONSTITUTION), "learn.title" to go(AndarzNav.LEARN), "sec.title" to go(AndarzNav.SECURITY), "set.title" to go(AndarzNav.SETTINGS),
                         "about.title" to go(AndarzNav.ABOUT),
                     ),
                 )
@@ -182,6 +182,7 @@ fun AndarzNavHost(
                     onAmend = { navController.navigate(AndarzNav.RULES) },
                 )
             }
+            composable(AndarzNav.LEARN) { ir.andarz.app.ui.platform.LearnScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.SECURITY) { SecurityScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.ABOUT) { AboutScreen(onBack = { navController.popBackStack() }, onLicenses = { navController.navigate(AndarzNav.LICENSES) }) }
             composable(AndarzNav.LICENSES) { LicensesScreen(onBack = { navController.popBackStack() }) }

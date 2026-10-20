@@ -255,4 +255,62 @@ class JournalLifecycleTest {
         for (i in 1 until 10) assertNull(watch.add("C${i}USDT", null, null, "", ""))
         assertEquals(WatchError.FULL, watch.add("XUSDT", null, null, "", ""), "Watchlist_Max is 10")
     }
+
+    // ---- M7: late logging (D-26, D-67) and demo data (D-68)
+
+    @Test
+    fun lateEntryIsJudgedAtItsOwnEntryTimeAndFlagged(): Unit = runBlocking {
+        val s = onboarded()
+        val t0 = clock.now()
+        // a stop-out right now starts a cool-down
+        val a = journal.savePlan(draft(s))
+        journal.confirmEntry(a.id, EntryConfirm(100.0, 500.0, t0))
+        clock.plus(Duration.ofMinutes(5))
+        journal.close(a.id, listOf(ExitLeg(96.0, 1.0)), 0.0, "STOP_LOSS", clock.now())
+        clock.plus(Duration.ofMinutes(10))
+        assertFalse(facade.snapshot().mayEnter, "cool-down is active now")
+
+        // logged now, entered two hours ago (before the stop-out): judged then, so the entry was allowed
+        val b = journal.savePlan(draft(s))
+        val late = journal.confirmEntry(b.id, EntryConfirm(100.0, 500.0, t0.minus(Duration.ofHours(2))))
+        assertTrue(late.loggedLate)
+        assertTrue(late.entryAllowed, "the governor at the entry time had no lock")
+
+        // an entry confirmed on time is judged now and the cool-down counts
+        val c = journal.savePlan(draft(s))
+        val onTime = journal.confirmEntry(c.id, EntryConfirm(100.0, 500.0, clock.now().minus(Duration.ofMinutes(10))))
+        assertFalse(onTime.loggedLate)
+        assertFalse(onTime.entryAllowed)
+
+        // the entry may not be in the future
+        val d = journal.savePlan(draft(s))
+        assertIs<IllegalArgumentException>(runCatching { journal.confirmEntry(d.id, EntryConfirm(100.0, 500.0, clock.now().plusSeconds(60))) }.exceptionOrNull())
+        assertTrue(JournalRepository.isLate(t0, t0.plus(Duration.ofMinutes(16))))
+        assertFalse(JournalRepository.isLate(t0, t0.plus(Duration.ofMinutes(15))))
+    }
+
+    @Test
+    fun demoDataLoadsTwelveDemoTradesThatNeverTouchRealNumbers(): Unit = runBlocking {
+        onboarded()
+        val before = facade.snapshot()
+        val demo = DemoData(db, clock, params)
+        assertEquals(12, demo.load())
+        assertEquals(0, demo.load(), "a second load is a no-op")
+        val rows = db.trades().all().filter { it.id.startsWith(DemoData.PREFIX) }
+        assertEquals(12, rows.size)
+        assertTrue(rows.all { it.account == "DEMO" && !it.imported && it.status == "CLOSED" && it.net != null })
+        assertTrue(rows.any { it.net!! > 0 } && rows.any { it.net!! < 0 }, "a mix of wins and losses")
+        assertTrue(rows.all { kotlin.math.abs(it.legs.sumOf { l -> l.fraction } - 1.0) < 1e-9 })
+        val after = facade.snapshot()
+        assertEquals(before.equity.now, after.equity.now, 1e-9)
+        assertEquals(before.governor.locks, after.governor.locks)
+
+        // a demo trade the user logged by hand survives the removal
+        val mine = journal.savePlan(draft(db.setups().all().first().id).copy(account = "DEMO"))
+        assertEquals(12, demo.remove())
+        assertFalse(demo.loaded())
+        assertNotNull(db.trades().get(mine.id))
+        assertEquals(1, db.audit().all().count { it.type == "DEMO_LOAD" })
+        assertEquals(1, db.audit().all().count { it.type == "DEMO_REMOVE" })
+    }
 }
