@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.analysis
 
+import androidx.compose.ui.text.style.TextOverflow
+
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -138,7 +141,7 @@ fun BarChart(bars: List<Bar>, label: (Bar) -> String, value: (Bar) -> String, mo
         Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.Bottom) {
             for (b in bars) {
                 Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(value(b), style = MaterialTheme.typography.labelSmall, maxLines = 1)
+                    Text(value(b), style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     val col = color ?: if (b.value < 0) c.redline else c.allowed
                     Canvas(Modifier.fillMaxWidth().height(if (hasNeg) 120.dp else 90.dp)) {
                         val zeroY = if (hasNeg) size.height / 2 else size.height
@@ -148,7 +151,7 @@ fun BarChart(bars: List<Bar>, label: (Bar) -> String, value: (Bar) -> String, mo
                         if (b.value >= 0) drawRect(col, Offset(x, zeroY - h), Size(w, h)) else drawRect(col, Offset(x, zeroY), Size(w, h))
                         drawLine(c.divider, Offset(0f, zeroY), Offset(size.width, zeroY), strokeWidth = 1.dp.toPx())
                     }
-                    Text(label(b), style = MaterialTheme.typography.labelSmall, maxLines = 1)
+                    Text(label(b), style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 }
             }
         }
@@ -163,14 +166,15 @@ fun RankBars(bars: List<Bar>, label: (Bar) -> String, value: (Bar) -> String, si
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         for (b in bars) {
             Row(Modifier.fillMaxWidth().heightIn(min = 32.dp).semantics(mergeDescendants = true) {}, verticalAlignment = Alignment.CenterVertically) {
-                Text(label(b), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.width(110.dp), maxLines = 1)
+                Text(label(b), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(0.45f), maxLines = 2, overflow = TextOverflow.Ellipsis)
                 val col = if (!signed) c.info else if (b.value < 0) c.redline else c.allowed
-                Canvas(Modifier.weight(1f).height(10.dp)) {
+                Canvas(Modifier.weight(0.55f).height(10.dp)) {
                     drawRect(c.divider, Offset.Zero, size)
                     val w = (kotlin.math.abs(b.value) / maxAbs).toFloat() * size.width
                     drawRect(col, Offset.Zero, Size(w, size.height))
                 }
-                Text(value(b), style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(start = 8.dp).width(64.dp), maxLines = 1)
+                // Numbers are never truncated (6.8, 200% font): the value column grows instead.
+                Text(value(b), style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(start = 8.dp).widthIn(min = 64.dp), maxLines = 1, softWrap = false)
             }
         }
     }

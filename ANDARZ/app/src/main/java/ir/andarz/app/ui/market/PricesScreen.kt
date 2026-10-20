@@ -127,7 +127,7 @@ internal fun PricesScreen(
         if (shown.isEmpty() && state.coins.isNotEmpty()) {
             item(key = "empty") { EmptyState(content.ui("mkt.prices.empty")) }
         }
-        items(shown, key = { it.id }) { c ->
+        items(shown, key = { it.id }, contentType = { "coin" }) { c ->
             Row(Modifier.padding(horizontal = 12.dp, vertical = 4.dp)) {
                 CoinRow(content, fmt, c, c.id in watch, toman, rate, onToggle = { onToggle(c.id) }, onOpen = { onOpen(c.id) })
             }

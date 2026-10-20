@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.journal
 
+import androidx.compose.foundation.layout.heightIn
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -125,14 +127,14 @@ fun JournalScreen(onOpen: (String) -> Unit, onInsights: () -> Unit, vm: JournalV
         LazyColumn(Modifier.fillMaxSize()) {
             val groups: Map<LocalDate, List<TradeEntity>> = rows.groupBy(dayOf)
             groups.forEach { (day, list) ->
-                item(key = "h$day") {
+                item(key = "h$day", contentType = "day") {
                     Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
                         Text(u.date(day), style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
                         val net = list.filter { it.account == "REAL" }.mapNotNull { it.net }
                         if (net.isNotEmpty()) Text(u.signedMoney(net.sum()), style = MaterialTheme.typography.titleSmall)
                     }
                 }
-                items(list, key = { it.id }) { t -> JournalRow(t, names[t.setupId], onOpen); HorizontalDivider() }
+                items(list, key = { it.id }, contentType = { "trade" }) { t -> JournalRow(t, names[t.setupId], onOpen); HorizontalDivider() }
             }
         }
     }
@@ -144,7 +146,7 @@ fun JournalScreen(onOpen: (String) -> Unit, onInsights: () -> Unit, vm: JournalV
 internal fun JournalRow(t: TradeEntity, setup: String?, onOpen: (String) -> Unit) {
     val u = ui()
     val c = LocalAndarzColors.current
-    Column(Modifier.fillMaxWidth().clickable { onOpen(t.id) }.padding(horizontal = 16.dp, vertical = 10.dp)) {
+    Column(Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable(role = androidx.compose.ui.semantics.Role.Button) { onOpen(t.id) }.padding(horizontal = 16.dp, vertical = 10.dp)) {
         androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(u.symbol(t.symbol), style = MaterialTheme.typography.titleSmall)
             TagChip(u.enumLabel("side", t.side))

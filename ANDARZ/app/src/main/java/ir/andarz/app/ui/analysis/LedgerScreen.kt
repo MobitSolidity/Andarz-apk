@@ -115,6 +115,7 @@ fun LedgerScreen(onBack: () -> Unit, vm: LedgerViewModel = hiltViewModel()) {
     var daysAgo by rememberSaveable { mutableStateOf(0) }
     var note by rememberSaveable { mutableStateOf("") }
     var baselineEdit by rememberSaveable { mutableStateOf<String?>(null) }
+    var askDelete by rememberSaveable { mutableStateOf<String?>(null) }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -168,9 +169,22 @@ fun LedgerScreen(onBack: () -> Unit, vm: LedgerViewModel = hiltViewModel()) {
                 if (e.type == "BASELINE") {
                     if (session) TextButton(onClick = { baselineEdit = CalcLogic.field(e.amount) }) { Text(u.t("common.edit")) }
                     else Text(u.t("ledger.baseline.locked"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)
-                } else TextButton(onClick = { vm.delete(e) }) { Text(u.t("common.delete")) }
+                } else TextButton(onClick = { askDelete = e.id }) { Text(u.t("common.delete"), color = c.redline) }
             }
         }
+    }
+
+    // UI review (D-81): a ledger row moves equity and every limit, so deleting asks first, like a trade (5.5).
+    askDelete?.let { id ->
+        val e = entries.firstOrNull { it.id == id }
+        if (e == null) { askDelete = null; return@let }
+        AlertDialog(
+            onDismissRequest = { askDelete = null },
+            title = { Text(u.t("common.delete")) },
+            text = { Text(u.t("ledger.type.${e.type}") + " \u00B7 " + entryAmount(u, e) + "\n" + u.t("common.confirm")) },
+            confirmButton = { TextButton(onClick = { vm.delete(e); askDelete = null }) { Text(u.t("common.delete"), color = c.redline) } },
+            dismissButton = { TextButton(onClick = { askDelete = null }) { Text(u.t("common.cancel")) } },
+        )
     }
 
     baselineEdit?.let { text ->

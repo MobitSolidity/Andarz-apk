@@ -1,5 +1,13 @@
 package ir.andarz.app.ui.platform
 
+import androidx.compose.runtime.remember
+
+import androidx.compose.foundation.layout.Box
+
+import androidx.compose.material3.SnackbarHostState
+
+import androidx.compose.material3.SnackbarHost
+
 import android.Manifest
 import android.content.Intent
 import android.os.Build
@@ -67,7 +75,6 @@ fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -
     val busy by vm.busy.collectAsState()
     val share by vm.shareUri.collectAsState()
     val ctx = LocalContext.current
-    val c = LocalAndarzColors.current
 
     LaunchedEffect(share) {
         val (uri, mime) = share ?: return@LaunchedEffect
@@ -76,13 +83,22 @@ fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -
         vm.shareUri.value = null
     }
 
+    // UI review (D-81): the page is long and most actions sit far below the top, so their result is shown in a
+    // snackbar at the bottom of the viewport (announced by TalkBack), then cleared, instead of a line at the top
+    // that the user never sees.
+    val snack = remember { SnackbarHostState() }
+    LaunchedEffect(message) {
+        val m = message ?: return@LaunchedEffect
+        snack.showSnackbar(u.t(m), withDismissAction = true)
+        vm.message.value = null
+    }
+    Box(Modifier.fillMaxSize()) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(u.t("set.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
             TextButton(onClick = onBack) { Text(u.t("common.back")) }
         }
         if (busy) LinearProgressIndicator(Modifier.fillMaxWidth())
-        message?.let { Text(u.t(it), color = if (it.startsWith("err.")) c.redline else c.allowed) }
 
         // D-76: the one switch that allows or forbids every internet connection, first on the page.
         InternetSettings(u, vm)
@@ -96,6 +112,8 @@ fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -
             Text(u.t("set.version", "v" to u.digits(vm.versionName)) + " \u00B7 " + u.t("set.build", "b" to u.int(vm.versionCode)), style = MaterialTheme.typography.bodyMedium)
             TextButton(onClick = onAbout) { Text(u.t("about.title")) }
         }
+    }
+    SnackbarHost(snack, Modifier.align(Alignment.BottomCenter).padding(16.dp))
     }
 }
 

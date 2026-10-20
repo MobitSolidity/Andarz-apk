@@ -26,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.andarz.app.content.ContentRepository
 import ir.andarz.app.ui.AppViewModel
 import ir.andarz.app.ui.LocalUi
+import ir.andarz.app.ui.nav.DeepLinks
 import ir.andarz.app.ui.Ui
 import ir.andarz.app.ui.nav.AndarzNavHost
 import ir.andarz.app.ui.onboarding.OnboardingScreen
@@ -59,7 +60,7 @@ class MainActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        pendingRoute.value = intent?.getStringExtra(EXTRA_ROUTE)
+        pendingRoute.value = DeepLinks.sanitize(intent?.getStringExtra(EXTRA_ROUTE))
 
         setContent {
             val settings by app.settings.collectAsState()
@@ -92,7 +93,8 @@ class MainActivity : FragmentActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        intent.getStringExtra(EXTRA_ROUTE)?.let { pendingRoute.value = it }
+        setIntent(intent)
+        DeepLinks.sanitize(intent.getStringExtra(EXTRA_ROUTE))?.let { pendingRoute.value = it }
     }
 
     companion object {

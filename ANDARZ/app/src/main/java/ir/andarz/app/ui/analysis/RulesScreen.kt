@@ -194,8 +194,8 @@ fun RulesScreen(onBack: () -> Unit, vm: GovernanceViewModel = hiltViewModel()) {
             }
         }
         for (group in listOf("core", "governor")) {
-            item { Text(u.t("params.group.$group"), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp)) }
-            items(vm.defs.filter { it.group == group }, key = { it.key }) { d ->
+            item(key = "group-$group", contentType = "header") { Text(u.t("params.group.$group"), style = MaterialTheme.typography.titleMedium, modifier = Modifier.padding(top = 8.dp)) }
+            items(vm.defs.filter { it.group == group }, key = { it.key }, contentType = { "param" }) { d ->
                 ParamRow(u, d, p[d.key], session != null) { editing = d.key }
                 HorizontalDivider()
             }

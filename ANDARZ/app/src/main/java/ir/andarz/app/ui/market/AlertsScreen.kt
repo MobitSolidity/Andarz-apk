@@ -214,7 +214,7 @@ internal fun AlertsScreen(
                 SectionCard(null) { Text(content.ui("mkt.alerts.rules.empty"), style = MaterialTheme.typography.bodyMedium, color = c.textMuted) }
             }
         }
-        items(ruleList, key = { it.id }) { r ->
+        items(ruleList, key = { it.id }, contentType = { "rule" }) { r ->
             RuleRow(content, fmt, u, r, coins.firstOrNull { it.id == r.id }, onOpen = { onOpen(r.id) }, onRemove = { vm.removeRule(r.id) })
         }
     }

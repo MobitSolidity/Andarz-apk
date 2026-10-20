@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.theme
 
+import ir.andarz.app.R
+
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -11,10 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -52,28 +52,17 @@ val LocalAndarzColors: ProvidableCompositionLocal<AndarzColors> =
 /**
  * Vazirmatn (SIL OFL), weights 400/500/700 (§6.3).
  *
- * The TTFs are not in the kit and §2.2 forbids a build-time download, so the files are looked up by name
- * at runtime: present means Vazirmatn, absent means the platform default (D-M34, O-5). The lookup is by
- * name rather than by `R.font.…` on purpose — a direct reference would not compile until the owner drops
- * the files in, and the app has to build and run either way.
+ * The TTFs ship in `res/font` (D-M34). They are referenced as `R.font.*`, not looked up by name, so R8's
+ * resource shrinker sees them and keeps them (D-80, r8-analyzer: no reflection-only references).
  */
-private val FONT_NAMES = listOf(
-    "vazirmatn_regular" to FontWeight.Normal,
-    "vazirmatn_medium" to FontWeight.Medium,
-    "vazirmatn_bold" to FontWeight.Bold,
+private val persianFamily = FontFamily(
+    Font(R.font.vazirmatn_regular, FontWeight.Normal),
+    Font(R.font.vazirmatn_medium, FontWeight.Medium),
+    Font(R.font.vazirmatn_bold, FontWeight.Bold),
 )
 
 @Composable
-private fun rememberPersianFamily(): FontFamily {
-    val context = LocalContext.current
-    return remember(context) {
-        val fonts = FONT_NAMES.mapNotNull { (name, weight) ->
-            val id = context.resources.getIdentifier(name, "font", context.packageName)
-            if (id != 0) Font(id, weight) else null
-        }
-        if (fonts.isEmpty()) FontFamily.Default else FontFamily(fonts)
-    }
-}
+private fun rememberPersianFamily(): FontFamily = persianFamily
 
 /** Line height 1.6 for Persian text (§6.3, `typography.lineHeightFactorFa`). */
 private fun fa(family: FontFamily, size: Int, weight: FontWeight) = TextStyle(

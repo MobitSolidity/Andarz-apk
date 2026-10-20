@@ -514,6 +514,65 @@ Demo data (P1, done in M7: D-68), the 3-step font slider (the system scale alrea
 backups (D-13), the learn pages (P1, done in M7: D-69), the spot portfolio (P2) and full Jalali date pickers: dates are entered with day steppers in
 M5/M6 screens and CSV accepts Jalali dates. `mkt.set.quiet` and market settings in backups are MK3.
 
+## Android skills review (decisions)
+
+The owner supplied Google's Android skills (`android-skills.zip`). The applicable ones were read in full and
+run against the project: play-policy-insights (its scripts, Mode B), android-permissions-security,
+android-intent-security, edge-to-edge, jetpack-compose-performance, r8-analyzer and testing-setup. Only
+findings confirmed in the code were changed; everything else is recorded as checked. Skills for features
+Andarz does not have (camera, cars, Wear, TV, XR, billing, credentials, AppFunctions, Glance, Media3, AGP 9
+upgrade, Navigation 3) were not applied.
+
+### D-78 — Deep-link route allowlist (android-intent-security)
+
+`MainActivity` is exported (launcher), and it read the route extra and passed any string to
+`navController.navigate`. Another app could therefore open any screen in the graph, including onboarding or
+the wizard, after unlock. `DeepLinks.sanitize` now accepts only the shapes Andarz itself puts in
+notifications (`today`, `reviews`, `settings`, `security`, `market`, `market/news`, `trade/<id>`,
+`market/coin/<id>` with a bounded id), in both `onCreate` and `onNewIntent`, and `onNewIntent` calls
+`setIntent`. `DeepLinksTest` checks every route the app generates passes and hostile routes do not. Checked
+and already correct: all 11 PendingIntents are `FLAG_IMMUTABLE`; every component except the launcher and the
+boot receiver is `exported=false`; the boot receiver accepts only `BOOT_COMPLETED` / `MY_PACKAGE_REPLACED`
+(protected broadcasts); the FileProvider shares only `cache/out/`; no custom permission, bound service or
+content provider is exported. Runtime permission: POST_NOTIFICATIONS is requested only when the user turns
+on a reminder or alert, never at start, and the app works without it (no loop).
+
+### D-79 — Edge-to-edge and lists (edge-to-edge, compose-performance)
+
+Both activities already call `enableEdgeToEdge()` (ComponentActivity, so icon colours are automatic) and
+`adjustResize` is set. Gaps fixed: the nav `Scaffold` now uses `contentWindowInsets = safeDrawing` and its
+content consumes the padding, so text fields are never under the keyboard and nothing is padded twice; the
+two screens outside the Scaffold (onboarding, lock) use `safeDrawingPadding()`, and the lock screen now
+scrolls, so its PIN field stays reachable at 200% font with the keyboard open. Lazy lists that mix headers and
+rows declare `contentType` (journal, prices, alerts, rules); the Market section chips, a fixed set of five,
+use a plain scrolling `Row` instead of a `LazyRow`. `isNavigationBarContrastEnforced` is left at its default:
+the skill asks for `false` with a coloured bottom bar, but the Material 3 `NavigationBar` already draws its
+own container behind the gesture area, and the change cannot be checked without a device.
+
+### D-80 — R8 configuration (r8-analyzer, heuristic path: AGP 8.7.3)
+
+The analyzer's quantitative paths need AGP 9.3 or R8 9.3.7, which are not used here; the heuristic path was
+followed. Removed as redundant or too broad: the Room keep (room-runtime ships it), the kotlinx-serialization
+keeps (the library ships R8 rules), `-keep class ir.andarz.engine.** { *; }` (package-wide wildcard; the
+engine has no reflection), and `android.enableR8.fullMode=true` (the default since AGP 8.0). Added
+`SourceFile,LineNumberTable` so a crash can be retraced with the mapping file. Found by the same review:
+the Vazirmatn fonts were looked up with `Resources.getIdentifier`, which resource shrinking cannot see; they
+are now referenced as `R.font.*`. The AGP 9 upgrade the skill suggests is not done (toolchain lock, D-M33).
+
+### D-81 — UI and UX fixes from the review
+
+- Settings: action results (backup, CSV, demo data, errors) appeared as a line at the top of a long page,
+  usually off screen. They are now a snackbar at the bottom, announced by TalkBack, then cleared.
+- Ledger: deleting a deposit, withdrawal or adjustment happened on one tap. It changes equity and every
+  limit, so it now asks first (like deleting a trade), and the button is drawn in the red-line colour.
+- Journal rows: at least 48 dp tall and announced as buttons.
+- Truncated numbers: prices and ranked-bar values could be cut with no ellipsis at 200% font. Values are now
+  never truncated (the column widens), labels may wrap to two lines, and every remaining single-line text has
+  an ellipsis.
+- Testing (testing-setup): the existing stack (JUnit4, Robolectric with Compose tests in `test`, Hilt) is
+  respected; no new framework was added. Screenshot tests (Roborazzi/Dropshots) are not added: they need a
+  reference device run to be meaningful.
+
 ## Owner request — internet switch in Settings (decisions)
 
 ### D-76 — One internet switch, first on the Settings page

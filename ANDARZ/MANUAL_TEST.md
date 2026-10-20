@@ -241,3 +241,19 @@ F9 and F10 under Robolectric (`AccessibilityLayoutTest`, D-71).
 | N-3 | Turn it off with Prices open and an alert armed | Prices stop updating, no alert fires, a proxy shows zero requests | pending |
 | N-4 | Back up, wipe, restore | Switch is off after restore | pending |
 
+## Android skills review (D-78 … D-81, pending: needs a device)
+
+Play policy audit (play-policy-insights): **Compliant**, report in `docs/audit/play_policy_report.md`. Two
+advisory items for the Play Console: the foreground-service declaration with a short video, and the exact
+alarm explanation. Data Safety form: only "Files and docs, user-initiated export" is shared, by the user.
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| S-1 | `adb shell am start -n ir.andarz.app/.MainActivity --es ir.andarz.app.extra.ROUTE onboarding` | App opens on Today; onboarding is not shown | pending |
+| S-2 | Tap a trade reminder notification while the app is locked | Unlock, then the trade opens | pending |
+| S-3 | Open a text field in Rules / Ledger / Settings with the keyboard up, 3-button and gesture navigation | Field stays above the keyboard; nothing behind the navigation bar; no double gap | pending |
+| S-4 | Lock screen at 200% font with the PIN keyboard open | PIN field and unlock button reachable by scrolling | pending |
+| S-5 | Settings: make a backup at the bottom of the page | Snackbar at the bottom with the result | pending |
+| S-6 | Ledger: tap delete on a deposit | Confirmation dialog; cancel keeps the row | pending |
+| S-7 | Release APK: fonts | Vazirmatn shows (not the system font) | pending |
+

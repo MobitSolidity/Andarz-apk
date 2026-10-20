@@ -1,5 +1,11 @@
 package ir.andarz.app.ui.platform
 
+import androidx.compose.foundation.rememberScrollState
+
+import androidx.compose.foundation.verticalScroll
+
+import androidx.compose.foundation.layout.safeDrawingPadding
+
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.compose.foundation.layout.Arrangement
@@ -75,7 +81,7 @@ fun LockScreen(lock: AppLock, s: Settings) {
     }
     LaunchedEffect(canBio) { if (canBio) prompt() }
 
-    Column(Modifier.fillMaxSize().padding(32.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)) {
+    Column(Modifier.fillMaxSize().safeDrawingPadding().verticalScroll(rememberScrollState()).padding(32.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)) {
         Icon(Icons.Filled.Lock, contentDescription = u.t("a11y.lockedState"), tint = LocalAndarzColors.current.info)
         Text(u.content.appName, style = MaterialTheme.typography.headlineSmall)
         OutlinedTextField(

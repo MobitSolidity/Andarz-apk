@@ -115,7 +115,7 @@ internal fun SymbolBadge(symbol: String, toman: Boolean) {
                 text = Fmt.isolate(symbol.take(if (toman) 4 else 3)),
                 style = MaterialTheme.typography.labelMedium,
                 color = if (toman) LocalAndarzColors.current.caution else MaterialTheme.colorScheme.onSurface,
-                maxLines = 1,
+                maxLines = 1, overflow = TextOverflow.Ellipsis,
             )
         }
     }
@@ -143,7 +143,7 @@ internal fun CoinRow(
             SymbolBadge(c.symbol, c.isToman)
             Column(Modifier.weight(1f).padding(horizontal = 10.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(Fmt.isolate(c.symbol), style = MaterialTheme.typography.titleSmall, maxLines = 1)
+                    Text(Fmt.isolate(c.symbol), style = MaterialTheme.typography.titleSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     Spacer(Modifier.width(6.dp))
                     Text(
                         if (c.isToman) Fmt.isolate("IR") else Fmt.isolate("#" + fmt.int(c.rank)),
@@ -155,7 +155,7 @@ internal fun CoinRow(
             }
             Sparkline(c.spark.takeLast(if (c.isToman) 120 else 24), tone, Modifier.size(width = 52.dp, height = 26.dp))
             Column(Modifier.width(116.dp), horizontalAlignment = Alignment.End) {
-                Text(fmt.coinPrice(c, toman, rate), style = MaterialTheme.typography.bodyLarge, maxLines = 1)
+                Text(fmt.coinPrice(c, toman, rate), style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 Text(fmt.pct(c.change24h), style = MaterialTheme.typography.labelMedium, color = tone)
             }
             StarButton(starred, content.ui("mkt.sheet.star"), onToggle)

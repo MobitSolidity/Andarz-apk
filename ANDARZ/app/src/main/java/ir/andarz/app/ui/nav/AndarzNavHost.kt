@@ -1,5 +1,11 @@
 package ir.andarz.app.ui.nav
 
+import androidx.compose.foundation.layout.consumeWindowInsets
+
+import androidx.compose.foundation.layout.safeDrawing
+
+import androidx.compose.foundation.layout.WindowInsets
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -89,6 +95,9 @@ fun AndarzNavHost(
     val showBar = AndarzNav.bottomBar.any { currentRoute?.startsWith(it.route) == true }
 
     Scaffold(
+        // edge-to-edge (D-79): system bars plus the keyboard, so a focused field is never under the IME;
+        // the padding is consumed below so nested screens do not add it twice.
+        contentWindowInsets = WindowInsets.safeDrawing,
         bottomBar = {
             if (showBar) NavigationBar {
                 for (destination in AndarzNav.bottomBar.filter { it.visible }) {
@@ -115,7 +124,7 @@ fun AndarzNavHost(
             }
         },
     ) { insets ->
-        NavHost(navController = navController, startDestination = startRoute, modifier = Modifier.padding(insets)) {
+        NavHost(navController = navController, startDestination = startRoute, modifier = Modifier.padding(insets).consumeWindowInsets(insets)) {
             composable(AndarzNav.TODAY) {
                 val vm: TodayViewModel = hiltViewModel()
                 val open by vm.open.collectAsState()

@@ -1,5 +1,9 @@
 package ir.andarz.app.ui.market
 
+import androidx.compose.foundation.layout.Row
+
+import androidx.compose.foundation.horizontalScroll
+
 import ir.andarz.engine.Fmt
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,8 +12,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -180,12 +182,12 @@ private fun SectionRow(
     selected: MarketSection,
     onSelect: (MarketSection) -> Unit,
 ) {
-    val sections = remember { MarketSection.entries.toList() }
-    LazyRow(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+    // A small, fixed set of chips: a plain scrolling Row, no lazy virtualization (compose-performance, D-79).
+    Row(
+        modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()).padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(sections) { item ->
+        MarketSection.entries.forEach { item ->
             FilterChip(
                 selected = item == selected,
                 onClick = { onSelect(item) },

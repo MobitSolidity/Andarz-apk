@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.market
 
+import androidx.compose.ui.text.style.TextOverflow
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -111,7 +113,7 @@ private fun WatchCard(
                 }
             }
             if (c.isToman) Text(content.ui("mkt.coins.usdtPair"), style = MaterialTheme.typography.bodySmall, color = LocalAndarzColors.current.textMuted)
-            Text(fmt.coinPrice(c, toman, rate), style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 6.dp), maxLines = 1)
+            Text(fmt.coinPrice(c, toman, rate), style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 6.dp), maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text(fmt.pct(c.change24h), style = MaterialTheme.typography.labelLarge, color = tone)
             Sparkline(c.spark.takeLast(if (c.isToman) 120 else 48), tone, Modifier.fillMaxWidth().height(36.dp).padding(top = 6.dp))
         }

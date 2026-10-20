@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.onboarding
 
+import androidx.compose.foundation.layout.safeDrawingPadding
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -79,7 +81,8 @@ fun OnboardingScreen(onDone: () -> Unit, vm: OnboardingViewModel = hiltViewModel
     val rp = Fmt.normalizeInput(risk)?.div(100)?.takeIf { it in rMin..rMax }
     val zoneOk = runCatching { ZoneId.of(zone) }.isSuccess
 
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
+    // Outside the nav Scaffold: keep clear of the system bars and the keyboard (edge-to-edge, D-79).
+    Column(Modifier.fillMaxSize().safeDrawingPadding().padding(16.dp)) {
         LinearProgressIndicator(progress = { (page + 1) / PAGES.toFloat() }, modifier = Modifier.fillMaxWidth())
         Column(Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(top = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             when (page) {
