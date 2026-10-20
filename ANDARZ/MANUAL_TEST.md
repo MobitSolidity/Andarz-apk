@@ -153,6 +153,23 @@ counts, quiet hours and the reminder plan (`PlatformLogicTest`).
 | A9 | Plant each K8.4 violation | Each fails the build (guard log) | done on the JVM guards; re-run before release |
 | A10 | Read every shipped string | No emoji, no English UI text, no "no internet" claim, no March name outside the credit | done by guard 9 |
 
+## MK3 integration (pending: needs a device with a network; nothing below has been run)
+
+JVM tests: one-shot firing per level on a fake clock, stale quotes ignored, no symbols after close
+(`TradeLinkTest`); rows deleted on close and the 1 -> 2 migration (`PlatformDataTest`); market settings round
+trip without consent or switch (`MarketPrefsBackupTest`).
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| MK3-1 | Open a BTCUSDT trade, arm take-profit and stop alerts, leave the app open | When the price crosses, one private notification per level; tapping opens the trade after the lock; never again for that level; closing the trade removes the card's switches | pending |
+| MK3-2 | Symbol FOOUSDT or a duplicated ticker | `mkt.link.nocoin`; nothing armed | pending |
+| MK3-3 | Wizard step 4, calculator with a symbol, trade current price, with Market on | Chip with price, age and source; tap copies the number; after 60 s without ticks `mkt.chip.stale` | pending |
+| MK3-4 | Watch-list with BTCUSDT while Prices is open | Price and 24 h change under the symbol; nothing with Market off | pending |
+| MK3-5 | Back up, wipe, restore | Stars, rules and alert settings return; Market stays off until the user turns it on | pending |
+| MK3-6 | `mkt.set.quiet` on, quiet hours around now, trigger an alert | Notification posted silently; no ring | pending |
+| A11 | Golden vectors and the 24 items | Vectors pass in every build (engine 275 tests); `engine/` unchanged in MK3; `data/` gained only `trade_alert` | partial (device items pending) |
+| A12 | MERGE_MAP | No todo rows | done |
+
 ## MK1 market data and prices (pending: needs a device with a network; nothing below has been run)
 
 JVM tests cover parsing, merge, cadence, demand, zero traffic and formatting (D-M48). These rows are the

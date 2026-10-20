@@ -109,7 +109,8 @@ Checked off when the owning milestone proves it with a test. None of it is redes
 | About -> network page (K6.9) | done | `mkt.net.title/body/sent`, the host list from `MarketModule.hosts`, the credit line `mkt.about.credit`; the threat-model comment states that Market uses the internet. |
 | Channel groups (K6.6) | done | Discipline group with `discipline`, `reviews`, `system` (tag `discipline`); Market group unchanged (tag `market`). |
 | Deep links through the lock (K6.11) | done | `MainActivity` keeps the notification route while locked and hands it to the nav host after unlock; `onNewIntent` covers a running app. `AlarmActivity` stays outside the lock. |
-| Backup of market settings | MK3 | `BackupDocument.market` is reserved (null until `exportJson/importJson`). |
+| Backup of market settings | done | MK3: `settings.market` from `MarketPrefs.exportJson`; consent and switch excluded; `onRestored` after restore (D-M60). |
+| Trade-linked alerts, live chip, watch-list prices, quiet mute (K9.1 b-e) | done | MK3: `TradeWatcher`, `TradeLink`, `LiveLink.kt`, `muteInQuiet` (D-M56..D-M60). |
 
 ## Suspected March defects (flagged, not fixed — D-M23)
 

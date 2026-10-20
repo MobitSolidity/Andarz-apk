@@ -642,6 +642,46 @@ floor, the monitor and reboot restore need a device. They are rows of "Device ch
 features (MK2)" in MANUAL_TEST.md, all pending. The JVM covers the evaluator, reminder time math, boot
 restore through a fake scheduler and the calendar loader.
 
+## MK3 — Integration (decisions)
+
+### D-M56 — `trade_alert` table, schema version 2
+
+Trade-linked one-shot flags live in `:data` as `trade_alert(tradeId, level, price, armedAt, firedAt)` with a
+cascade foreign key to `trade`. Migration 1 -> 2 only creates the table; a JVM test builds version 1 from the
+exported `1.json`, migrates through Room and checks data survives. `markFired` is an `UPDATE ... WHERE firedAt IS
+NULL` and returns the row count, so exactly one caller posts. `JournalRepository.close` deletes the trade's rows in
+the same transaction (they vanish when the trade closes). The backup carries the table; restore keeps rows of OPEN
+trades only.
+
+### D-M57 — The trade watcher lives in `:app`
+
+`TradeWatcher` combines open trades and armed rows with `MarketRepository.state`, sets `extraSymbols` and holds one
+background acquire while anything is armed (K6.4 d), so journal data never enters `:market` (D-M21). Levels:
+take-profit, current stop, and `priceAtR(side, entry, slInitial, Partial_R_Lo)` for the partial level (the existing
+engine helper; no engine change). The price is frozen when armed. Only quotes younger than 60 s are evaluated.
+Notifications use the discipline channel, private on the lock screen, with `mkt.link.notif.*` and `notif.partial.*`;
+the card states with `mkt.alerts.bg.hint` that alerts arrive while the app is open or the monitor runs.
+
+### D-M58 — Symbol resolution
+
+Suffixes `USDT`, `USDC`, `USD`, `PERP`, `.P` are removed repeatedly (separators trimmed) and the base must match
+exactly one non-Toman coin of the top 200; otherwise the card shows `mkt.link.nocoin` and nothing is armed.
+
+### D-M59 — Live chip and watch-list prices never demand the hub
+
+The chip (wizard entry, calculator, trade current price) and the watch-list row read the state only; they show a
+price when Market is on and something already streams it. The chip copies the number as typed text (D-M06). The
+calculator gains a symbol field used only for the chip; *build a trade* still opens the wizard with an empty
+symbol (5.7).
+
+### D-M60 — Market settings in the backup; the quiet mute
+
+`MarketPrefs.exportJson/importJson` carry stars, reminded releases, unit, alert settings and rules; the consent
+stamp and the master switch are never exported, so a restore leaves Market off (K6.12). Import ignores unknown
+fields and keeps current values for invalid ones. After a restore `MarketModule.onRestored` reschedules release
+reminders and restarts the monitor only if enabled and the gates are open. `mkt.set.quiet` (`muteInQuiet`, default
+off) posts price alerts silently inside the journal's quiet hours, asked through `MarketHost.inQuietHours`.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |
