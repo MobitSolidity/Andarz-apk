@@ -61,7 +61,10 @@ object MarketModule {
         val repository = MarketRepository(hub, prefs)
         val scope = scope
         val evaluator = AlertEvaluator()
-        val dispatcher: AlertDispatcher? = app?.let { AlertDispatcher(it, host) }
+        val dispatcher: AlertDispatcher? = app?.let { a ->
+            AlertDispatcher(a, host) { mute && host.inQuietHours(System.currentTimeMillis()) }
+        }
+        @Volatile var mute: Boolean = false
         val alerts: AlertsController? = app?.let { a -> dispatcher?.let { AlertsController(a, prefs, it) } }
         val calendar: CalendarController? = app?.let { CalendarController(it, prefs) }
         val visible = MutableStateFlow(false)
@@ -113,6 +116,7 @@ object MarketModule {
                 holding = want
             }
         }
+        i.scope.launch { i.prefs.alertSettings.collect { i.mute = it.muteInQuiet } }
         i.scope.launch {
             combine(i.prefs.gate, i.prefs.alertSettings) { g, s -> g.mayUseNetwork && s.background }
                 .distinctUntilChanged()
@@ -143,6 +147,18 @@ object MarketModule {
         val on = i.prefs.gate.first().mayUseNetwork && i.prefs.alertSettings.first().background
         if (on) LiveService.start(context)
     }
+
+    /** Market settings for the backup (K6.12); never consent or the master switch. */
+    suspend fun exportJson(): String = require().prefs.exportJson()
+
+    /** Applies restored market settings; malformed input throws and changes nothing. */
+    suspend fun importJson(json: String) = require().prefs.importJson(json)
+
+    /**
+     * After a restore (K9.1 a): release reminders are rescheduled; the monitor restarts only when enabled,
+     * and only if the gates are open, which a restore never opens.
+     */
+    suspend fun onRestored(context: Context) = restoreAfterBoot(context)
 
     /** Wording, or null before install (a receiver in a cold process of a not-yet-installed app). */
     internal fun textsOrNull(): MarketTexts? = state?.host?.texts

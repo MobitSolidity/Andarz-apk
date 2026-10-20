@@ -108,6 +108,8 @@ data class AlertSettings(
     val ring: RingMode = RingMode.OFF,
     /** Ring through the phone's Clock app when Android allows it; the own alarm otherwise. */
     val clockApp: Boolean = false,
+    /** P1 `mkt.set.quiet` (K6.6): inside the journal's quiet hours, alerts are posted silently. Default off. */
+    val muteInQuiet: Boolean = false,
 )
 
 /** Per-coin overrides: own % threshold and one-shot target prices (USD, or Toman for USDT/IRT). */

@@ -261,3 +261,21 @@ data class AuditLogEntity(
     val refId: String?,
     @ColumnInfo(defaultValue = "{}") val payload: String,
 )
+
+/**
+ * One-shot price alerts armed on an OPEN trade (MK3, K9.1 b, D-M56): one row per trade and level
+ * (`TP`, `PARTIAL`, `STOP`). `firedAt` makes it one-shot; rows are deleted with the trade and when it closes.
+ */
+@Serializable
+@Entity(
+    tableName = "trade_alert",
+    primaryKeys = ["tradeId", "level"],
+    foreignKeys = [ForeignKey(entity = TradeEntity::class, parentColumns = ["id"], childColumns = ["tradeId"], onDelete = ForeignKey.CASCADE)],
+)
+data class TradeAlertEntity(
+    val tradeId: String,
+    val level: String,
+    val price: Double,
+    val armedAt: Long,
+    val firedAt: Long? = null,
+)

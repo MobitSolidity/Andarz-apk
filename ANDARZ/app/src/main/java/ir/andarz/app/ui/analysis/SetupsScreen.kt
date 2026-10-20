@@ -263,6 +263,8 @@ fun WatchlistScreen(onBack: () -> Unit, vm: SetupsViewModel = hiltViewModel()) {
                     Text(u.symbol(w.symbol), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
                     liq.pass?.let { ok -> TagChip(u.t(if (ok) "wl.filter.pass" else "wl.filter.fail").substringBefore('\u061B'), if (ok) c.allowed else c.caution) }
                 }
+                // K9.1 d: price and 24 h change when the symbol resolves and Market is on; display only.
+                ir.andarz.app.ui.market.WatchPrice(w.symbol)
                 w.volume24hUsd?.let { Text(u.t("mkt.sheet.vol24") + ": " + u.money(it, 0), style = MaterialTheme.typography.bodyMedium) }
                 w.relVolume?.let { Text(u.mult(it), style = MaterialTheme.typography.bodyMedium) }
                 if (liq.pass == false) Text(u.t("wl.filter.fail"), style = MaterialTheme.typography.labelMedium, color = c.caution)

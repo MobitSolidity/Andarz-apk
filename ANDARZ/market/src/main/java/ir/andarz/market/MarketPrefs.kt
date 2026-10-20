@@ -21,6 +21,7 @@ import ir.andarz.market.model.RingMode
 import ir.andarz.market.model.USDT_IRT_ID
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import org.json.JSONObject
 
@@ -49,6 +50,7 @@ private val A_BG = booleanPreferencesKey("alert_bg")
 private val A_USDT = booleanPreferencesKey("alert_usdt")
 private val A_RING = stringPreferencesKey("alert_ring")
 private val A_CLOCK = booleanPreferencesKey("alert_clock_app")
+private val A_QUIET = booleanPreferencesKey("alert_quiet_mute")
 private val NAME = stringPreferencesKey("user_name")
 private val RULES = stringPreferencesKey("coin_rules")
 
@@ -83,6 +85,7 @@ internal fun readSettings(p: Preferences) = AlertSettings(
     name = p[NAME] ?: DEFAULTS.name,
     ring = enumOr(p[A_RING], DEFAULTS.ring),
     clockApp = p[A_CLOCK] ?: DEFAULTS.clockApp,
+    muteInQuiet = p[A_QUIET] ?: DEFAULTS.muteInQuiet,
 )
 
 private fun MutablePreferences.write(s: AlertSettings) {
@@ -97,6 +100,52 @@ private fun MutablePreferences.write(s: AlertSettings) {
     this[NAME] = s.name
     this[A_RING] = s.ring.name
     this[A_CLOCK] = s.clockApp
+    this[A_QUIET] = s.muteInQuiet
+}
+
+/**
+ * The settings document of the backup (K6.12, K9.1 a): stars, reminded releases, unit, alert settings and
+ * rules. The consent stamp and the master switch are never exported, so a restore leaves Market off.
+ */
+internal fun exportDoc(p: Preferences): JSONObject = JSONObject().apply {
+    put("version", 1)
+    put("watch", org.json.JSONArray((p[WATCH] ?: DEFAULT_WATCH).sorted()))
+    put("alarms", org.json.JSONArray((p[ALARMS] ?: emptySet()).sorted()))
+    put("toman", p[TOMAN] ?: false)
+    val s = readSettings(p)
+    put("alerts", JSONObject().apply {
+        put("enabled", s.enabled); put("pct", s.thresholdPct.toDouble()); put("window", s.window.name); put("scope", s.scope.name)
+        put("direction", s.direction.name); put("cooldown", s.cooldownMin); put("background", s.background)
+        put("usdt", s.includeUsdt); put("name", s.name); put("ring", s.ring.name); put("clockApp", s.clockApp); put("muteInQuiet", s.muteInQuiet)
+    })
+    put("rules", JSONObject(encodeRules(decodeRules(p[RULES]))))
+}
+
+/** Applies a document; unknown fields are ignored, invalid values fall back to the current ones. */
+internal fun importDoc(o: JSONObject, p: MutablePreferences) {
+    fun strings(k: String): Set<String>? = o.optJSONArray(k)?.let { a -> (0 until a.length()).mapNotNull { a.optString(it).takeIf { s -> s.isNotBlank() && s.length <= 64 } }.toSet() }
+    strings("watch")?.let { p[WATCH] = it }
+    strings("alarms")?.let { p[ALARMS] = it }
+    if (o.has("toman")) p[TOMAN] = o.optBoolean("toman")
+    o.optJSONObject("alerts")?.let { a ->
+        val cur = readSettings(p)
+        val next = cur.copy(
+            enabled = a.optBoolean("enabled", cur.enabled),
+            thresholdPct = a.optDouble("pct", cur.thresholdPct.toDouble()).takeIf { it.isFinite() && it > 0 && it <= 100 }?.toFloat() ?: cur.thresholdPct,
+            window = enumOr(a.optString("window"), cur.window),
+            scope = enumOr(a.optString("scope"), cur.scope),
+            direction = enumOr(a.optString("direction"), cur.direction),
+            cooldownMin = a.optInt("cooldown", cur.cooldownMin).takeIf { it in 1..1440 } ?: cur.cooldownMin,
+            background = a.optBoolean("background", cur.background),
+            includeUsdt = a.optBoolean("usdt", cur.includeUsdt),
+            name = a.optString("name", cur.name).take(40),
+            ring = enumOr(a.optString("ring"), cur.ring),
+            clockApp = a.optBoolean("clockApp", cur.clockApp),
+            muteInQuiet = a.optBoolean("muteInQuiet", cur.muteInQuiet),
+        )
+        p.write(next)
+    }
+    o.optJSONObject("rules")?.let { p[RULES] = encodeRules(decodeRules(it.toString())) }
 }
 
 private fun JSONObject.optNum(k: String): Double? =
@@ -191,6 +240,14 @@ internal class MarketPrefs(private val store: DataStore<Preferences>) {
             if (rule.isEmpty) m.remove(rule.id) else m[rule.id] = rule
             p[RULES] = encodeRules(m)
         }
+    }
+
+    suspend fun exportJson(): String = exportDoc(store.data.first()).toString()
+
+    /** Throws on malformed JSON; never touches consent or the master switch (K6.12). */
+    suspend fun importJson(json: String) {
+        val o = JSONObject(json)
+        store.edit { importDoc(o, it) }
     }
 
     suspend fun clearTarget(id: String, above: Boolean) {

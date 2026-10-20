@@ -98,6 +98,7 @@ fun TradeScreen(onBack: () -> Unit, vm: TradeViewModel = hiltViewModel()) {
         PlanSection(u, trade)
         if (trade.entryTime != null) ExecutionSection(u, trade)
         if (trade.status == "OPEN") ManagementSection(u, vm, trade, p) { closing = true }
+        if (trade.status == "OPEN") ir.andarz.app.ui.market.TradeLinkCard(trade, p)
         if (trade.status == "CLOSED") {
             ResultCard(u, trade)
             SectionCard(u.t("trade.section.review")) {
@@ -170,6 +171,8 @@ private fun ManagementSection(u: Ui, vm: TradeViewModel, t: TradeEntity, p: Para
     val legs = t.legs.map { Leg(it.price, it.fraction) }
     SectionCard(u.t("trade.section.management")) {
         NumberField(u.t("trade.currentPrice"), price, { price = it }, hint = u.t("trade.currentPrice.hint"))
+        // K9.1 c: a copy aid only; the typed number is what the screen uses (D-M06).
+        ir.andarz.app.ui.market.LivePriceChip(t.symbol, { price = it })
         Fmt.normalizeInput(price)?.takeIf { it > 0 }?.let { px ->
             val (pnl, r) = Management.floating(side, t.entry!!, t.slInitial, t.notional!!, legs, px)
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {

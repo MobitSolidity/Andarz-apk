@@ -41,6 +41,7 @@ data class BackupTables(
     val security_check: List<SecurityCheckEntity> = emptyList(),
     val spot_asset: List<SpotAssetEntity> = emptyList(),
     val audit_log: List<AuditLogEntity> = emptyList(),
+    val trade_alert: List<ir.andarz.data.db.TradeAlertEntity> = emptyList(),
 )
 
 /**
@@ -81,7 +82,7 @@ class BackupService(private val db: AndarzDatabase, private val clock: Clock) {
             tables = BackupTables(
                 db.trades().all(), db.events().all(), db.attachments().all(), db.setups().all(), db.watch().all(),
                 db.ledger().all(), db.reviews().all(), db.paramChanges().all(), db.sessions().all(), db.pledges().all(),
-                db.security().all(), db.spot().all(), db.audit().all(),
+                db.security().all(), db.spot().all(), db.audit().all(), db.tradeAlerts().all(),
             ),
             settings = settings, market = market, files = files,
         )
@@ -157,6 +158,7 @@ class BackupService(private val db: AndarzDatabase, private val clock: Clock) {
             db.security().insertAll(t.security_check)
             db.spot().insertAll(t.spot_asset)
             db.audit().insertAll(t.audit_log)
+            db.tradeAlerts().insertAll(t.trade_alert.filter { a -> t.trade.any { it.id == a.tradeId && it.status == "OPEN" } })
             beforeCommit()
             db.audit().log(clock.now().toEpochMilli(), AuditType.BACKUP_RESTORE, null, mapOf("trades" to t.trade.size, "createdAt" to doc.createdAt))
         }
@@ -171,7 +173,7 @@ class BackupService(private val db: AndarzDatabase, private val clock: Clock) {
     }
 
     private suspend fun clearAll() {
-        db.events().deleteAll(); db.attachments().deleteAll(); db.trades().deleteAll()
+        db.tradeAlerts().deleteAll(); db.events().deleteAll(); db.attachments().deleteAll(); db.trades().deleteAll()
         db.setups().deleteAll(); db.watch().deleteAll(); db.ledger().deleteAll(); db.reviews().deleteAll()
         db.paramChanges().deleteAll(); db.sessions().deleteAll(); db.pledges().deleteAll(); db.security().deleteAll()
         db.spot().deleteAll(); db.audit().deleteAll()

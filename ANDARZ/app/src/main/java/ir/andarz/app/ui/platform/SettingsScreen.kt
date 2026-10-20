@@ -344,6 +344,7 @@ private fun MarketSettings(u: Ui, vm: SettingsViewModel, onMarketAlerts: () -> U
             FilterChip(selected = toman, onClick = { vm.setMarketToman(true) }, label = { Text(u.t("mkt.unit.toman")) })
         }
         SwitchRow(u.t("mkt.alerts.bg"), alerts.background, { vm.setMarketMonitor(it) }, enabled = gate.mayUseNetwork)
+        SwitchRow(u.t("mkt.set.quiet"), alerts.muteInQuiet, { vm.setMarketQuietMute(it) })
         TextButton(onClick = onMarketAlerts) { Text(u.t("mkt.tab.alerts")) }
         Text(u.t("mkt.set.sources"), style = MaterialTheme.typography.labelLarge)
         Text(u.t("mkt.set.sources.body"), style = MaterialTheme.typography.bodyMedium)

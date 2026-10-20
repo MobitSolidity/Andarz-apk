@@ -250,7 +250,11 @@ class JournalRepository(
             gross = f.gross, net = f.net, r = f.r, result = (f.result ?: TradeResult.EVEN).name, equityAfter = f.equityAfter,
             ok = ok, updatedAt = now(),
         )
-        db.trades().update(out)
+        db.withTransaction {
+            db.trades().update(out)
+            // MK3: trade-linked price alerts vanish when the trade closes (K9.1 b).
+            db.tradeAlerts().removeAll(id)
+        }
         return out
     }
 

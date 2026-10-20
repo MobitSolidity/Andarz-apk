@@ -132,8 +132,9 @@ class SettingsViewModel @Inject constructor(
     fun disableLock() = viewModelScope.launch { lock.disable() }
 
     // ---- backup (8.3)
-    /** Market settings join the backup in MK3 (exportJson/importJson); null until then. */
-    private fun marketDoc(): kotlinx.serialization.json.JsonElement? = null
+    /** Market settings as `settings.market` of the payload (K6.12); consent and switch excluded. */
+    private suspend fun marketDoc(): kotlinx.serialization.json.JsonElement? =
+        runCatching { kotlinx.serialization.json.Json.parseToJsonElement(MarketModule.exportJson()) }.getOrNull()
 
     fun exportBackup(uri: Uri, password: String) = viewModelScope.launch {
         busy.value = true
@@ -175,6 +176,8 @@ class SettingsViewModel @Inject constructor(
         try {
             backup.restore(p.doc)
             SettingsDoc.apply(p.doc.settings, repo)
+            p.doc.market?.let { m -> runCatching { MarketModule.importJson(m.toString()) } }
+            runCatching { MarketModule.onRestored(ctx) }
             reconciler.reconcile(ctx)
             pendingRestore.value = null
             message.value = "set.backup.restore.done"
@@ -251,4 +254,5 @@ class SettingsViewModel @Inject constructor(
     fun setMarketEnabled(on: Boolean) = viewModelScope.launch { MarketModule.setEnabled(on) }
     fun setMarketToman(on: Boolean) = viewModelScope.launch { MarketModule.repository.setToman(on) }
     fun setMarketMonitor(on: Boolean) = viewModelScope.launch { MarketModule.setMonitor(on) }
+    fun setMarketQuietMute(on: Boolean) = viewModelScope.launch { MarketModule.alerts.update { it.copy(muteInQuiet = on) } }
 }

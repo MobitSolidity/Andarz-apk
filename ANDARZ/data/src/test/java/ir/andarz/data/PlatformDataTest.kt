@@ -211,4 +211,56 @@ class PlatformDataTest {
         assertEquals(PinLock.ITERATIONS, PinLock.hash("1234").iterations)
         assertNotNull(h.salt)
     }
+
+    @Test
+    fun tradeAlertsAreOneShotAndVanishOnClose() = runBlocking {
+        assertNull(ledger.onboard(2000.0, 0.01, zone))
+        val s = setups.create("retest").id
+        val t = journal.savePlan(PlanDraft("REAL", "btcusdt", Side.LONG, "INTRADAY", s, "15m", "UP", null, "CALM", 0xFF, 2000.0, 100.0, 96.0, 108.0, 5.0, 0.01, "LIMIT", true, true, true))
+        clock.plus(Duration.ofMinutes(1))
+        journal.confirmEntry(t.id, EntryConfirm(100.0, 500.0, clock.now()))
+        db.tradeAlerts().put(ir.andarz.data.db.TradeAlertEntity(t.id, "TP", 108.0, 1))
+        db.tradeAlerts().put(ir.andarz.data.db.TradeAlertEntity(t.id, "STOP", 96.0, 1))
+        assertEquals(1, db.tradeAlerts().markFired(t.id, "TP", 5))
+        assertEquals(0, db.tradeAlerts().markFired(t.id, "TP", 6), "a fired level never fires again")
+        clock.plus(Duration.ofMinutes(10))
+        journal.close(t.id, listOf(ExitLeg(108.0, 1.0)), 0.6, "TAKE_PROFIT", clock.now())
+        assertTrue(db.tradeAlerts().all().isEmpty())
+    }
+
+    @Test
+    fun migrationOneToTwoAddsTheTradeAlertTable() {
+        val ctx = ApplicationProvider.getApplicationContext<Context>()
+        val name = "migrate-test.db"
+        ctx.deleteDatabase(name)
+        // Version 1 schema straight from the exported JSON, then the 1 -> 2 migration through Room.
+        val schema = File("schemas/ir.andarz.data.db.AndarzDatabase/1.json").takeIf { it.isFile }
+            ?: File("data/schemas/ir.andarz.data.db.AndarzDatabase/1.json")
+        val v1 = Json.parseToJsonElement(schema.readText()).jsonObject["database"]!!.jsonObject
+        val helper = androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory().create(
+            androidx.sqlite.db.SupportSQLiteOpenHelper.Configuration.builder(ctx).name(name).callback(object : androidx.sqlite.db.SupportSQLiteOpenHelper.Callback(1) {
+                override fun onCreate(db: androidx.sqlite.db.SupportSQLiteDatabase) {
+                    for (e in (v1["entities"] as kotlinx.serialization.json.JsonArray)) {
+                        val o = e.jsonObject
+                        val tn = (o["tableName"] as JsonPrimitive).content
+                        db.execSQL((o["createSql"] as JsonPrimitive).content.replace("\${TABLE_NAME}", tn))
+                        (o["indices"] as? kotlinx.serialization.json.JsonArray)?.forEach { i ->
+                            db.execSQL((i.jsonObject["createSql"] as JsonPrimitive).content.replace("\${TABLE_NAME}", tn))
+                        }
+                    }
+                    for (q in (v1["setupQueries"] as kotlinx.serialization.json.JsonArray)) db.execSQL((q as JsonPrimitive).content)
+                    db.execSQL("INSERT INTO ledger_entry (id, time, type, amount, note, createdAt) VALUES ('b', 0, 'BASELINE', 2000.0, '', 0)")
+                }
+                override fun onUpgrade(db: androidx.sqlite.db.SupportSQLiteDatabase, oldVersion: Int, newVersion: Int) {}
+            }).build(),
+        )
+        helper.writableDatabase.close()
+        val migrated = Room.databaseBuilder(ctx, AndarzDatabase::class.java, name).addMigrations(*AndarzDatabase.MIGRATIONS).allowMainThreadQueries().build()
+        runBlocking {
+            assertEquals(1, migrated.ledger().baselines().size, "data survives the migration")
+            assertTrue(migrated.tradeAlerts().all().isEmpty())
+        }
+        migrated.close()
+        ctx.deleteDatabase(name)
+    }
 }

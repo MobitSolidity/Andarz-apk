@@ -145,3 +145,16 @@ interface AuditDao {
     @Query("SELECT * FROM audit_log ORDER BY time DESC") fun observeAll(): Flow<List<AuditLogEntity>>
     @Query("SELECT * FROM audit_log ORDER BY time") suspend fun all(): List<AuditLogEntity>
 }
+
+@Dao
+interface TradeAlertDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun put(a: TradeAlertEntity)
+    @Query("DELETE FROM trade_alert WHERE tradeId = :tradeId AND level = :level") suspend fun remove(tradeId: String, level: String)
+    @Query("DELETE FROM trade_alert WHERE tradeId = :tradeId") suspend fun removeAll(tradeId: String)
+    @Query("UPDATE trade_alert SET firedAt = :at WHERE tradeId = :tradeId AND level = :level AND firedAt IS NULL") suspend fun markFired(tradeId: String, level: String, at: Long): Int
+    @Query("SELECT * FROM trade_alert") suspend fun all(): List<TradeAlertEntity>
+    @Query("SELECT * FROM trade_alert") fun observeAll(): Flow<List<TradeAlertEntity>>
+    @Query("SELECT * FROM trade_alert WHERE tradeId = :tradeId") fun observeFor(tradeId: String): Flow<List<TradeAlertEntity>>
+    @Insert suspend fun insertAll(rows: List<TradeAlertEntity>)
+    @Query("DELETE FROM trade_alert") suspend fun deleteAll()
+}

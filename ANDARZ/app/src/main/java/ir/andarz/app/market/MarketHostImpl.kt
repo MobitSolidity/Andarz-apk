@@ -65,6 +65,12 @@ class MarketHostImpl @Inject constructor(
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             .putExtra(MainActivity.EXTRA_ROUTE, routeOf(target))
 
+    override fun inQuietHours(nowMs: Long): Boolean {
+        val s = current
+        val t = java.time.Instant.ofEpochMilli(nowMs)
+        return ir.andarz.app.platform.ReminderPlanner.outOfQuiet(t, s.zone, s.quietStart, s.quietEnd) != t
+    }
+
     private fun routeOf(target: MarketTarget): String = when (target) {
         is MarketTarget.Coin -> "market/coin/" + target.id
         MarketTarget.News -> "market/news"

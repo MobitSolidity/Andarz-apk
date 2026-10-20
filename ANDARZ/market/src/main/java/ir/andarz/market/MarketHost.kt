@@ -112,4 +112,7 @@ interface MarketHost {
      * `FLAG_IMMUTABLE`; the app lock is shown first, then the route (K6.11).
      */
     fun openIntent(context: Context, target: MarketTarget): Intent
+
+    /** The journal's quiet hours (D-34), used only by the P1 mute switch `mkt.set.quiet` (K6.6). */
+    fun inQuietHours(nowMs: Long): Boolean = false
 }

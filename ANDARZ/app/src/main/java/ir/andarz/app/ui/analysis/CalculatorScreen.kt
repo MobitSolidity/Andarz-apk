@@ -117,7 +117,10 @@ fun CalculatorScreen(onToPlan: () -> Unit, vm: CalculatorViewModel = hiltViewMod
             NumberField(u.t("wiz.equity"), d.equity, { v -> vm.update { it.copy(equity = v) } }, modifier = Modifier.weight(1f), error = err(d.equity, c.equity))
             snap?.let { s -> TextButton(onClick = { vm.update { it.copy(equity = CalcLogic.field(s.equity.now)) } }) { Text(u.t("calc.useEquity")) } }
         }
+        // The symbol is used only for the live chip (K9.1 c); the calculator stores nothing.
+        androidx.compose.material3.OutlinedTextField(d.symbol, { v -> vm.update { it.copy(symbol = v) } }, label = { Text(u.t("wiz.symbol")) }, singleLine = true, modifier = Modifier.fillMaxWidth())
         NumberField(u.t("wiz.entry"), d.entry, { v -> vm.update { it.copy(entry = v) } }, error = err(d.entry, c.entry))
+        ir.andarz.app.ui.market.LivePriceChip(d.symbol, { v -> vm.update { it.copy(entry = v) } })
         NumberField(u.t("wiz.sl"), d.sl, { v -> vm.update { it.copy(sl = v) } }, error = err(d.sl, c.sl) ?: when {
             c.entryEqSl -> u.t("err.entryEqSl")
             c.slWrong -> u.t("err.slDirection", "dir" to u.t("wiz.gate.slWhere.${d.side.name}"))

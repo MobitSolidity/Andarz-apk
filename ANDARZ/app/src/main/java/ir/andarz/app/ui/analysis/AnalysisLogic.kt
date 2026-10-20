@@ -34,6 +34,8 @@ data class CalcDraft(
     val lev: String = "5",
     val riskPct: String = "",
     val feePct: String = "",
+    /** Only for the live price chip (K9.1 c). */
+    val symbol: String = "",
 ) : java.io.Serializable
 
 data class CalcResult(

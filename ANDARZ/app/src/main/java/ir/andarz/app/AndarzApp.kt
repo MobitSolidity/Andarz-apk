@@ -40,6 +40,7 @@ class AndarzApp : Application(), Configuration.Provider {
     @Inject lateinit var content: ContentRepository
     @Inject lateinit var db: AndarzDatabase
     @Inject lateinit var lock: AppLock
+    @Inject lateinit var tradeWatcher: ir.andarz.app.market.TradeWatcher
 
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder().setWorkerFactory(workerFactory).build()
@@ -51,6 +52,7 @@ class AndarzApp : Application(), Configuration.Provider {
         runCatching { File(cacheDir, "out").deleteRecursively() }
         marketHost.watchSettings(appScope)
         MarketModule.install(this, marketHost)
+        tradeWatcher.start(appScope)
         runCatching { DisciplineChannels.ensure(this, content) }
         ProcessLifecycleOwner.get().lifecycle.addObserver(
             LifecycleEventObserver { _, e ->

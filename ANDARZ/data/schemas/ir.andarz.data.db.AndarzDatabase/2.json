@@ -1,0 +1,1333 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b2718596111134cd282683abe672d8cb",
+    "entities": [
+      {
+        "tableName": "trade",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `account` TEXT NOT NULL, `status` TEXT NOT NULL, `symbol` TEXT NOT NULL, `side` TEXT NOT NULL, `kind` TEXT NOT NULL, `setupId` TEXT, `timeframe` TEXT NOT NULL, `htfTrend` TEXT NOT NULL, `counterTrendReason` TEXT, `emotion` TEXT NOT NULL, `checklistMask` INTEGER NOT NULL, `chk` INTEGER NOT NULL, `equity` REAL NOT NULL, `plannedEntry` REAL NOT NULL, `slInitial` REAL NOT NULL, `tp` REAL NOT NULL, `lev` REAL NOT NULL, `riskPctChosen` REAL NOT NULL, `riskPctCap` REAL NOT NULL, `gradeA` INTEGER NOT NULL, `entryOrder` TEXT NOT NULL, `isolated` INTEGER NOT NULL, `slTpOnExchange` INTEGER NOT NULL, `canMonitor` INTEGER NOT NULL, `gateReasons` TEXT NOT NULL, `gatePlanOk` INTEGER NOT NULL, `entryAllowed` INTEGER NOT NULL, `gateAllowed` INTEGER NOT NULL, `entry` REAL, `notional` REAL, `entryTime` INTEGER, `slCurrent` REAL, `rrisk` REAL, `rriskp` REAL, `verdict` TEXT, `exitTime` INTEGER, `legs` TEXT NOT NULL, `fee` REAL NOT NULL, `exitReason` TEXT, `gross` REAL, `net` REAL, `r` REAL, `result` TEXT, `equityAfter` REAL, `ok` INTEGER, `violations` TEXT NOT NULL, `violationAt` INTEGER, `violationReport` TEXT, `mistake` TEXT, `emotionAfter` TEXT, `lesson` TEXT, `reviewedAt` INTEGER, `imported` INTEGER NOT NULL, `loggedLate` INTEGER NOT NULL, `monitorChecks` TEXT NOT NULL, `editedAt` INTEGER, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, `plan_sld` REAL, `plan_rr` REAL, `plan_riskUsd` REAL NOT NULL, `plan_notionalMax` REAL, `plan_margin` REAL, `plan_marginPct` REAL, `plan_liq` REAL, `plan_liqDist` REAL, `plan_liqX` REAL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "account",
+            "columnName": "account",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "symbol",
+            "columnName": "symbol",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "side",
+            "columnName": "side",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "kind",
+            "columnName": "kind",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "setupId",
+            "columnName": "setupId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timeframe",
+            "columnName": "timeframe",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "htfTrend",
+            "columnName": "htfTrend",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "counterTrendReason",
+            "columnName": "counterTrendReason",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "emotion",
+            "columnName": "emotion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "checklistMask",
+            "columnName": "checklistMask",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chk",
+            "columnName": "chk",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "equity",
+            "columnName": "equity",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plannedEntry",
+            "columnName": "plannedEntry",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slInitial",
+            "columnName": "slInitial",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tp",
+            "columnName": "tp",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lev",
+            "columnName": "lev",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "riskPctChosen",
+            "columnName": "riskPctChosen",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "riskPctCap",
+            "columnName": "riskPctCap",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gradeA",
+            "columnName": "gradeA",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entryOrder",
+            "columnName": "entryOrder",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isolated",
+            "columnName": "isolated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slTpOnExchange",
+            "columnName": "slTpOnExchange",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "canMonitor",
+            "columnName": "canMonitor",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gateReasons",
+            "columnName": "gateReasons",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gatePlanOk",
+            "columnName": "gatePlanOk",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entryAllowed",
+            "columnName": "entryAllowed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "gateAllowed",
+            "columnName": "gateAllowed",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entry",
+            "columnName": "entry",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "notional",
+            "columnName": "notional",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "entryTime",
+            "columnName": "entryTime",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "slCurrent",
+            "columnName": "slCurrent",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rrisk",
+            "columnName": "rrisk",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rriskp",
+            "columnName": "rriskp",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "verdict",
+            "columnName": "verdict",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "exitTime",
+            "columnName": "exitTime",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "legs",
+            "columnName": "legs",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fee",
+            "columnName": "fee",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "exitReason",
+            "columnName": "exitReason",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gross",
+            "columnName": "gross",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "net",
+            "columnName": "net",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "r",
+            "columnName": "r",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "result",
+            "columnName": "result",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "equityAfter",
+            "columnName": "equityAfter",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ok",
+            "columnName": "ok",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "violations",
+            "columnName": "violations",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "violationAt",
+            "columnName": "violationAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "violationReport",
+            "columnName": "violationReport",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mistake",
+            "columnName": "mistake",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "emotionAfter",
+            "columnName": "emotionAfter",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lesson",
+            "columnName": "lesson",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reviewedAt",
+            "columnName": "reviewedAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imported",
+            "columnName": "imported",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "loggedLate",
+            "columnName": "loggedLate",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "monitorChecks",
+            "columnName": "monitorChecks",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editedAt",
+            "columnName": "editedAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plan.sld",
+            "columnName": "plan_sld",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plan.rr",
+            "columnName": "plan_rr",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plan.riskUsd",
+            "columnName": "plan_riskUsd",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "plan.notionalMax",
+            "columnName": "plan_notionalMax",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plan.margin",
+            "columnName": "plan_margin",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plan.marginPct",
+            "columnName": "plan_marginPct",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plan.liq",
+            "columnName": "plan_liq",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plan.liqDist",
+            "columnName": "plan_liqDist",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "plan.liqX",
+            "columnName": "plan_liqX",
+            "affinity": "REAL",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_trade_status",
+            "unique": false,
+            "columnNames": [
+              "status"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_trade_status` ON `${TABLE_NAME}` (`status`)"
+          },
+          {
+            "name": "index_trade_entryTime",
+            "unique": false,
+            "columnNames": [
+              "entryTime"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_trade_entryTime` ON `${TABLE_NAME}` (`entryTime`)"
+          },
+          {
+            "name": "index_trade_exitTime",
+            "unique": false,
+            "columnNames": [
+              "exitTime"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_trade_exitTime` ON `${TABLE_NAME}` (`exitTime`)"
+          },
+          {
+            "name": "index_trade_setupId",
+            "unique": false,
+            "columnNames": [
+              "setupId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_trade_setupId` ON `${TABLE_NAME}` (`setupId`)"
+          },
+          {
+            "name": "index_trade_account",
+            "unique": false,
+            "columnNames": [
+              "account"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_trade_account` ON `${TABLE_NAME}` (`account`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "trade_event",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `tradeId` TEXT NOT NULL, `time` INTEGER NOT NULL, `type` TEXT NOT NULL, `payload` TEXT NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`tradeId`) REFERENCES `trade`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tradeId",
+            "columnName": "tradeId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "payload",
+            "columnName": "payload",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_trade_event_tradeId",
+            "unique": false,
+            "columnNames": [
+              "tradeId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_trade_event_tradeId` ON `${TABLE_NAME}` (`tradeId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "trade",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "tradeId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "attachment",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `tradeId` TEXT NOT NULL, `fileName` TEXT NOT NULL, `mime` TEXT NOT NULL, `width` INTEGER NOT NULL, `height` INTEGER NOT NULL, `bytes` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`tradeId`) REFERENCES `trade`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tradeId",
+            "columnName": "tradeId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fileName",
+            "columnName": "fileName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mime",
+            "columnName": "mime",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "width",
+            "columnName": "width",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "height",
+            "columnName": "height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bytes",
+            "columnName": "bytes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_attachment_tradeId",
+            "unique": false,
+            "columnNames": [
+              "tradeId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_attachment_tradeId` ON `${TABLE_NAME}` (`tradeId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "trade",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "tradeId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "setup",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `entryRule` TEXT NOT NULL, `invalidation` TEXT NOT NULL, `target` TEXT NOT NULL, `notes` TEXT NOT NULL, `grade` TEXT NOT NULL, `archived` INTEGER NOT NULL, `testWaived` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "entryRule",
+            "columnName": "entryRule",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "invalidation",
+            "columnName": "invalidation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "target",
+            "columnName": "target",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "grade",
+            "columnName": "grade",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "archived",
+            "columnName": "archived",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "testWaived",
+            "columnName": "testWaived",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "watch_symbol",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `symbol` TEXT NOT NULL, `volume24hUsd` REAL, `relVolume` REAL, `levels` TEXT NOT NULL, `notes` TEXT NOT NULL, `checkedAt` INTEGER, `addedAt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "symbol",
+            "columnName": "symbol",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "volume24hUsd",
+            "columnName": "volume24hUsd",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "relVolume",
+            "columnName": "relVolume",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "levels",
+            "columnName": "levels",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "notes",
+            "columnName": "notes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "checkedAt",
+            "columnName": "checkedAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "addedAt",
+            "columnName": "addedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_watch_symbol_symbol",
+            "unique": true,
+            "columnNames": [
+              "symbol"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_watch_symbol_symbol` ON `${TABLE_NAME}` (`symbol`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ledger_entry",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `time` INTEGER NOT NULL, `type` TEXT NOT NULL, `amount` REAL NOT NULL, `note` TEXT NOT NULL, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_ledger_entry_time",
+            "unique": false,
+            "columnNames": [
+              "time"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ledger_entry_time` ON `${TABLE_NAME}` (`time`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "review",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `type` TEXT NOT NULL, `completedAt` INTEGER NOT NULL, `periodStart` TEXT NOT NULL, `periodEnd` TEXT NOT NULL, `payload` TEXT NOT NULL, `kpiSnapshot` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "completedAt",
+            "columnName": "completedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "periodStart",
+            "columnName": "periodStart",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "periodEnd",
+            "columnName": "periodEnd",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "payload",
+            "columnName": "payload",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "kpiSnapshot",
+            "columnName": "kpiSnapshot",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_review_type",
+            "unique": false,
+            "columnNames": [
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_type` ON `${TABLE_NAME}` (`type`)"
+          },
+          {
+            "name": "index_review_periodStart",
+            "unique": false,
+            "columnNames": [
+              "periodStart"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_periodStart` ON `${TABLE_NAME}` (`periodStart`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "param_change",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `key` TEXT NOT NULL, `oldValue` REAL NOT NULL, `newValue` REAL NOT NULL, `kind` TEXT NOT NULL, `appliedAt` INTEGER NOT NULL, `effectiveAt` INTEGER NOT NULL, `reason` TEXT NOT NULL, `sessionId` TEXT, `cancelledAt` INTEGER, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "key",
+            "columnName": "key",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "oldValue",
+            "columnName": "oldValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "newValue",
+            "columnName": "newValue",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "kind",
+            "columnName": "kind",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "appliedAt",
+            "columnName": "appliedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "effectiveAt",
+            "columnName": "effectiveAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reason",
+            "columnName": "reason",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sessionId",
+            "columnName": "sessionId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cancelledAt",
+            "columnName": "cancelledAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_param_change_key",
+            "unique": false,
+            "columnNames": [
+              "key"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_param_change_key` ON `${TABLE_NAME}` (`key`)"
+          },
+          {
+            "name": "index_param_change_effectiveAt",
+            "unique": false,
+            "columnNames": [
+              "effectiveAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_param_change_effectiveAt` ON `${TABLE_NAME}` (`effectiveAt`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "review_session",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `startedAt` INTEGER NOT NULL, `endedAt` INTEGER, `endReason` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startedAt",
+            "columnName": "startedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endedAt",
+            "columnName": "endedAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "endReason",
+            "columnName": "endReason",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "pledge",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `version` INTEGER NOT NULL, `name` TEXT NOT NULL, `signedAt` INTEGER NOT NULL, `startEquity` REAL NOT NULL, `riskPct` REAL NOT NULL, `textSnapshot` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "version",
+            "columnName": "version",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "signedAt",
+            "columnName": "signedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startEquity",
+            "columnName": "startEquity",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "riskPct",
+            "columnName": "riskPct",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "textSnapshot",
+            "columnName": "textSnapshot",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "security_check",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`clauseId` TEXT NOT NULL, `checked` INTEGER NOT NULL, `checkedAt` INTEGER, PRIMARY KEY(`clauseId`))",
+        "fields": [
+          {
+            "fieldPath": "clauseId",
+            "columnName": "clauseId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "checked",
+            "columnName": "checked",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "checkedAt",
+            "columnName": "checkedAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "clauseId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "spot_asset",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `asset` TEXT NOT NULL, `thesis` TEXT NOT NULL, `invalidation` TEXT NOT NULL, `weightCap` REAL NOT NULL, `weight` REAL NOT NULL, `stagedNotes` TEXT NOT NULL, `lastReviewAt` INTEGER, `createdAt` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "asset",
+            "columnName": "asset",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thesis",
+            "columnName": "thesis",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "invalidation",
+            "columnName": "invalidation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weightCap",
+            "columnName": "weightCap",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weight",
+            "columnName": "weight",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stagedNotes",
+            "columnName": "stagedNotes",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastReviewAt",
+            "columnName": "lastReviewAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "audit_log",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `time` INTEGER NOT NULL, `type` TEXT NOT NULL, `refId` TEXT, `payload` TEXT NOT NULL DEFAULT '{}', PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "refId",
+            "columnName": "refId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "payload",
+            "columnName": "payload",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'{}'"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_audit_log_time",
+            "unique": false,
+            "columnNames": [
+              "time"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_audit_log_time` ON `${TABLE_NAME}` (`time`)"
+          },
+          {
+            "name": "index_audit_log_type",
+            "unique": false,
+            "columnNames": [
+              "type"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_audit_log_type` ON `${TABLE_NAME}` (`type`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "trade_alert",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tradeId` TEXT NOT NULL, `level` TEXT NOT NULL, `price` REAL NOT NULL, `armedAt` INTEGER NOT NULL, `firedAt` INTEGER, PRIMARY KEY(`tradeId`, `level`), FOREIGN KEY(`tradeId`) REFERENCES `trade`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "tradeId",
+            "columnName": "tradeId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "level",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "price",
+            "columnName": "price",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "armedAt",
+            "columnName": "armedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firedAt",
+            "columnName": "firedAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "tradeId",
+            "level"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "trade",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "tradeId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b2718596111134cd282683abe672d8cb')"
+    ]
+  }
+}
