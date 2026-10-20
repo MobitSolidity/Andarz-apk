@@ -13,6 +13,7 @@ Everything a coding agent needs to build **Andarz**: an offline-first, Persian-f
 | `spec/jalali_ref.py` | Jalali <-> Gregorian reference. |
 | `spec/andarz_content_fa.json` | All Persian text, the 45 parameters, the constitution, lists, CSV profiles. |
 | `spec/andarz_design_tokens.json` | Colors (dark and light, contrast-checked), type, spacing, motion. |
+| `DECISIONS.md`, `MANUAL_TEST.md`, `MERGE_MAP.md`, `MISSING_COPY.md`, `RELEASE_NOTES.md` | Build records: decisions, device acceptance script, March merge map, missing wording, release notes. |
 
 ## How to use (merged build)
 
@@ -41,6 +42,34 @@ Standalone build (no March): unzip the kit into an empty git repository and past
 - The name «اندرز» and the placeholder `applicationId` (`ir.andarz.app`) were not checked against Bazaar, Myket or Google Play.
 - The governor (locks, risk reductions, big-win hold) has no Excel twin: `andarz_ref.py` and 33 scenarios define it. The imported-history rule (section 3.9, D-14) has no vector; the prompt asks for dedicated tests.
 - A personal discipline tool, not financial advice. The app never trades and never connects to an exchange account.
+
+## Module map (the built project)
+
+| Module | Kind | Depends on | Holds |
+|---|---|---|---|
+| `:engine` | pure Kotlin/JVM | nothing | Formulas, gate, size verdict, governor (locks, reductions), KPIs, Jalali, `Fmt`, clause rendering. Tested against `spec/andarz_golden_vectors.json` |
+| `:data` | Android library | `:engine` | Room (schema v2, `data/schemas/`), DataStore settings, repositories (journal, ledger, params, setups, reviews, watch-list), `EngineFacade`, backup (AES-256-GCM + PBKDF2), CSV, PIN, demo data |
+| `:market` | Android library | **no project module** | The isolated Market section ported from March: OkHttp clients, prices, alerts and ringing, calendar asset, `MarketHost` interface. The only module with `INTERNET` |
+| `:app` | Android application | `:engine`, `:data`, `:market` | Compose UI (Today, wizard, trade, journal, insights, rules, reviews, settings, constitution, learn, Market screens), Hilt, WorkManager reminders, app lock, `MarketHostImpl` and `TradeWatcher` that connect Market to the journal |
+
+The build guards in `gradle/guards.gradle.kts` (data in `tools/guards/guard_config.json`) enforce the
+isolation on every build: merged-manifest permission allowlist, `INTERNET` only from `:market`, the dependency
+graph above, no Persian literal in Kotlin, no forbidden tokens, no emoji or product names in shipped strings.
+
+## Building
+
+```
+./gradlew build             # every module, all unit tests, lint, the guards
+./gradlew assembleDebug     # app/build/outputs/apk/debug/app-debug.apk
+./gradlew assembleRelease   # R8; app/build/outputs/apk/release/app-release.apk
+```
+
+JDK 17 and the Android SDK (platform 35) are required. Release signing (`DECISIONS.md` D-74): set
+`ANDARZ_KEYSTORE`, `ANDARZ_KEYSTORE_PASSWORD`, `ANDARZ_KEY_ALIAS`, `ANDARZ_KEY_PASSWORD` in the environment,
+or put `storeFile`, `storePassword`, `keyAlias`, `keyPassword` in a git-ignored `keystore.properties` at the
+project root. Without them the release is signed with the debug key, its version ends in `-unsigned` and the
+build prints **NOT PUBLISHABLE**. Never use March's committed keystore. `versionName` lives in
+`gradle.properties`; `versionCode` is the git commit count (D-73).
 
 ## Refreshing the release calendar
 

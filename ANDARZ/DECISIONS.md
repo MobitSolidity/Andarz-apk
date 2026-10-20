@@ -512,6 +512,38 @@ Demo data (P1, done in M7: D-68), the 3-step font slider (the system scale alrea
 backups (D-13), the learn pages (P1, done in M7: D-69), the spot portfolio (P2) and full Jalali date pickers: dates are entered with day steppers in
 M5/M6 screens and CSV accepts Jalali dates. `mkt.set.quiet` and market settings in backups are MK3.
 
+## M8 — Release preparation (decisions)
+
+### D-73 — Version stamping
+
+`versionName` is the human version in `gradle.properties` (`andarz.versionName`, now `0.9.0`: feature
+complete, device acceptance still open). `versionCode` is `git rev-list --count HEAD`, so every pushed build
+is higher than the previous one without anyone editing a number; outside a git checkout it falls back to
+`andarz.versionCode`. The short commit is `BuildConfig.GIT_COMMIT` and appears on About next to version and
+build. **Reason.** A monotonic code with no manual step, and a build that can be traced to its source.
+
+### D-74 — Release signing and the NOT PUBLISHABLE path (K8.6, D-M10)
+
+March's `Bazaaryar/ci/march-ci.jks.b64` is a signing key committed to a public repository and is treated as
+compromised: it was never decoded, copied or referenced, and its alias is not reused. Release signing reads
+`ANDARZ_KEYSTORE`, `ANDARZ_KEYSTORE_PASSWORD`, `ANDARZ_KEY_ALIAS`, `ANDARZ_KEY_PASSWORD` from the environment
+or a git-ignored `keystore.properties` (keys `storeFile`, `storePassword`, `keyAlias`, `keyPassword`; `*.jks`
+and `*.keystore` are git-ignored too). When a keystore is named, every other value must be present and the
+file must exist, or configuration fails with the missing name (never a silent debug fallback). Without one,
+the release is signed with the debug key, its `versionName` gets the suffix `-unsigned`, and
+`assembleRelease` / `bundleRelease` print a boxed `NOT PUBLISHABLE` warning before and after packaging. No CI
+workflow and no release automation exist.
+
+### D-75 — R8 release, what was verified
+
+`assembleRelease` runs R8 with resource shrinking; the release APK is about 2.9 MB (gate: 25 MB). The
+mapping keeps the kotlinx-serialization companions and `$$serializer` classes of the backup document and the
+market models, Room's generated database, and the engine names (readable stack traces). The merged release
+manifest holds exactly the K8.1 permission set (guard 1) and `allowBackup=false`; the APK contains no
+Firebase, Crashlytics or Play Services classes. Release unit tests run the same suites as debug except the
+Compose UI tests (D-71). Not verified: the release APK has not been installed or started anywhere (no
+device), so an R8 rule gap that only shows at runtime would not be caught here — MANUAL_TEST R-1.
+
 ## M7 — Polish (decisions)
 
 ### D-67 — Late logging: a 15-minute threshold, judged at the entry time

@@ -118,7 +118,7 @@ fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
             TextButton(onClick = onBack) { Text(u.t("common.back")) }
         }
         Text(u.content.appName + " \u00B7 " + u.content.tagline, style = MaterialTheme.typography.titleMedium)
-        Text(u.t("set.version", "v" to u.digits(BuildConfig.VERSION_NAME)) + " \u00B7 " + u.t("set.build", "b" to u.int(BuildConfig.VERSION_CODE)), style = MaterialTheme.typography.labelLarge)
+        Text(u.t("set.version", "v" to u.digits(BuildConfig.VERSION_NAME)) + " \u00B7 " + u.t("set.build", "b" to u.int(BuildConfig.VERSION_CODE)) + " \u00B7 " + Fmt.isolate(BuildConfig.GIT_COMMIT), style = MaterialTheme.typography.labelLarge)
         Text(u.t("about.meaning"), style = MaterialTheme.typography.bodyMedium)
         Text(u.t("about.madeFor"), style = MaterialTheme.typography.bodyMedium)
         SectionCard(null) { Text(u.t("about.privacy"), style = MaterialTheme.typography.bodyMedium) }

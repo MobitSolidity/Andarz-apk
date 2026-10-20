@@ -27,6 +27,21 @@ fun signingValue(env: String, prop: String): String? =
 
 val releaseStore: String? = signingValue("ANDARZ_KEYSTORE", "storeFile")
 
+// ---------------------------------------------------------------- version stamping (M8, D-73)
+// versionName is the human version in gradle.properties (andarz.versionName); versionCode is the number of
+// commits on HEAD, so every pushed build is higher than the last without anyone editing a number. Outside a
+// git checkout (a source archive) it falls back to andarz.versionCode. The short commit lands in BuildConfig.
+fun git(vararg args: String): String? = runCatching {
+    val p = ProcessBuilder(listOf("git") + args).directory(rootDir).redirectErrorStream(true).start()
+    val out = p.inputStream.bufferedReader().readText().trim()
+    if (p.waitFor() == 0 && out.isNotEmpty()) out else null
+}.getOrNull()
+
+val andarzVersionName: String = (findProperty("andarz.versionName") as String?) ?: "0.9.0"
+val andarzVersionCode: Int = git("rev-list", "--count", "HEAD")?.toIntOrNull()
+    ?: (findProperty("andarz.versionCode") as String?)?.toIntOrNull() ?: 1
+val andarzCommit: String = git("rev-parse", "--short=10", "HEAD") ?: "unknown"
+
 android {
     namespace = "ir.andarz.app"
     compileSdk = 35
@@ -36,8 +51,9 @@ android {
         applicationId = "ir.andarz.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "0.1.0"
+        versionCode = andarzVersionCode
+        versionName = andarzVersionName
+        buildConfigField("String", "GIT_COMMIT", "\"" + andarzCommit + "\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resourceConfigurations += listOf("fa")
     }
@@ -66,6 +82,8 @@ android {
             } else {
                 signingConfigs.getByName("debug")
             }
+            // A debug-signed release is marked in its own version name, so it can never pass as published.
+            if (releaseStore == null) versionNameSuffix = "-unsigned"
         }
     }
 
@@ -308,4 +326,28 @@ tasks.register("verifyMergedManifest") {
 // D-71: the Compose UI tests need the debug-only ui-test-manifest activity; the release unit-test task skips them.
 tasks.matching { it.name == "testReleaseUnitTest" }.configureEach {
     (this as Test).filter.excludeTestsMatching("ir.andarz.app.ui.AccessibilityLayoutTest")
+}
+
+// ---------------------------------------------------------------- K8.6: the loud warning
+// Without ANDARZ_KEYSTORE (env or keystore.properties) a release is signed with the debug key. Say so on every
+// release task, at configuration and again when the APK/AAB is produced. March's committed key is never used.
+val notPublishable = """
+    |==============================================================================
+    |  NOT PUBLISHABLE: this release build is signed with the DEBUG key.
+    |  Set ANDARZ_KEYSTORE, ANDARZ_KEYSTORE_PASSWORD, ANDARZ_KEY_ALIAS and
+    |  ANDARZ_KEY_PASSWORD (environment or a git-ignored keystore.properties).
+    |  March's committed keystore is compromised and must never be used (D-M10).
+    |==============================================================================
+""".trimMargin()
+
+if (releaseStore == null) {
+    tasks.matching { it.name in setOf("assembleRelease", "bundleRelease", "packageRelease") }.configureEach {
+        doFirst { logger.warn(notPublishable) }
+        doLast { logger.warn(notPublishable) }
+    }
+} else {
+    require(rootProject.file(releaseStore).isFile) { "ANDARZ_KEYSTORE points to a missing file: $releaseStore" }
+    listOf("ANDARZ_KEYSTORE_PASSWORD" to "storePassword", "ANDARZ_KEY_ALIAS" to "keyAlias", "ANDARZ_KEY_PASSWORD" to "keyPassword").forEach { (e, k) ->
+        require(!signingValue(e, k).isNullOrEmpty()) { "release signing: $e (or $k in keystore.properties) is missing" }
+    }
 }

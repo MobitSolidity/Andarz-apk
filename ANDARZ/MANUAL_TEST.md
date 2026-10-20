@@ -6,13 +6,12 @@ Items 1–24 are §12 of `ANDARZ_MASTER_PROMPT.md`; A1–A12 are K11 of `KICKOFF
 **Status column** — `pending` nothing to run yet · `blocked` needs a toolchain or device this machine does
 not have (see D-M33) · `pass` / `fail` with the date and what was observed.
 
-> **What has run, as of 2026-10-15.** The toolchain is installed and `./gradlew build` and
-> `./gradlew verifyGuards` are green: 29 unit tests pass (13 egress, 3 zero-traffic, 10 content, plus
-> lint), and all seven Gradle guards were each proven to fail on a planted violation — the table is in
-> `DECISIONS.md`. A debug APK builds.
+> **What has run, as of M8.** `./gradlew build` is green with every K8.4 guard; unit tests: engine 275, data
+> 30, app 60, market 79 per variant (debug and release both run), including F9/F10 under Robolectric (D-71).
+> `./gradlew assembleRelease` succeeds (R8, about 2.9 MB, debug-signed and marked `NOT PUBLISHABLE`, D-74).
 >
-> **No emulator or device is available**, so every row below that needs a running app is still `blocked`
-> and none is ticked (K12). The rows a build alone can answer are marked `partial` with what was checked.
+> **No emulator or device is available**, so every row below that needs a running app is still `blocked` or
+> `pending` and none is ticked (K12). Rows a build alone can answer are marked `partial` with what was checked.
 
 ---
 
@@ -49,16 +48,16 @@ not have (see D-M33) · `pass` / `fail` with the date and what was observed.
 | 17 | Switch theme, digits and calendar | Dark is the default; light and system work; RTL is correct; Persian and Latin digits and Jalali/Gregorian display work on every screen | blocked |
 | 18 | Close a winning and a losing trade | The same neutral result card; no confetti, no streaks, no praise | blocked |
 | 19 | 200٪ font, TalkBack, reduced motion on Today, wizard, trade detail, Journal | Nothing is clipped or overlapping; every control is announced; with animations removed nothing moves | blocked |
-| 20 | Open every chart | The x axis runs left → right; a table view is available for screen readers | blocked |
+| 20 | Open every chart | The x axis runs left → right; a table view is available for screen readers | partial: LTR plot and table toggle in code (D-70); device check pending |
 
 ## Security and privacy
 
 | # | Step | Expected | Status |
 |---|---|---|---|
-| 21 | Inspect the release APK (as amended by K2) | `INTERNET` appears **only** through `:market`'s manifest and every guard of K8.4 is green; no analytics, crash or Play Services dependency; `allowBackup=false` | blocked |
+| 21 | Inspect the release APK (as amended by K2) | `INTERNET` appears **only** through `:market`'s manifest and every guard of K8.4 is green; no analytics, crash or Play Services dependency; `allowBackup=false` | partial (M8): aapt2 on the release APK shows the K8.1 set and `allowBackup=false`; no Firebase/Crashlytics/GMS classes; guards green |
 | 22 | Turn the app lock on | Biometric and PIN with the attempt policy (5 free, then 30 s doubling to 30 min); `FLAG_SECURE` hides the app in recents; no journal content is composed while locked | blocked |
-| 23 | Back up, then restore with a wrong password and a corrupted file | AES-256-GCM with PBKDF2 passes the crypto vectors; a wrong password, a flipped tag bit, a truncated file and a bad magic each fail with their own message and change nothing | blocked |
-| 24 | `git grep -nP "[\\x{0600}-\\x{06FF}]" -- "*.kt"` | No hit. All wording comes from the content JSON; `MISSING_COPY.md` is empty or explained | blocked |
+| 23 | Back up, then restore with a wrong password and a corrupted file | AES-256-GCM with PBKDF2 passes the crypto vectors; a wrong password, a flipped tag bit, a truncated file and a bad magic each fail with their own message and change nothing | partial: crypto vectors and each failure mode pass in `PlatformDataTest`; the messages on a device pending |
+| 24 | `git grep -nP "[\\x{0600}-\\x{06FF}]" -- "*.kt"` | No hit. All wording comes from the content JSON; `MISSING_COPY.md` is empty or explained | pass (M8): 0 hits over the 139 tracked `.kt`/`.kts` files of ANDARZ (the guard also runs in every build); MISSING_COPY lists three keys with reasons |
 
 ---
 
@@ -223,4 +222,13 @@ F9 and F10 under Robolectric (`AccessibilityLayoutTest`, D-71).
 | Snapshot <= 50 ms with 5,000 trades | JVM test measures it on every build (printed); device timing pending |
 | Cold start <= 1.5 s, Today first frame <= 300 ms | pending (device) |
 | Release APK <= 25 MB, no `INTERNET` outside `:market`, no Persian literal in `.kt` | guards in every build; APK size measured in M8 |
+
+## M8 release script (pending: needs a device)
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| R-1 | Install `app-release.apk` (debug-signed) on Android 8 and a current Android; run onboarding, the worked example, a backup and a restore, Market on with one alert | No crash: R8 kept every serializer, Room and Hilt class; backup file restores on the debug build too | pending |
+| R-2 | About | Version `0.9.0-unsigned`, build = commit count, short commit | pending |
+| R-3 | Build with a real keystore in `keystore.properties` | No `NOT PUBLISHABLE` box; version without `-unsigned`; `apksigner verify --print-certs` shows the new certificate, not March's | pending (owner, O-2) |
+| R-4 | Name a keystore but omit its password | Configuration fails naming `ANDARZ_KEYSTORE_PASSWORD` | pass (M8): `ANDARZ_KEYSTORE=<file> ./gradlew help` fails with "release signing: ANDARZ_KEYSTORE_PASSWORD (or storePassword in keystore.properties) is missing" |
 
