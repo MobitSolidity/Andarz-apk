@@ -67,8 +67,8 @@ fun TodayScreen(
 ) {
     val u = ui()
     val c = LocalAndarzColors.current
-    var now by remember { mutableStateOf(Instant.now()) }
-    LaunchedEffect(Unit) { while (true) { delay(1_000); now = Instant.now() } }
+    val nowMs by ir.andarz.app.ui.rememberNowMillis(1_000, aligned = true)
+    val now: Instant = Instant.ofEpochMilli(nowMs)
 
     if (snapshot == null) { ir.andarz.app.ui.components.LoadingState(); return }
     val p = snapshot.params

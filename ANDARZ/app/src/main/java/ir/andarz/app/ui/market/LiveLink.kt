@@ -68,8 +68,7 @@ fun LivePriceChip(symbol: String, onUse: (String) -> Unit, vm: LiveLinkViewModel
     val u = ui()
     val gate by vm.gate.collectAsState()
     val state by vm.market.collectAsState()
-    var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
-    LaunchedEffect(Unit) { while (true) { delay(5_000); now = System.currentTimeMillis() } }
+    val now by ir.andarz.app.ui.rememberNowMillis(5_000)
     if (!gate.mayUseNetwork || symbol.isBlank()) return
     val coin = TradeLink.resolve(symbol, state.coins) ?: return
     Column {

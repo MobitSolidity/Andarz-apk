@@ -48,12 +48,17 @@ class AndarzApp : Application(), Configuration.Provider {
     @OptIn(FlowPreview::class)
     override fun onCreate() {
         super.onCreate()
-        // Outgoing files are purged at the next start (8.4).
-        runCatching { File(cacheDir, "out").deleteRecursively() }
         marketHost.watchSettings(appScope)
         MarketModule.install(this, marketHost)
         tradeWatcher.start(appScope)
-        runCatching { DisciplineChannels.ensure(this, content) }
+        // Cold start (P-02): the 185 KB wording parse, the channel set-up and the purge of outgoing files (8.4)
+        // run off the main thread. The splash waits for settings, and a receiver in a cold process still loads
+        // the wording synchronously through ContentRepository's lock, so nothing can see a half-built state.
+        appScope.launch(Dispatchers.IO) {
+            runCatching { File(cacheDir, "out").deleteRecursively() }
+            runCatching { content.preload() }
+            runCatching { DisciplineChannels.ensure(this@AndarzApp, content) }
+        }
         ProcessLifecycleOwner.get().lifecycle.addObserver(
             LifecycleEventObserver { _, e ->
                 when (e) {

@@ -98,10 +98,8 @@ class GovernanceViewModel @Inject constructor(
     val message = MutableStateFlow<String?>(null)
 
     init {
-        safeLaunch {
-            // The 60-minute timeout is applied lazily by the repository; poll so the screen follows it.
-            while (true) { refresh(); delay(30_000) }
-        }
+        // The 60-minute timeout is applied lazily by the repository; RulesScreen re-polls while visible (P-01).
+        safeLaunch { refresh() }
     }
 
     suspend fun refresh() {
@@ -165,6 +163,7 @@ fun RulesScreen(onBack: () -> Unit, vm: GovernanceViewModel = hiltViewModel()) {
     val history by vm.history.collectAsState()
     val blocked by vm.blocked.collectAsState()
     val message by vm.message.collectAsState()
+    ir.andarz.app.ui.WhileStarted(30_000) { vm.refresh() }
     var editing by rememberSaveable { mutableStateOf<String?>(null) }
     var resetAsk by rememberSaveable { mutableStateOf(false) }
     val c = LocalAndarzColors.current

@@ -80,13 +80,7 @@ internal fun NewsScreen(
     onClock: (EconEvent) -> Boolean,
 ) {
     val u = ui()
-    var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
-    LaunchedEffect(Unit) {
-        while (true) {
-            now = System.currentTimeMillis()
-            delay(1000 - now % 1000)
-        }
-    }
+    val now by ir.andarz.app.ui.rememberNowMillis(1_000, aligned = true)
     val status = data.status(now)
     if (status != CalendarStatus.VALID) {
         val until = if (data.validUntil > 0) u.date(u.localDate(Instant.ofEpochMilli(data.validUntil)), withWeekday = false) else content.ui("common.dash")
