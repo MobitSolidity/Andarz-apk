@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.onboarding
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.layout.safeDrawingPadding
 
 import androidx.compose.foundation.layout.Arrangement
@@ -53,7 +55,7 @@ class OnboardingViewModel @Inject constructor(
     private val pledges: PledgeRepository,
 ) : ViewModel() {
     /** Writes BASELINE + NEUTRAL Start_Equity/Risk_Pct (5.1, D-18), the pledge when signed, then finishes. */
-    fun finish(equity: Double, riskPct: Double, zone: String, pledgeText: String?, name: String, onDone: () -> Unit) = viewModelScope.launch {
+    fun finish(equity: Double, riskPct: Double, zone: String, pledgeText: String?, name: String, onDone: () -> Unit) = safeLaunch {
         settings.setZone(zone)
         ledger.onboard(equity, riskPct, ZoneId.of(zone))
         if (pledgeText != null) pledges.sign(1, name, equity, riskPct, pledgeText)

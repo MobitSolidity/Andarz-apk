@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -84,10 +86,10 @@ class SetupsViewModel @Inject constructor(
     val message = MutableStateFlow<String?>(null)
 
     init {
-        viewModelScope.launch { db.trades().observeEngineRows().collect { refresh() } }
+        safeLaunch { db.trades().observeEngineRows().collect { refresh() } }
     }
 
-    fun refresh() = viewModelScope.launch {
+    fun refresh() = safeLaunch {
         val p = params.current()
         _p.value = p
         _session.value = params.openSession() != null
@@ -99,22 +101,22 @@ class SetupsViewModel @Inject constructor(
         }
     }
 
-    fun save(existing: SetupEntity?, name: String, entry: String, inval: String, target: String, notes: String, waived: Boolean) = viewModelScope.launch {
+    fun save(existing: SetupEntity?, name: String, entry: String, inval: String, target: String, notes: String, waived: Boolean) = safeLaunch {
         if (existing == null) {
             val s = repo.create(name, entry, inval, target, notes)
             if (waived) repo.update(s.copy(testWaived = true))
         } else repo.update(existing.copy(name = name.trim(), entryRule = entry, invalidation = inval, target = target, notes = notes, testWaived = waived))
     }
 
-    fun grade(s: SetupEntity, grade: String) = viewModelScope.launch {
+    fun grade(s: SetupEntity, grade: String) = safeLaunch {
         val ok = repo.setGrade(s.id, grade, _stats.value[s.id]?.gradeA?.eligible == true)
         if (!ok) message.value = "setups.notEligibleA"
     }
 
-    fun archive(s: SetupEntity, archived: Boolean) = viewModelScope.launch { repo.setArchived(s.id, archived) }
+    fun archive(s: SetupEntity, archived: Boolean) = safeLaunch { repo.setArchived(s.id, archived) }
 
     // ---- watch-list
-    fun addWatch(symbol: String, vol: String, rel: String, levels: String, notes: String) = viewModelScope.launch {
+    fun addWatch(symbol: String, vol: String, rel: String, levels: String, notes: String) = safeLaunch {
         message.value = when (watchRepo.add(symbol, Fmt.normalizeInput(vol), Fmt.normalizeInput(rel), levels, notes)) {
             WatchError.FULL -> "wl.full"
             WatchError.EMPTY_SYMBOL -> "err.symbolRequired"
@@ -124,18 +126,18 @@ class SetupsViewModel @Inject constructor(
         }
     }
 
-    fun updateWatch(w: WatchSymbolEntity, vol: String, rel: String, levels: String, notes: String) = viewModelScope.launch {
+    fun updateWatch(w: WatchSymbolEntity, vol: String, rel: String, levels: String, notes: String) = safeLaunch {
         val v = Fmt.normalizeInput(vol)
         val r = Fmt.normalizeInput(rel)
         watchRepo.update(w.copy(volume24hUsd = v, relVolume = r, levels = levels.trim(), notes = notes.trim()), liquidityChanged = v != w.volume24hUsd || r != w.relVolume || v != null || r != null)
     }
 
-    fun deleteWatch(w: WatchSymbolEntity) = viewModelScope.launch { watchRepo.delete(w) }
+    fun deleteWatch(w: WatchSymbolEntity) = safeLaunch { watchRepo.delete(w) }
 
     /** D-22 thresholds: editable only inside a review session, with no delay (5.11). */
-    fun setThresholds(vol: Double, lo: Double, hi: Double) = viewModelScope.launch {
-        if (params.openSession() == null) { message.value = "params.needsSession"; return@launch }
-        if (vol <= 0 || lo <= 0 || hi <= lo) { message.value = "err.positive"; return@launch }
+    fun setThresholds(vol: Double, lo: Double, hi: Double) = safeLaunch {
+        if (params.openSession() == null) { message.value = "params.needsSession"; return@safeLaunch }
+        if (vol <= 0 || lo <= 0 || hi <= lo) { message.value = "err.positive"; return@safeLaunch }
         settingsRepo.setLiquidity(vol, lo, hi)
         message.value = "common.saved"
     }

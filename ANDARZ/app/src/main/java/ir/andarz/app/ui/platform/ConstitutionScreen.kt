@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.platform
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -80,11 +82,11 @@ class ConstitutionViewModel @Inject constructor(
     private val _p = MutableStateFlow(Params.DEFAULTS)
     val params: StateFlow<Params> = _p
 
-    init { viewModelScope.launch { _p.value = facade.paramsAt(Instant.now()) } }
+    init { safeLaunch { _p.value = facade.paramsAt(Instant.now()) } }
 
-    fun markRead(n: String) = viewModelScope.launch { settings.markArticleRead(n) }
+    fun markRead(n: String) = safeLaunch { settings.markArticleRead(n) }
 
-    fun sign(version: Int, name: String, text: String) = viewModelScope.launch {
+    fun sign(version: Int, name: String, text: String) = safeLaunch {
         val p = _p.value
         pledges.sign(version, name, p.startEquity, p.riskPct, text)
     }

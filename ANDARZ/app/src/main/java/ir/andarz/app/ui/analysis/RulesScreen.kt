@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -96,7 +98,7 @@ class GovernanceViewModel @Inject constructor(
     val message = MutableStateFlow<String?>(null)
 
     init {
-        viewModelScope.launch {
+        safeLaunch {
             // The 60-minute timeout is applied lazily by the repository; poll so the screen follows it.
             while (true) { refresh(); delay(30_000) }
         }
@@ -108,16 +110,16 @@ class GovernanceViewModel @Inject constructor(
         _pending.value = params.pending()
     }
 
-    fun start() = viewModelScope.launch {
+    fun start() = safeLaunch {
         val (check, s) = params.startSession()
         blocked.value = if (s == null) check else null
         refresh()
     }
 
-    fun end() = viewModelScope.launch { params.endSession(); refresh() }
+    fun end() = safeLaunch { params.endSession(); refresh() }
 
     /** Returns through [message] the key of the outcome; [onDone] runs on success. */
-    fun apply(key: String, value: Double, reason: String, onDone: () -> Unit) = viewModelScope.launch {
+    fun apply(key: String, value: Double, reason: String, onDone: () -> Unit) = safeLaunch {
         when (val r = params.apply(key, value, reason)) {
             is ChangeResult.Applied -> { message.value = "common.saved"; onDone() }
             is ChangeResult.Rejected -> message.value = when (r.reason) {
@@ -132,10 +134,10 @@ class GovernanceViewModel @Inject constructor(
         refresh()
     }
 
-    fun cancel(id: String) = viewModelScope.launch { params.cancel(id); refresh() }
+    fun cancel(id: String) = safeLaunch { params.cancel(id); refresh() }
 
     /** Reset to defaults: ordinary changes through the same pipeline, tightening first (5.10). */
-    fun reset(reason: String) = viewModelScope.launch {
+    fun reset(reason: String) = safeLaunch {
         val p = params.current()
         for ((d, v) in RulesLogic.resetOrder(RulesLogic.resetChanges(defs, p), p)) params.apply(d.key, v, reason)
         message.value = "common.saved"

@@ -11,6 +11,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -82,7 +85,14 @@ class MainActivity : FragmentActivity() {
                     Surface(modifier = Modifier.fillMaxSize()) {
                         when {
                             locked && s.lockEnabled && s.pinHash != null -> LockScreen(lock, s)
-                            !onboarded && !s.onboardingDone -> OnboardingScreen(onDone = { onboarded = true })
+                            !onboarded && !s.onboardingDone -> androidx.compose.foundation.layout.Box(Modifier.fillMaxSize()) {
+                                OnboardingScreen(onDone = { onboarded = true })
+                                ir.andarz.app.ui.UiErrorSnackbarHost(
+                                    content,
+                                    Modifier.align(androidx.compose.ui.Alignment.BottomCenter)
+                                        .windowInsetsPadding(WindowInsets.safeDrawing),
+                                )
+                            }
                             else -> AndarzNavHost(content = content, app = app, deepLink = route, onDeepLinkConsumed = { pendingRoute.value = null })
                         }
                     }

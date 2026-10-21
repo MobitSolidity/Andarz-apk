@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.market
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,35 +38,35 @@ class AlertsNewsViewModel @Inject constructor() : ViewModel() {
     val calendarData: StateFlow<CalendarData> = _calendar.asStateFlow()
 
     init {
-        viewModelScope.launch { _calendar.value = calendar.data() }
+        safeLaunch { _calendar.value = calendar.data() }
     }
 
     fun update(change: (AlertSettings) -> AlertSettings) {
-        viewModelScope.launch { alerts.update(change) }
+        safeLaunch { alerts.update(change) }
     }
 
     fun setRule(rule: CoinRule) {
-        viewModelScope.launch { alerts.setRule(rule) }
+        safeLaunch { alerts.setRule(rule) }
     }
 
     fun removeRule(id: String) {
-        viewModelScope.launch { alerts.removeRule(id) }
+        safeLaunch { alerts.removeRule(id) }
     }
 
     fun test() {
-        viewModelScope.launch { alerts.test() }
+        safeLaunch { alerts.test() }
     }
 
     fun testAlarm() {
-        viewModelScope.launch { alerts.testAlarm() }
+        safeLaunch { alerts.testAlarm() }
     }
 
     fun setMonitor(on: Boolean) {
-        viewModelScope.launch { MarketModule.setMonitor(on) }
+        safeLaunch { MarketModule.setMonitor(on) }
     }
 
     fun toggleReminder(e: EconEvent) {
-        viewModelScope.launch { calendar.toggle(e, System.currentTimeMillis()) }
+        safeLaunch { calendar.toggle(e, System.currentTimeMillis()) }
     }
 
     /** False when no Clock app handled the alarm (March shows a short message then). */

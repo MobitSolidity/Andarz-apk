@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.trade
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -37,9 +39,9 @@ class TradeViewModel @Inject constructor(
     val error = MutableStateFlow<String?>(null)
     val deleted = MutableStateFlow(false)
 
-    init { viewModelScope.launch { params.value = facade.paramsAt(Instant.now()) } }
+    init { safeLaunch { params.value = facade.paramsAt(Instant.now()) } }
 
-    private fun run(block: suspend () -> Unit) = viewModelScope.launch {
+    private fun run(block: suspend () -> Unit) = safeLaunch {
         try { block() } catch (e: IllegalArgumentException) { error.value = e.message } catch (e: IllegalStateException) { error.value = e.message }
     }
 

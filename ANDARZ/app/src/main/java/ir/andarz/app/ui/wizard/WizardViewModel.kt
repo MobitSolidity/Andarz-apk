@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.wizard
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -116,7 +118,7 @@ class WizardViewModel @Inject constructor(
         refresh()
     }
 
-    fun refresh() = viewModelScope.launch {
+    fun refresh() = safeLaunch {
         val s = facade.snapshot(Instant.now(), _draft.value.setupId)
         _snapshot.value = s
         if (_draft.value.equity.isEmpty()) update { it.copy(equity = Fmt.number(s.equity.now, 2, fa = false, group = false, trim = true)) }
@@ -147,24 +149,24 @@ class WizardViewModel @Inject constructor(
         slTpOnExchange = d.slTpOnExchange, canMonitor = d.canMonitor,
     )
 
-    fun savePlan(rejected: Boolean, thenEnter: Boolean) = viewModelScope.launch {
+    fun savePlan(rejected: Boolean, thenEnter: Boolean) = safeLaunch {
         val d = _draft.value
         val c = calc(d, _snapshot.value)
-        if (!c.numbersValid) return@launch
+        if (!c.numbersValid) return@safeLaunch
         val t = journal.savePlan(toPlan(d, c), rejected)
         if (thenEnter) pendingEntry.value = t else done.value = t.id
         if (!thenEnter) clear()
     }
 
-    fun confirm(entry: Double, notional: Double, at: Instant, withoutStops: Boolean) = viewModelScope.launch {
-        val t = pendingEntry.value ?: return@launch
+    fun confirm(entry: Double, notional: Double, at: Instant, withoutStops: Boolean) = safeLaunch {
+        val t = pendingEntry.value ?: return@safeLaunch
         journal.confirmEntry(t.id, EntryConfirm(entry, notional, at, withoutStops))
         pendingEntry.value = null
         done.value = t.id
         clear()
     }
 
-    fun createSetup(name: String) = viewModelScope.launch {
+    fun createSetup(name: String) = safeLaunch {
         val s = setups.create(name)
         update { it.copy(setupId = s.id) }
     }

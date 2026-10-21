@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.market
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AssistChip
@@ -54,7 +56,7 @@ class LiveLinkViewModel @Inject constructor(private val db: AndarzDatabase, priv
     val market: StateFlow<MarketState> = if (MarketModule.isInstalled) MarketModule.repository.state else MutableStateFlow(MarketState())
     fun alertsFor(tradeId: String): StateFlow<List<TradeAlertEntity>> =
         db.tradeAlerts().observeFor(tradeId).stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
-    fun setArmed(tradeId: String, level: LinkLevel, on: Boolean) = viewModelScope.launch { watcher.setArmed(tradeId, level, on) }
+    fun setArmed(tradeId: String, level: LinkLevel, on: Boolean) = safeLaunch { watcher.setArmed(tradeId, level, on) }
 }
 
 /**

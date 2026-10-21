@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.platform
 
+import ir.andarz.app.ui.safeLaunch
+
 import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
@@ -117,27 +119,27 @@ class SettingsViewModel @Inject constructor(
     val versionName: String = BuildConfig.VERSION_NAME
     val versionCode: Int = BuildConfig.VERSION_CODE
 
-    fun <T> set(block: suspend SettingsRepository.() -> T) = viewModelScope.launch { repo.block(); reconciler.reconcile(ctx) }
+    fun <T> set(block: suspend SettingsRepository.() -> T) = safeLaunch { repo.block(); reconciler.reconcile(ctx) }
 
     // ---- lock (8.2)
-    fun enableLock(pin: String, biometric: Boolean, timeout: Int, hide: Boolean) = viewModelScope.launch {
-        if (!PinLock.valid(pin)) { message.value = "set.lock.pin"; return@launch }
+    fun enableLock(pin: String, biometric: Boolean, timeout: Int, hide: Boolean) = safeLaunch {
+        if (!PinLock.valid(pin)) { message.value = "set.lock.pin"; return@safeLaunch }
         lock.enable(pin, if (biometric) LockMethod.BIOMETRIC else LockMethod.PIN, timeout, hide)
         message.value = "common.saved"
     }
 
-    fun updateLock(biometric: Boolean, timeout: Int, hide: Boolean) = viewModelScope.launch {
+    fun updateLock(biometric: Boolean, timeout: Int, hide: Boolean) = safeLaunch {
         repo.setLock(true, if (biometric) LockMethod.BIOMETRIC else LockMethod.PIN, timeout, hide)
     }
 
-    fun disableLock() = viewModelScope.launch { lock.disable() }
+    fun disableLock() = safeLaunch { lock.disable() }
 
     // ---- backup (8.3)
     /** Market settings as `settings.market` of the payload (K6.12); consent and switch excluded. */
     private suspend fun marketDoc(): kotlinx.serialization.json.JsonElement? =
         runCatching { kotlinx.serialization.json.Json.parseToJsonElement(MarketModule.exportJson()) }.getOrNull()
 
-    fun exportBackup(uri: Uri, password: String) = viewModelScope.launch {
+    fun exportBackup(uri: Uri, password: String) = safeLaunch {
         busy.value = true
         try {
             val s = repo.current()
@@ -150,7 +152,7 @@ class SettingsViewModel @Inject constructor(
         } catch (e: Exception) { message.value = "err.storage" } finally { busy.value = false }
     }
 
-    fun openBackup(uri: Uri, password: String) = viewModelScope.launch {
+    fun openBackup(uri: Uri, password: String) = safeLaunch {
         busy.value = true
         try {
             val bytes = withContext(Dispatchers.IO) {
@@ -171,8 +173,8 @@ class SettingsViewModel @Inject constructor(
         finally { busy.value = false }
     }
 
-    fun confirmRestore() = viewModelScope.launch {
-        val p = pendingRestore.value ?: return@launch
+    fun confirmRestore() = safeLaunch {
+        val p = pendingRestore.value ?: return@safeLaunch
         busy.value = true
         try {
             backup.restore(p.doc)
@@ -197,7 +199,7 @@ class SettingsViewModel @Inject constructor(
 
     val shareUri = MutableStateFlow<Pair<Uri, String>?>(null)
 
-    fun exportCsv(full: Boolean) = viewModelScope.launch {
+    fun exportCsv(full: Boolean) = safeLaunch {
         val s = repo.current()
         val text = if (full) csv.exportFull(vocab, s.zone) else csv.exportExcel(vocab, s.zone)
         val stamp = ir.andarz.data.backup.BackupService.fileName(Instant.now(), s.zone).removePrefix("andarz-backup-").removeSuffix(".andz")
@@ -205,14 +207,14 @@ class SettingsViewModel @Inject constructor(
         message.value = "journal.export.done"
     }
 
-    fun exportJson() = viewModelScope.launch {
+    fun exportJson() = safeLaunch {
         val s = repo.current()
         val doc = backup.snapshot(versionName, s.zone, SettingsDoc.of(s), marketDoc())
         val stamp = ir.andarz.data.backup.BackupService.fileName(Instant.now(), s.zone).removePrefix("andarz-backup-").removeSuffix(".andz")
         shareUri.value = share("andarz-$stamp.json", backup.encode(doc, pretty = true)) to "application/json"
     }
 
-    fun previewCsv(uri: Uri) = viewModelScope.launch {
+    fun previewCsv(uri: Uri) = safeLaunch {
         try {
             val text = withContext(Dispatchers.IO) {
                 val bytes = ctx.contentResolver.openInputStream(uri)!!.use { it.readBytes() }
@@ -228,8 +230,8 @@ class SettingsViewModel @Inject constructor(
     }
 
     /** [moveBaseline]: the 9.2 step 7 choice, the new baseline amount when the user confirmed it. */
-    fun commitCsv(moveBaselineAmount: Double?) = viewModelScope.launch {
-        val p = csvPreview.value ?: return@launch
+    fun commitCsv(moveBaselineAmount: Double?) = safeLaunch {
+        val p = csvPreview.value ?: return@safeLaunch
         val s = repo.current()
         val move = if (moveBaselineAmount != null && p.earliest != null) p.earliest!!.atStartOfDay(s.zone).toInstant() to moveBaselineAmount else null
         csv.commit(p, move)
@@ -243,7 +245,7 @@ class SettingsViewModel @Inject constructor(
         return base - p.trades.sumOf { it.net ?: 0.0 }
     }
 
-    fun wipe() = viewModelScope.launch {
+    fun wipe() = safeLaunch {
         backup.wipe()
         repo.setOnboardingDone(false)
         repo.setDemoLoaded(false)
@@ -253,19 +255,19 @@ class SettingsViewModel @Inject constructor(
     }
 
     // ---- demo data (5.14, D-68)
-    fun loadDemo() = viewModelScope.launch {
+    fun loadDemo() = safeLaunch {
         demo.load(); repo.setDemoLoaded(true); message.value = "common.done"
     }
 
-    fun removeDemo() = viewModelScope.launch {
+    fun removeDemo() = safeLaunch {
         demo.remove(); repo.setDemoLoaded(false); message.value = "common.deleted"
     }
 
     // ---- market (K6.9)
-    fun setMarketEnabled(on: Boolean) = viewModelScope.launch { MarketModule.setEnabled(on) }
+    fun setMarketEnabled(on: Boolean) = safeLaunch { MarketModule.setEnabled(on) }
     /** Settings -> Internet switch, first time on: records the consent and turns the connection on (D-76). */
-    fun acceptMarketConsent() = viewModelScope.launch { MarketModule.acceptConsent(System.currentTimeMillis()) }
-    fun setMarketToman(on: Boolean) = viewModelScope.launch { MarketModule.repository.setToman(on) }
-    fun setMarketMonitor(on: Boolean) = viewModelScope.launch { MarketModule.setMonitor(on) }
-    fun setMarketQuietMute(on: Boolean) = viewModelScope.launch { MarketModule.alerts.update { it.copy(muteInQuiet = on) } }
+    fun acceptMarketConsent() = safeLaunch { MarketModule.acceptConsent(System.currentTimeMillis()) }
+    fun setMarketToman(on: Boolean) = safeLaunch { MarketModule.repository.setToman(on) }
+    fun setMarketMonitor(on: Boolean) = safeLaunch { MarketModule.setMonitor(on) }
+    fun setMarketQuietMute(on: Boolean) = safeLaunch { MarketModule.alerts.update { it.copy(muteInQuiet = on) } }
 }

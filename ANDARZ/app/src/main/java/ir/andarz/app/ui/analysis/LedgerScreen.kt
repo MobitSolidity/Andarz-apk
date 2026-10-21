@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -72,7 +74,7 @@ class LedgerViewModel @Inject constructor(
 
     init { refresh() }
 
-    fun refresh() = viewModelScope.launch {
+    fun refresh() = safeLaunch {
         val s = settings.current()
         val (from, to) = Periods.previousMonth(LocalDate.now(s.zone), s.calendar == CalendarMode.JALALI)
         val k = InsightsLogic.of(db.trades().engineRows(), from, to, params.current(), s.zone).kpis
@@ -80,7 +82,7 @@ class LedgerViewModel @Inject constructor(
         _session.value = params.openSession() != null
     }
 
-    fun add(type: String, amount: Double, at: Instant, note: String) = viewModelScope.launch {
+    fun add(type: String, amount: Double, at: Instant, note: String) = safeLaunch {
         message.value = when (ledger.add(type, amount, at, note)) {
             LedgerError.NEGATIVE_EQUITY -> "ledger.negative"
             LedgerError.NOT_POSITIVE -> "err.positive"
@@ -89,9 +91,9 @@ class LedgerViewModel @Inject constructor(
         }
     }
 
-    fun delete(e: LedgerEntryEntity) = viewModelScope.launch { if (ledger.delete(e.id) == LedgerError.BASELINE_LOCKED) message.value = "ledger.baseline.locked" }
+    fun delete(e: LedgerEntryEntity) = safeLaunch { if (ledger.delete(e.id) == LedgerError.BASELINE_LOCKED) message.value = "ledger.baseline.locked" }
 
-    fun editBaseline(amount: Double, reason: String) = viewModelScope.launch {
+    fun editBaseline(amount: Double, reason: String) = safeLaunch {
         message.value = when (runCatching { ledger.editBaseline(amount, null, reason) }.getOrElse { LedgerError.BASELINE_LOCKED }) {
             null -> "common.saved"
             LedgerError.NOT_POSITIVE -> "err.positive"

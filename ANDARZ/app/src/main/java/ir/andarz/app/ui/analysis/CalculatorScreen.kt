@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -73,7 +75,7 @@ class CalculatorViewModel @Inject constructor(
     private val _snapshot = MutableStateFlow<Snapshot?>(null)
     val snapshot: StateFlow<Snapshot?> = _snapshot
 
-    init { viewModelScope.launch { _snapshot.value = facade.snapshot() } }
+    init { safeLaunch { _snapshot.value = facade.snapshot() } }
 
     fun update(f: (CalcDraft) -> CalcDraft) { val d = f(_draft.value); _draft.value = d; state[KEY] = d }
 

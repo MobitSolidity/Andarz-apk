@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -133,31 +135,31 @@ class ReviewsViewModel @Inject constructor(
         }
     }).toString()
 
-    fun saveDaily(day: LocalDate, ticks: List<Boolean>, onDone: () -> Unit) = viewModelScope.launch {
+    fun saveDaily(day: LocalDate, ticks: List<Boolean>, onDone: () -> Unit) = safeLaunch {
         reviews.save("DAILY", day, day, payload(mapOf("items" to ticks.map { it.toString() })), kpiJson(kpis(day, day)))
         message.value = "rev.daily.done"; onDone()
     }
 
-    fun saveWeekly(weekStart: LocalDate, answers: List<String>, topMistake: String?, rule: String, onDone: () -> Unit) = viewModelScope.launch {
+    fun saveWeekly(weekStart: LocalDate, answers: List<String>, topMistake: String?, rule: String, onDone: () -> Unit) = safeLaunch {
         val end = weekStart.plusDays(6)
         reviews.save("WEEKLY", weekStart, end, payload(mapOf("answers" to answers, "topMistake" to topMistake, "rule" to rule.trim())), kpiJson(kpis(weekStart, end)))
         message.value = "common.saved"; onDone()
     }
 
-    fun saveMonthly(start: LocalDate, end: LocalDate, security: Boolean, withdrawRecorded: Boolean, onDone: () -> Unit) = viewModelScope.launch {
+    fun saveMonthly(start: LocalDate, end: LocalDate, security: Boolean, withdrawRecorded: Boolean, onDone: () -> Unit) = safeLaunch {
         if (security) settings.setLastSecurityReviewAt(System.currentTimeMillis())
         reviews.save("MONTHLY", start, end, payload(mapOf("security" to security, "withdrawRecorded" to withdrawRecorded)), kpiJson(kpis(start, end)))
         message.value = "common.saved"; onDone()
     }
 
     /** `rev.monthly.withdraw.record`: a WITHDRAWAL ledger row after the user confirmed (5.9). */
-    fun recordWithdrawal(amount: Double, onDone: (Boolean) -> Unit) = viewModelScope.launch {
+    fun recordWithdrawal(amount: Double, onDone: (Boolean) -> Unit) = safeLaunch {
         val err = ledger.add("WITHDRAWAL", amount, Instant.now(), "")
         message.value = if (err == null) "common.saved" else "ledger.negative"
         onDone(err == null)
     }
 
-    fun saveDrawdown(q1: String, q2: String, onDone: () -> Unit) = viewModelScope.launch {
+    fun saveDrawdown(q1: String, q2: String, onDone: () -> Unit) = safeLaunch {
         val today = LocalDate.now(settings.current().zone)
         reviews.save("DRAWDOWN", today, today, payload(mapOf("q1" to q1.trim(), "q2" to q2.trim())), kpiJson(kpis(LocalDate.of(1970, 1, 1), today)))
         message.value = "common.saved"; onDone()

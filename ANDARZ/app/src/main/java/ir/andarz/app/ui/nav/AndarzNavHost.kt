@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.nav
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.layout.consumeWindowInsets
 
 import androidx.compose.foundation.layout.safeDrawing
@@ -63,9 +65,9 @@ class TodayViewModel @Inject constructor(db: AndarzDatabase, private val journal
     val open: StateFlow<List<TradeEntity>> =
         db.trades().observeAll().map { all -> all.filter { it.status == "OPEN" } }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
-    init { viewModelScope.launch { journal.expirePlans() } }
+    init { safeLaunch { journal.expirePlans() } }
 
-    fun monitor(id: String) = viewModelScope.launch { journal.monitorCheck(id) }
+    fun monitor(id: String) = safeLaunch { journal.monitorCheck(id) }
 }
 
 /**
@@ -98,6 +100,7 @@ fun AndarzNavHost(
         // edge-to-edge (D-79): system bars plus the keyboard, so a focused field is never under the IME;
         // the padding is consumed below so nested screens do not add it twice.
         contentWindowInsets = WindowInsets.safeDrawing,
+        snackbarHost = { ir.andarz.app.ui.UiErrorSnackbarHost(content) },
         bottomBar = {
             if (showBar) NavigationBar {
                 for (destination in AndarzNav.bottomBar.filter { it.visible }) {

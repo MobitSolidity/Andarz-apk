@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.market
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -71,23 +73,23 @@ class MarketViewModel @Inject constructor(
     fun refresh() = repo.refreshNow()
 
     fun toggleStar(id: String) {
-        viewModelScope.launch { repo.toggleWatch(id) }
+        safeLaunch { repo.toggleWatch(id) }
     }
 
     fun setToman(on: Boolean) {
-        viewModelScope.launch { repo.setToman(on) }
+        safeLaunch { repo.setToman(on) }
     }
 
     fun session(id: String): List<Double> = repo.session(id)
 
     /** "Turn Market on" in the consent sheet: records the consent and opens the master switch. */
     fun acceptConsent() {
-        viewModelScope.launch { MarketModule.acceptConsent(System.currentTimeMillis()) }
+        safeLaunch { MarketModule.acceptConsent(System.currentTimeMillis()) }
     }
 
     /** Settings -> Market, and the off state's action once consent exists. */
     fun setEnabled(on: Boolean) {
-        viewModelScope.launch { MarketModule.setEnabled(on) }
+        safeLaunch { MarketModule.setEnabled(on) }
     }
 
     override fun onCleared() {

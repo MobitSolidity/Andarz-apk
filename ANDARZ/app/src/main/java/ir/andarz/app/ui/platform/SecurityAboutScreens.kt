@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.platform
 
+import ir.andarz.app.ui.safeLaunch
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -52,10 +54,10 @@ class SecurityViewModel @Inject constructor(private val db: AndarzDatabase, priv
     val checks: StateFlow<List<SecurityCheckEntity>> = db.security().observeAll().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
     val s: StateFlow<Settings?> = settings.settings.stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
-    fun toggle(id: String, on: Boolean) = viewModelScope.launch { db.security().put(SecurityCheckEntity(id, on, if (on) System.currentTimeMillis() else null)) }
+    fun toggle(id: String, on: Boolean) = safeLaunch { db.security().put(SecurityCheckEntity(id, on, if (on) System.currentTimeMillis() else null)) }
 
     /** `sec.markAll`: every clause checked and `lastSecurityReviewAt` set (5.13). */
-    fun markAll(ids: List<String>) = viewModelScope.launch {
+    fun markAll(ids: List<String>) = safeLaunch {
         val now = System.currentTimeMillis()
         ids.forEach { db.security().put(SecurityCheckEntity(it, true, now)) }
         settings.setLastSecurityReviewAt(now)
