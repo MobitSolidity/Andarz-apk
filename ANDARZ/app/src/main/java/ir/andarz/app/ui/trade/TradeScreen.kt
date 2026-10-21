@@ -97,7 +97,11 @@ fun TradeScreen(onBack: () -> Unit, vm: TradeViewModel = hiltViewModel()) {
 
         PlanSection(u, trade)
         if (trade.entryTime != null) ExecutionSection(u, trade)
-        if (trade.status == "OPEN") ManagementSection(u, vm, trade, p) { closing = true }
+        // A-02: an OPEN row from an old backup or a hand-edited import may lack the execution fields that the
+        // management maths dereferences; such a row is shown read-only instead of crashing the screen.
+        val executed = trade.entry != null && trade.notional != null && trade.entryTime != null
+        if (trade.status == "OPEN" && executed) ManagementSection(u, vm, trade, p) { closing = true }
+        if (trade.status == "OPEN" && !executed) Text(u.t("err.generic"), color = LocalAndarzColors.current.redline)
         if (trade.status == "OPEN") ir.andarz.app.ui.market.TradeLinkCard(trade, p)
         if (trade.status == "CLOSED") {
             ResultCard(u, trade)
@@ -123,7 +127,7 @@ fun TradeScreen(onBack: () -> Unit, vm: TradeViewModel = hiltViewModel()) {
         Spacer(Modifier.height(24.dp))
     }
 
-    if (closing) ModalBottomSheet(onDismissRequest = { closing = false }) {
+    if (closing && trade.status == "OPEN" && trade.entry != null && trade.notional != null && trade.entryTime != null) ModalBottomSheet(onDismissRequest = { closing = false }) {
         CloseSheet(u, trade) { legs, fee, reason, at -> vm.close(legs, fee, reason, at); closing = false; reviewing = true }
     }
     if (reviewing) ModalBottomSheet(onDismissRequest = { reviewing = false }) { ReviewSheet(u, trade, p) { vm.review(it); reviewing = false } }
