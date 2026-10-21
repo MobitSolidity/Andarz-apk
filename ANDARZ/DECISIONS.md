@@ -573,6 +573,63 @@ are now referenced as `R.font.*`. The AGP 9 upgrade the skill suggests is not do
   respected; no new framework was added. Screenshot tests (Roborazzi/Dropshots) are not added: they need a
   reference device run to be meaningful.
 
+## International-grade audit (opus5-review, decisions)
+
+Full register: `AUDIT.md`. Only the decisions are recorded here.
+
+### D-82 — Failed user actions are reported, never fatal (A-01)
+
+Repositories reject invalid state by throwing (`require`, `TradeStateException`, Room constraint errors).
+Every ViewModel coroutine was started with a bare `viewModelScope.launch`, so such an exception reached the
+thread's default handler and killed the process. All 71 call sites in 15 files now use `safeLaunch`
+(`ui/SafeLaunch.kt`), which maps the failure to `err.storage` (disk full, I/O) or `err.generic` and shows it
+in a snackbar in the nav shell and on onboarding. Cancellation is untouched (the handler never sees it). The
+stack trace is logged only in debug builds. Both keys already existed in K13; no new copy.
+
+### D-83 — Periodic UI work only while visible (P-01)
+
+The governance screen polled the repository every 30 s from `viewModelScope`, so it kept waking the process
+for as long as the screen sat on the back stack, including in the background. Today (1 s), News (1 s) and
+the trade link (5 s) ran their clocks with `LaunchedEffect(Unit)`, which is paused but not stopped when the
+activity stops. All four now run under `repeatOnLifecycle(STARTED)` (`ui/Ticker.kt`). The background price
+monitor is unchanged: it is a user-started foreground service with its own notification (D-M08).
+
+### D-84 — Cold start off the main thread (P-02)
+
+`ContentRepository.preload()` existed but was never called, so the first composition parsed 185 KB of
+wording JSON on the main thread, and `Application.onCreate` also created the notification channels and
+deleted `cacheDir/out` there. These now run on `Dispatchers.IO` at process start. A broadcast receiver in a
+cold process still loads the wording synchronously through the repository's lock, so ordering is safe.
+Channel creation is idempotent. A baseline profile is **not** added: it needs a device or emulator run to
+generate (`:baselineprofile` with a managed device), which this environment does not have; ROADMAP item.
+
+### D-85 — Touch targets and roles (U-01, U-02)
+
+Three icon buttons were drawn at 24 dp and 40 dp; they are 48 dp now (WCAG 2.2 SC 2.5.8, Android guidance).
+Seven `clickable` surfaces now declare `Role.Button`. `TouchTargetSourceTest` enforces both on the sources.
+
+### D-86 — No crash-reporting SDK (waiver of the review's crash-monitoring item)
+
+The review asks for Crashlytics or Sentry. Law K2 / §8.4 forbids any network path outside `:market`, and
+guard 4 rejects such libraries on the classpath. Crash monitoring therefore relies on Play Console's Android
+vitals (ANR and crash rates, collected by the OS, no SDK) and on the R8 mapping file kept for every release
+(D-80) so stack traces can be retraced. A local, opt-in "export last crash" is a ROADMAP item, not built now.
+
+### D-87 — No CI pipeline (waiver of the software-production skill's CI/CD item)
+
+The owner's standing rule is no CI workflow and no release automation (D-74). The skill's CI/CD, SBOM and
+release-playbook items are met by documents instead: `RELEASE.md` (exact commands, staged rollout, rollback),
+`docs/audit/sbom.txt` (the resolved runtime dependency list that was scanned on OSV) and the guards wired into
+`./gradlew build`.
+
+### D-88 — Certificate pinning is not added
+
+Pinning the five public market hosts (CoinGecko, alternative.me, Binance data stream, Nobitex, Wallex) would
+break the app silently whenever one of them rotates its certificate, and the app has no update channel of its
+own to ship new pins. The traffic carries no user data or credentials (guard 5 rejects `Authorization`,
+`Cookie` and any body). HTTPS with the system trust store, cleartext refused (`network_security_config.xml`),
+is the chosen level. Recorded as accepted risk S-03 in `AUDIT.md`.
+
 ## Owner request — internet switch in Settings (decisions)
 
 ### D-76 — One internet switch, first on the Settings page
