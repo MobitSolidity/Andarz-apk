@@ -223,7 +223,7 @@ internal fun AlertsScreen(
 @Composable
 private fun PermissionRow(title: String, sub: String, onClick: () -> Unit) {
     val c = LocalAndarzColors.current
-    Surface(Modifier.fillMaxWidth().padding(top = 8.dp).clickable(onClick = onClick), shape = RoundedCornerShape(12.dp), color = c.surfaceAlt) {
+    Surface(Modifier.fillMaxWidth().padding(top = 8.dp).clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onClick), shape = RoundedCornerShape(12.dp), color = c.surfaceAlt) {
         Row(Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
             // K6.7: the warning emoji of March becomes a core icon next to the text.
             Icon(Icons.Filled.Warning, contentDescription = null, tint = c.caution, modifier = Modifier.padding(end = 8.dp))
@@ -259,7 +259,7 @@ internal fun ruleSummary(content: ContentRepository, fmt: MarketFmt, u: Ui, r: C
 @Composable
 private fun RuleRow(content: ContentRepository, fmt: MarketFmt, u: Ui, r: CoinRule, coin: Coin?, onOpen: () -> Unit, onRemove: () -> Unit) {
     val toman = r.id == USDT_IRT_ID
-    Surface(Modifier.fillMaxWidth().clickable(onClick = onOpen), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
+    Surface(Modifier.fillMaxWidth().clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onOpen), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
         Row(Modifier.padding(start = 14.dp, top = 6.dp, bottom = 6.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text(if (toman) content.ui("mkt.coins.usdtPair") else Fmt.isolate(coin?.symbol ?: r.id), style = MaterialTheme.typography.titleSmall)

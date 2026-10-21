@@ -249,11 +249,11 @@ private fun EventRow(
                     if (ReleaseTimes.clockAppAllowed(e.at, now)) {
                         IconButton(onClick = {
                             if (!onClock()) Toast.makeText(ctx, content.ui("mkt.news.noClock"), Toast.LENGTH_SHORT).show()
-                        }, modifier = Modifier.size(40.dp)) {
+                        }, modifier = Modifier.size(48.dp)) {
                             Icon(painterResource(R.drawable.ic_alarm_add), contentDescription = content.ui("mkt.news.clock"), tint = c.info)
                         }
                     }
-                    IconButton(onClick = onToggle, modifier = Modifier.size(40.dp)) {
+                    IconButton(onClick = onToggle, modifier = Modifier.size(48.dp)) {
                         if (on) {
                             Icon(painterResource(R.drawable.ic_bell_active), contentDescription = content.ui("mkt.news.reminder"), tint = c.caution)
                         } else {

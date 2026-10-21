@@ -190,7 +190,7 @@ fun ReviewsScreen(onBack: () -> Unit, onOpenTrade: (String) -> Unit, onRules: ()
             Text(u.t("rev.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
             TextButton(onClick = { if (open != null) open = null else onBack() }) { Text(u.t("common.back")) }
         }
-        message?.let { Text(u.t(it), color = c.allowed, modifier = Modifier.clickable { vm.message.value = null }) }
+        message?.let { Text(u.t(it), color = c.allowed, modifier = Modifier.clickable(role = androidx.compose.ui.semantics.Role.Button) { vm.message.value = null }) }
 
         when (open) {
             ReviewKind.DAILY -> DailyForm(u, vm, trades, today, onOpenTrade) { open = null }

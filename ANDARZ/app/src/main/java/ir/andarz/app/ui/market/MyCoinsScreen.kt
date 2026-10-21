@@ -73,7 +73,7 @@ internal fun MyCoinsScreen(
         } else {
             reminders.forEach { (title, whenText) ->
                 item {
-                    Surface(Modifier.fillMaxWidth().padding(bottom = 6.dp).clickable(onClick = onGoNews), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
+                    Surface(Modifier.fillMaxWidth().padding(bottom = 6.dp).clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onGoNews), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
                         Column(Modifier.padding(12.dp)) {
                             Text(title, style = MaterialTheme.typography.bodyLarge)
                             Text(whenText, style = MaterialTheme.typography.bodySmall, color = LocalAndarzColors.current.textMuted)
@@ -102,13 +102,13 @@ private fun WatchCard(
     onOpen: () -> Unit,
 ) {
     val tone = toneOf(c.change24h)
-    Surface(modifier.clickable(onClick = onOpen), shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
+    Surface(modifier.clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onOpen), shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
         Column(Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 SymbolBadge(c.symbol, c.isToman)
                 Spacer(Modifier.width(8.dp))
                 Text(Fmt.isolate(c.symbol), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
-                IconButton(onClick = onRemove, modifier = Modifier.size(24.dp)) {
+                IconButton(onClick = onRemove, modifier = Modifier.size(48.dp)) {
                     Icon(Icons.Filled.Close, contentDescription = content.ui("mkt.coins.remove"), tint = LocalAndarzColors.current.textMuted)
                 }
             }

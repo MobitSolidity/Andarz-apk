@@ -178,7 +178,7 @@ fun RulesScreen(onBack: () -> Unit, vm: GovernanceViewModel = hiltViewModel()) {
             Text(u.t("params.subtitle"), style = MaterialTheme.typography.bodyMedium, color = c.textMuted)
         }
         item { SessionCard(u, session, blocked, vm::start, vm::end) }
-        message?.let { m -> item { Text(u.t(m), color = c.info, modifier = Modifier.clickable { vm.message.value = null }) } }
+        message?.let { m -> item { Text(u.t(m), color = c.info, modifier = Modifier.clickable(role = androidx.compose.ui.semantics.Role.Button) { vm.message.value = null }) } }
         if (pending.isNotEmpty()) item {
             SectionCard(u.t("params.pending.title")) {
                 pending.forEach { ch ->

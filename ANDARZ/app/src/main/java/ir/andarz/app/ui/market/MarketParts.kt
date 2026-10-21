@@ -137,7 +137,7 @@ internal fun CoinRow(
     Surface(
         shape = RoundedCornerShape(14.dp),
         color = MaterialTheme.colorScheme.surfaceContainerLow,
-        modifier = Modifier.fillMaxWidth().clickable(onClick = onOpen),
+        modifier = Modifier.fillMaxWidth().clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onOpen),
     ) {
         Row(Modifier.padding(start = 12.dp, end = 2.dp, top = 10.dp, bottom = 10.dp), verticalAlignment = Alignment.CenterVertically) {
             SymbolBadge(c.symbol, c.isToman)
