@@ -14,6 +14,7 @@ Everything a coding agent needs to build **Andarz**: an offline-first, Persian-f
 | `spec/andarz_content_fa.json` | All Persian text, the 45 parameters, the constitution, lists, CSV profiles. |
 | `spec/andarz_design_tokens.json` | Colors (dark and light, contrast-checked), type, spacing, motion. |
 | `DECISIONS.md`, `MANUAL_TEST.md`, `MERGE_MAP.md`, `MISSING_COPY.md`, `RELEASE_NOTES.md` | Build records: decisions, device acceptance script, March merge map, missing wording, release notes. |
+| `AUDIT.md`, `TESTING.md`, `RELEASE.md`, `STORE_LISTING.md`, `CHANGELOG.md`, `ROADMAP.md` | Release audit (findings, verdict), test strategy, build/sign/rollout/rollback playbook, Play listing and policy answers, changes, what comes next. |
 
 ## How to use (merged build)
 

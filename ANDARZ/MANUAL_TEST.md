@@ -257,3 +257,14 @@ alarm explanation. Data Safety form: only "Files and docs, user-initiated export
 | S-6 | Ledger: tap delete on a deposit | Confirmation dialog; cancel keeps the row | pending |
 | S-7 | Release APK: fonts | Vazirmatn shows (not the system font) | pending |
 
+
+## opus5 audit additions (pending: needs a device)
+
+The release smoke S1–S18 lives in `TESTING.md` §3. Cases that check this audit's fixes directly:
+
+| ID | Steps | Expected | Status |
+|---|---|---|---|
+| AU-1 | Fill storage, then save a trade or a ledger entry | Snackbar with `err.storage`; app stays open (A-01) | pending |
+| AU-2 | Leave Rules open, press Home, wait 5 min, check *Battery usage* | No wake-ups from Andarz; returning refreshes the session at once (P-01) | pending |
+| AU-3 | Remove a coin in My coins, toggle a News reminder with TalkBack on | Each button is read as a button and has a 48 dp target (U-01, U-02) | pending |
+| AU-4 | `./gradlew :app:connectedDebugAndroidTest` on a clean install | `ColdStartE2ETest` passes | pending |
