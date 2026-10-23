@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Downloaded update APKs live in cache/updates and are handed to the system installer through FileProvider. -->
-<paths>
-    <cache-path name="updates" path="updates/" />
-</paths>
