@@ -108,7 +108,7 @@ These are enforced by code and by build guards, not just by convention:
 
 | | |
 |---|---|
-| Version | **0.9.2** (release candidate) · see [CHANGELOG](CHANGELOG.md) |
+| Version | **0.10.0** (release candidate, v2 "Ledger" look) · see [CHANGELOG](CHANGELOG.md) |
 | Build | `./gradlew build` green: unit tests in both variants, lint and build guards 1–9 |
 | Tests | engine 275 · data 60 · market 158 · app 133 test runs (both variants), 0 failures |
 | Dependencies | 159 runtime components, 0 known advisories (OSV) · [SBOM](docs/audit/sbom.txt) |

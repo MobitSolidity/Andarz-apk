@@ -4,7 +4,7 @@ All notable changes. Format: [Keep a Changelog](https://keepachangelog.com/en/1.
 SemVer for `versionName`; `versionCode` is the git commit count (D-73). User-facing release notes for each
 build are in `RELEASE_NOTES.md`.
 
-## [Unreleased]
+## [0.10.0] — appearance v2 "Ledger" (not published)
 
 ### Changed — appearance v2 "Ledger" (D-UI2, UI only)
 - New graphite / emerald / gold / coral palette for dark and light themes; contrast table recomputed.
