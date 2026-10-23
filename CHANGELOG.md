@@ -4,6 +4,20 @@ All notable changes. Format: [Keep a Changelog](https://keepachangelog.com/en/1.
 SemVer for `versionName`; `versionCode` is the git commit count (D-73). User-facing release notes for each
 build are in `RELEASE_NOTES.md`.
 
+## [Unreleased]
+
+### Changed — repository layout (D-89)
+- **BREAKING (layout only):** the Gradle project moved from `ANDARZ/` to the repository root. Clone and run
+  `./gradlew build` at the root. Code, database schema, backup format and build guards are unchanged.
+- Documents sorted into `docs/{project,release,testing,audit,reference}` with an index (`docs/README.md`);
+  prompts and briefs collected in `prompts/`.
+- New `README.md` (English) and `README.fa.md` (Persian).
+
+### Removed
+- March's original sources (`Bazaaryar/`) and the CI workflow that rebuilt them; the one-time migration
+  scripts and their raw output; duplicate files (root kickoff copy, `.docx` brief, golden-vector copy). The
+  previous layout is kept at tag `pre-restructure`.
+
 ## [0.9.2] — audit release (not published)
 
 ### Fixed
