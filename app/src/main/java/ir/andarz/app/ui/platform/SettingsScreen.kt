@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.platform
 
+import ir.andarz.app.ui.components.ScreenHeader
 import androidx.compose.runtime.remember
 
 import androidx.compose.foundation.layout.Box
@@ -25,14 +26,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.FilterChip
+import ir.andarz.app.ui.components.Button
+import ir.andarz.app.ui.components.FilterChip
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import ir.andarz.app.ui.components.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -94,10 +95,7 @@ fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -
     }
     Box(Modifier.fillMaxSize()) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("set.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("set.title"), onBack = onBack)
         if (busy) LinearProgressIndicator(Modifier.fillMaxWidth())
 
         // D-76: the one switch that allows or forbids every internet connection, first on the page.

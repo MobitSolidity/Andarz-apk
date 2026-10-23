@@ -935,6 +935,27 @@ fields and keeps current values for invalid ones. After a restore `MarketModule.
 reminders and restarts the monitor only if enabled and the gates are open. `mkt.set.quiet` (`muteInQuiet`, default
 off) posts price alerts silently inside the journal's quiet hours, asked through `MarketHost.inQuietHours`.
 
+### D-UI2 — v2 "Ledger" look (appearance only)
+
+The app keeps its data, engine, database schema, navigation and every behaviour. Only the appearance changes:
+
+- **Palette** (`spec/andarz_design_tokens.json` v2, mirrored in `Tokens.kt`): graphite tonal surfaces
+  (#0D0E10 → #24272E), emerald firouzeh #4AE390, gold saffron #E0B667, coral anar #FF7166. Token names are
+  unchanged, so each semantic role (allowed / caution / redline / info) keeps its meaning. Every text pair stays
+  ≥ 4.5:1, outlines and chart series ≥ 3:1; the contrast table in the JSON is recomputed.
+- **Typography:** all 15 Material 3 roles are now defined (v1 defined 6; titleLarge, titleSmall, labelLarge,
+  bodySmall and others fell back to the platform font). Vazirmatn Light (300, OFL) is added for display figures
+  only. Tabular figures (`tnum`) everywhere.
+- **Controls** (`components/Controls.kt`): Button / OutlinedButton / TextButton / FilterChip wrappers with the
+  same parameters as Material 3. Primary is solid firouzeh at 52 dp; disabled is a readable muted label (the
+  M3 default alpha was near-invisible on graphite); secondary is a tonal tile; a selected chip shows a check
+  icon as well as tint (colour is never the only signal).
+- **ScreenHeader:** every pushed screen uses a 48 dp mirrored back arrow plus a heading, instead of a title with
+  a "back" text link at the far edge.
+- **Surfaces:** cards get a hairline and 20 dp corners; `surfaceTint` is neutral so sheets and dialogs are not
+  tinted green; the bottom bar uses the emerald indicator; the FAB is flat (no shadow in dark, per tokens).
+- **Window / splash / launcher / alarm screen** colours follow the new palette.
+
 ## The register of §13.1 (D-01 … D-37)
 
 | Id | Decision | Why |

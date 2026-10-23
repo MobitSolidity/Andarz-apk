@@ -7,6 +7,6 @@
   Every other colour in the app comes from the tokens at runtime (D-M13). Dark is the default (law 9).
 -->
 <resources>
-    <color name="andarz_window_background">#0A1016</color>
-    <color name="andarz_splash_mark">#2DD4C0</color>
+    <color name="andarz_window_background">#0D0E10</color>
+    <color name="andarz_splash_mark">#4AE390</color>
 </resources>

@@ -117,9 +117,9 @@ class AlarmActivity : ComponentActivity() {
     }
 }
 
-private val Deep = Color(0xFF0A1016)
-private val Muted = Color(0xFF9DB0C3)
-private val Accent = Color(0xFFC62A43)
+private val Deep = Color(0xFF0D0E10)
+private val Muted = Color(0xFFA3A79C)
+private val Accent = Color(0xFFC9342A)
 
 @Composable
 private fun AlarmScreen(

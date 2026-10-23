@@ -55,7 +55,7 @@ fun ChartCard(title: String, summary: String, empty: Boolean, note: String? = nu
     SectionCard(
         title,
         action = if (empty) null else ({
-            androidx.compose.material3.TextButton(onClick = { table = !table }) {
+            ir.andarz.app.ui.components.TextButton(onClick = { table = !table }) {
                 Text(u.t(if (table) "common.less" else "common.details"))
             }
         }),

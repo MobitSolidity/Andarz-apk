@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.components
 
+import androidx.compose.ui.semantics.heading
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
@@ -27,12 +28,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -98,7 +97,7 @@ fun VerdictBanner(state: Verdict, title: String, numbers: String?, why: List<Str
             // 6.8 / F10: the verdict exposes a state word, not only a colour.
             stateDescription = verdictState
         }.then(sized),
-        shape = RoundedCornerShape(14.dp),
+        shape = MaterialTheme.shapes.medium,
         color = color.copy(alpha = 0.12f),
         border = BorderStroke(1.dp, color.copy(alpha = 0.4f)),
     ) {
@@ -162,7 +161,7 @@ fun LockBanner(title: String, body: String, until: String?, actions: List<Pair<S
     val c = LocalAndarzColors.current
     Surface(
         modifier = modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite },
-        shape = RoundedCornerShape(14.dp),
+        shape = MaterialTheme.shapes.medium,
         color = MaterialTheme.colorScheme.errorContainer,
     ) {
         Row {
@@ -210,25 +209,30 @@ fun RChip(r: Double?) {
 @Composable
 fun TagChip(text: String, color: Color = LocalAndarzColors.current.textMuted) {
     Surface(shape = RoundedCornerShape(8.dp), color = color.copy(alpha = 0.14f)) {
-        Text(text, color = color, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp))
+        Text(text, color = color, style = MaterialTheme.typography.labelMedium, modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp))
     }
 }
 
-/** 6.4.8 SectionCard. */
+/**
+ * 6.4.8 SectionCard. v2 (D-UI2): one tonal step above the background with a hairline, 20 dp corners, and a
+ * quieter title (medium weight) so the figures inside lead.
+ */
 @Composable
 fun SectionCard(title: String?, modifier: Modifier = Modifier, action: (@Composable () -> Unit)? = null, body: @Composable () -> Unit) {
+    val c = LocalAndarzColors.current
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
+        shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerLow),
+        border = BorderStroke(1.dp, c.divider.copy(alpha = if (c.isDark) 0.6f else 1f)),
     ) {
         Column(Modifier.padding(16.dp)) {
             if (title != null || action != null) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    if (title != null) Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+                    if (title != null) Text(title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f).semantics { heading() })
                     action?.invoke()
                 }
-                Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(10.dp))
             }
             body()
         }
@@ -244,14 +248,14 @@ fun KeyValue(label: String, value: String, valueColor: Color = Color.Unspecified
     }
 }
 
-/** 6.4.8 StatTile: value, status chip, target. */
+/** 6.4.8 StatTile: value, status chip, target. v2: muted label above a light figure, 16 dp tile. */
 @Composable
 fun StatTile(label: String, value: String, status: String?, statusOk: Boolean?, target: String?, modifier: Modifier = Modifier) {
     val c = LocalAndarzColors.current
-    Surface(modifier, shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainer) {
-        Column(Modifier.padding(12.dp)) {
+    Surface(modifier, shape = MaterialTheme.shapes.medium, color = MaterialTheme.colorScheme.surfaceContainer) {
+        Column(Modifier.padding(14.dp), verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(4.dp)) {
             Text(label, style = MaterialTheme.typography.labelMedium, color = c.textMuted)
-            Text(value, style = MaterialTheme.typography.titleLarge)
+            Text(value, style = MaterialTheme.typography.titleLarge.copy(fontWeight = androidx.compose.ui.text.font.FontWeight.Medium))
             if (status != null) TagChip(status, if (statusOk == true) c.allowed else if (statusOk == false) c.caution else c.textMuted)
             if (target != null) Text(target, style = MaterialTheme.typography.labelMedium, color = c.textMuted)
         }
@@ -307,8 +311,10 @@ fun ErrorState(text: String, onRetry: (() -> Unit)? = null) {
 @Composable
 fun EmptyState(text: String, action: Pair<String, () -> Unit>? = null) {
     Column(Modifier.fillMaxWidth().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-        Icon(Icons.Filled.Info, contentDescription = null, tint = LocalAndarzColors.current.textMuted)
-        Spacer(Modifier.height(8.dp))
+        Surface(shape = androidx.compose.foundation.shape.CircleShape, color = LocalAndarzColors.current.surfaceHigh, modifier = Modifier.size(44.dp)) {
+            Box(contentAlignment = Alignment.Center) { Icon(Icons.Filled.Info, contentDescription = null, tint = LocalAndarzColors.current.textMuted) }
+        }
+        Spacer(Modifier.height(10.dp))
         Text(text, style = MaterialTheme.typography.bodyMedium, color = LocalAndarzColors.current.textMuted)
         if (action != null) TextButton(onClick = action.second) { Text(action.first) }
     }

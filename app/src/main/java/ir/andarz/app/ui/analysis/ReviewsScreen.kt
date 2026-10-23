@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.components.ScreenHeader
 import ir.andarz.app.ui.safeLaunch
 
 import androidx.compose.foundation.clickable
@@ -12,15 +13,15 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import ir.andarz.app.ui.components.Button
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.FilterChip
+import ir.andarz.app.ui.components.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import ir.andarz.app.ui.components.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -186,10 +187,7 @@ fun ReviewsScreen(onBack: () -> Unit, onOpenTrade: (String) -> Unit, onRules: ()
     LaunchedEffect(ddNeedsReview) { if (ddNeedsReview && open == null) open = ReviewKind.DRAWDOWN }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("rev.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = { if (open != null) open = null else onBack() }) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("rev.title"), onBack = { if (open != null) open = null else onBack() })
         message?.let { Text(u.t(it), color = c.allowed, modifier = Modifier.clickable(role = androidx.compose.ui.semantics.Role.Button) { vm.message.value = null }) }
 
         when (open) {

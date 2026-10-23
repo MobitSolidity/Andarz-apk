@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.components.ScreenHeader
 import ir.andarz.app.ui.safeLaunch
 
 import androidx.compose.foundation.layout.Arrangement
@@ -11,13 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.FilterChip
+import ir.andarz.app.ui.components.Button
+import ir.andarz.app.ui.components.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -120,10 +121,7 @@ fun LedgerScreen(onBack: () -> Unit, vm: LedgerViewModel = hiltViewModel()) {
     var askDelete by rememberSaveable { mutableStateOf<String?>(null) }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("ledger.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("ledger.title"), onBack = onBack)
         SectionCard(u.t("ledger.equity")) {
             Text(u.money(snap?.equity?.now), style = MaterialTheme.typography.headlineMedium)
             Text(u.t("ledger.note.curve"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)

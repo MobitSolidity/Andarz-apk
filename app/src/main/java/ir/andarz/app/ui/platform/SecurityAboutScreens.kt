@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.platform
 
+import ir.andarz.app.ui.components.ScreenHeader
 import ir.andarz.app.ui.safeLaunch
 
 import androidx.compose.foundation.clickable
@@ -12,11 +13,11 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import ir.andarz.app.ui.components.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -75,10 +76,7 @@ fun SecurityScreen(onBack: () -> Unit, vm: SecurityViewModel = hiltViewModel()) 
     val done = checks.filter { it.checked }.map { it.clauseId }.toSet()
     val c = LocalAndarzColors.current
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("sec.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("sec.title"), onBack = onBack)
         Text(u.t("sec.subtitle"), style = MaterialTheme.typography.bodyMedium, color = c.textMuted)
         val last = s?.lastSecurityReviewAt ?: 0
         Text(if (last > 0) u.t("sec.lastChecked", "date" to u.date(u.localDate(Instant.ofEpochMilli(last)), false)) else u.t("sec.never"), style = MaterialTheme.typography.labelLarge)
@@ -115,10 +113,7 @@ fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
     val u = ui()
     val c = LocalAndarzColors.current
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("about.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("about.title"), onBack = onBack)
         Text(u.content.appName + " \u00B7 " + u.content.tagline, style = MaterialTheme.typography.titleMedium)
         Text(u.t("set.version", "v" to u.digits(BuildConfig.VERSION_NAME)) + " \u00B7 " + u.t("set.build", "b" to u.int(BuildConfig.VERSION_CODE)) + " \u00B7 " + Fmt.isolate(BuildConfig.GIT_COMMIT), style = MaterialTheme.typography.labelLarge)
         Text(u.t("about.meaning"), style = MaterialTheme.typography.bodyMedium)
@@ -141,10 +136,7 @@ fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
 fun LicensesScreen(onBack: () -> Unit) {
     val u = ui()
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("set.licenses"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("set.licenses"), onBack = onBack)
         androidx.compose.runtime.CompositionLocalProvider(androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Ltr) {
             Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 LICENSES.forEach { (name, license) ->

@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.platform
 
+import ir.andarz.app.ui.components.ScreenHeader
 import ir.andarz.app.ui.safeLaunch
 
 import androidx.compose.foundation.background
@@ -14,13 +15,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import ir.andarz.app.ui.components.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import ir.andarz.app.ui.components.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
@@ -141,10 +142,7 @@ fun ConstitutionScreen(onBack: () -> Unit, onRules: () -> Unit, onExample: () ->
     val c = LocalAndarzColors.current
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("con.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = { if (article != null || pledgePage) { article = null; pledgePage = false } else onBack() }) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("con.title"), onBack = { if (article != null || pledgePage) { article = null; pledgePage = false } else onBack() })
         when {
             pledgePage -> PledgePage(u, vm, pledge, con)
             article != null -> {

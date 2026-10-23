@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -102,7 +105,10 @@ fun AndarzNavHost(
         contentWindowInsets = WindowInsets.safeDrawing,
         snackbarHost = { ir.andarz.app.ui.UiErrorSnackbarHost(content) },
         bottomBar = {
-            if (showBar) NavigationBar {
+            if (showBar) NavigationBar(
+                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                tonalElevation = 0.dp,
+            ) {
                 for (destination in AndarzNav.bottomBar.filter { it.visible }) {
                     NavigationBarItem(
                         selected = currentRoute?.startsWith(destination.route) == true,
@@ -121,7 +127,14 @@ fun AndarzNavHost(
                                 destination.iconRes != null -> Icon(painterResource(destination.iconRes), contentDescription = null)
                             }
                         },
-                        label = { Text(content.ui(destination.labelKey)) },
+                        label = { Text(content.ui(destination.labelKey), style = MaterialTheme.typography.labelMedium, maxLines = 1) },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = MaterialTheme.colorScheme.primary,
+                            selectedTextColor = MaterialTheme.colorScheme.primary,
+                            indicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        ),
                     )
                 }
             }

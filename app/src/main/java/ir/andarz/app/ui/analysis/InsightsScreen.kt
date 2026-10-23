@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.components.ScreenHeader
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,11 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.FilterChip
+import ir.andarz.app.ui.components.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -139,10 +140,7 @@ fun InsightsScreen(onBack: () -> Unit, vm: InsightsViewModel = hiltViewModel()) 
     val names = setups.associate { it.id to it.name }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("ins.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("ins.title"), onBack = onBack)
         Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             val keys = mapOf(Period.WEEK to "week", Period.MONTH to "month", Period.LAST30 to "last30", Period.ALL to "all", Period.CUSTOM to "custom")
             Period.entries.forEach { p ->

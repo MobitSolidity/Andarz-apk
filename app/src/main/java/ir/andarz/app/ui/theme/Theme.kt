@@ -50,12 +50,14 @@ val LocalAndarzColors: ProvidableCompositionLocal<AndarzColors> =
     staticCompositionLocalOf { error("AndarzColors was read outside AndarzTheme") }
 
 /**
- * Vazirmatn (SIL OFL), weights 400/500/700 (§6.3).
+ * Vazirmatn (SIL OFL), weights 300/400/500/700 (§6.3).
  *
  * The TTFs ship in `res/font` (D-M34). They are referenced as `R.font.*`, not looked up by name, so R8's
  * resource shrinker sees them and keeps them (D-80, r8-analyzer: no reflection-only references).
+ * Light (300) is used only for the large display figures (equity, prices, countdowns) of the v2 look (D-UI2).
  */
 private val persianFamily = FontFamily(
+    Font(R.font.vazirmatn_light, FontWeight.Light),
     Font(R.font.vazirmatn_regular, FontWeight.Normal),
     Font(R.font.vazirmatn_medium, FontWeight.Medium),
     Font(R.font.vazirmatn_bold, FontWeight.Bold),
@@ -64,21 +66,39 @@ private val persianFamily = FontFamily(
 @Composable
 private fun rememberPersianFamily(): FontFamily = persianFamily
 
-/** Line height 1.6 for Persian text (§6.3, `typography.lineHeightFactorFa`). */
-private fun fa(family: FontFamily, size: Int, weight: FontWeight) = TextStyle(
+/**
+ * Line height 1.6 for Persian text (§6.3, `typography.lineHeightFactorFa`). Tabular figures everywhere, so
+ * money, R values and prices line up in columns (tokens `typography.numerals`).
+ */
+private fun fa(family: FontFamily, size: Int, weight: FontWeight, lineFactor: Float = 1.6f) = TextStyle(
     fontFamily = family,
     fontWeight = weight,
     fontSize = size.sp,
-    lineHeight = (size * 1.6f).sp,
+    lineHeight = (size * lineFactor).sp,
+    fontFeatureSettings = "tnum",
 )
 
+/**
+ * Every Material 3 role is set, so no text ever falls back to the platform font (the v1 scale defined six
+ * roles and the other nine — titleLarge, titleSmall, labelLarge, bodySmall… — rendered in the system font).
+ * Display roles are light and tighter: they only ever carry figures.
+ */
 private fun typographyOf(family: FontFamily) = Typography(
-    displayMedium = fa(family, 32, FontWeight.Bold),
+    displayLarge = fa(family, 44, FontWeight.Light, 1.2f),
+    displayMedium = fa(family, 36, FontWeight.Light, 1.25f),
+    displaySmall = fa(family, 32, FontWeight.Light, 1.3f),
+    headlineLarge = fa(family, 28, FontWeight.Bold),
     headlineMedium = fa(family, 24, FontWeight.Bold),
-    titleMedium = fa(family, 18, FontWeight.Bold),
+    headlineSmall = fa(family, 22, FontWeight.Bold),
+    titleLarge = fa(family, 20, FontWeight.Bold),
+    titleMedium = fa(family, 17, FontWeight.Medium),
+    titleSmall = fa(family, 15, FontWeight.Medium),
     bodyLarge = fa(family, 16, FontWeight.Normal),
     bodyMedium = fa(family, 15, FontWeight.Normal),
+    bodySmall = fa(family, 13, FontWeight.Normal),
+    labelLarge = fa(family, 14, FontWeight.Medium),
     labelMedium = fa(family, 12, FontWeight.Medium),
+    labelSmall = fa(family, 11, FontWeight.Medium),
 )
 
 private val andarzShapes = Shapes(
@@ -118,6 +138,15 @@ private val darkScheme = darkColorScheme(
     error = DarkTokens.anar,
     errorContainer = DarkTokens.anarContainer,
     onErrorContainer = DarkTokens.anar,
+    onError = DarkTokens.bg,
+    onSecondary = DarkTokens.bg,
+    inverseSurface = DarkTokens.text,
+    inverseOnSurface = DarkTokens.bg,
+    inversePrimary = DarkTokens.firouzehContainer,
+    surfaceDim = DarkTokens.bg,
+    surfaceBright = DarkTokens.surfaceHigh,
+    // Tonal elevation must not tint dialogs and sheets green: depth is the surface steps (tokens `elevation`).
+    surfaceTint = DarkTokens.surfaceHigh,
     scrim = Color(0x99000000),
 )
 
@@ -150,6 +179,15 @@ private val lightScheme = lightColorScheme(
     error = LightTokens.anar,
     errorContainer = LightTokens.anarContainer,
     onErrorContainer = LightTokens.anar,
+    onError = LightTokens.onAnarFill,
+    onSecondary = LightTokens.bg,
+    inverseSurface = LightTokens.text,
+    inverseOnSurface = LightTokens.bg,
+    inversePrimary = LightTokens.firouzehContainer,
+    surfaceDim = LightTokens.bg,
+    surfaceBright = LightTokens.surfaceHigh,
+    // Tonal elevation must not tint dialogs and sheets green: depth is the surface steps (tokens `elevation`).
+    surfaceTint = LightTokens.surfaceHigh,
     scrim = Color(0x99000000),
 )
 

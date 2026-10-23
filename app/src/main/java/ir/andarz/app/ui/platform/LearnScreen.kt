@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.platform
 
+import ir.andarz.app.ui.components.ScreenHeader
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -68,10 +69,7 @@ fun LearnScreen(onBack: () -> Unit) {
     var tab by rememberSaveable { mutableStateOf(LearnTab.SUMMARY) }
     val learn = u.content.obj("learn")
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("learn.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f).semantics { heading() })
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("learn.title"), onBack = onBack)
         // A vertical list of section buttons instead of tabs: it wraps at 200% font (6.8).
         LearnTab.entries.forEach { t ->
             val on = t == tab

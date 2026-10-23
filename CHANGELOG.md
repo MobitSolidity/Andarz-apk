@@ -6,6 +6,13 @@ build are in `RELEASE_NOTES.md`.
 
 ## [Unreleased]
 
+### Changed — appearance v2 "Ledger" (D-UI2, UI only)
+- New graphite / emerald / gold / coral palette for dark and light themes; contrast table recomputed.
+- Every typography role uses Vazirmatn (several used the system font before); light display figures.
+- Unified buttons, chips and screen headers; readable disabled buttons; check icon on selected chips.
+- Today hero reworked (equity figure, coloured day P&L with arrow, week/drawdown split); More is a card list.
+- No change to data, engine, database, backup format, navigation or behaviour.
+
 ### Changed — repository layout (D-89)
 - **BREAKING (layout only):** the Gradle project moved from `ANDARZ/` to the repository root. Clone and run
   `./gradlew build` at the root. Code, database schema, backup format and build guards are unchanged.

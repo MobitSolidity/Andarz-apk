@@ -1,5 +1,6 @@
 package ir.andarz.app.ui.analysis
 
+import ir.andarz.app.ui.components.ScreenHeader
 import ir.andarz.app.ui.safeLaunch
 
 import androidx.compose.foundation.layout.Arrangement
@@ -10,15 +11,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
+import ir.andarz.app.ui.components.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedButton
+import ir.andarz.app.ui.components.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -157,10 +158,7 @@ fun SetupsScreen(onBack: () -> Unit, vm: SetupsViewModel = hiltViewModel()) {
     val active = setups.filter { !it.archived }
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("setups.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("setups.title"), onBack = onBack)
         Text(u.t("setups.none"), style = MaterialTheme.typography.bodyMedium, color = c.textMuted)
         if (active.size > 2) Text(u.t("setups.limit"), color = c.caution, style = MaterialTheme.typography.bodyMedium)
         message?.let { Text(u.t(it, "n" to "", "min" to u.int(p.minTrades.toInt())), color = c.caution) }
@@ -248,10 +246,7 @@ fun WatchlistScreen(onBack: () -> Unit, vm: SetupsViewModel = hiltViewModel()) {
     val now = Instant.now()
 
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(u.t("wl.title"), style = MaterialTheme.typography.titleLarge, modifier = Modifier.weight(1f))
-            TextButton(onClick = onBack) { Text(u.t("common.back")) }
-        }
+        ScreenHeader(u.t("wl.title"), onBack = onBack)
         Text(u.t("wl.limit", "max" to u.int(max)) + " \u00B7 " + u.int(list.size) + "/" + u.int(max), style = MaterialTheme.typography.bodyMedium, color = c.textMuted)
         message?.let { Text(u.t(it), color = c.caution) }
         Button(onClick = { editing = "" }, enabled = list.size < max, modifier = Modifier.fillMaxWidth()) { Text(u.t("wl.add")) }

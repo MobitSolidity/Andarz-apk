@@ -19,9 +19,9 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import ir.andarz.app.ui.components.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -78,23 +78,52 @@ fun TodayScreen(
 
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            Row {
-                Text(u.t("app.name") + " \u00B7 " + u.date(u.localDate(now)), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
+            Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(u.t("app.name"), style = MaterialTheme.typography.headlineSmall)
+                    Text(u.date(u.localDate(now)), style = MaterialTheme.typography.labelLarge, color = c.textMuted)
+                }
                 if (g.locks.isNotEmpty()) Icon(Icons.Filled.Lock, contentDescription = u.t("a11y.lockedState"), tint = c.redline)
             }
 
-            // hero
-            Card(shape = MaterialTheme.shapes.large, colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)) {
+            // hero (v2, D-UI2): muted eyebrow, a light display figure, then the day line in its own tone.
+            Card(
+                shape = MaterialTheme.shapes.large,
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer),
+                border = androidx.compose.foundation.BorderStroke(1.dp, c.divider.copy(alpha = if (c.isDark) 0.6f else 1f)),
+            ) {
                 Box {
                     KhatamPattern(Modifier.matchParentSize())
                     Column(Modifier.padding(20.dp).fillMaxWidth()) {
                         Text(u.t("today.equity"), style = MaterialTheme.typography.labelLarge, color = c.textMuted)
-                        Text(u.money(snapshot.equity.now), style = MaterialTheme.typography.displaySmall)
-                        Spacer(Modifier.height(8.dp))
-                        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                            Text(u.t("today.dayPnl") + " " + u.signedMoney(g.dailyNet) + " (" + u.pct(d.dailyPct, 2, signed = true) + ")", style = MaterialTheme.typography.bodyMedium)
+                        Text(u.money(snapshot.equity.now), style = MaterialTheme.typography.displayMedium, modifier = Modifier.padding(vertical = 4.dp))
+                        val dayTone = when {
+                            g.dailyNet > 0 -> c.allowed
+                            g.dailyNet < 0 -> c.redline
+                            else -> c.textMuted
                         }
-                        Text(u.t("today.weekPnl") + " " + u.pct(d.weeklyPct, 2, signed = true) + "   " + u.t("today.drawdown") + " " + u.pct(d.drawdown, 2), style = MaterialTheme.typography.bodyMedium)
+                        val arrow = when {
+                            g.dailyNet > 0 -> "\u25B2 "
+                            g.dailyNet < 0 -> "\u25BC "
+                            else -> ""
+                        }
+                        Text(
+                            arrow + u.t("today.dayPnl") + " " + u.signedMoney(g.dailyNet) + " (" + u.pct(d.dailyPct, 2, signed = true) + ")",
+                            style = MaterialTheme.typography.labelLarge, color = dayTone,
+                        )
+                        Spacer(Modifier.height(12.dp))
+                        androidx.compose.material3.HorizontalDivider(color = c.divider)
+                        Spacer(Modifier.height(12.dp))
+                        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                            Column(Modifier.weight(1f)) {
+                                Text(u.t("today.weekPnl"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)
+                                Text(u.pct(d.weeklyPct, 2, signed = true), style = MaterialTheme.typography.titleMedium)
+                            }
+                            Column(Modifier.weight(1f)) {
+                                Text(u.t("today.drawdown"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)
+                                Text(u.pct(d.drawdown, 2), style = MaterialTheme.typography.titleMedium)
+                            }
+                        }
                     }
                 }
             }
@@ -207,6 +236,9 @@ fun TodayScreen(
             icon = { Icon(if (mayEnter) Icons.Filled.Add else Icons.Filled.Lock, contentDescription = null) },
             text = { Text(u.t(if (mayEnter) "today.newTrade" else "today.newTrade.blocked")) },
             containerColor = if (mayEnter) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerHigh,
+            contentColor = if (mayEnter) MaterialTheme.colorScheme.onPrimary else c.textMuted,
+            shape = MaterialTheme.shapes.medium,
+            elevation = androidx.compose.material3.FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
             modifier = Modifier.align(androidx.compose.ui.Alignment.BottomEnd).padding(16.dp),
         )
     }
