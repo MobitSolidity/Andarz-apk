@@ -6,7 +6,7 @@
 
 Persian-first (RTL) · offline-first · no account · no ads · no tracking
 
-[فارسی](README.fa.md) · [Documentation](docs/README.md) · [Changelog](CHANGELOG.md) · [Audit](docs/audit/AUDIT.md) · [Releases](https://github.com/MobitSolidity/march/releases)
+[فارسی](README.fa.md) · [Documentation](docs/README.md) · [Changelog](CHANGELOG.md) · [Audit](docs/audit/AUDIT.md) · [Releases](https://github.com/MobitSolidity/Andarz-apk/releases)
 
 ![Platform](https://img.shields.io/badge/platform-Android%208.0%2B-3DDC84)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.1-7F52FF)
@@ -188,7 +188,7 @@ foreign product name. Two more guards are test suites in `:market`: egress polic
 works). Point `local.properties` at your SDK (`sdk.dir=/path/to/Android/sdk`) or set `ANDROID_HOME`.
 
 ```bash
-git clone https://github.com/MobitSolidity/march.git andarz
+git clone https://github.com/MobitSolidity/Andarz-apk.git andarz
 cd andarz
 ./gradlew build             # all modules, all unit tests, lint, build guards
 ./gradlew assembleDebug     # app/build/outputs/apk/debug/app-debug.apk
@@ -265,7 +265,7 @@ from the specification in `prompts/` and absorbed March's features as the isolat
 [MERGE_MAP](docs/project/MERGE_MAP.md) records the fate of every March file. After the merge was complete,
 March's original sources, its CI workflow and the one-time migration scripts were removed and the Andarz
 project moved to the repository root (decision D-89). The earlier layout is preserved at the git tag
-[`pre-restructure`](https://github.com/MobitSolidity/march/tree/pre-restructure).
+[`pre-restructure`](https://github.com/MobitSolidity/Andarz-apk/tree/pre-restructure).
 
 ## Disclaimer
 

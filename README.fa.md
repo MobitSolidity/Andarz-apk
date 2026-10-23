@@ -8,7 +8,7 @@
 
 فارسی و راست‌به‌چپ · آفلاین‌محور · بدون حساب کاربری · بدون تبلیغ · بدون ردیابی
 
-[English](README.md) · [مستندات](docs/README.md) · [تاریخچهٔ تغییرات](CHANGELOG.md) · [گزارش ممیزی](docs/audit/AUDIT.md) · [نسخه‌ها](https://github.com/MobitSolidity/march/releases)
+[English](README.md) · [مستندات](docs/README.md) · [تاریخچهٔ تغییرات](CHANGELOG.md) · [گزارش ممیزی](docs/audit/AUDIT.md) · [نسخه‌ها](https://github.com/MobitSolidity/Andarz-apk/releases)
 
 </div>
 
@@ -170,7 +170,7 @@
 <div dir="ltr">
 
 ```bash
-git clone https://github.com/MobitSolidity/march.git andarz
+git clone https://github.com/MobitSolidity/Andarz-apk.git andarz
 cd andarz
 ./gradlew build             # all modules, all unit tests, lint, build guards
 ./gradlew assembleDebug     # app/build/outputs/apk/debug/app-debug.apk
@@ -226,7 +226,7 @@ cd andarz
 
 ## تاریخچهٔ این مخزن
 
-این مخزن با **March** (بستهٔ `ir.bazaaryar.app`)، یک برنامهٔ قیمت و خبر، آغاز شد. سپس اندرز از روی مشخصات پوشهٔ `prompts/` ساخته شد و قابلیت‌های March را در قالب ماژول جدای `:market` در خود جای داد؛ سرنوشت تک‌تک فایل‌های March در [MERGE_MAP](docs/project/MERGE_MAP.md) ثبت شده است. پس از کامل شدن ادغام، کد اصلی March، گردش‌کار CI آن و اسکریپت‌های یک‌بارمصرف مهاجرت حذف شدند و پروژهٔ اندرز به ریشهٔ مخزن منتقل شد (تصمیم D-89). چیدمان پیشین در برچسب git با نام [`pre-restructure`](https://github.com/MobitSolidity/march/tree/pre-restructure) محفوظ است.
+این مخزن با **March** (بستهٔ `ir.bazaaryar.app`)، یک برنامهٔ قیمت و خبر، آغاز شد. سپس اندرز از روی مشخصات پوشهٔ `prompts/` ساخته شد و قابلیت‌های March را در قالب ماژول جدای `:market` در خود جای داد؛ سرنوشت تک‌تک فایل‌های March در [MERGE_MAP](docs/project/MERGE_MAP.md) ثبت شده است. پس از کامل شدن ادغام، کد اصلی March، گردش‌کار CI آن و اسکریپت‌های یک‌بارمصرف مهاجرت حذف شدند و پروژهٔ اندرز به ریشهٔ مخزن منتقل شد (تصمیم D-89). چیدمان پیشین در برچسب git با نام [`pre-restructure`](https://github.com/MobitSolidity/Andarz-apk/tree/pre-restructure) محفوظ است.
 
 ## سلب مسئولیت
 
