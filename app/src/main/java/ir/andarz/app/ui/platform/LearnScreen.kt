@@ -2,6 +2,7 @@ package ir.andarz.app.ui.platform
 
 import ir.andarz.app.ui.components.ScreenHeader
 import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -55,8 +56,11 @@ object LearnLogic {
     fun fromPercent(text: String): Double? = Fmt.normalizeInput(text)?.let { it / 100 }
 }
 
-/** The five learn sections (5.13). */
-private enum class LearnTab(val key: String) { SUMMARY("learn.summary"), REVIEW("learn.review"), ADDITIONS("learn.additions"), JOURNAL("learn.journalGuide"), EXPECTANCY("learn.expectancy") }
+/** The five learn sections of 5.13 and the glossary (D-92). */
+private enum class LearnTab(val key: String) {
+    SUMMARY("learn.summary"), REVIEW("learn.review"), ADDITIONS("learn.additions"), JOURNAL("learn.journalGuide"),
+    EXPECTANCY("learn.expectancy"), GLOSSARY("app.glossary.title"),
+}
 
 /**
  * Learn pages (5.13, P1): summary (thesis, four axes, twelve lessons), the review of experiences, the ten
@@ -94,6 +98,7 @@ fun LearnScreen(onBack: () -> Unit) {
             LearnTab.ADDITIONS -> Additions(u, learn["additions"]?.jsonObject)
             LearnTab.JOURNAL -> JournalGuide(u, learn["journal"]?.jsonObject)
             LearnTab.EXPECTANCY -> Expectancy(u, learn["additions"]?.jsonObject?.get("expectancy")?.jsonObject)
+            LearnTab.GLOSSARY -> GlossaryPage(u)
         }
         Text(u.digits(str(learn["journal"]?.jsonObject, "disclaimer")), style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
     }
@@ -208,6 +213,87 @@ private fun Expectancy(u: Ui, o: JsonObject?) {
             )
             LearnLogic.breakEven(r)?.let { be ->
                 Text(u.t("ins.breakEven", "r" to u.num(r, 2, trim = true), "p" to u.pct(be, 0)), style = MaterialTheme.typography.labelLarge)
+            }
+        }
+    }
+}
+
+/**
+ * The trading glossary (D-92): a search field, one chip per section and the term cards. Without a query one
+ * section is shown at a time, so the page composes at most a few dozen cards; a query searches all 165.
+ */
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+@Composable
+private fun GlossaryPage(u: Ui) {
+    val g = u.content.glossary
+    var query by rememberSaveable { mutableStateOf("") }
+    var section by rememberSaveable { mutableStateOf(1) }
+    val c = LocalAndarzColors.current
+    SectionCard(u.t("app.glossary.title")) {
+        Para(u, u.t("app.glossary.intro"), muted = true)
+        androidx.compose.material3.OutlinedTextField(
+            value = query, onValueChange = { query = it.take(60) },
+            label = { Text(u.t("app.glossary.search")) }, singleLine = true,
+            modifier = Modifier.fillMaxWidth(),
+            trailingIcon = if (query.isNotEmpty()) {
+                {
+                    androidx.compose.material3.IconButton(onClick = { query = "" }) {
+                        androidx.compose.material3.Icon(androidx.compose.material.icons.Icons.Filled.Close, contentDescription = u.t("common.close"))
+                    }
+                }
+            } else null,
+        )
+        if (query.isBlank()) {
+            androidx.compose.foundation.layout.FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                g.sections.forEach { sec ->
+                    ir.andarz.app.ui.components.FilterChip(
+                        selected = sec.n == section, onClick = { section = sec.n },
+                        label = { Text(u.digits(sec.n.toString()) + ". " + sec.title) },
+                    )
+                }
+            }
+        }
+    }
+    val shown = if (query.isBlank()) g.termsOf(section) else g.search(query)
+    if (query.isBlank()) {
+        g.sections.firstOrNull { it.n == section }?.let { sec ->
+            Text(sec.title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
+            Para(u, sec.note, muted = true)
+        }
+    } else {
+        Text(u.t("app.glossary.count", "n" to u.int(shown.size)), style = MaterialTheme.typography.labelLarge, color = c.textMuted)
+    }
+    if (shown.isEmpty()) Text(u.t("app.glossary.empty"), style = MaterialTheme.typography.bodyMedium, color = c.textMuted)
+    shown.forEach { t -> GlossaryCard(u, t, showSection = query.isNotBlank()) }
+}
+
+@OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+@Composable
+private fun GlossaryCard(u: Ui, t: ir.andarz.app.content.Glossary.Term, showSection: Boolean) {
+    val c = LocalAndarzColors.current
+    androidx.compose.material3.Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceContainerLow,
+        border = androidx.compose.foundation.BorderStroke(1.dp, c.divider.copy(alpha = if (c.isDark) 0.6f else 1f)),
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            // The term and its Latin name wrap onto two lines on a narrow screen instead of squeezing.
+            androidx.compose.foundation.layout.FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                Text(t.term, style = MaterialTheme.typography.titleMedium, modifier = Modifier.semantics { heading() })
+                if (t.latin != t.term) Text(Fmt.isolate(t.latin), style = MaterialTheme.typography.labelLarge, color = c.info)
+            }
+            if (showSection) Text(u.t("app.glossary.section", "n" to u.int(t.section)), style = MaterialTheme.typography.labelSmall, color = c.textMuted)
+            Text(u.digits(t.meaning), style = MaterialTheme.typography.bodyMedium)
+            if (t.example.isNotBlank()) {
+                Text(u.t("app.glossary.example"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)
+                Text(u.digits(t.example), style = MaterialTheme.typography.bodyMedium, color = c.textMuted)
             }
         }
     }

@@ -1,0 +1,2757 @@
+{
+ "_note": "Trading and exchange glossary for Learn (D-92). Persian source: the user's PDF 'واژه‌نامهٔ ترید و صرافی' (165 terms, 10 sections), extracted and checked by hand; English written for D-90. Clause references use article-clause order (3-1 = article 3, clause 1). Formulas are LTR isolates.",
+ "sections": [
+  {
+   "n": 1,
+   "title": {
+    "fa": "بازار و قرارداد",
+    "en": "Markets and contracts"
+   },
+   "note": {
+    "fa": "",
+    "en": ""
+   }
+  },
+  {
+   "n": 2,
+   "title": {
+    "fa": "سفارش‌ها و دفتر سفارش",
+    "en": "Orders and the order book"
+   },
+   "note": {
+    "fa": "",
+    "en": ""
+   }
+  },
+  {
+   "n": 3,
+   "title": {
+    "fa": "فیوچرز: اهرم، مارجین و لیکوئید",
+    "en": "Futures: leverage, margin and liquidation"
+   },
+   "note": {
+    "fa": "عددهای این بخش تقریبی‌اند؛ فرمول دقیق هر صرافی پله‌های نرخ نگهداری و کارمزد را هم دارد.",
+    "en": "The numbers in this section are approximate; each exchange's exact formula also includes maintenance-rate tiers and fees."
+   }
+  },
+  {
+   "n": 4,
+   "title": {
+    "fa": "صفحهٔ معامله و تاریخچه در اپ صرافی",
+    "en": "The trade screen and history in an exchange app"
+   },
+   "note": {
+    "fa": "نام‌ها از صرافی به صرافی کمی فرق می‌کند؛ ستون سوم می‌گوید هر برچسب در ژورنال به چه کارت می‌آید.",
+    "en": "Names differ a little from exchange to exchange; the example says what each label is useful for in the journal."
+   }
+  },
+  {
+   "n": 5,
+   "title": {
+    "fa": "ریسک و مدیریت سرمایه",
+    "en": "Risk and money management"
+   },
+   "note": {
+    "fa": "فرمول‌های این بخش همان‌هایی‌اند که در اساس‌نامه و بخش افزوده‌ها آمده است.",
+    "en": "The formulas in this section are the same as in the constitution and the additions."
+   }
+  },
+  {
+   "n": 6,
+   "title": {
+    "fa": "نمودار و تحلیل",
+    "en": "Charts and analysis"
+   },
+   "note": {
+    "fa": "",
+    "en": ""
+   }
+  },
+  {
+   "n": 7,
+   "title": {
+    "fa": "صرافی، کیف پول و امنیت",
+    "en": "Exchanges, wallets and security"
+   },
+   "note": {
+    "fa": "بندهای امنیتی این بخش به ماده ۱۰ اساس‌نامه (امنیت و ریسک عملیاتی) وصل‌اند.",
+    "en": "The security items in this section link to article 10 of the constitution (security and operational risk)."
+   }
+  },
+  {
+   "n": 8,
+   "title": {
+    "fa": "اخبار و اقتصاد کلان",
+    "en": "News and macroeconomics"
+   },
+   "note": {
+    "fa": "بازهٔ ایمنی اساس‌نامه برای رویدادهای مهم اقتصادی، از ۳۰ دقیقه قبل تا ۶۰ دقیقه بعد، در ماده ۴ مورد ۵ آمده است.",
+    "en": "The constitution's safety window for major economic events, from 30 minutes before to 60 minutes after, is in article 4, item 5."
+   }
+  },
+  {
+   "n": 9,
+   "title": {
+    "fa": "رفتار و روان‌شناسی",
+    "en": "Behaviour and psychology"
+   },
+   "note": {
+    "fa": "ثبت احساس پیش از هر ورود (آرام، فومو، طمع، ترس، انتقام، کسل) در بند ۸-۴ اساس‌نامه آمده است.",
+    "en": "Recording your emotion before every entry (calm, FOMO, greed, fear, revenge, bored) is in clause 8-4 of the constitution."
+   }
+  },
+  {
+   "n": 10,
+   "title": {
+    "fa": "اصطلاحات عامیانهٔ بازار",
+    "en": "Market slang"
+   },
+   "note": {
+    "fa": "این واژه‌ها در گروه‌ها و کانال‌های بازار زیاد شنیده می‌شوند؛ معنی دقیق بعضی‌شان بین جامعه‌ها کمی فرق می‌کند.",
+    "en": "These words are heard a lot in market groups and channels; the exact meaning of some differs a little between communities."
+   }
+  }
+ ],
+ "terms": [
+  {
+   "section": 1,
+   "term": {
+    "fa": "اسپات",
+    "en": "Spot"
+   },
+   "latin": "Spot",
+   "meaning": {
+    "fa": "خرید و فروش خود دارایی با پول کامل. دارایی مال توست و لیکوئید نمی‌شود.",
+    "en": "Buying and selling the asset itself with full payment. The asset is yours and cannot be liquidated."
+   },
+   "example": {
+    "fa": "جای نگه‌داری بلندمدت (بند ۱۱-۱).",
+    "en": "The place for long-term holdings (clause 11-1)."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "فیوچرز",
+    "en": "Futures"
+   },
+   "latin": "Futures",
+   "meaning": {
+    "fa": "قراردادی روی قیمت یک دارایی، بدون داشتن خود دارایی؛ با اهرم و امکان شورت.",
+    "en": "A contract on an asset's price without owning the asset; with leverage and the option to short."
+   },
+   "example": {
+    "fa": "با اهرم، هر حرکت قیمت روی مارجین چند برابر اثر می‌گذارد.",
+    "en": "With leverage, every price move has a multiplied effect on the margin."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "قرارداد دائمی",
+    "en": "Perpetual"
+   },
+   "latin": "Perpetual",
+   "meaning": {
+    "fa": "فیوچرزی بدون تاریخ انقضا؛ نرخ فاندینگ قیمتش را نزدیک قیمت اسپات نگه می‌دارد.",
+    "en": "A futures contract with no expiry; the funding rate keeps its price close to the spot price."
+   },
+   "example": {
+    "fa": "بیشتر معاملات فیوچرز کریپتو از این نوع است، مثل BTCUSDT.",
+    "en": "Most crypto futures trading is of this kind, such as BTCUSDT."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "لانگ",
+    "en": "Long"
+   },
+   "latin": "Long",
+   "meaning": {
+    "fa": "شرط روی بالا رفتن قیمت؛ با گران‌تر شدن دارایی سود می‌کنی.",
+    "en": "A bet on the price going up; you profit as the asset gets more expensive."
+   },
+   "example": {
+    "fa": "لانگ از ۱۰۰ به ۱۰۸ یعنی ۸٪ حرکت به نفع تو.",
+    "en": "A long from 100 to 108 is an 8% move in your favour."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "شورت",
+    "en": "Short"
+   },
+   "latin": "Short",
+   "meaning": {
+    "fa": "شرط روی پایین آمدن قیمت؛ با ارزان‌تر شدن دارایی سود می‌کنی و با گران‌تر شدنش ضرر.",
+    "en": "A bet on the price going down; you profit as the asset gets cheaper and lose as it gets more expensive."
+   },
+   "example": {
+    "fa": "ضرر شورت در اصل سقف ندارد؛ فقط حد ضرر یا لیکوئید آن را می‌بُرد.",
+    "en": "A short's loss has no ceiling in principle; only the stop loss or liquidation cuts it."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "پوزیشن",
+    "en": "Position"
+   },
+   "latin": "Position",
+   "meaning": {
+    "fa": "معاملهٔ باز: جهت، اندازه و قیمت ورود.",
+    "en": "An open trade: direction, size and entry price."
+   },
+   "example": {
+    "fa": "تا نبسته‌ای، سود و زیانش روی کاغذ است (بند ۷-۱).",
+    "en": "Until you close it, its profit or loss is on paper (clause 7-1)."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "نماد و جفت‌ارز",
+    "en": "Symbol / Pair"
+   },
+   "latin": "Symbol / Pair",
+   "meaning": {
+    "fa": "نام بازار. در BTC/USDT دارایی پایه BTC است (چیزی که می‌خری) و دارایی نقل USDT (واحد قیمت).",
+    "en": "The market's name. In BTC/USDT the base asset is BTC (what you buy) and the quote asset is USDT (the price unit)."
+   },
+   "example": {
+    "fa": "در BTCUSDT قیمت هر بیت‌کوین به تتر گفته می‌شود.",
+    "en": "In BTCUSDT the price of one bitcoin is quoted in USDT."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "استیبل‌کوین",
+    "en": "Stablecoin"
+   },
+   "latin": "Stablecoin",
+   "meaning": {
+    "fa": "ارز دیجیتالی که قیمتش به یک دارایی مثل دلار بسته شده، مثل تتر (USDT) و USDC.",
+    "en": "A cryptocurrency whose price is pegged to an asset such as the dollar, for example USDT and USDC."
+   },
+   "example": {
+    "fa": "خطرش «دی‌پگ» است، یعنی افتادن قیمت از یک دلار. حساب فیوچرز معمولاً با همین‌ها پر می‌شود.",
+    "en": "Its risk is a \"de-peg\", the price falling away from one dollar. Futures accounts are usually funded with these."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "آلت‌کوین",
+    "en": "Altcoin"
+   },
+   "latin": "Altcoin",
+   "meaning": {
+    "fa": "هر ارز دیجیتال غیر از بیت‌کوین.",
+    "en": "Any cryptocurrency other than bitcoin."
+   },
+   "example": {
+    "fa": "معمولاً نوسان بیشتر و نقدشوندگی کمتر دارد؛ چند لانگ آلت‌کوین یک پوزیشن همبسته حساب می‌شود (بند ۳-۶).",
+    "en": "Usually more volatile and less liquid; several altcoin longs count as one correlated position (clause 3-6)."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "بازار گاوی و خرسی",
+    "en": "Bull / Bear Market"
+   },
+   "latin": "Bull / Bear Market",
+   "meaning": {
+    "fa": "گاوی: روند کلی صعودی و خوش‌بینی. خرسی: روند کلی نزولی و ترس.",
+    "en": "Bull: an overall uptrend and optimism. Bear: an overall downtrend and fear."
+   },
+   "example": {
+    "fa": "در بازار گاوی شورت زودهنگام از ضررهای رایج است (بازبینی ۱).",
+    "en": "In a bull market, shorting early is one of the common losses (correction 1)."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "نقدشوندگی",
+    "en": "Liquidity"
+   },
+   "latin": "Liquidity",
+   "meaning": {
+    "fa": "سهولت خرید و فروش بدون تکان دادن قیمت؛ حجم بالا و دفتر سفارش عمیق یعنی نقدشونده.",
+    "en": "How easily you can buy and sell without moving the price; high volume and a deep order book mean liquid."
+   },
+   "example": {
+    "fa": "فیلتر ورود: حجم ۲۴ ساعتهٔ فیوچرز دست‌کم ۱۰۰ میلیون دلار (ماده ۴ مورد ۳). با «لیکوئید شدن» اشتباه نشود.",
+    "en": "Entry filter: 24h futures volume of at least 100 million dollars (article 4, item 3). Not to be confused with \"liquidation\"."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "حجم",
+    "en": "Volume"
+   },
+   "latin": "Volume",
+   "meaning": {
+    "fa": "مجموع مقدار معامله‌شده در یک بازه، مثل یک کندل یا ۲۴ ساعت.",
+    "en": "The total amount traded in a period, such as one candle or 24 hours."
+   },
+   "example": {
+    "fa": "حجم نسبی = حجم فعلی ÷ میانگین ۲۰ دوره؛ مثلاً ⁦150 ÷ 100 = 1.5⁩ که داخل بازهٔ ۰٫۷ تا ۳ است (ماده ۴ مورد ۳).",
+    "en": "Relative volume = current volume ÷ 20-period average; for example ⁦150 ÷ 100 = 1.5⁩, which is inside the 0.7 to 3 range (article 4, item 3)."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "نوسان",
+    "en": "Volatility"
+   },
+   "latin": "Volatility",
+   "meaning": {
+    "fa": "شدت و سرعت تغییر قیمت؛ با ATR یا اندازهٔ کندل‌ها سنجیده می‌شود.",
+    "en": "How strongly and quickly the price changes; measured with ATR or candle size."
+   },
+   "example": {
+    "fa": "نوسان زیاد یعنی حد ضرر دورتر و، طبق فرمول، سایز کوچک‌تر.",
+    "en": "High volatility means a wider stop and, by the formula, a smaller size."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "ارزش بازار",
+    "en": "Market Cap"
+   },
+   "latin": "Market Cap",
+   "meaning": {
+    "fa": "قیمت × عرضهٔ در گردش؛ اندازهٔ تقریبی یک ارز.",
+    "en": "Price × circulating supply; the approximate size of a coin."
+   },
+   "example": {
+    "fa": "ارزش بازار کم یعنی نوسان و ریسک بیشتر.",
+    "en": "A low market cap means more volatility and risk."
+   }
+  },
+  {
+   "section": 1,
+   "term": {
+    "fa": "دامیننس بیت‌کوین",
+    "en": "BTC Dominance"
+   },
+   "latin": "BTC Dominance",
+   "meaning": {
+    "fa": "سهم بیت‌کوین از کل ارزش بازار ارزهای دیجیتال.",
+    "en": "Bitcoin's share of the total crypto market cap."
+   },
+   "example": {
+    "fa": "بالا رفتنش معمولاً یعنی پول بیشتر در بیت‌کوین می‌ماند تا آلت‌کوین‌ها.",
+    "en": "When it rises, money usually stays in bitcoin rather than altcoins."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "سفارش مارکت",
+    "en": "Market Order"
+   },
+   "latin": "Market Order",
+   "meaning": {
+    "fa": "خرید یا فروش فوری با بهترین قیمت‌های موجود. اجرا قطعی است، قیمت نه.",
+    "en": "Buy or sell immediately at the best available prices. Execution is certain, the price is not."
+   },
+   "example": {
+    "fa": "کارمزد تیکر و اسلیپیج دارد؛ فقط برای خروج اضطراری یا ورود بعد از شکست تأییدشده (بند ۵-۲).",
+    "en": "It pays the taker fee and slippage; only for an emergency exit or an entry after a confirmed breakout (clause 5-2)."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "سفارش لیمیت",
+    "en": "Limit Order"
+   },
+   "latin": "Limit Order",
+   "meaning": {
+    "fa": "سفارش در قیمتی مشخص که فقط در همان قیمت یا بهتر پر می‌شود.",
+    "en": "An order at a set price that fills only at that price or better."
+   },
+   "example": {
+    "fa": "ممکن است هرگز پر نشود، اما کارمزدش معمولاً کمتر است. روش اصلی ورود (بند ۵-۱).",
+    "en": "It may never fill, but its fee is usually lower. The main way to enter (clause 5-1)."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "استاپ‌مارکت",
+    "en": "Stop-Market"
+   },
+   "latin": "Stop-Market",
+   "meaning": {
+    "fa": "وقتی قیمت به «قیمت تریگر» برسد، یک سفارش مارکت فعال می‌شود.",
+    "en": "When the price reaches the \"trigger price\", a market order is sent."
+   },
+   "example": {
+    "fa": "رایج‌ترین شکل حد ضرر؛ اجرا مطمئن است ولی با اسلیپیج.",
+    "en": "The most common form of stop loss; execution is reliable but with slippage."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "استاپ‌لیمیت",
+    "en": "Stop-Limit"
+   },
+   "latin": "Stop-Limit",
+   "meaning": {
+    "fa": "با رسیدن به قیمت تریگر، یک سفارش لیمیت فعال می‌شود.",
+    "en": "When the trigger price is reached, a limit order is sent."
+   },
+   "example": {
+    "fa": "اگر قیمت با یک جهش از لیمیت رد شود پر نمی‌شود و پوزیشن بدون حد ضرر می‌ماند.",
+    "en": "If the price jumps past the limit it does not fill and the position is left without a stop."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "حد ضرر",
+    "en": "Stop Loss (SL)"
+   },
+   "latin": "Stop Loss (SL)",
+   "meaning": {
+    "fa": "سفارشی که پوزیشن را در قیمتی از پیش تعیین‌شده می‌بندد تا ضرر محدود بماند.",
+    "en": "An order that closes the position at a preset price to keep the loss limited."
+   },
+   "example": {
+    "fa": "همان لحظهٔ ورود در صرافی ثبت می‌شود، نه در ذهن (بند ۵-۴).",
+    "en": "Placed on the exchange at the moment of entry, not kept in your head (clause 5-4)."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "حد سود",
+    "en": "Take Profit (TP)"
+   },
+   "latin": "Take Profit (TP)",
+   "meaning": {
+    "fa": "سفارشی که پوزیشن را در قیمت هدف می‌بندد و سود را نقد می‌کند.",
+    "en": "An order that closes the position at the target price and realizes the profit."
+   },
+   "example": {
+    "fa": "همراه حد ضرر و هم‌زمان با ورود ثبت می‌شود (بند ۵-۴).",
+    "en": "Placed together with the stop, at the same time as entry (clause 5-4)."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "حد ضرر دنبال‌شونده",
+    "en": "Trailing Stop"
+   },
+   "latin": "Trailing Stop",
+   "meaning": {
+    "fa": "حد ضرری که با حرکت قیمت به سمت سود، با فاصلهٔ ثابت (درصد یا مبلغ) دنبالش می‌آید و عقب نمی‌رود.",
+    "en": "A stop that follows the price toward profit at a fixed distance (percent or amount) and never moves back."
+   },
+   "example": {
+    "fa": "برای نگه داشتن بقیهٔ پوزیشن بعد از سیو سود (بند ۶-۲).",
+    "en": "To hold the rest of the position after taking partial profit (clause 6-2)."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "فقط کاهشی",
+    "en": "Reduce-Only"
+   },
+   "latin": "Reduce-Only",
+   "meaning": {
+    "fa": "سفارشی که فقط می‌تواند پوزیشن موجود را کم کند و هرگز پوزیشن تازه یا خلاف جهت نمی‌سازد.",
+    "en": "An order that can only reduce an existing position and never opens a new or opposite one."
+   },
+   "example": {
+    "fa": "روی حد سود و خروج پله‌ای فعالش کن تا پوزیشن معکوس ناخواسته باز نشود.",
+    "en": "Turn it on for take-profit and scale-out orders so no unwanted reverse position opens."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "پست‌اونلی",
+    "en": "Post-Only"
+   },
+   "latin": "Post-Only",
+   "meaning": {
+    "fa": "سفارش لیمیتی که اگر فوراً پر شود (تیکر شود) رد می‌شود.",
+    "en": "A limit order that is rejected if it would fill immediately (as a taker)."
+   },
+   "example": {
+    "fa": "تضمین می‌کند همیشه کارمزد میکر بدهی.",
+    "en": "It guarantees you always pay the maker fee."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "پر شدن کامل و جزئی",
+    "en": "Fill / Partial Fill"
+   },
+   "latin": "Fill / Partial Fill",
+   "meaning": {
+    "fa": "«پر شدن» یعنی اجرا شدن سفارش. در پر شدن جزئی فقط بخشی از حجم اجرا شده است.",
+    "en": "\"Filled\" means the order was executed. In a partial fill only part of the amount was executed."
+   },
+   "example": {
+    "fa": "سفارش لیمیت بزرگ ممکن است تکه‌تکه پر شود؛ قیمت ورود می‌شود میانگین تکه‌ها.",
+    "en": "A large limit order may fill in pieces; the entry price is the average of the pieces."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "دفتر سفارش",
+    "en": "Order Book"
+   },
+   "latin": "Order Book",
+   "meaning": {
+    "fa": "فهرست زندهٔ سفارش‌های خرید و فروش در هر قیمت.",
+    "en": "The live list of buy and sell orders at each price."
+   },
+   "example": {
+    "fa": "خریداران یک طرف و فروشندگان طرف دیگر؛ هر چه سفارش نزدیک قیمت بیشتر باشد، بازار عمیق‌تر است.",
+    "en": "Buyers on one side, sellers on the other; the more orders near the price, the deeper the market."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "بید، اسک و اسپرد",
+    "en": "Bid / Ask / Spread"
+   },
+   "latin": "Bid / Ask / Spread",
+   "meaning": {
+    "fa": "بید: بالاترین قیمتی که خریداران می‌دهند. اسک: پایین‌ترین قیمتی که فروشندگان می‌خواهند. اسپرد: فاصلهٔ این دو، هزینهٔ پنهان ورود و خروج فوری.",
+    "en": "Bid: the highest price buyers offer. Ask: the lowest price sellers want. Spread: the gap between them, the hidden cost of entering and exiting immediately."
+   },
+   "example": {
+    "fa": "مارکت خرید به قیمت اسک اجرا می‌شود و مارکت فروش به قیمت بید. بید ۹۹٫۹۸ و اسک ۱۰۰٫۰۲ یعنی اسپرد ۰٫۰۴ (۰٫۰۴٪).",
+    "en": "A market buy fills at the ask and a market sell at the bid. Bid 99.98 and ask 100.02 mean a spread of 0.04 (0.04%)."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "عمق بازار",
+    "en": "Market Depth"
+   },
+   "latin": "Market Depth",
+   "meaning": {
+    "fa": "مقدار سفارش‌های باز نزدیک قیمت فعلی.",
+    "en": "The amount of open orders near the current price."
+   },
+   "example": {
+    "fa": "عمق کم یعنی یک سفارش بزرگ قیمت را جابه‌جا می‌کند و اسلیپیج زیاد می‌شود.",
+    "en": "Thin depth means one large order moves the price and slippage grows."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "اسلیپیج",
+    "en": "Slippage"
+   },
+   "latin": "Slippage",
+   "meaning": {
+    "fa": "تفاوت قیمت مورد انتظار با قیمت واقعی اجرا.",
+    "en": "The difference between the expected price and the actual fill price."
+   },
+   "example": {
+    "fa": "مارکت خرید ۱۰٬۰۰۰ دلاری در بازار کم‌عمق: میانگین ۱۰۰٫۳ به‌جای ۱۰۰ یعنی ۰٫۳٪ یا ۳۰ دلار.",
+    "en": "A 10,000 dollar market buy in a thin market: an average of 100.3 instead of 100 means 0.3%, or 30 dollars."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "میکر و تیکر",
+    "en": "Maker / Taker"
+   },
+   "latin": "Maker / Taker",
+   "meaning": {
+    "fa": "میکر با سفارش منتظر لیمیت به دفتر سفارش نقدینگی می‌دهد. تیکر با سفارش فوری نقدینگی برمی‌دارد.",
+    "en": "A maker adds liquidity to the order book with a resting limit order. A taker removes liquidity with an immediate order."
+   },
+   "example": {
+    "fa": "کارمزد تیکر بیشتر است؛ مثلاً ۰٫۰۲٪ برای میکر و ۰٫۰۵٪ برای تیکر (عددها نمونه‌اند).",
+    "en": "The taker fee is higher; for example 0.02% for makers and 0.05% for takers (sample numbers)."
+   }
+  },
+  {
+   "section": 2,
+   "term": {
+    "fa": "کارمزد معامله",
+    "en": "Trading Fee"
+   },
+   "latin": "Trading Fee",
+   "meaning": {
+    "fa": "درصدی از ارزش پوزیشن (نه مارجین) که هم هنگام ورود و هم خروج کسر می‌شود.",
+    "en": "A percentage of the position value (not the margin) charged on both entry and exit."
+   },
+   "example": {
+    "fa": "پوزیشن ۵۰۰ دلاری با تیکر ۰٫۰۵٪: ۰٫۲۵ دلار هر طرف. با مارجین ۱۰۰ دلار یعنی ۰٫۲۵٪ مارجین در هر طرف.",
+    "en": "A 500 dollar position at a 0.05% taker fee: 0.25 dollars each side. With 100 dollars of margin that is 0.25% of margin each side."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "اهرم",
+    "en": "Leverage"
+   },
+   "latin": "Leverage",
+   "meaning": {
+    "fa": "نسبت ارزش پوزیشن به مارجین. با اهرم ۵ برابر، ۱۰۰ دلار مارجین پوزیشنی ۵۰۰ دلاری باز می‌کند.",
+    "en": "The ratio of position value to margin. At 5x leverage, 100 dollars of margin opens a 500 dollar position."
+   },
+   "example": {
+    "fa": "اهرم نتیجهٔ هر حرکت را روی مارجین چند برابر می‌کند: ۲٪ حرکت قیمت با اهرم ۱۰ برابر می‌شود ۲۰٪ مارجین. پیش‌فرض ۳ تا ۵ و سقف ۱۰ (بند ۳-۳).",
+    "en": "Leverage multiplies every move on the margin: a 2% price move at 10x is 20% of margin. Default 3 to 5, cap 10 (clause 3-3)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "مارجین",
+    "en": "Margin"
+   },
+   "latin": "Margin",
+   "meaning": {
+    "fa": "پولی که برای نگه داشتن پوزیشن در حساب قفل می‌شود؛ ارزش پوزیشن ÷ اهرم.",
+    "en": "The money locked in the account to hold the position; position value ÷ leverage."
+   },
+   "example": {
+    "fa": "در مثال ماده ۳: ⁦500 ÷ 5 = 100⁩ دلار، یعنی ۵٪ سرمایه. سقف ۱۰٪ سرمایه (بند ۳-۴).",
+    "en": "In the article 3 example: ⁦500 ÷ 5 = 100⁩ dollars, which is 5% of equity. Cap 10% of equity (clause 3-4)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "مارجین اولیه و نگهداری",
+    "en": "Initial / Maintenance Margin"
+   },
+   "latin": "Initial / Maintenance Margin",
+   "meaning": {
+    "fa": "اولیه: لازم برای باز کردن پوزیشن. نگهداری: حداقل لازم برای باز ماندن؛ اگر موجودی پوزیشن از آن کمتر شود، لیکوئید می‌شود.",
+    "en": "Initial: needed to open the position. Maintenance: the minimum to keep it open; if the position's balance falls below it, it is liquidated."
+   },
+   "example": {
+    "fa": "نرخ نگهداری در پوزیشن‌های کوچک معمولاً کسری از درصد است (مثلاً ۰٫۵٪) و با بزرگ‌تر شدن پوزیشن بالا می‌رود.",
+    "en": "The maintenance rate on small positions is usually a fraction of a percent (for example 0.5%) and rises as the position grows."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "ایزوله",
+    "en": "Isolated"
+   },
+   "latin": "Isolated",
+   "meaning": {
+    "fa": "مارجین جدا برای همان پوزیشن؛ بدترین حالت از دست رفتن همان مارجین است.",
+    "en": "Separate margin for that position; the worst case is losing that margin."
+   },
+   "example": {
+    "fa": "همیشه ایزوله (بند ۳-۴). جای حد ضرر را نمی‌گیرد (بازبینی ۶).",
+    "en": "Always isolated (clause 3-4). It does not replace a stop loss (correction 6)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "کراس",
+    "en": "Cross"
+   },
+   "latin": "Cross",
+   "meaning": {
+    "fa": "کل موجودی حساب فیوچرز پشتوانهٔ همهٔ پوزیشن‌هاست؛ قیمت لیکوئید دورتر می‌شود، اما کل حساب در خطر است.",
+    "en": "The whole futures balance backs every position; the liquidation price moves further away, but the whole account is at risk."
+   },
+   "example": {
+    "fa": "ممنوع (ماده ۹ مورد ۳).",
+    "en": "Forbidden (article 9, item 3)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "لیکوئید شدن",
+    "en": "Liquidation"
+   },
+   "latin": "Liquidation",
+   "meaning": {
+    "fa": "بستن اجباری پوزیشن توسط صرافی وقتی مارجین از حد نگهداری کمتر شود. در حالت ایزوله معمولاً کل مارجین آن پوزیشن از دست می‌رود.",
+    "en": "The exchange force-closes the position when margin falls below maintenance. In isolated mode the whole margin of that position is usually lost."
+   },
+   "example": {
+    "fa": "با «نقدشوندگی» (Liquidity) اشتباه نشود؛ اصطلاح درست liquidation price است (بازبینی ۸).",
+    "en": "Not to be confused with liquidity; the correct term is liquidation price (correction 8)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "قیمت لیکوئید",
+    "en": "Liquidation Price"
+   },
+   "latin": "Liquidation Price",
+   "meaning": {
+    "fa": "قیمتی که پوزیشن در آن لیکوئید می‌شود. تقریباً، لانگ ایزوله: ورود × (۱ − ۱ ÷ اهرم + نرخ نگهداری). برای شورت علامت‌ها برعکس است.",
+    "en": "The price at which the position is liquidated. Roughly, for an isolated long: entry × (1 − 1 ÷ leverage + maintenance rate). For a short the signs are reversed."
+   },
+   "example": {
+    "fa": "ورود ۱۰۰، اهرم ۵، نرخ ۰٫۵٪: ⁦100 × (1 − 0.2 + 0.005) = 80.5⁩. باید دست‌کم دو برابر فاصلهٔ حد ضرر از ورود باشد (بند ۳-۵).",
+    "en": "Entry 100, leverage 5, rate 0.5%: ⁦100 × (1 − 0.2 + 0.005) = 80.5⁩. It must be at least two times the stop distance from entry (clause 3-5)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "قیمت آخر، مارک و شاخص",
+    "en": "Last / Mark / Index Price"
+   },
+   "latin": "Last / Mark / Index Price",
+   "meaning": {
+    "fa": "آخر: قیمت آخرین معاملهٔ همان صرافی. شاخص: میانگین قیمت چند صرافی. مارک: قیمتی بر پایهٔ شاخص که صرافی برای سود و زیان باز و لیکوئید به کار می‌برد.",
+    "en": "Last: the price of the exchange's latest trade. Index: an average of several exchanges' prices. Mark: an index-based price the exchange uses for open P&L and liquidation."
+   },
+   "example": {
+    "fa": "لیکوئید بر پایهٔ مارک است، پس یک سوزن لحظه‌ای در قیمت آخر معمولاً آن را نمی‌زند. هنگام ثبت حد ضرر، پایهٔ فعال شدن (آخر یا مارک) را خودت انتخاب کن.",
+    "en": "Liquidation uses the mark price, so a momentary wick in the last price usually does not trigger it. When placing a stop, choose its trigger basis (last or mark) yourself."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "سود و زیان باز و بسته",
+    "en": "Unrealized / Realized PnL"
+   },
+   "latin": "Unrealized / Realized PnL",
+   "meaning": {
+    "fa": "باز (تحقق‌نیافته): سود یا زیان پوزیشنی که هنوز باز است. بسته (تحقق‌یافته): نتیجهٔ بخشی که بسته شده است.",
+    "en": "Unrealized: the profit or loss of a position still open. Realized: the result of the part that has been closed."
+   },
+   "example": {
+    "fa": "سود باز با یک شمع برمی‌گردد؛ سود وقتی سود است که محقق شده باشد (بند ۷-۱).",
+    "en": "Open profit can vanish in one candle; profit is profit only once realized (clause 7-1)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "بازده روی مارجین",
+    "en": "ROE"
+   },
+   "latin": "ROE",
+   "meaning": {
+    "fa": "سود یا زیان تقسیم بر مارجین. با اهرم بالا عدد بزرگ و گمراه‌کننده می‌شود.",
+    "en": "Profit or loss divided by margin. With high leverage the number becomes large and misleading."
+   },
+   "example": {
+    "fa": "۲۰ دلار سود روی ۱۰۰ دلار مارجین یعنی ۲۰٪؛ ولی ریسک واقعی را «ریسک هر معامله» نشان می‌دهد، نه ROE.",
+    "en": "20 dollars of profit on 100 dollars of margin is 20%; but the real risk is shown by \"risk per trade\", not ROE."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "ارزش پوزیشن",
+    "en": "Notional Value"
+   },
+   "latin": "Notional Value",
+   "meaning": {
+    "fa": "قیمت × تعداد؛ اندازهٔ واقعی پوزیشن، نه مارجین.",
+    "en": "Price × quantity; the real size of the position, not the margin."
+   },
+   "example": {
+    "fa": "ورود ۱۰۰ و ۵ واحد یعنی ۵۰۰ دلار. فرمول ماده ۳ همین عدد را می‌دهد (بند ۳-۲).",
+    "en": "Entry 100 and 5 units means 500 dollars. The article 3 formula gives this number (clause 3-2)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "نرخ فاندینگ",
+    "en": "Funding Rate"
+   },
+   "latin": "Funding Rate",
+   "meaning": {
+    "fa": "مبلغی که در قرارداد دائمی هر چند ساعت (معمولاً هر ۸ ساعت) بین لانگ‌ها و شورت‌ها رد و بدل می‌شود. نرخ مثبت: لانگ‌ها می‌پردازند. منفی: شورت‌ها. صرافی از آن سود نمی‌برد.",
+    "en": "An amount exchanged between longs and shorts every few hours (usually every 8 hours) on perpetual contracts. Positive rate: longs pay. Negative: shorts pay. The exchange does not profit from it."
+   },
+   "example": {
+    "fa": "فقط اگر لحظهٔ تسویه پوزیشن باز باشد. ۵۰۰ دلار با نرخ ۰٫۰۱٪ یعنی ۰٫۰۵ دلار در هر دوره و ۰٫۱۵ دلار در روز. نرخ بالا نشانهٔ ازدحام در لانگ‌هاست.",
+    "en": "Only if the position is open at settlement time. 500 dollars at 0.01% is 0.05 dollars per period and 0.15 dollars a day. A high rate is a sign of crowded longs."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "اوپن‌اینترست",
+    "en": "Open Interest (OI)"
+   },
+   "latin": "Open Interest (OI)",
+   "meaning": {
+    "fa": "مجموع قراردادهای باز (پوزیشن‌های هنوز بسته‌نشده) در یک نماد.",
+    "en": "The total of open contracts (positions not yet closed) on a symbol."
+   },
+   "example": {
+    "fa": "رشد OI کنار فاندینگ بالا نشانهٔ ازدحام است (بازبینی ۱).",
+    "en": "Rising OI next to high funding is a sign of crowding (correction 1)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "صندوق بیمه و ADL",
+    "en": "Insurance Fund / Auto-Deleveraging"
+   },
+   "latin": "Insurance Fund / Auto-Deleveraging",
+   "meaning": {
+    "fa": "صندوق بیمه کسری لیکوئیدهای بدتر از ورشکستگی را می‌پوشاند. اگر کافی نباشد، ADL پوزیشن سودده‌ترین و پراهرم‌ترین معامله‌گران طرف مقابل را اجباراً کم می‌کند.",
+    "en": "The insurance fund covers the shortfall of liquidations worse than bankruptcy. If it is not enough, ADL forcibly reduces the positions of the most profitable, most leveraged traders on the other side."
+   },
+   "example": {
+    "fa": "نادر است اما در سقوط‌های شدید پیش می‌آید؛ یکی از دلایل نگه نداشتن همهٔ سرمایه روی یک صرافی (بند ۱۰-۴).",
+    "en": "Rare, but it happens in severe crashes; one reason not to keep all capital on one exchange (clause 10-4)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "حالت تک‌جهته و هج",
+    "en": "One-way / Hedge Mode"
+   },
+   "latin": "One-way / Hedge Mode",
+   "meaning": {
+    "fa": "تک‌جهته: برای هر نماد فقط یک پوزیشن. هج: لانگ و شورت هم‌زمان روی یک نماد.",
+    "en": "One-way: only one position per symbol. Hedge: a long and a short at the same time on one symbol."
+   },
+   "example": {
+    "fa": "در هج دو پوزیشن جدا داری و ریسک هر دو باید جمع بخورد (بند ۳-۶).",
+    "en": "In hedge mode you hold two separate positions and the risk of both must be added up (clause 3-6)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "قیمت سربه‌سر",
+    "en": "Break-even Price"
+   },
+   "latin": "Break-even Price",
+   "meaning": {
+    "fa": "قیمتی که در آن، سود و زیان بعد از کارمزد (و فاندینگ) صفر است.",
+    "en": "The price at which profit and loss after fees (and funding) is zero."
+   },
+   "example": {
+    "fa": "لانگ با ورود ۱۰۰ و کارمزد تیکر ۰٫۰۵٪ در هر طرف: حدود ۱۰۰٫۱۰. حد ضرر بقیه به ورود «به‌علاوهٔ کارمزد» می‌رود (بند ۶-۱).",
+    "en": "A long entered at 100 with a 0.05% taker fee each side: about 100.10. The stop on the rest goes to entry \"plus fees\" (clause 6-1)."
+   }
+  },
+  {
+   "section": 3,
+   "term": {
+    "fa": "افزودن مارجین",
+    "en": "Add Margin"
+   },
+   "latin": "Add Margin",
+   "meaning": {
+    "fa": "واریز مارجین بیشتر به پوزیشن باز تا قیمت لیکوئید دورتر شود.",
+    "en": "Depositing more margin into an open position to move the liquidation price further away."
+   },
+   "example": {
+    "fa": "روی پوزیشن ضررده ممنوع است، چون یعنی نپذیرفتن ضرر (بند ۶-۴).",
+    "en": "Forbidden on a losing position, because it means refusing to accept the loss (clause 6-4)."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "اندازه",
+    "en": "Size"
+   },
+   "latin": "Size",
+   "meaning": {
+    "fa": "مقدار پوزیشن، معمولاً به واحد دارایی (گاهی به دلار).",
+    "en": "The amount of the position, usually in units of the asset (sometimes in dollars)."
+   },
+   "example": {
+    "fa": "ارزش دلاری = اندازه × قیمت؛ آن را با ارزش پوزیشن فرمول ماده ۳ مقایسه کن.",
+    "en": "Dollar value = size × price; compare it with the position value from the article 3 formula."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "قیمت ورود",
+    "en": "Entry Price"
+   },
+   "latin": "Entry Price",
+   "meaning": {
+    "fa": "میانگین قیمت پر شدن سفارش‌های ورود.",
+    "en": "The average fill price of the entry orders."
+   },
+   "example": {
+    "fa": "در ورود پله‌ای میانگین وزنی چند سفارش است؛ همین عدد را در ژورنال بنویس.",
+    "en": "With a scaled entry it is the weighted average of several orders; write this number in the journal."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "مارجین",
+    "en": "Margin"
+   },
+   "latin": "Margin",
+   "meaning": {
+    "fa": "مبلغی که به این پوزیشن اختصاص یافته است.",
+    "en": "The amount allocated to this position."
+   },
+   "example": {
+    "fa": "در مثال ماده ۳: ⁦500 ÷ 5 = 100⁩ دلار، یعنی ۵٪ سرمایه. سقف ۱۰٪ سرمایه (بند ۳-۴).",
+    "en": "In the article 3 example: ⁦500 ÷ 5 = 100⁩ dollars, which is 5% of equity. Cap 10% of equity (clause 3-4)."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "قیمت لیکوئید",
+    "en": "Liq. Price"
+   },
+   "latin": "Liq. Price",
+   "meaning": {
+    "fa": "قیمتی که پوزیشن در آن لیکوئید می‌شود. برای لانگ ایزوله تقریباً: ⁦Entry × (1 − 1 ÷ Lev + MMR)⁩ (ورود = Entry، اهرم = Lev، نرخ نگهداری = MMR). برای شورت علامت‌ها برعکس است.",
+    "en": "The price at which the position is liquidated. For an isolated long roughly: ⁦Entry × (1 − 1 ÷ Lev + MMR)⁩ (Lev = leverage, MMR = maintenance margin rate). For a short the signs are reversed."
+   },
+   "example": {
+    "fa": "ورود ۱۰۰، اهرم ۵، نرخ ۰٫۵٪: ⁦100 × (1 − 0.2 + 0.005) = 80.5⁩. باید دست‌کم دو برابر فاصلهٔ حد ضرر از ورود باشد (بند ۳-۵).",
+    "en": "Entry 100, leverage 5, rate 0.5%: ⁦100 × (1 − 0.2 + 0.005) = 80.5⁩. It must be at least two times the stop distance from entry (clause 3-5)."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "نسبت مارجین",
+    "en": "Margin Ratio"
+   },
+   "latin": "Margin Ratio",
+   "meaning": {
+    "fa": "شاخص نزدیکی به لیکوئید. تعریفش بین صرافی‌ها فرق می‌کند: در بعضی بالا رفتنش خطر است و در بعضی پایین آمدنش.",
+    "en": "An indicator of how close the position is to liquidation. Its definition differs between exchanges: on some a rising value is danger, on others a falling one."
+   },
+   "example": {
+    "fa": "توضیح همان صرافی را یک بار بخوان؛ برای تصمیم، به «قیمت لیکوئید» و حد ضرر تکیه کن.",
+    "en": "Read your exchange's explanation once; for decisions rely on the liquidation price and the stop."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "سود و زیان",
+    "en": "PNL (ROE%)"
+   },
+   "latin": "PNL (ROE%)",
+   "meaning": {
+    "fa": "سود یا زیان باز به دلار و بازده روی مارجین به درصد.",
+    "en": "Open profit or loss in dollars and return on margin in percent."
+   },
+   "example": {
+    "fa": "ملاک ژورنال «R» است، نه ROE (مثال ماده ۳).",
+    "en": "The journal's measure is \"R\", not ROE (article 3 example)."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "سفارش‌های باز",
+    "en": "Open Orders"
+   },
+   "latin": "Open Orders",
+   "meaning": {
+    "fa": "سفارش‌هایی که هنوز پر نشده‌اند: لیمیت‌های ورود، حد سود و حد ضرر.",
+    "en": "Orders not filled yet: entry limits, take profit and stop loss."
+   },
+   "example": {
+    "fa": "پیش از بستن اپ ببین حد ضرر و حد سود آنجا هست (بند ۵-۴).",
+    "en": "Before closing the app, check that the stop and target are there (clause 5-4)."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "تاریخچهٔ سفارش‌ها",
+    "en": "Order History"
+   },
+   "latin": "Order History",
+   "meaning": {
+    "fa": "همهٔ سفارش‌ها با وضعیت پر شده، لغو شده یا رد شده.",
+    "en": "All orders with their status: filled, cancelled or rejected."
+   },
+   "example": {
+    "fa": "برای فهمیدن اینکه چرا یک سفارش اجرا نشد.",
+    "en": "To understand why an order was not executed."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "تاریخچهٔ معاملات",
+    "en": "Trade History"
+   },
+   "latin": "Trade History",
+   "meaning": {
+    "fa": "هر پر شدن با قیمت، مقدار و کارمزد واقعی.",
+    "en": "Every fill with its actual price, quantity and fee."
+   },
+   "example": {
+    "fa": "قیمت خروج و کارمزد ژورنال را از اینجا بردار.",
+    "en": "Take the journal's exit price and fee from here."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "تاریخچهٔ تراکنش‌ها",
+    "en": "Transaction History"
+   },
+   "latin": "Transaction History",
+   "meaning": {
+    "fa": "ردیف‌های جدا برای فاندینگ، کارمزد، انتقال‌ها و سود و زیان تحقق‌یافته.",
+    "en": "Separate rows for funding, fees, transfers and realized P&L."
+   },
+   "example": {
+    "fa": "مبلغ فاندینگ ژورنال را از اینجا بردار.",
+    "en": "Take the journal's funding amount from here."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "تاریخچهٔ پوزیشن",
+    "en": "Position History"
+   },
+   "latin": "Position History",
+   "meaning": {
+    "fa": "خلاصهٔ هر پوزیشن بسته‌شده از ورود تا خروج، با سود و زیان نهایی.",
+    "en": "A summary of each closed position from entry to exit, with the final P&L."
+   },
+   "example": {
+    "fa": "برای مرور هفتگی و تطبیق با ژورنال (بند ۱۲-۲).",
+    "en": "For the weekly review and reconciling with the journal (clause 12-2)."
+   }
+  },
+  {
+   "section": 4,
+   "term": {
+    "fa": "بستن با مارکت یا لیمیت",
+    "en": "Market / Limit Close"
+   },
+   "latin": "Market / Limit Close",
+   "meaning": {
+    "fa": "دکمه‌های خروج: مارکت فوری و با اسلیپیج، لیمیت در قیمتی که تو می‌گذاری.",
+    "en": "Exit buttons: market is immediate and with slippage, limit at the price you set."
+   },
+   "example": {
+    "fa": "خروج اضطراری فقط با مارکت (بند ۵-۲).",
+    "en": "Emergency exits only with market (clause 5-2)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "سرمایه",
+    "en": "Equity"
+   },
+   "latin": "Equity",
+   "meaning": {
+    "fa": "ارزش کل حساب معاملاتی (موجودی به‌علاوهٔ سود و زیان باز)؛ مبنای محاسبهٔ درصد ریسک.",
+    "en": "The total value of the trading account (balance plus open P&L); the basis for the risk percentage."
+   },
+   "example": {
+    "fa": "پیش از هر ورود از صرافی ببین و در ژورنال بنویس (بازبینی ۱۰).",
+    "en": "Check it on the exchange before every entry and write it in the journal (correction 10)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "ریسک هر معامله",
+    "en": "Risk per Trade"
+   },
+   "latin": "Risk per Trade",
+   "meaning": {
+    "fa": "ضرر دلاری در لحظهٔ خوردن حد ضرر، نه مقدار مارجین.",
+    "en": "The dollar loss at the moment the stop is hit, not the margin amount."
+   },
+   "example": {
+    "fa": "۱٪ سرمایه؛ با ۲٬۰۰۰ دلار یعنی ۲۰ دلار (بند ۳-۱).",
+    "en": "1% of equity; with 2,000 dollars that is 20 dollars (clause 3-1)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "فاصلهٔ حد ضرر",
+    "en": "SL Distance"
+   },
+   "latin": "SL Distance",
+   "meaning": {
+    "fa": "اختلاف قیمت ورود و حد ضرر، تقسیم بر قیمت ورود، به درصد.",
+    "en": "The difference between entry and stop, divided by the entry price, in percent."
+   },
+   "example": {
+    "fa": "ورود ۱۰۰ و حد ضرر ۹۶ یعنی ۴٪.",
+    "en": "Entry 100 and stop 96 mean 4%."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "اندازهٔ پوزیشن",
+    "en": "Position Sizing"
+   },
+   "latin": "Position Sizing",
+   "meaning": {
+    "fa": "محاسبهٔ ارزش پوزیشن از روی ریسک و فاصلهٔ حد ضرر: سرمایه × درصد ریسک ÷ درصد فاصله.",
+    "en": "Computing position value from risk and stop distance: equity × risk percent ÷ distance percent."
+   },
+   "example": {
+    "fa": "⁦2,000 × 1% ÷ 4% = 500⁩ دلار. اهرم بعد از این عدد انتخاب می‌شود (بند ۳-۲).",
+    "en": "⁦2,000 × 1% ÷ 4% = 500⁩ dollars. Leverage is chosen after this number (clause 3-2)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "ضریب R",
+    "en": "R-multiple"
+   },
+   "latin": "R-multiple",
+   "meaning": {
+    "fa": "نتیجهٔ معامله بر حسب ریسک اولیه‌اش: 1R همان مقداری است که ریسک کرده‌ای. سود 2R یعنی دو برابر ریسک و ضرر کامل منفی 1R.",
+    "en": "A trade's result in units of its initial risk: 1R is what you risked. A 2R win is twice the risk and a full loss is minus 1R."
+   },
+   "example": {
+    "fa": "سود خالص ۳۹٫۴ دلار روی ریسک ۲۰ دلار حدود 1.97R است (مثال ماده ۳).",
+    "en": "A net profit of 39.4 dollars on a 20 dollar risk is about 1.97R (article 3 example)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "نسبت سود به ضرر",
+    "en": "Risk:Reward (R:R)"
+   },
+   "latin": "Risk:Reward (R:R)",
+   "meaning": {
+    "fa": "فاصلهٔ حد سود ÷ فاصلهٔ حد ضرر. «۱ به ۲» یعنی هدف دو برابر ریسک.",
+    "en": "Target distance ÷ stop distance. \"1 to 2\" means the target is twice the risk."
+   },
+   "example": {
+    "fa": "حداقل ۱ به ۱٫۵ (ماده ۴ مورد ۶).",
+    "en": "At least 1 to 1.5 (article 4, item 6)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "درصد برد",
+    "en": "Win Rate"
+   },
+   "latin": "Win Rate",
+   "meaning": {
+    "fa": "معاملات برنده ÷ همهٔ معاملات؛ به‌تنهایی معیار خوبی نیست.",
+    "en": "Winning trades ÷ all trades; not a good measure on its own."
+   },
+   "example": {
+    "fa": "درصد برد سربه‌سر = ⁦1 ÷ (1 + R:R)⁩: در ۱ به ۲ حدود ۳۳٪، در ۱ به ۱٫۵ برابر ۴۰٪ و در ۱ به ۱ برابر ۵۰٪.",
+    "en": "Breakeven win rate = ⁦1 ÷ (1 + R:R)⁩: about 33% at 1 to 2, 40% at 1 to 1.5 and 50% at 1 to 1."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "امید ریاضی",
+    "en": "Expectancy"
+   },
+   "latin": "Expectancy",
+   "meaning": {
+    "fa": "میانگین سود هر معامله بر حسب R: ⁦E = p × R − (1 − p)⁩.",
+    "en": "The average profit per trade in R: ⁦E = p × R − (1 − p)⁩."
+   },
+   "example": {
+    "fa": "درصد برد ۴۰٪ و R:R برابر ۲ یعنی ⁦0.4 × 2 − 0.6 = 0.2R⁩ در هر معامله.",
+    "en": "A 40% win rate and an R:R of 2 give ⁦0.4 × 2 − 0.6 = 0.2R⁩ per trade."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "ضریب سود",
+    "en": "Profit Factor"
+   },
+   "latin": "Profit Factor",
+   "meaning": {
+    "fa": "جمع سودها ÷ جمع زیان‌ها. بالای ۱ یعنی در مجموع سودده‌ای.",
+    "en": "Sum of profits ÷ sum of losses. Above 1 means you are profitable overall."
+   },
+   "example": {
+    "fa": "۳۰۰ دلار سود و ۲۰۰ دلار زیان می‌شود ۱٫۵؛ هدف ماهانه بالای ۱٫۳.",
+    "en": "300 dollars of profit and 200 dollars of loss make 1.5; the monthly target is above 1.3."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "افت سرمایه",
+    "en": "Drawdown"
+   },
+   "latin": "Drawdown",
+   "meaning": {
+    "fa": "کاهش سرمایه از آخرین اوج: (اوج − فعلی) ÷ اوج. منحنی سرمایه همین را نشان می‌دهد.",
+    "en": "The fall of equity from its last peak: (peak − current) ÷ peak. The equity curve shows it."
+   },
+   "example": {
+    "fa": "اوج ۲٬۲۰۰ و فعلی ۱٬۹۸۰ یعنی ۱۰٪ (حد توقف بند ۳-۷). برای جبران ۱۰٪ افت، ۱۱٫۱٪ سود لازم است و برای ۵۰٪ افت، ۱۰۰٪.",
+    "en": "Peak 2,200 and current 1,980 mean 10% (the clause 3-7 stop level). Recovering a 10% drawdown needs an 11.1% gain, and a 50% drawdown needs 100%."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "ریسک باز",
+    "en": "Open Risk"
+   },
+   "latin": "Open Risk",
+   "meaning": {
+    "fa": "جمع ریسک همهٔ پوزیشن‌های باز اگر همه حد ضرر بخورند.",
+    "en": "The total risk of all open positions if every stop is hit."
+   },
+   "example": {
+    "fa": "حداکثر ۳٪ و حداکثر ۳ پوزیشن (بند ۳-۶).",
+    "en": "At most 3% and at most 3 positions (clause 3-6)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "همبستگی",
+    "en": "Correlation"
+   },
+   "latin": "Correlation",
+   "meaning": {
+    "fa": "میزان همسو حرکت کردن دو دارایی.",
+    "en": "How much two assets move together."
+   },
+   "example": {
+    "fa": "آلت‌کوین‌ها با بیت‌کوین همبسته‌اند؛ چند پوزیشن هم‌جهت عملاً یک پوزیشن بزرگ است (بند ۳-۶).",
+    "en": "Altcoins are correlated with bitcoin; several same-direction positions are in practice one big position (clause 3-6)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "ریسک‌فری",
+    "en": "Risk-Free"
+   },
+   "latin": "Risk-Free",
+   "meaning": {
+    "fa": "بعد از سود، بردن حد ضرر به قیمت ورود (به‌علاوهٔ کارمزد) تا ضرری باقی نماند.",
+    "en": "After a gain, moving the stop to entry (plus fees) so no loss remains."
+   },
+   "example": {
+    "fa": "ریسک‌فری زودهنگام با یک پولبک عادی معاملهٔ درست را می‌کشد؛ پس اول نصف پوزیشن بسته می‌شود (بند ۶-۱).",
+    "en": "Going risk-free too early lets a normal pullback kill a good trade; so half the position is closed first (clause 6-1)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "سیو سود",
+    "en": "Partial Profit"
+   },
+   "latin": "Partial Profit",
+   "meaning": {
+    "fa": "بستن بخشی از پوزیشن در سود.",
+    "en": "Closing part of the position in profit."
+   },
+   "example": {
+    "fa": "۵۰٪ پوزیشن در 1R تا 1.5R (بند ۶-۱).",
+    "en": "50% of the position at 1R to 1.5R (clause 6-1)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "ورود و خروج پله‌ای",
+    "en": "Scaling In / Out"
+   },
+   "latin": "Scaling In / Out",
+   "meaning": {
+    "fa": "تقسیم ورود یا خروج به چند سفارش در قیمت‌های مختلف.",
+    "en": "Splitting an entry or exit into several orders at different prices."
+   },
+   "example": {
+    "fa": "ورود با ۲ تا ۳ سفارش لیمیت در ناحیه (بند ۵-۱).",
+    "en": "Entry with 2 to 3 limit orders in the zone (clause 5-1)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "میانگین‌گیری و DCA",
+    "en": "Averaging Down / DCA"
+   },
+   "latin": "Averaging Down / DCA",
+   "meaning": {
+    "fa": "میانگین‌گیری: خرید بیشتر در قیمت بدتر برای پایین آوردن میانگین ورود. DCA: خرید دوره‌ای با مبلغ ثابت.",
+    "en": "Averaging down: buying more at a worse price to lower the average entry. DCA: periodic buying of a fixed amount."
+   },
+   "example": {
+    "fa": "میانگین‌گیری روی پوزیشن ضررده ممنوع است (بند ۶-۴). DCA برای اسپات بلندمدت است.",
+    "en": "Averaging down on a losing position is forbidden (clause 6-4). DCA is for long-term spot."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "ستاپ و شرط ابطال",
+    "en": "Setup / Invalidation"
+   },
+   "latin": "Setup / Invalidation",
+   "meaning": {
+    "fa": "ستاپ: الگوی مکتوب ورود، ابطال و هدف. شرط ابطال: نقطه‌ای که با رسیدن قیمت به آن، ایدهٔ معامله باطل می‌شود.",
+    "en": "Setup: a written pattern of entry, invalidation and target. Invalidation: the point at which, if price reaches it, the trade idea is void."
+   },
+   "example": {
+    "fa": "حد ضرر پشت نقطهٔ ابطال می‌رود؛ بدون ستاپ، بدون معامله (بند ۱-۴).",
+    "en": "The stop goes behind the invalidation point; no setup, no trade (clause 1-4)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "تارگت",
+    "en": "Target"
+   },
+   "latin": "Target",
+   "meaning": {
+    "fa": "قیمت هدف برای خروج.",
+    "en": "The target price for the exit."
+   },
+   "example": {
+    "fa": "باید با تایم‌فریم ورود هماهنگ باشد؛ اسکالپ با تارگت روزانه جور درنمی‌آید (بازبینی ۳).",
+    "en": "It must match the entry timeframe; a scalp does not fit a daily target (correction 3)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "اسکالپ، اینترادی، سوینگ",
+    "en": "Scalp / Intraday / Swing"
+   },
+   "latin": "Scalp / Intraday / Swing",
+   "meaning": {
+    "fa": "اسکالپ: معاملهٔ خیلی کوتاه، چند دقیقه، با هدف کوچک. اینترادی: چند ساعت و در همان روز بسته می‌شود. سوینگ: چند روز تا چند هفته.",
+    "en": "Scalp: a very short trade, a few minutes, with a small target. Intraday: a few hours and closed the same day. Swing: a few days to a few weeks."
+   },
+   "example": {
+    "fa": "نوع معامله پیش از ورود ثبت می‌شود و بعدش عوض نمی‌شود (بند ۲-۳).",
+    "en": "The trade type is recorded before entry and does not change afterwards (clause 2-3)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "دمو",
+    "en": "Demo / Paper Trading"
+   },
+   "latin": "Demo / Paper Trading",
+   "meaning": {
+    "fa": "معامله با پول مجازی.",
+    "en": "Trading with virtual money."
+   },
+   "example": {
+    "fa": "ستاپ جدید ۲۰ معامله در دمو یا با ریسک ۰٫۲۵٪ آزموده می‌شود (بند ۱۲-۶).",
+    "en": "A new setup is tested for 20 trades on demo or at 0.25% risk (clause 12-6)."
+   }
+  },
+  {
+   "section": 5,
+   "term": {
+    "fa": "تز و سقف وزن",
+    "en": "Thesis / Weight Cap"
+   },
+   "latin": "Thesis / Weight Cap",
+   "meaning": {
+    "fa": "تز: دلیل مکتوب نگه‌داشتن یک دارایی بلندمدت. وزن: سهم آن دارایی از کل پرتفوی.",
+    "en": "Thesis: the written reason for holding a long-term asset. Weight: that asset's share of the whole portfolio."
+   },
+   "example": {
+    "fa": "هر آلت‌کوین حداکثر ۵٪ پرتفوی (بند ۱۱-۲).",
+    "en": "Each altcoin at most 5% of the portfolio (clause 11-2)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "کندل و سایه",
+    "en": "Candlestick / Wick"
+   },
+   "latin": "Candlestick / Wick",
+   "meaning": {
+    "fa": "کندل قیمت یک بازه را با چهار عدد نشان می‌دهد: باز شدن، بالاترین، پایین‌ترین و بسته شدن. بدنه فاصلهٔ باز تا بسته شدن است و سایه خط‌های بالا و پایین آن.",
+    "en": "A candle shows one period's price with four numbers: open, high, low and close. The body is the distance from open to close and the wicks are the lines above and below it."
+   },
+   "example": {
+    "fa": "سایهٔ بلند یعنی قیمت از آن سطح پس زده شده. تا کندل نبسته، تأییدی نیست (بند ۵-۳).",
+    "en": "A long wick means the price was rejected from that level. Until the candle closes, there is no confirmation (clause 5-3)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "تایم‌فریم",
+    "en": "Timeframe"
+   },
+   "latin": "Timeframe",
+   "meaning": {
+    "fa": "بازهٔ زمانی هر کندل، مثل ۵ دقیقه، ۱ ساعت، ۴ ساعت یا ۱ روز.",
+    "en": "The time span of each candle, such as 5 minutes, 1 hour, 4 hours or 1 day."
+   },
+   "example": {
+    "fa": "مدل سه‌تایم‌فریمی: جهت (۴ ساعته یا روزانه)، ستاپ (۱ ساعته)، ورود (۱۵ یا ۵ دقیقه) (بازبینی ۳).",
+    "en": "Three-timeframe model: direction (4 hour or daily), setup (1 hour), entry (15 or 5 minutes) (correction 3)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "روند و رنج",
+    "en": "Trend / Range"
+   },
+   "latin": "Trend / Range",
+   "meaning": {
+    "fa": "روند صعودی: سقف و کف بالاتر. نزولی: سقف و کف پایین‌تر. رنج: نوسان بین یک کف و سقف بدون جهت.",
+    "en": "Uptrend: higher highs and lows. Downtrend: lower highs and lows. Range: swinging between a floor and a ceiling without direction."
+   },
+   "example": {
+    "fa": "بدون روند و بدون بررسی چند تایم‌فریم وارد نشو (درس ۲ از دوازده درس).",
+    "en": "Do not enter without a trend and without checking several timeframes (lesson 2 of the twelve)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "ساختار و شکست ساختار",
+    "en": "Structure / Break of Structure"
+   },
+   "latin": "Structure / Break of Structure",
+   "meaning": {
+    "fa": "ساختار: الگوی سقف‌ها و کف‌ها. شکست ساختار: شکسته شدن آخرین کف مهم در روند صعودی (یا آخرین سقف در روند نزولی)، نشانهٔ احتمالی برگشت.",
+    "en": "Structure: the pattern of highs and lows. Break of structure: the last important low breaking in an uptrend (or the last high in a downtrend), a possible sign of reversal."
+   },
+   "example": {
+    "fa": "بعضی منابع به آن CHoCH می‌گویند. شورت فقط بعد از تأیید برگشت (بازبینی ۱).",
+    "en": "Some sources call it CHoCH. Short only after a confirmed reversal (correction 1)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "حمایت و مقاومت",
+    "en": "Support / Resistance"
+   },
+   "latin": "Support / Resistance",
+   "meaning": {
+    "fa": "ناحیه‌هایی که قیمت قبلاً از آن‌ها برگشته؛ حمایت زیر قیمت و مقاومت بالای آن.",
+    "en": "Zones where price has turned before; support below the price and resistance above it."
+   },
+   "example": {
+    "fa": "ناحیه است، نه یک عدد دقیق. ورود روبه‌روی مقاومت تایم‌فریم بالا ممنوع است (ماده ۴ مورد ۲).",
+    "en": "A zone, not an exact number. Entering right into higher-timeframe resistance is forbidden (article 4, item 2)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "شکست و فیک‌بریک",
+    "en": "Breakout / Fakeout"
+   },
+   "latin": "Breakout / Fakeout",
+   "meaning": {
+    "fa": "شکست: عبور قیمت از حمایت یا مقاومت، معمولاً با حجم بیشتر. فیک‌بریک: شکستی که برمی‌گردد و ورودی‌های روی شکست را به دام می‌اندازد.",
+    "en": "Breakout: price passing support or resistance, usually on higher volume. Fakeout: a breakout that reverses and traps those who entered on it."
+   },
+   "example": {
+    "fa": "منتظر بسته شدن کندل تأییدی بمان (بند ۵-۳).",
+    "en": "Wait for a confirming candle close (clause 5-3)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "پولبک و ریتست",
+    "en": "Pullback / Retest"
+   },
+   "latin": "Pullback / Retest",
+   "meaning": {
+    "fa": "پولبک: برگشت کوتاه خلاف جهت در دل یک روند. ریتست: برگشت قیمت به سطح شکسته‌شده برای آزمودن آن.",
+    "en": "Pullback: a short move against the trend inside a trend. Retest: price returning to a broken level to test it."
+   },
+   "example": {
+    "fa": "ورود در ریتست، با لیمیت، بهتر از تعقیب قیمت است (بازبینی ۹).",
+    "en": "Entering on the retest, with a limit order, beats chasing the price (correction 9)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "فیبوناچی",
+    "en": "Fibonacci Retracement"
+   },
+   "latin": "Fibonacci Retracement",
+   "meaning": {
+    "fa": "ابزاری که اندازهٔ برگشت را با نسبت‌های ۰٫۳۸۲، ۰٫۵ و ۰٫۶۱۸ حرکت قبلی نشان می‌دهد.",
+    "en": "A tool that shows the size of a retracement with the 0.382, 0.5 and 0.618 ratios of the previous move."
+   },
+   "example": {
+    "fa": "کمکی برای تعیین ناحیه است، نه دلیل ورود.",
+    "en": "A help for marking a zone, not a reason to enter."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "واگرایی",
+    "en": "Divergence"
+   },
+   "latin": "Divergence",
+   "meaning": {
+    "fa": "ناهمسویی قیمت با حجم یا اندیکاتور؛ مثلاً قیمت سقف بالاتر می‌زند ولی حجم کم می‌شود.",
+    "en": "Price disagreeing with volume or an indicator; for example price makes a higher high while volume falls."
+   },
+   "example": {
+    "fa": "هشدار است، نه شرط شورت؛ زمان ورود را نمی‌گوید (بازبینی ۱ و ماده ۴ مورد ۴).",
+    "en": "A warning, not a reason to short; it does not tell the entry time (correction 1 and article 4, item 4)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "اندیکاتور",
+    "en": "Indicator"
+   },
+   "latin": "Indicator",
+   "meaning": {
+    "fa": "محاسبه‌ای روی قیمت یا حجم برای کمک به تصمیم.",
+    "en": "A calculation on price or volume to help a decision."
+   },
+   "example": {
+    "fa": "بیشترشان قیمت را با تأخیر نشان می‌دهند؛ ابزار تأییدند، نه پیش‌بینی.",
+    "en": "Most of them lag the price; they are tools for confirmation, not prediction."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "میانگین متحرک",
+    "en": "MA / EMA"
+   },
+   "latin": "MA / EMA",
+   "meaning": {
+    "fa": "میانگین قیمت بسته شدن در چند کندل اخیر. SMA همه را برابر می‌گیرد و EMA به کندل‌های تازه وزن بیشتر می‌دهد.",
+    "en": "The average closing price of the last few candles. SMA weights them equally and EMA gives more weight to recent candles."
+   },
+   "example": {
+    "fa": "۵۰ EMA و ۲۰۰ برای تعیین روند (بازبینی ۳).",
+    "en": "The 50 and 200 EMA for defining the trend (correction 3)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "آراس‌آی",
+    "en": "RSI"
+   },
+   "latin": "RSI",
+   "meaning": {
+    "fa": "شاخصی بین ۰ و ۱۰۰ از قدرت حرکت قیمت (معمولاً ۱۴ دوره). بالای ۷۰ را «اشباع خرید» و زیر ۳۰ را «اشباع فروش» می‌گویند.",
+    "en": "An index from 0 to 100 of the strength of price moves (usually 14 periods). Above 70 is called \"overbought\" and below 30 \"oversold\"."
+   },
+   "example": {
+    "fa": "در روند قوی مدت‌ها بالای ۷۰ می‌ماند؛ «اشباع» به معنی برگشت نیست.",
+    "en": "In a strong trend it stays above 70 for a long time; \"overbought\" does not mean a reversal."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "باند بولینگر",
+    "en": "Bollinger Bands"
+   },
+   "latin": "Bollinger Bands",
+   "meaning": {
+    "fa": "دو باند به فاصلهٔ ۲ انحراف معیار بالا و پایین میانگین ۲۰ دوره.",
+    "en": "Two bands 2 standard deviations above and below the 20-period average."
+   },
+   "example": {
+    "fa": "باریک شدن باندها یعنی نوسان کم؛ لمس باند به‌تنهایی سیگنال برگشت نیست.",
+    "en": "Narrowing bands mean low volatility; touching a band alone is not a reversal signal."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "ای‌تی‌آر",
+    "en": "ATR"
+   },
+   "latin": "ATR",
+   "meaning": {
+    "fa": "میانگین دامنهٔ واقعی کندل‌ها (معمولاً ۱۴ دوره)؛ معیار نوسان به واحد قیمت.",
+    "en": "The average true range of candles (usually 14 periods); a measure of volatility in price units."
+   },
+   "example": {
+    "fa": "حد ضرر پشت ساختار به‌علاوهٔ ۰٫۵ تا ۱ ATR (بند ۵-۴). اگر ATR برابر ۲ و قیمت ۱۰۰ باشد، یک ATR یعنی ۲٪.",
+    "en": "The stop goes behind structure plus 0.5 to 1 ATR (clause 5-4). If ATR is 2 and price is 100, one ATR is 2%."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "تحلیل تکنیکال و بنیادی",
+    "en": "Technical / Fundamental"
+   },
+   "latin": "Technical / Fundamental",
+   "meaning": {
+    "fa": "تکنیکال: بررسی نمودار و حجم. بنیادی: ارزیابی پروژه، اخبار و اقتصاد.",
+    "en": "Technical: studying the chart and volume. Fundamental: evaluating the project, news and economy."
+   },
+   "example": {
+    "fa": "اساس‌نامه خبر را برای مدیریت ریسک رویداد می‌خواهد (ماده ۴ مورد ۵).",
+    "en": "The constitution wants news for managing event risk (article 4, item 5)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "شکار استاپ",
+    "en": "Stop Hunt"
+   },
+   "latin": "Stop Hunt",
+   "meaning": {
+    "fa": "حرکت سریع قیمت به ناحیه‌ای که استاپ‌های زیادی آنجاست و بعد برگشت.",
+    "en": "A fast move of price into a zone with many stops, followed by a reversal."
+   },
+   "example": {
+    "fa": "حد ضرر روی عدد رُند آسان شکار می‌شود (بند ۵-۴).",
+    "en": "A stop on a round number is easily hunted (clause 5-4)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "مارکت‌میکر",
+    "en": "Market Maker"
+   },
+   "latin": "Market Maker",
+   "meaning": {
+    "fa": "نهادی که دائم سفارش خرید و فروش می‌گذارد و نقدینگی می‌سازد.",
+    "en": "A firm that constantly places buy and sell orders and creates liquidity."
+   },
+   "example": {
+    "fa": "نیت‌شان را نمی‌شود سنجید، اما همسو نبودن حجم با قیمت را می‌شود (بازبینی ۱).",
+    "en": "You cannot measure their intent, but you can measure volume not agreeing with price (correction 1)."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "لیکوئید زنجیره‌ای",
+    "en": "Liquidation Cascade"
+   },
+   "latin": "Liquidation Cascade",
+   "meaning": {
+    "fa": "زنجیرهٔ لیکوئیدها: فروش اجباری لانگ‌ها قیمت را پایین‌تر می‌برد و لیکوئید بعدی را می‌زند.",
+    "en": "A chain of liquidations: forced selling of longs pushes the price lower and hits the next liquidation."
+   },
+   "example": {
+    "fa": "علت بسیاری از شمع‌های بلند ناگهانی و یکی از دلایل دوری از اهرم بالا.",
+    "en": "The cause of many sudden long candles and one reason to stay away from high leverage."
+   }
+  },
+  {
+   "section": 6,
+   "term": {
+    "fa": "اسکوییز",
+    "en": "Short / Long Squeeze"
+   },
+   "latin": "Short / Long Squeeze",
+   "meaning": {
+    "fa": "حرکت تند به‌خاطر بسته شدن اجباری پوزیشن‌های یک طرف. در شورت‌اسکوییز، شورت‌ها برای بستن خرید می‌کنند و قیمت را بالاتر می‌برند.",
+    "en": "A sharp move caused by one side's positions being force-closed. In a short squeeze, shorts buy to close and push the price higher."
+   },
+   "example": {
+    "fa": "معمولاً بعد از ازدحام در یک جهت (فاندینگ بالا) پیش می‌آید.",
+    "en": "It usually follows crowding in one direction (high funding)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "صرافی متمرکز",
+    "en": "CEX"
+   },
+   "latin": "CEX",
+   "meaning": {
+    "fa": "صرافی‌ای که یک شرکت اداره می‌کند. دارایی در حساب شما نزد صرافی نگه‌داری می‌شود و با نام کاربری، رمز و احراز هویت وارد می‌شوید.",
+    "en": "An exchange run by a company. Assets are held in your account at the exchange and you log in with a username, password and identity verification."
+   },
+   "example": {
+    "fa": "فیوچرز این اساس‌نامه روی صرافی متمرکز انجام می‌شود. صرافی هم ریسک دارد: هک، توقف برداشت، مسدودی حساب (بند ۱۰-۴).",
+    "en": "This constitution's futures trading happens on a centralized exchange. Exchanges carry risk too: hacks, withdrawal freezes, account blocks (clause 10-4)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "صرافی غیرمتمرکز",
+    "en": "DEX"
+   },
+   "latin": "DEX",
+   "meaning": {
+    "fa": "صرافی‌ای که روی بلاک‌چین و با قرارداد هوشمند کار می‌کند. دارایی در کیف پول خودتان می‌ماند و برای معامله کیف را به آن وصل می‌کنید.",
+    "en": "An exchange that runs on a blockchain with smart contracts. Assets stay in your own wallet and you connect the wallet to trade."
+   },
+   "example": {
+    "fa": "معمولاً حساب و احراز هویت ندارد، اما اشتباه در آدرس یا تأیید یک قرارداد جعلی را کسی جبران نمی‌کند.",
+    "en": "It usually has no account or identity check, but no one reverses a mistake in an address or the approval of a fake contract."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "کیف اسپات و فیوچرز",
+    "en": "Spot / Futures Wallet"
+   },
+   "latin": "Spot / Futures Wallet",
+   "meaning": {
+    "fa": "دو بخش جدا در حساب صرافی. اسپات برای خرید و نگه‌داری دارایی است و فیوچرز مارجین معاملات اهرمی را نگه می‌دارد.",
+    "en": "Two separate parts of an exchange account. Spot is for buying and holding assets, futures holds the margin of leveraged trades."
+   },
+   "example": {
+    "fa": "برای معامله باید پول را از اسپات به فیوچرز منتقل کنی (Transfer). فقط مقدار لازم را منتقل کن و بقیه روی صرافی نماند (بند ۱۰-۳).",
+    "en": "To trade you must move money from spot to futures (Transfer). Move only what is needed and do not leave the rest on the exchange (clause 10-3)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "زیرحساب",
+    "en": "Sub-account"
+   },
+   "latin": "Sub-account",
+   "meaning": {
+    "fa": "حساب فرعی در همان صرافی با موجودی و کلید API جداگانه (اگر صرافی پشتیبانی کند).",
+    "en": "A secondary account at the same exchange with its own balance and API key (if the exchange supports it)."
+   },
+   "example": {
+    "fa": "ابزار عملی بند ۲-۱: حساب معاملاتی و پرتفوی بلندمدت قاطی نشوند.",
+    "en": "A practical tool for clause 2-1: keep the trading account and the long-term portfolio apart."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "واریز و برداشت",
+    "en": "Deposit / Withdrawal"
+   },
+   "latin": "Deposit / Withdrawal",
+   "meaning": {
+    "fa": "واریز: فرستادن دارایی از بیرون به حساب صرافی. برداشت: فرستادن دارایی از حساب صرافی به آدرسی بیرونی.",
+    "en": "Deposit: sending assets from outside into the exchange account. Withdrawal: sending assets from the exchange account to an outside address."
+   },
+   "example": {
+    "fa": "هر ماه ۳۰٪ از سود محقق‌شده (قابل تنظیم تا ۵۰٪) به اسپات یا کیف پول شخصی منتقل می‌شود (بند ۷-۲).",
+    "en": "Each month 30% of realized profit (adjustable up to 50%) moves to spot or a personal wallet (clause 7-2)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "شبکه",
+    "en": "Network"
+   },
+   "latin": "Network",
+   "meaning": {
+    "fa": "مسیر بلاک‌چینی انتقال: ترون (TRC20)، اتریوم (ERC20) یا شبکهٔ BEP20 (بی‌ان‌بی اسمارت چین). یک دارایی ممکن است روی چند شبکه وجود داشته باشد.",
+    "en": "The blockchain route of a transfer: Tron (TRC20), Ethereum (ERC20) or BEP20 (BNB Smart Chain). One asset may exist on several networks."
+   },
+   "example": {
+    "fa": "شبکهٔ مبدأ و مقصد باید یکی باشد، وگرنه دارایی ممکن است گم شود یا بازیابی‌اش سخت و پرهزینه باشد. اول یک مبلغ کوچک آزمایشی بفرست.",
+    "en": "The sending and receiving networks must match, otherwise the asset may be lost or hard and costly to recover. Send a small test amount first."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "آدرس و ممو",
+    "en": "Address / Memo / Tag"
+   },
+   "latin": "Address / Memo / Tag",
+   "meaning": {
+    "fa": "آدرس مقصد رشته‌ای بلند از حروف و عدد است. بعضی دارایی‌ها علاوه بر آدرس یک شناسهٔ تکمیلی (ممو یا تگ) هم می‌خواهند.",
+    "en": "The destination address is a long string of letters and digits. Some assets also need an extra identifier (memo or tag) besides the address."
+   },
+   "example": {
+    "fa": "ممو را جا بیندازی، واریز به حسابت نمی‌رسد یا دیر می‌رسد. آدرس را کپی کن، تایپ نکن، و ابتدا و انتهایش را با مقصد مقایسه کن.",
+    "en": "If you leave out the memo, the deposit does not reach your account or arrives late. Copy the address, do not type it, and compare its start and end with the destination."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "شناسهٔ تراکنش",
+    "en": "TXID / Hash"
+   },
+   "latin": "TXID / Hash",
+   "meaning": {
+    "fa": "کد یکتای هر تراکنش روی بلاک‌چین. با آن در سایت‌های کاوشگر بلاک‌چین وضعیت انتقال را می‌بینی.",
+    "en": "The unique code of each transaction on the blockchain. With it you can see the transfer's status on blockchain explorer sites."
+   },
+   "example": {
+    "fa": "اگر واریز دیر شد، TXID را به پشتیبانی بده و تا رسیدن به حساب، رویش موجودی فرض نکن.",
+    "en": "If a deposit is late, give the TXID to support, and do not count on the balance until it arrives."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "تأییدیه",
+    "en": "Confirmation"
+   },
+   "latin": "Confirmation",
+   "meaning": {
+    "fa": "تعداد بلوک‌هایی که پس از ثبت تراکنش روی آن اضافه شده‌اند. صرافی تعداد مشخصی تأییدیه می‌خواهد تا واریز را قابل استفاده کند.",
+    "en": "The number of blocks added on top of a transaction after it was recorded. The exchange needs a set number of confirmations before a deposit can be used."
+   },
+   "example": {
+    "fa": "تعداد لازم را صرافی تعیین می‌کند و بسته به شبکه فرق دارد. تا کامل نشده، برای معامله رویش حساب نکن.",
+    "en": "The exchange sets the number and it varies by network. Until it is complete, do not count on it for trading."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "کارمزد شبکه",
+    "en": "Network Fee / Gas"
+   },
+   "latin": "Network Fee / Gas",
+   "meaning": {
+    "fa": "هزینهٔ ثبت تراکنش روی بلاک‌چین؛ با شلوغی شبکه بالا می‌رود، به‌ویژه در اتریوم. صرافی هنگام برداشت یک کارمزد برداشت (معمولاً ثابت برای هر شبکه) از مبلغ کم می‌کند.",
+    "en": "The cost of recording a transaction on the blockchain; it rises when the network is busy, especially on Ethereum. On withdrawal the exchange deducts a withdrawal fee (usually fixed per network)."
+   },
+   "example": {
+    "fa": "پیش از برداشت، کارمزد را در صفحهٔ صرافی ببین و اگر مقصد پشتیبانی می‌کند، شبکهٔ ارزان‌تر را انتخاب کن.",
+    "en": "Before withdrawing, check the fee on the exchange page and, if the destination supports it, pick the cheaper network."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "احراز هویت",
+    "en": "KYC"
+   },
+   "latin": "KYC",
+   "meaning": {
+    "fa": "تأیید هویت با مدارک (و گاهی عکس یا ویدیو) برای بالاتر رفتن سقف‌ها یا دسترسی به خدمات بیشتر.",
+    "en": "Identity verification with documents (and sometimes a photo or video) to raise limits or unlock more services."
+   },
+   "example": {
+    "fa": "شرایط هر صرافی و هر کشور فرق می‌کند و ممکن است عوض شود. ریسک مسدودی حساب واقعی است (بند ۱۰-۴).",
+    "en": "Conditions differ by exchange and country and may change. The risk of an account block is real (clause 10-4)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "احراز هویت دومرحله‌ای",
+    "en": "2FA"
+   },
+   "latin": "2FA",
+   "meaning": {
+    "fa": "لایهٔ دوم ورود علاوه بر رمز؛ معمولاً کدی از برنامهٔ Authenticator یا کلید سخت‌افزاری.",
+    "en": "A second login layer besides the password; usually a code from an authenticator app or a hardware key."
+   },
+   "example": {
+    "fa": "برنامهٔ Authenticator امن‌تر از پیامک است. کدهای پشتیبان را روی کاغذ نگه دار (بند ۱۰-۱).",
+    "en": "An authenticator app is safer than SMS. Keep the backup codes on paper (clause 10-1)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "کلید API",
+    "en": "API Key"
+   },
+   "latin": "API Key",
+   "meaning": {
+    "fa": "دسترسی برنامه‌ای به حساب بدون رمز ورود؛ برای ربات، نمودار و ابزارهای ژورنال.",
+    "en": "Programmatic access to the account without the login password; for bots, charting and journal tools."
+   },
+   "example": {
+    "fa": "فقط با دسترسی معامله (یا فقط خواندن)، بدون اجازهٔ برداشت و در صورت امکان با محدودیت IP (بند ۱۰-۲). کلید و Secret را در پیام‌رسان یا اسکرین‌شات نفرست.",
+    "en": "Trading permission only (or read-only), no withdrawal permission and an IP restriction where possible (clause 10-2). Never send the key and secret in a messenger or a screenshot."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "فهرست سفید",
+    "en": "Whitelist"
+   },
+   "latin": "Whitelist",
+   "meaning": {
+    "fa": "فهرست آدرس‌های مجاز برای برداشت؛ برداشت به آدرس بیرون از فهرست مسدود یا با تأخیر انجام می‌شود (بسته به صرافی).",
+    "en": "A list of addresses allowed for withdrawal; withdrawals to addresses outside the list are blocked or delayed (depending on the exchange)."
+   },
+   "example": {
+    "fa": "اگر حساب هک شود، برداشت به آدرس مهاجم سخت‌تر می‌شود. فقط آدرس کیف پول شخصی خودت را اضافه کن (بند ۱۰-۳).",
+    "en": "If the account is hacked, withdrawing to the attacker's address becomes harder. Add only your own personal wallet address (clause 10-3)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "فیشینگ",
+    "en": "Phishing"
+   },
+   "latin": "Phishing",
+   "meaning": {
+    "fa": "سایت، ایمیل، پیام یا برنامهٔ جعلی که شبیه صرافی یا کیف پول است و رمز، کد 2FA یا عبارت بازیابی را می‌دزدد.",
+    "en": "A fake site, email, message or app that looks like an exchange or wallet and steals the password, 2FA code or recovery phrase."
+   },
+   "example": {
+    "fa": "صرافی را از بوکمارک خودت باز کن، نه از لینک پیام. «کد ضدفیشینگ» صرافی را، اگر دارد، فعال کن. لینک‌ها و سیگنال‌دهنده‌های ناشناس مشکوک‌اند (بند ۱۰-۶).",
+    "en": "Open the exchange from your own bookmark, not from a link in a message. Enable the exchange's \"anti-phishing code\" if it has one. Unknown links and signal sellers are suspicious (clause 10-6)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "کیف پول سرد و گرم",
+    "en": "Cold / Hot Wallet"
+   },
+   "latin": "Cold / Hot Wallet",
+   "meaning": {
+    "fa": "گرم: کیف پول متصل به اینترنت، مثل کیف موبایل یا افزونهٔ مرورگر. سرد: کلیدها آفلاین نگه‌داری می‌شوند، مثل کیف سخت‌افزاری.",
+    "en": "Hot: a wallet connected to the internet, such as a mobile wallet or browser extension. Cold: keys kept offline, such as a hardware wallet."
+   },
+   "example": {
+    "fa": "پول بلندمدت را سرد نگه دار و روی صرافی فقط موجودی لازم معامله بماند (بندهای ۱۰-۳ و ۷-۲).",
+    "en": "Keep long-term money cold and leave only the balance needed for trading on the exchange (clauses 10-3 and 7-2)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "کلید خصوصی و عبارت بازیابی",
+    "en": "Private Key / Seed Phrase"
+   },
+   "latin": "Private Key / Seed Phrase",
+   "meaning": {
+    "fa": "کلید خصوصی ثابت‌کنندهٔ مالکیت کیف پول است. عبارت بازیابی ۱۲ یا ۲۴ کلمه‌ای است که همهٔ کلیدها را می‌سازد.",
+    "en": "The private key proves ownership of a wallet. The recovery phrase is 12 or 24 words that generate all the keys."
+   },
+   "example": {
+    "fa": "هر کس این کلمات را داشته باشد، پول را دارد. به هیچ‌کس و هیچ سایتی نده، عکس نگیر و آنلاین ذخیره نکن؛ آفلاین روی کاغذ یا فلز (بند ۱۰-۶).",
+    "en": "Whoever has these words has the money. Give them to no one and no site, do not photograph them and do not store them online; keep them offline on paper or metal (clause 10-6)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "توقف برداشت",
+    "en": "Withdrawal Suspension"
+   },
+   "latin": "Withdrawal Suspension",
+   "meaning": {
+    "fa": "وضعیتی که صرافی برداشت را کلی یا برای یک شبکه موقت می‌بندد؛ به‌دلیل نگه‌داری، هک، شلوغی یا مسائل حقوقی.",
+    "en": "A state in which the exchange temporarily closes withdrawals entirely or for one network; because of maintenance, a hack, congestion or legal issues."
+   },
+   "example": {
+    "fa": "یکی از دلیل‌های اینکه همهٔ سرمایه روی یک صرافی نمی‌ماند (بند ۱۰-۴).",
+    "en": "One of the reasons not all capital stays on one exchange (clause 10-4)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "دیلیست",
+    "en": "Delisting"
+   },
+   "latin": "Delisting",
+   "meaning": {
+    "fa": "حذف یک دارایی از فهرست معاملاتی صرافی. معمولاً از قبل اعلام می‌شود و قیمت اغلب با اعلام آن می‌ریزد.",
+    "en": "Removing an asset from the exchange's trading list. It is usually announced in advance and the price often falls on the announcement."
+   },
+   "example": {
+    "fa": "اعلان‌های صرافی را دنبال کن؛ پوزیشن اهرمی روی دارایی با اعلام دیلیست پرریسک است.",
+    "en": "Follow the exchange's announcements; a leveraged position on an asset announced for delisting is high risk."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "اثبات ذخایر",
+    "en": "Proof of Reserves"
+   },
+   "latin": "Proof of Reserves",
+   "meaning": {
+    "fa": "گزارشی که صرافی منتشر می‌کند تا نشان دهد دارایی مشتریان را واقعاً دارد. روش و اعتبار آن بین صرافی‌ها فرق می‌کند.",
+    "en": "A report an exchange publishes to show it really holds customers' assets. The method and its reliability differ between exchanges."
+   },
+   "example": {
+    "fa": "فقط یکی از سنجه‌ها برای ریسک صرافی است، نه ضمانت (بند ۱۰-۴).",
+    "en": "Only one measure of exchange risk, not a guarantee (clause 10-4)."
+   }
+  },
+  {
+   "section": 7,
+   "term": {
+    "fa": "فیات و پی‌تو‌پی",
+    "en": "Fiat / P2P"
+   },
+   "latin": "Fiat / P2P",
+   "meaning": {
+    "fa": "فیات: پول رسمی مثل ریال و دلار. پی‌تو‌پی: خرید و فروش مستقیم بین کاربران با واسطهٔ صرافی.",
+    "en": "Fiat: official money such as the rial and the dollar. P2P: direct buying and selling between users with the exchange as intermediary."
+   },
+   "example": {
+    "fa": "در P2P فقط به موجودی واقعی حساب بانکی خودت اعتماد کن، نه عکس رسید. پیش از آزاد کردن دارایی، واریز را در حساب خودت ببین.",
+    "en": "In P2P trust only the real balance of your own bank account, not a picture of a receipt. Before releasing the asset, see the deposit in your own account."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "فدرال رزرو و جلسهٔ FOMC",
+    "en": "Federal Reserve / FOMC"
+   },
+   "latin": "Federal Reserve / FOMC",
+   "meaning": {
+    "fa": "بانک مرکزی آمریکا. کمیتهٔ FOMC در سال حدود ۸ جلسهٔ اصلی برای تصمیم دربارهٔ نرخ بهره دارد و پس از هر جلسه بیانیه می‌دهد.",
+    "en": "The US central bank. The FOMC holds about 8 main meetings a year to decide on interest rates and issues a statement after each one."
+   },
+   "example": {
+    "fa": "بیانیه معمولاً ساعت ۱۴ به وقت شرق آمریکا منتشر می‌شود (حدود ۲۱:۳۰ تا ۲۲:۳۰ به وقت تهران، بسته به ساعت تابستانی آمریکا) و نشست خبری رئیس فدرال رزرو نیم ساعت بعد شروع می‌شود. در بازهٔ ایمنی ورود جدید ممنوع است (ماده ۴ مورد ۵).",
+    "en": "The statement is usually released at 14:00 US Eastern time (about 21:30 to 22:30 Tehran time, depending on US daylight saving) and the chair's press conference starts half an hour later. New entries are forbidden in the safety window (article 4, item 5)."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "نرخ بهره",
+    "en": "Interest Rate"
+   },
+   "latin": "Interest Rate",
+   "meaning": {
+    "fa": "هزینهٔ قرض گرفتن پول که بانک مرکزی تعیین می‌کند. نرخ بالاتر معمولاً به دارایی‌های ریسکی مثل کریپتو فشار می‌آورد و نرخ پایین‌تر معمولاً حمایتی است.",
+    "en": "The cost of borrowing money, set by the central bank. Higher rates usually weigh on risky assets such as crypto and lower rates are usually supportive."
+   },
+   "example": {
+    "fa": "واکنش بازار بیشتر به فاصلهٔ نتیجه با انتظار است تا به خود عدد. این رابطه همیشگی نیست و در کوتاه‌مدت می‌تواند برعکس شود.",
+    "en": "The market reacts more to the gap between the result and expectations than to the number itself. The relationship is not permanent and can reverse in the short term."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "تورم و شاخص قیمت مصرف‌کننده",
+    "en": "Inflation / CPI"
+   },
+   "latin": "Inflation / CPI",
+   "meaning": {
+    "fa": "تورم: افزایش عمومی قیمت‌ها. CPI سنجهٔ ماهانهٔ تورم مصرف‌کننده در آمریکاست و از مهم‌ترین عددهایی است که فدرال رزرو دنبال می‌کند.",
+    "en": "Inflation: a general rise in prices. CPI is the monthly measure of US consumer inflation and one of the most important numbers the Federal Reserve watches."
+   },
+   "example": {
+    "fa": "CPI بالاتر از پیش‌بینی معمولاً یعنی احتمال نرخ بهرهٔ بالاتر و فشار بر بازار. روز انتشار جزو رویدادهای بازهٔ ایمنی است (ماده ۴ مورد ۵).",
+    "en": "A CPI above forecast usually means a higher chance of higher rates and pressure on the market. Release day is one of the safety-window events (article 4, item 5)."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "گزارش اشتغال",
+    "en": "NFP / Jobs Report"
+   },
+   "latin": "NFP / Jobs Report",
+   "meaning": {
+    "fa": "گزارش ماهانهٔ تغییر تعداد مشاغل غیرکشاورزی در آمریکا (Non-Farm Payrolls) که معمولاً جمعهٔ اول هر ماه منتشر می‌شود.",
+    "en": "The monthly report of the change in US non-farm jobs (Non-Farm Payrolls), usually released on the first Friday of each month."
+   },
+   "example": {
+    "fa": "از شلوغ‌ترین ساعت‌های خبری ماه است. در بازهٔ ایمنی ورود جدید نکن (ماده ۴ مورد ۵).",
+    "en": "One of the busiest news hours of the month. Do not open new entries in the safety window (article 4, item 5)."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "تقویم اقتصادی",
+    "en": "Economic Calendar"
+   },
+   "latin": "Economic Calendar",
+   "meaning": {
+    "fa": "جدول رویدادهای اقتصادی هر روز و هفته با ساعت انتشار، میزان اهمیت و سه عدد: قبلی (Previous)، پیش‌بینی (Forecast) و واقعی (Actual).",
+    "en": "A table of each day's and week's economic events with release time, importance and three numbers: previous, forecast and actual."
+   },
+   "example": {
+    "fa": "هر صبح نگاهش کن (بازبینی ۸) و رویدادهای مهم را در یادداشت همان روز بنویس. نتیجهٔ دور از پیش‌بینی معمولاً نوسان بزرگ‌تری می‌سازد.",
+    "en": "Look at it every morning (correction 8) and write the important events in that day's note. A result far from the forecast usually creates a bigger swing."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "ریسک‌پذیری و ریسک‌گریزی",
+    "en": "Risk-On / Risk-Off"
+   },
+   "latin": "Risk-On / Risk-Off",
+   "meaning": {
+    "fa": "ریسک‌پذیری: سرمایه به سمت دارایی‌های پرریسک مثل سهام و کریپتو می‌رود. ریسک‌گریزی: سرمایه به سمت دارایی‌های امن‌تر مثل دلار و اوراق می‌رود.",
+    "en": "Risk-on: money flows into risky assets such as stocks and crypto. Risk-off: money flows into safer assets such as the dollar and bonds."
+   },
+   "example": {
+    "fa": "حال‌وهوای کلی بازار است و با اخبار سریع عوض می‌شود. وقتی ریسک‌گریزی غالب است، لانگ آلت‌کوین‌ها معمولاً بیشتر آسیب می‌بینند.",
+    "en": "It is the general mood of the market and changes quickly with news. When risk-off dominates, altcoin longs usually suffer most."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "شاخص دلار",
+    "en": "DXY / US Dollar Index"
+   },
+   "latin": "DXY / US Dollar Index",
+   "meaning": {
+    "fa": "ارزش دلار آمریکا در برابر سبدی از ارزهای اصلی.",
+    "en": "The value of the US dollar against a basket of major currencies."
+   },
+   "example": {
+    "fa": "معمولاً دلار قوی‌تر به بازارهای ریسکی فشار می‌آورد و دلار ضعیف‌تر حمایتی است. این رابطه ثابت نیست و فقط یکی از ورودی‌هاست.",
+    "en": "A stronger dollar usually weighs on risk markets and a weaker dollar is supportive. The relationship is not fixed and is only one input."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "ای‌تی‌اف و جریان آن",
+    "en": "ETF / ETF Flows"
+   },
+   "latin": "ETF / ETF Flows",
+   "meaning": {
+    "fa": "ETF صندوقی است که در بورس معامله می‌شود. صندوق‌های ETF اسپات بیت‌کوین و اتریوم در آمریکا امکان سرمایه‌گذاری بدون نگه‌داری مستقیم کیف پول را می‌دهند. جریان ETF ورود و خروج خالص پول به آن‌هاست که هر روز منتشر می‌شود.",
+    "en": "An ETF is a fund traded on a stock exchange. US spot bitcoin and ether ETFs allow investing without holding a wallet directly. ETF flows are the net money in and out of them, published daily."
+   },
+   "example": {
+    "fa": "ردپای سرمایه‌گذاران بزرگ ورودی تحلیل است، نه دلیل خرید (بند ۱۱-۴).",
+    "en": "The footprint of large investors is an analysis input, not a reason to buy (clause 11-4)."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "ذخایر صرافی",
+    "en": "Exchange Reserves"
+   },
+   "latin": "Exchange Reserves",
+   "meaning": {
+    "fa": "مجموع دارایی روی آدرس‌های شناخته‌شدهٔ صرافی‌ها. بعضی تحلیلگران کاهش آن را نشانهٔ انتقال به نگه‌داری شخصی و افزایشش را نشانهٔ آمادگی برای فروش می‌دانند.",
+    "en": "The total assets on exchanges' known addresses. Some analysts read a decline as a move to self-custody and a rise as readiness to sell."
+   },
+   "example": {
+    "fa": "تفسیر قطعی ندارد و باید با داده‌های دیگر سنجیده شود. ورودی تحلیل است، نه دلیل خرید (بند ۱۱-۴).",
+    "en": "It has no definite reading and must be weighed with other data. An analysis input, not a reason to buy (clause 11-4)."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "داده‌های آنچین",
+    "en": "On-chain Data"
+   },
+   "latin": "On-chain Data",
+   "meaning": {
+    "fa": "اطلاعاتی که از خود بلاک‌چین خوانده می‌شود، مثل حرکت کیف‌های بزرگ، تعداد آدرس‌های فعال و ورود و خروج دارایی به صرافی‌ها.",
+    "en": "Information read from the blockchain itself, such as large wallet movements, active address counts and flows into and out of exchanges."
+   },
+   "example": {
+    "fa": "ابزار تکمیلی است. برچسب‌هایی مثل «نهنگ» یا «صرافی» روی آدرس‌ها حدسی‌اند و گاهی اشتباه.",
+    "en": "A supplementary tool. Labels like \"whale\" or \"exchange\" on addresses are guesses and sometimes wrong."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "هاوینگ",
+    "en": "Halving"
+   },
+   "latin": "Halving",
+   "meaning": {
+    "fa": "رویدادی در بیت‌کوین که تقریباً هر ۲۱۰٬۰۰۰ بلوک (حدود ۴ سال) پاداش استخراج هر بلوک را نصف می‌کند.",
+    "en": "A bitcoin event that halves the block mining reward roughly every 210,000 blocks (about 4 years)."
+   },
+   "example": {
+    "fa": "تاریخش از قبل معلوم است و ممکن است پیش از رویداد در قیمت اثر کرده باشد. به‌تنهایی دلیل ورود نیست.",
+    "en": "Its date is known in advance and may already be in the price before the event. It is not a reason to enter on its own."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "قیمت‌گذاری‌شده",
+    "en": "Priced In"
+   },
+   "latin": "Priced In",
+   "meaning": {
+    "fa": "وقتی خبری از قبل مورد انتظار بوده، اثرش پیش از انتشار روی قیمت آمده است.",
+    "en": "When news was expected in advance, its effect reached the price before the release."
+   },
+   "example": {
+    "fa": "گاهی خبر «خوب» منتشر می‌شود و قیمت می‌ریزد، چون بازار بهتر از آن را انتظار داشت. واکنش را با انتظار بسنج، نه با خود خبر.",
+    "en": "Sometimes \"good\" news comes out and the price falls, because the market expected better. Judge the reaction against expectations, not against the news itself."
+   }
+  },
+  {
+   "section": 8,
+   "term": {
+    "fa": "رویداد ناگهانی و قوی سیاه",
+    "en": "Black Swan"
+   },
+   "latin": "Black Swan",
+   "meaning": {
+    "fa": "رویداد نادر و غیرمنتظره که بازار را شوکه می‌کند، مثل هک بزرگ، ورشکستگی یک صرافی یا تنش نظامی.",
+    "en": "A rare, unexpected event that shocks the market, such as a big hack, an exchange bankruptcy or military tension."
+   },
+   "example": {
+    "fa": "پیش‌بینی‌پذیر نیست. فقط با اهرم پایین، حد ضرر ثبت‌شده در صرافی و ریسک کم هر معامله قابل تحمل می‌شود. در روز خبرهای ناگهانی ریسک را نصف کن (بازبینی ۸).",
+    "en": "It cannot be predicted. It only becomes survivable with low leverage, a stop placed on the exchange and low risk per trade. On days of sudden news, halve the risk (correction 8)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "احساسات بازار و شاخص ترس و طمع",
+    "en": "Sentiment / Fear and Greed Index"
+   },
+   "latin": "Sentiment / Fear and Greed Index",
+   "meaning": {
+    "fa": "حال‌وهوای جمعی بازار. شاخص ترس و طمع عددی بین ۰ تا ۱۰۰ است که از چند داده مثل نوسان، حجم و شبکه‌های اجتماعی ساخته می‌شود.",
+    "en": "The collective mood of the market. The fear and greed index is a number from 0 to 100 built from data such as volatility, volume and social media."
+   },
+   "example": {
+    "fa": "ورودی کمکی است، نه سیگنال ورود. روش محاسبه بین سایت‌ها فرق دارد.",
+    "en": "A supporting input, not an entry signal. The calculation differs between sites."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "فومو",
+    "en": "FOMO"
+   },
+   "latin": "FOMO",
+   "meaning": {
+    "fa": "ترس از جا ماندن (Fear Of Missing Out): ورود عجولانه چون قیمت دارد می‌رود.",
+    "en": "Fear Of Missing Out: entering in a hurry because the price is running away."
+   },
+   "example": {
+    "fa": "نشانه‌ها: تعقیب کندل، بزرگ‌تر کردن اندازه، ورود بدون چک‌لیست. ورود بدون چک‌لیست خط‌قرمز است (ماده ۹ مورد ۶).",
+    "en": "Signs: chasing candles, enlarging the size, entering without the checklist. Entering without the checklist is a red line (article 9, item 6)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "فاد",
+    "en": "FUD"
+   },
+   "latin": "FUD",
+   "meaning": {
+    "fa": "ترس، تردید و ابهام (Fear, Uncertainty, Doubt): خبر یا شایعه‌ای که با هدف ترساندن بازار پخش می‌شود، چه درست باشد چه غلط.",
+    "en": "Fear, Uncertainty, Doubt: news or a rumour spread to scare the market, whether true or false."
+   },
+   "example": {
+    "fa": "پیش از واکنش، منبع و ساعت انتشار را بررسی کن و خبر را با قیمت و تقویم بسنج، نه با شدت لحن آن.",
+    "en": "Before reacting, check the source and release time and weigh the news against price and the calendar, not against how loud it sounds."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "تعقیب قیمت",
+    "en": "Chasing"
+   },
+   "latin": "Chasing",
+   "meaning": {
+    "fa": "ورود بعد از حرکت بزرگ و بدون ستاپ، فقط چون قیمت دارد دور می‌شود.",
+    "en": "Entering after a big move and without a setup, only because the price is getting away."
+   },
+   "example": {
+    "fa": "تعقیب کندل ممنوع است و Market فقط برای خروج اضطراری یا ورود بعد از شکست تأییدشده است (بند ۵-۲).",
+    "en": "Chasing a candle is forbidden and market orders are only for an emergency exit or an entry after a confirmed breakout (clause 5-2)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "طمع",
+    "en": "Greed"
+   },
+   "latin": "Greed",
+   "meaning": {
+    "fa": "میل به سود بیشتر بعد از رسیدن به هدف؛ نگه‌داشتن بیش از حد پوزیشن یا بزرگ کردن اندازه.",
+    "en": "The urge for more profit after reaching the target; holding a position too long or enlarging the size."
+   },
+   "example": {
+    "fa": "وقتی در سود بزرگ هستی و دلت «بیشتر» می‌خواهد، بخشی را فوراً ببند؛ طمع علامت است (بند ۷-۳).",
+    "en": "When you are deep in profit and want \"more\", close part of it at once; greed is a signal (clause 7-3)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "معاملهٔ انتقامی",
+    "en": "Revenge Trading"
+   },
+   "latin": "Revenge Trading",
+   "meaning": {
+    "fa": "معامله‌ای که فقط برای جبران فوری ضرر گرفته می‌شود، معمولاً با اندازهٔ بزرگ‌تر و بدون ستاپ.",
+    "en": "A trade taken only to recover a loss immediately, usually with a bigger size and no setup."
+   },
+   "example": {
+    "fa": "ممنوع است (بند ۸-۲ و ماده ۹ مورد ۷). بعد از هر حد ضرر ۳۰ دقیقه توقف؛ بعد از دو حد ضرر پیاپی، پایان معاملات همان روز (بند ۸-۱).",
+    "en": "Forbidden (clause 8-2 and article 9, item 7). A 30 minute pause after each stop loss; after two consecutive stops, trading ends for the day (clause 8-1)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "معاملهٔ بیش‌ازحد",
+    "en": "Overtrading"
+   },
+   "latin": "Overtrading",
+   "meaning": {
+    "fa": "معاملهٔ زیاد و کم‌کیفیت، معمولاً از کسالت، هیجان یا میل به جبران.",
+    "en": "Trading a lot with low quality, usually out of boredom, excitement or the urge to recover."
+   },
+   "example": {
+    "fa": "سقف ۳ معامله در روز (بند ۸-۱). کسالت و هیجان را در برچسب احساس ژورنال ثبت کن (بند ۸-۴).",
+    "en": "A cap of 3 trades a day (clause 8-1). Record boredom and excitement in the journal's emotion label (clause 8-4)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "تیلت",
+    "en": "Tilt"
+   },
+   "latin": "Tilt",
+   "meaning": {
+    "fa": "از دست رفتن کنترل هیجانی بعد از ضرر یا اتفاق ناخوشایند که کیفیت تصمیم‌ها را خراب می‌کند. واژه از پوکر آمده است.",
+    "en": "Loss of emotional control after a loss or an unpleasant event, which ruins the quality of decisions. The word comes from poker."
+   },
+   "example": {
+    "fa": "نشانه‌ها: عجله، نادیده گرفتن چک‌لیست، بزرگ کردن اندازه. اگر کنترل از دستت رفته، معاملهٔ جدید نگیر و از صفحه فاصله بگیر؛ توقف‌های بند ۸-۱ برای همین‌اند.",
+    "en": "Signs: rushing, ignoring the checklist, enlarging the size. If you have lost control, take no new trade and step away from the screen; the clause 8-1 pauses exist for this."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "قاعدهٔ دعا",
+    "en": "Hope Rule"
+   },
+   "latin": "Hope Rule",
+   "meaning": {
+    "fa": "اگر خودت را در حال امیدواری یا دعا کردن دیدی، یعنی برنامه نداری.",
+    "en": "If you catch yourself hoping or praying, you have no plan."
+   },
+   "example": {
+    "fa": "نصف پوزیشن را ببند (بند ۸-۳).",
+    "en": "Close half of the position (clause 8-3)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "اعتمادبه‌نفس کاذب",
+    "en": "Overconfidence"
+   },
+   "latin": "Overconfidence",
+   "meaning": {
+    "fa": "بعد از چند سود پیاپی، حس اینکه بازار را فهمیده‌ای و با «پول بازار» بازی می‌کنی؛ اندازه و ریسک بی‌صدا بالا می‌رود.",
+    "en": "After a few wins in a row, the feeling that you have figured out the market and are playing with \"the market's money\"; size and risk silently go up."
+   },
+   "example": {
+    "fa": "بعد از سود، اندازه فقط با فرمول تعیین می‌شود. بعد از سود بزرگ (بالای ۳ برابر ریسک یا ۳٪ سرمایه در یک روز) تا ۲۴ ساعت ریسک را بالا نبر (بند ۳-۸).",
+    "en": "After a win, size comes only from the formula. After a big win (above 3 times risk or 3% of equity in one day) do not raise risk for 24 hours (clause 3-8)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "زیان‌گریزی",
+    "en": "Loss Aversion"
+   },
+   "latin": "Loss Aversion",
+   "meaning": {
+    "fa": "تمایل روانی به نگه‌داشتن ضرر باز به امید برگشت، چون تثبیت ضرر دردناک‌تر از ضرر روی کاغذ است.",
+    "en": "The psychological urge to hold an open loss hoping for a recovery, because locking in a loss hurts more than a loss on paper."
+   },
+   "example": {
+    "fa": "علت رایج جابه‌جا کردن حد ضرر و نگه‌داشتن بازنده‌هاست (بازبینی ۹). دور کردن یا حذف حد ضرر خط‌قرمز است (ماده ۹ مورد ۴).",
+    "en": "A common cause of moving stops and holding losers (correction 9). Moving the stop away or removing it is a red line (article 9, item 4)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "هزینهٔ غرق‌شده",
+    "en": "Sunk Cost"
+   },
+   "latin": "Sunk Cost",
+   "meaning": {
+    "fa": "ادامه دادن به معامله یا دارایی بازنده فقط چون قبلاً زمان و پول زیادی رویش گذاشته‌ای.",
+    "en": "Continuing a losing trade or asset only because you already put a lot of time and money into it."
+   },
+   "example": {
+    "fa": "پولی که رفته تصمیم آینده را تعیین نمی‌کند. ضرر را به «سرمایه‌گذاری بلندمدت» تبدیل نمی‌کنم (بند ۶-۶).",
+    "en": "Money that is gone does not decide the future. I do not turn a loss into a \"long-term investment\" (clause 6-6)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "سوگیری تأیید",
+    "en": "Confirmation Bias"
+   },
+   "latin": "Confirmation Bias",
+   "meaning": {
+    "fa": "گرایش به دیدن فقط نشانه‌هایی که با دیدگاه قبلی ما می‌خواند و نادیده گرفتن بقیه.",
+    "en": "The tendency to see only the signs that agree with our earlier view and ignore the rest."
+   },
+   "example": {
+    "fa": "پیش از ورود شرط ابطال را بنویس و عمداً دنبال دلیل مخالف هم بگرد.",
+    "en": "Before entry, write the invalidation condition and deliberately look for the opposing case too."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "انضباط و رعایت قوانین",
+    "en": "Discipline / Rule Compliance"
+   },
+   "latin": "Discipline / Rule Compliance",
+   "meaning": {
+    "fa": "پایبندی به قانون‌های مکتوب، فارغ از اینکه همان معامله سود بدهد یا ضرر.",
+    "en": "Sticking to the written rules, regardless of whether that particular trade wins or loses."
+   },
+   "example": {
+    "fa": "معیار اصلی موفقیت ماهانه «درصد رعایت قوانین» است (هدف ۹۰٪ یا بیشتر)، نه سود (بند ۱۳-۳).",
+    "en": "The main measure of monthly success is \"rule compliance\" (target 90% or more), not profit (clause 13-3)."
+   }
+  },
+  {
+   "section": 9,
+   "term": {
+    "fa": "برچسب اشتباه",
+    "en": "Mistake Tag"
+   },
+   "latin": "Mistake Tag",
+   "meaning": {
+    "fa": "در ژورنال برای هر معامله فقط یک اشتباه اصلی انتخاب می‌شود، مثل ورود زودهنگام، تعقیب قیمت، سایز بزرگ، خروج احساسی یا نقض چک‌لیست.",
+    "en": "In the journal, only one main mistake is picked for each trade, such as early entry, chasing price, oversized, emotional exit or checklist breach."
+   },
+   "example": {
+    "fa": "هدف سرزنش نیست؛ در مرور هفتگی تکراری‌ترین برچسب پیدا می‌شود و برایش یک قانون بهبود نوشته می‌شود (بند ۱۲-۲).",
+    "en": "The goal is not blame; in the weekly review the most repeated label is found and an improvement rule is written for it (clause 12-2)."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "پامپ و دامپ",
+    "en": "Pump and Dump"
+   },
+   "latin": "Pump and Dump",
+   "meaning": {
+    "fa": "بالا بردن مصنوعی قیمت یک دارایی کم‌حجم با تبلیغ و خرید هماهنگ، و فروختن در اوج به خریداران دیررسیده.",
+    "en": "Artificially driving up the price of a low-volume asset with promotion and coordinated buying, then selling at the top to late buyers."
+   },
+   "example": {
+    "fa": "بعضی کانال‌های سیگنال این کار را می‌کنند. سیگنال‌دهنده‌ها و لینک‌های ناشناس مشکوک‌اند (بند ۱۰-۶).",
+    "en": "Some signal channels do this. Unknown signal sellers and links are suspicious (clause 10-6)."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "راگ‌پول و اسکم",
+    "en": "Rug Pull / Scam"
+   },
+   "latin": "Rug Pull / Scam",
+   "meaning": {
+    "fa": "راگ‌پول: سازندگان پروژه نقدینگی یا دارایی را برمی‌دارند و ناپدید می‌شوند. اسکم: هر پروژه یا طرح کلاهبردارانه.",
+    "en": "Rug pull: the project's creators take the liquidity or assets and disappear. Scam: any fraudulent project or scheme."
+   },
+   "example": {
+    "fa": "نشانه‌ها: وعدهٔ سود تضمینی، تیم گمنام، نقدینگی قفل‌نشده. پروژهٔ تازه با وعدهٔ سود تضمینی را معامله نکن.",
+    "en": "Signs: promises of guaranteed profit, an anonymous team, unlocked liquidity. Do not trade a new project that promises guaranteed profit."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "هودل",
+    "en": "HODL"
+   },
+   "latin": "HODL",
+   "meaning": {
+    "fa": "نگه‌داشتن دارایی بدون توجه به نوسان بازار. این واژه از یک غلط املایی در یک پست قدیمی آمده است.",
+    "en": "Holding an asset regardless of market swings. The word comes from a typo in an old forum post."
+   },
+   "example": {
+    "fa": "مخصوص اسپات بلندمدت است. ضرر فیوچرز را «هودل» نکن (بند ۶-۶).",
+    "en": "For long-term spot only. Do not \"HODL\" a futures loss (clause 6-6)."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "اوج و کف تاریخی",
+    "en": "ATH / ATL"
+   },
+   "latin": "ATH / ATL",
+   "meaning": {
+    "fa": "بالاترین و پایین‌ترین قیمت ثبت‌شدهٔ یک دارایی در کل تاریخش.",
+    "en": "The highest and lowest prices an asset has ever recorded."
+   },
+   "example": {
+    "fa": "نقطهٔ مرجع است، نه سیگنال. اطراف آن‌ها معمولاً نوسان و هیجان بیشتری هست.",
+    "en": "A reference point, not a signal. Around them there is usually more volatility and excitement."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "خرید در افت",
+    "en": "BTD / Buy the Dip"
+   },
+   "latin": "BTD / Buy the Dip",
+   "meaning": {
+    "fa": "خرید بعد از یک ریزش کوتاه به امید برگشت قیمت.",
+    "en": "Buying after a short drop hoping the price comes back."
+   },
+   "example": {
+    "fa": "در روند صعودی، با ساختار و حد ضرر، می‌تواند ستاپ باشد. اضافه کردن به پوزیشن ضررده ممنوع است (بند ۶-۴).",
+    "en": "In an uptrend, with structure and a stop, it can be a setup. Adding to a losing position is forbidden (clause 6-4)."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "تله گاوی و تله خرسی",
+    "en": "Bull Trap / Bear Trap"
+   },
+   "latin": "Bull Trap / Bear Trap",
+   "meaning": {
+    "fa": "تله گاوی: شکست کاذب رو به بالا که خریداران را به دام می‌اندازد و بعد قیمت برمی‌گردد. تله خرسی: همین ماجرا رو به پایین برای فروشنده‌ها.",
+    "en": "Bull trap: a false breakout upward that traps buyers before the price reverses. Bear trap: the same thing downward for sellers."
+   },
+   "example": {
+    "fa": "منتظر ماندن برای کندل تأییدی خطر تله را کم می‌کند (بند ۵-۳).",
+    "en": "Waiting for a confirming candle reduces the risk of a trap (clause 5-3)."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "دد‌کت‌بانس",
+    "en": "Dead Cat Bounce"
+   },
+   "latin": "Dead Cat Bounce",
+   "meaning": {
+    "fa": "برگشت کوتاه و ضعیف بعد از ریزش شدید که بعد از آن ریزش ادامه پیدا می‌کند.",
+    "en": "A short, weak bounce after a sharp drop, after which the drop continues."
+   },
+   "example": {
+    "fa": "در لحظه نمی‌شود تشخیصش داد. بدون تأیید ساختار روی برگشت قیمت لانگ نگیر.",
+    "en": "It cannot be recognised in the moment. Do not go long on a bounce without confirmed structure."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "بگ‌هولدر",
+    "en": "Bag Holder"
+   },
+   "latin": "Bag Holder",
+   "meaning": {
+    "fa": "کسی که دارایی بازنده را مدت‌ها نگه می‌دارد چون از قطعی شدن ضرر می‌ترسد.",
+    "en": "Someone who holds a losing asset for a long time because they fear making the loss final."
+   },
+   "example": {
+    "fa": "تبدیل معاملهٔ ضررده به نگه‌داری بلندمدت خط‌قرمز است (ماده ۹ مورد ۹).",
+    "en": "Turning a losing trade into a long-term hold is a red line (article 9, item 9)."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "نهنگ",
+    "en": "Whale"
+   },
+   "latin": "Whale",
+   "meaning": {
+    "fa": "دارنده یا معامله‌گری با سرمایهٔ بسیار بزرگ که معاملاتش می‌تواند قیمت را حرکت دهد.",
+    "en": "A holder or trader with very large capital whose trades can move the price."
+   },
+   "example": {
+    "fa": "حرکت نهنگ‌ها را با داده‌های آنچین دنبال می‌کنند، اما برچسب‌ها حدسی‌اند. فقط از روی آن‌ها معامله نکن.",
+    "en": "Whale moves are tracked with on-chain data, but the labels are guesses. Do not trade on them alone."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "شیل",
+    "en": "Shill"
+   },
+   "latin": "Shill",
+   "meaning": {
+    "fa": "تبلیغ یک پروژه یا دارایی به نفع خود، بدون اعلام اینکه از آن سود می‌برد.",
+    "en": "Promoting a project or asset for one's own benefit without disclosing that interest."
+   },
+   "example": {
+    "fa": "وقتی یک کانال مدام فقط یک سکه را تبلیغ می‌کند، ببین از آن چه نفعی می‌برد.",
+    "en": "When a channel keeps promoting just one coin, ask what it gains from it."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "ایردراپ",
+    "en": "Airdrop"
+   },
+   "latin": "Airdrop",
+   "meaning": {
+    "fa": "توزیع رایگان توکن بین کاربران برای تبلیغ یا پاداش.",
+    "en": "A free distribution of tokens to users for promotion or reward."
+   },
+   "example": {
+    "fa": "بعضی ایردراپ‌ها دام‌اند و برای دریافت، اتصال کیف پول به سایت ناشناس یا کلید خصوصی می‌خواهند؛ هرگز (بند ۱۰-۶).",
+    "en": "Some airdrops are traps that ask you to connect your wallet to an unknown site or give your private key to claim; never (clause 10-6)."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "سیگنال",
+    "en": "Signal"
+   },
+   "latin": "Signal",
+   "meaning": {
+    "fa": "پیشنهاد آمادهٔ معامله (نماد، جهت، حد ضرر، تارگت) که کسی در کانال یا گروه منتشر می‌کند.",
+    "en": "A ready-made trade suggestion (symbol, direction, stop, target) that someone posts in a channel or group."
+   },
+   "example": {
+    "fa": "سیگنال‌دهنده‌های ناشناس مشکوک‌اند (بند ۱۰-۶). هر معامله باید ستاپ و چک‌لیست خودت را داشته باشد.",
+    "en": "Unknown signal sellers are suspicious (clause 10-6). Every trade must have your own setup and checklist."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "خرید شایعه، فروش خبر",
+    "en": "Buy the Rumor, Sell the News"
+   },
+   "latin": "Buy the Rumor, Sell the News",
+   "meaning": {
+    "fa": "الگویی رایج: قیمت با شایعهٔ یک رویداد بالا می‌رود و بعد از تأیید یا وقوع آن می‌ریزد.",
+    "en": "A common pattern: the price rises on a rumour of an event and falls after it is confirmed or happens."
+   },
+   "example": {
+    "fa": "با مفهوم «قیمت‌گذاری‌شده» در بخش ۸ مرتبط است. همیشه رخ نمی‌دهد.",
+    "en": "Related to the idea of \"priced in\" in section 8. It does not always happen."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "میم‌کوین",
+    "en": "Memecoin"
+   },
+   "latin": "Memecoin",
+   "meaning": {
+    "fa": "ارز دیجیتالی که بیشتر با شوخی، فرهنگ اینترنتی و هیجان جمعی ارزش‌گذاری می‌شود تا کاربرد واقعی.",
+    "en": "A cryptocurrency valued more on jokes, internet culture and crowd excitement than on real use."
+   },
+   "example": {
+    "fa": "نوسان و ریسک راگ‌پول بالاست. اگر معامله کنی، اهرم کم و اندازه با همان فرمول ریسک ۱٪ باشد.",
+    "en": "Volatility and rug-pull risk are high. If you trade it, keep leverage low and size from the same 1% risk formula."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "ریکت",
+    "en": "Rekt"
+   },
+   "latin": "Rekt",
+   "meaning": {
+    "fa": "اصطلاح عامیانه برای کسی که ضرر سنگین خورده یا لیکوئید شده است.",
+    "en": "Slang for someone who took a heavy loss or was liquidated."
+   },
+   "example": {
+    "fa": "اغلب نتیجهٔ نبود حد ضرر یا اهرم زیاد است؛ هر دو در ماده ۹ اساس‌نامه خط‌قرمزند.",
+    "en": "Usually the result of no stop or high leverage; both are red lines in article 9 of the constitution."
+   }
+  },
+  {
+   "section": 10,
+   "term": {
+    "fa": "تحقیق شخصی",
+    "en": "DYOR / NFA"
+   },
+   "latin": "DYOR / NFA",
+   "meaning": {
+    "fa": "در DYOR یعنی «تحقیق خودت را بکن» و NFA یعنی «توصیهٔ مالی نیست». این دو عبارت زیر بسیاری از پست‌های تحلیلی می‌آید.",
+    "en": "DYOR means \"do your own research\" and NFA means \"not financial advice\". These two phrases appear under many analysis posts."
+   },
+   "example": {
+    "fa": "یعنی مسئولیت تصمیم با خودت است. اساس‌نامه هم همین را می‌خواهد: ستاپ و برنامهٔ مکتوب خودت.",
+    "en": "It means the decision is your responsibility. The constitution asks the same: your own written setup and plan."
+   }
+  }
+ ]
+}
