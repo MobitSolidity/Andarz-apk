@@ -62,6 +62,7 @@ object SettingsDoc {
             "relVolLo" to JsonPrimitive(s.relVolLo), "relVolHi" to JsonPrimitive(s.relVolHi),
             "lastSecurityReviewAt" to JsonPrimitive(s.lastSecurityReviewAt), "adviceEnabled" to JsonPrimitive(s.adviceEnabled),
             "onboardingDone" to JsonPrimitive(s.onboardingDone),
+            "language" to JsonPrimitive(s.language.name), "hideAmounts" to JsonPrimitive(s.hideAmounts),
         ),
     )
 
@@ -72,6 +73,9 @@ object SettingsDoc {
         fun dbl(k: String) = o[k]?.jsonPrimitive?.doubleOrNull
         val cur = repo.current()
         str("theme")?.let { v -> ThemeMode.entries.firstOrNull { it.name == v }?.let { repo.setTheme(it) } }
+        // Language first: it resets digits and calendar, which the next two lines then restore exactly (D-90).
+        str("language")?.let { v -> ir.andarz.data.settings.Language.entries.firstOrNull { it.name == v }?.let { repo.setLanguage(it) } }
+        bool("hideAmounts")?.let { repo.setHideAmounts(it) }
         str("digits")?.let { v -> Digits.entries.firstOrNull { it.name == v }?.let { repo.setDigits(it) } }
         str("calendar")?.let { v -> CalendarMode.entries.firstOrNull { it.name == v }?.let { repo.setCalendar(it) } }
         str("zoneId")?.let { runCatching { repo.setZone(it) } }

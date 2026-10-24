@@ -19,6 +19,9 @@ enum class Digits { FA, EN }
 enum class CalendarMode { JALALI, GREGORIAN }
 enum class LockMethod { NONE, BIOMETRIC, PIN }
 
+/** Display language (D-90). Persian is the default and the source of every translation. */
+enum class Language { FA, EN }
+
 /** The DataStore settings of 4.2, with their defaults. PIN material is never exported (8.3). */
 data class Settings(
     val theme: ThemeMode = ThemeMode.DARK,
@@ -55,6 +58,9 @@ data class Settings(
     val onboardingDone: Boolean = false,
     val adviceEnabled: Boolean = true,
     val demoLoaded: Boolean = false,
+    val language: Language = Language.FA,
+    /** Masks equity and dollar P&L on screen (D-91); the numbers themselves are never changed. */
+    val hideAmounts: Boolean = false,
 ) {
     val zone: ZoneId get() = runCatching { ZoneId.of(zoneId) }.getOrDefault(ZoneId.of(DEFAULT_ZONE))
 
@@ -99,6 +105,8 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
         val onboarding = booleanPreferencesKey("onboardingDone")
         val advice = booleanPreferencesKey("adviceEnabled")
         val demo = booleanPreferencesKey("demoLoaded")
+        val language = stringPreferencesKey("language")
+        val hideAmounts = booleanPreferencesKey("hideAmounts")
     }
 
     val settings: Flow<Settings> = store.data.map(::read)
@@ -125,6 +133,7 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
             liqVolMin = p[K.liqVolMin] ?: d.liqVolMin, relVolLo = p[K.relVolLo] ?: d.relVolLo, relVolHi = p[K.relVolHi] ?: d.relVolHi,
             readArticles = p[K.readArticles] ?: emptySet(), lastSecurityReviewAt = p[K.lastSecurity] ?: 0,
             onboardingDone = p[K.onboarding] ?: false, adviceEnabled = p[K.advice] ?: d.adviceEnabled, demoLoaded = p[K.demo] ?: false,
+            language = enumOr(p[K.language], d.language), hideAmounts = p[K.hideAmounts] ?: d.hideAmounts,
         )
     }
 
@@ -140,6 +149,17 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
     suspend fun markArticleRead(n: String) = store.edit { it[K.readArticles] = (it[K.readArticles] ?: emptySet()) + n }
     suspend fun setLastSecurityReviewAt(v: Long) = store.edit { it[K.lastSecurity] = v }
     suspend fun setDemoLoaded(v: Boolean) = store.edit { it[K.demo] = v }
+    suspend fun setHideAmounts(v: Boolean) = store.edit { it[K.hideAmounts] = v }
+
+    /**
+     * Switches the display language (D-90). Digits and calendar follow the language, because a Persian text with
+     * Latin digits or an English text with a Solar Hijri date is rarely what anyone wants; both stay adjustable.
+     */
+    suspend fun setLanguage(v: Language) = store.edit {
+        it[K.language] = v.name
+        it[K.digits] = (if (v == Language.FA) Digits.FA else Digits.EN).name
+        it[K.calendar] = (if (v == Language.FA) CalendarMode.JALALI else CalendarMode.GREGORIAN).name
+    }
     suspend fun setQuietHours(start: Int, end: Int) = store.edit { it[K.quietStart] = start; it[K.quietEnd] = end }
 
     suspend fun setLiquidity(volMin: Double, relLo: Double, relHi: Double) = store.edit {

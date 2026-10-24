@@ -14,26 +14,30 @@ object Clause {
     /** The derived value `@SL_Floor = Risk_Pct / (Margin_Max × Lev_Max)`. */
     fun slFloor(p: Params): Double = p.riskPct / (p.marginMax * p.levMax)
 
-    fun formatRef(v: Double, fmt: String, numberWords: List<String>): String = when (fmt) {
-        "pct" -> Fmt.number(XlMath.round(v * 100, 2), 2, fa = true, group = false, trim = true) + Fmt.FA_PERCENT
-        "int" -> Fmt.toFaDigits(Math.round(v).toString())
-        "dec" -> Fmt.number(v, 2, fa = true, group = false, trim = true)
+    /**
+     * [fa] = true is the port of `fmt_ref` (Persian digits and the Arabic percent sign) and the default the golden
+     * vectors pin. The English wording (D-90) passes false for Latin digits and '%'.
+     */
+    fun formatRef(v: Double, fmt: String, numberWords: List<String>, fa: Boolean = true): String = when (fmt) {
+        "pct" -> Fmt.number(XlMath.round(v * 100, 2), 2, fa = fa, group = false, trim = true) + (if (fa) Fmt.FA_PERCENT else '%')
+        "int" -> Math.round(v).toString().let { if (fa) Fmt.toFaDigits(it) else it }
+        "dec" -> Fmt.number(v, 2, fa = fa, group = false, trim = true)
         "word" -> {
             val i = v.toInt()
             if (v == Math.floor(v) && i in 1..numberWords.size) numberWords[i - 1]
-            else Fmt.number(v, 2, fa = true, group = false, trim = true)
+            else Fmt.number(v, 2, fa = fa, group = false, trim = true)
         }
         else -> throw IllegalArgumentException("unknown clause format $fmt")
     }
 
     /** Replace the first occurrence of each ref's literal by its template filled with the live value. */
-    fun render(text: String, refs: List<Ref>, p: Params, numberWords: List<String>): String {
+    fun render(text: String, refs: List<Ref>, p: Params, numberWords: List<String>, fa: Boolean = true): String {
         var out = text
         for (r in refs) {
             val v = if (r.param.startsWith("@")) derived(r.param, p) else p[r.param]
             val at = out.indexOf(r.literal)
             require(at >= 0) { "literal of ${r.param} not found in the clause" }
-            out = out.substring(0, at) + r.template.replace("{v}", formatRef(v, r.fmt, numberWords)) +
+            out = out.substring(0, at) + r.template.replace("{v}", formatRef(v, r.fmt, numberWords, fa)) +
                 out.substring(at + r.literal.length)
         }
         return out
