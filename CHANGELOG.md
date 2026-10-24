@@ -4,6 +4,25 @@ All notable changes. Format: [Keep a Changelog](https://keepachangelog.com/en/1.
 SemVer for `versionName`; `versionCode` is the git commit count (D-73). User-facing release notes for each
 build are in `RELEASE_NOTES.md`.
 
+## [0.11.0] — English, hidden amounts, glossary (not published)
+
+### Added
+- Display language: Persian or English, in Settings → Appearance (D-90). English is left to right, with Latin
+  digits and the Gregorian calendar by default; the constitution's live numbers follow.
+- Eye button on Today and a Settings switch to hide equity and dollar P&L everywhere (D-91).
+- Learn → Glossary: 165 trading and exchange terms in ten sections, searchable, in both languages (D-92).
+
+### Fixed
+- The calculator label in the bottom bar lost its last letter on narrow phones; labels now shrink to fit (D-93).
+- Content keeps a readable column on tablets and in landscape (D-93).
+
+### Tests
+- English content parity (keys, placeholders, live clauses, no stray Persian).
+- Glossary integrity.
+- Language and amount-mask settings.
+- Narrow-phone layouts in both directions.
+- Worked examples of every formula (D-94).
+
 ## [0.10.0] — appearance v2 "Ledger" (not published)
 
 ### Changed — appearance v2 "Ledger" (D-UI2, UI only)

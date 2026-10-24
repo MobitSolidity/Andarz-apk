@@ -48,3 +48,11 @@ March wording behind MK1 and MK2 is **moved, not written**: it is extracted from
 | `mkt.chip.*`, `mkt.link.*` | The live-price chip and trade-linked alerts are MK3 |
 
 A test reports unused `mkt.*` keys (K7), with an allow-list for the rows above.
+
+## 0.11.0 (D-90 … D-93)
+
+| Item | Status |
+|---|---|
+| English wording of every base, market and app key | Written for D-90 and reviewed by hand; a native-speaker review is still welcome |
+| English glossary meanings and examples | Written for D-92; the Persian text is the owner's PDF |
+| English font | Vazirmatn covers Latin; no separate English font was added |

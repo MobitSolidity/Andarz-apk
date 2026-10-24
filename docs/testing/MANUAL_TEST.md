@@ -268,3 +268,16 @@ The release smoke S1–S18 lives in `TESTING.md` §3. Cases that check this audi
 | AU-2 | Leave Rules open, press Home, wait 5 min, check *Battery usage* | No wake-ups from Andarz; returning refreshes the session at once (P-01) | pending |
 | AU-3 | Remove a coin in My coins, toggle a News reminder with TalkBack on | Each button is read as a button and has a 48 dp target (U-01, U-02) | pending |
 | AU-4 | `./gradlew :app:connectedDebugAndroidTest` on a clean install | `ColdStartE2ETest` passes | pending |
+
+## 0.11.0 additions (pending: needs a device)
+
+| ID | Steps | Expected | Status |
+|---|---|---|---|
+| L-1 | Settings → Appearance → English | Whole app switches to English, left to right, Latin digits, Gregorian dates; Persian chip reads فارسی | pending |
+| L-2 | In English, receive a cooldown or price notification | Title and text in English; channel names in system settings in English | pending |
+| L-3 | In English, export CSV, switch to Persian, import it | Rows import (headers are Persian in both languages) | pending |
+| H-1 | Tap the eye on Today | Equity and dollar P&L show bullets on Today, Ledger, Insights, Journal and Trade; calculator and wizard still show numbers | pending |
+| H-2 | Close and reopen the app | Hidden state is kept | pending |
+| G-1 | Learn → Glossary, pick each section, search "لیکوئید" and "liquidation" | Cards render; search finds the term in both forms | pending |
+| N-1 | 320 dp phone (or Display size largest + Font size largest) | Bottom bar labels whole, including the calculator label; Today figure fits | pending |
+| N-2 | Tablet or landscape | Content in a centred column, not stretched edge to edge | pending |
