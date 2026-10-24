@@ -37,7 +37,9 @@ object ShareNote {
      * The 9.5 values of one trade, line by line. [u] formats numbers per the user's digit setting;
      * every label comes from content through [u].
      */
-    fun values(u: ir.andarz.app.ui.Ui, t: ir.andarz.data.db.TradeEntity, setupName: String?): List<List<List<String>>> {
+    fun values(ui: ir.andarz.app.ui.Ui, t: ir.andarz.data.db.TradeEntity, setupName: String?): List<List<List<String>>> {
+        // An explicit export the user asked for: never masked (D-91).
+        val u = ui.unmasked()
         val entryAt = t.entryTime?.let { u.dateTime(java.time.Instant.ofEpochMilli(it)) } ?: ""
         val exitAvg = if (t.legs.isEmpty()) null else t.legs.sumOf { it.price * it.fraction } / t.legs.sumOf { it.fraction }
         val closed = t.status == "CLOSED"

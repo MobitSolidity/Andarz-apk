@@ -98,7 +98,8 @@ class CalculatorViewModel @Inject constructor(
 /** The stateless calculator of 5.7: nothing is saved and nothing touches the limits. */
 @Composable
 fun CalculatorScreen(onToPlan: () -> Unit, vm: CalculatorViewModel = hiltViewModel()) {
-    val u = ui()
+    // D-91: a working tool shows the numbers being typed, whatever the hide setting.
+    val u = ui().unmasked()
     val d by vm.draft.collectAsState()
     val snap by vm.snapshot.collectAsState()
     val p = snap?.params ?: Params.DEFAULTS

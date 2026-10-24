@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -64,6 +66,7 @@ fun TodayScreen(
     onNeed: (LockNeed, String?) -> Unit,
     onCloseDay: () -> Unit,
     onMonitor: (String) -> Unit,
+    onToggleAmounts: (Boolean) -> Unit = {},
 ) {
     val u = ui()
     val c = LocalAndarzColors.current
@@ -95,8 +98,20 @@ fun TodayScreen(
                 Box {
                     KhatamPattern(Modifier.matchParentSize())
                     Column(Modifier.padding(20.dp).fillMaxWidth()) {
-                        Text(u.t("today.equity"), style = MaterialTheme.typography.labelLarge, color = c.textMuted)
-                        Text(u.money(snapshot.equity.now), style = MaterialTheme.typography.displayMedium, modifier = Modifier.padding(vertical = 4.dp))
+                        // D-91: the eye hides equity and dollar P&L everywhere they are shown, and shows them again.
+                        Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                            Text(u.t("today.equity"), style = MaterialTheme.typography.labelLarge, color = c.textMuted, modifier = Modifier.weight(1f))
+                            androidx.compose.material3.IconButton(onClick = { onToggleAmounts(!u.hidden) }, modifier = Modifier.size(48.dp)) {
+                                Icon(
+                                    painterResource(if (u.hidden) ir.andarz.app.R.drawable.ic_eye_off else ir.andarz.app.R.drawable.ic_eye),
+                                    contentDescription = u.t(if (u.hidden) "app.amounts.show" else "app.amounts.hide"),
+                                    tint = c.textMuted,
+                                )
+                            }
+                        }
+                        androidx.compose.animation.Crossfade(targetState = u.money(snapshot.equity.now), label = "equity") { shown ->
+                            ir.andarz.app.ui.components.FitText(shown, style = MaterialTheme.typography.displayMedium, modifier = Modifier.padding(vertical = 4.dp).fillMaxWidth(), minScale = 0.5f)
+                        }
                         val dayTone = when {
                             g.dailyNet > 0 -> c.allowed
                             g.dailyNet < 0 -> c.redline

@@ -69,7 +69,7 @@ private const val PAGES = 7
 /** Seven pages (5.1): welcome, privacy, how, numbers, pledge, lock, done. Never asks for notifications. */
 @Composable
 fun OnboardingScreen(onDone: () -> Unit, vm: OnboardingViewModel = hiltViewModel()) {
-    val u = ui()
+    val u = ui().unmasked()
     var page by rememberSaveable { mutableStateOf(0) }
     var name by rememberSaveable { mutableStateOf("") }
     var equity by rememberSaveable { mutableStateOf("") }

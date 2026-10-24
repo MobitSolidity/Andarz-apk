@@ -23,6 +23,15 @@ import java.time.ZoneId
  */
 class Ui(val content: ContentBundle, val settings: Settings) {
     val fa: Boolean get() = settings.digits == Digits.FA
+
+    /** The wording reads left to right (English, D-90). */
+    val ltr: Boolean get() = content.isLtr
+
+    /** Equity and dollar P&L are masked on screen (D-91). Calculator inputs and results are never masked. */
+    val hidden: Boolean get() = settings.hideAmounts
+
+    /** The same helpers with the mask off: for tools whose numbers the user is typing (calculator, wizard, share). */
+    fun unmasked(): Ui = if (hidden) Ui(content, settings.copy(hideAmounts = false)) else this
     val zone: ZoneId get() = settings.zone
 
     fun t(key: String, vararg args: Pair<String, String>): String = content.ui(key, args.toMap())
@@ -45,15 +54,21 @@ class Ui(val content: ContentBundle, val settings: Settings) {
     fun num(x: Double?, d: Int = 2, group: Boolean = true, trim: Boolean = false): String =
         if (x == null) t("common.dash") else Fmt.number(x, d, fa, group, trim)
 
-    fun money(x: Double?, d: Int = 2): String {
+    /**
+     * A dollar amount. [mask] lets a screen opt out (the calculator and the wizard show the numbers the user is
+     * typing); everything that shows the account's money follows the hide setting (D-91).
+     */
+    fun money(x: Double?, d: Int = 2, mask: Boolean = true): String {
         if (x == null) return t("common.dash")
+        if (mask && hidden) return MASKED
         val r = ir.andarz.engine.XlMath.round(x, d)
         val sign = if (r > 0) "" else if (r < 0) Fmt.MINUS.toString() else ""
         return Fmt.isolate(sign + "$" + Fmt.number(kotlin.math.abs(r), d, fa))
     }
 
-    fun signedMoney(x: Double?, d: Int = 2): String {
+    fun signedMoney(x: Double?, d: Int = 2, mask: Boolean = true): String {
         if (x == null) return t("common.dash")
+        if (mask && hidden) return MASKED
         val r = ir.andarz.engine.XlMath.round(x, d)
         val sign = if (r > 0) "+" else if (r < 0) Fmt.MINUS.toString() else ""
         return Fmt.isolate(sign + "$" + Fmt.number(kotlin.math.abs(r), d, fa))
@@ -107,6 +122,9 @@ class Ui(val content: ContentBundle, val settings: Settings) {
     }
 
     companion object {
+        /** What a hidden amount shows: a dollar sign and four bullets, isolated so it sits right in RTL. */
+        val MASKED: String = Fmt.isolate("$\u2022\u2022\u2022\u2022")
+
         /** March's price tiers (K7), reused for journal prices. */
         fun priceDecimals(x: Double): Int {
             val a = kotlin.math.abs(x)

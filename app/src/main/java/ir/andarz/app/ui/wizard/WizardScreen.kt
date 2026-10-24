@@ -68,7 +68,8 @@ private const val STEPS = 5
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WizardScreen(pledgeSigned: Boolean, onDone: (String) -> Unit, onCancel: () -> Unit, vm: WizardViewModel = hiltViewModel()) {
-    val u = ui()
+    // D-91: a working tool shows the numbers being typed, whatever the hide setting.
+    val u = ui().unmasked()
     val d by vm.draft.collectAsState()
     val snap by vm.snapshot.collectAsState()
     val setups by vm.setupList.collectAsState()

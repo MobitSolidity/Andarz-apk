@@ -17,11 +17,14 @@ import javax.inject.Inject
 /** Settings, the live snapshot and the pledge, shared by every journal screen. */
 @HiltViewModel
 class AppViewModel @Inject constructor(
-    settings: SettingsRepository,
+    private val settingsRepo: SettingsRepository,
     facade: EngineFacade,
     db: AndarzDatabase,
 ) : ViewModel() {
-    val settings: StateFlow<Settings?> = settings.settings.stateIn(viewModelScope, SharingStarted.Eagerly, null)
+    val settings: StateFlow<Settings?> = settingsRepo.settings.stateIn(viewModelScope, SharingStarted.Eagerly, null)
     val snapshot: StateFlow<Snapshot?> = facade.observe().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), null)
     val pledge: StateFlow<PledgeEntity?> = db.pledges().observeLatest().stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    /** The eye on Today (D-91). */
+    fun setHideAmounts(v: Boolean) = safeLaunch { settingsRepo.setHideAmounts(v) }
 }
