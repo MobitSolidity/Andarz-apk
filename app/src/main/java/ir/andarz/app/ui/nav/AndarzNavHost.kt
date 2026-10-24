@@ -1,5 +1,7 @@
 package ir.andarz.app.ui.nav
 
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.fillMaxSize
 import ir.andarz.app.ui.safeLaunch
 
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -127,7 +129,9 @@ fun AndarzNavHost(
                                 destination.iconRes != null -> Icon(painterResource(destination.iconRes), contentDescription = null)
                             }
                         },
-                        label = { Text(content.ui(destination.labelKey), style = MaterialTheme.typography.labelMedium, maxLines = 1) },
+                        // D-93: one line that shrinks to fit, so no label loses its last letter on a narrow phone.
+                        label = { ir.andarz.app.ui.components.FitText(ir.andarz.app.ui.ui().t(destination.labelKey), style = MaterialTheme.typography.labelMedium) },
+                        alwaysShowLabel = true,
                         colors = NavigationBarItemDefaults.colors(
                             selectedIconColor = MaterialTheme.colorScheme.primary,
                             selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -140,7 +144,13 @@ fun AndarzNavHost(
             }
         },
     ) { insets ->
-        NavHost(navController = navController, startDestination = startRoute, modifier = Modifier.padding(insets).consumeWindowInsets(insets)) {
+        // D-93: on tablets, foldables and landscape the content keeps a readable column (max 720 dp) centred in
+        // the window instead of stretching cards and text lines across the whole width.
+        androidx.compose.foundation.layout.Box(
+            Modifier.fillMaxSize().padding(insets).consumeWindowInsets(insets),
+            contentAlignment = androidx.compose.ui.Alignment.TopCenter,
+        ) {
+        NavHost(navController = navController, startDestination = startRoute, modifier = Modifier.fillMaxSize().widthIn(max = MAX_CONTENT_WIDTH)) {
             composable(AndarzNav.TODAY) {
                 val vm: TodayViewModel = hiltViewModel()
                 val open by vm.open.collectAsState()
@@ -157,6 +167,7 @@ fun AndarzNavHost(
                     },
                     onCloseDay = { navController.navigate(AndarzNav.REVIEWS) },
                     onMonitor = { vm.monitor(it) },
+                    onToggleAmounts = { app.setHideAmounts(it) },
                 )
             }
             composable(AndarzNav.JOURNAL) {
@@ -220,5 +231,9 @@ fun AndarzNavHost(
             }
             composable(AndarzNav.TRADE) { TradeScreen(onBack = { navController.popBackStack() }) }
         }
+        }
     }
 }
+
+/** The widest a screen's content column grows (D-93). */
+val MAX_CONTENT_WIDTH = 720.dp

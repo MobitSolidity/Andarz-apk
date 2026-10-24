@@ -24,6 +24,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
@@ -188,3 +191,38 @@ fun ScreenHeader(
         actions()
     }
 }
+
+/**
+ * One line of text that shrinks its font (down to [minScale] of the style) until it fits, instead of clipping
+ * the last letters. Used by the bottom bar, where five labels share a 320 dp screen at up to 200% font
+ * (the clipped final letter of the calculator label, D-93). Below [minScale] it ellipsizes rather than cut a word.
+ */
+@Composable
+fun FitText(
+    text: String,
+    style: androidx.compose.ui.text.TextStyle,
+    modifier: Modifier = Modifier,
+    color: androidx.compose.ui.graphics.Color = androidx.compose.ui.graphics.Color.Unspecified,
+    minScale: Float = 0.7f,
+) {
+    var scale by androidx.compose.runtime.remember(text, style) { androidx.compose.runtime.mutableFloatStateOf(1f) }
+    var settled by androidx.compose.runtime.remember(text, style) { androidx.compose.runtime.mutableStateOf(false) }
+    Text(
+        text = text,
+        style = style.copy(fontSize = style.fontSize * scale),
+        color = color,
+        maxLines = 1,
+        softWrap = false,
+        overflow = if (settled) androidx.compose.ui.text.style.TextOverflow.Ellipsis else androidx.compose.ui.text.style.TextOverflow.Clip,
+        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+        modifier = modifier.drawWithContentIfSettled(settled),
+        onTextLayout = { r ->
+            if (r.hasVisualOverflow && scale > minScale) scale = (scale - 0.05f).coerceAtLeast(minScale)
+            else settled = true
+        },
+    )
+}
+
+/** Skips drawing the frames in which [FitText] is still shrinking, so the clipped label never flashes. */
+private fun Modifier.drawWithContentIfSettled(settled: Boolean): Modifier =
+    this.drawWithContent { if (settled) drawContent() }

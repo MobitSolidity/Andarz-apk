@@ -69,7 +69,7 @@ class AccessibilityLayoutTest {
 
     private val bundle: ContentBundle by lazy {
         fun f(n: String) = listOf(File("src/main/assets/$n"), File("app/src/main/assets/$n")).first { it.isFile }.readText()
-        ContentBundle.parse(f("content_fa.json"), f("content_market_fa.json"))
+        ContentBundle.parse(f("content_fa.json"), f("content_market_fa.json"), f("glossary.json"), f("content_app_fa.json"))
     }
     private val ui by lazy { Ui(bundle, Settings()) }
 
