@@ -346,6 +346,23 @@ val guardShippedStrings = tasks.register("guardShippedStrings") {
             val overrides = (m["overrides"] as? Map<String, String>) ?: emptyMap()
             overrides.forEach { (k, v) -> flat["ui.$k"] = v }
         }
+        // The English wording and the glossary ship too (D-90, D-92); they follow the same rules.
+        val baseEn = assets.resolve("content_en.json")
+        if (baseEn.isFile) walk(JsonSlurper().parse(baseEn, "UTF-8"), "en")
+        val marketEn = assets.resolve("content_market_en.json")
+        if (marketEn.isFile) {
+            @Suppress("UNCHECKED_CAST")
+            val m = JsonSlurper().parse(marketEn, "UTF-8") as Map<String, Any>
+            walk(m["ui"], "en.mkt")
+            walk(m["overrides"], "en.overrides")
+            walk(m["numberWords"], "en.numberWords")
+        }
+        for (name in listOf("content_app_fa.json", "content_app_en.json")) {
+            val f = assets.resolve(name)
+            if (f.isFile) walk(JsonSlurper().parse(f, "UTF-8"), name.removeSuffix(".json"))
+        }
+        val glossary = assets.resolve("glossary.json")
+        if (glossary.isFile) walk(JsonSlurper().parse(glossary, "UTF-8"), "glossary")
         // The market calendar asset ships too (K6.7 drops the flag emoji).
         val calendar = rootProject.file("market/src/main/assets/market_calendar.json")
         if (calendar.isFile) walk(JsonSlurper().parse(calendar, "UTF-8"), "calendar")

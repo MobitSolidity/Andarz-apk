@@ -1,6 +1,6 @@
 package ir.andarz.app.ui.analysis
 
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -44,7 +44,7 @@ fun MoreScreen(entries: List<Pair<String, () -> Unit>>) {
                     ) {
                         Text(u.t(key), style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
                         androidx.compose.material3.Icon(
-                            androidx.compose.material.icons.Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                            androidx.compose.material.icons.Icons.AutoMirrored.Filled.KeyboardArrowRight,
                             contentDescription = null, tint = c.textMuted,
                         )
                     }

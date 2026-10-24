@@ -1,0 +1,19 @@
+{
+ "meta": {"schema": 1, "locale": "en", "direction": "ltr", "keyPrefix": "app.", "note": "English twin of content_app_fa.json (D-90); same keys."},
+ "ui": {
+  "app.lang.fa": "فارسی",
+  "app.amounts.hide": "Hide amounts",
+  "app.amounts.show": "Show amounts",
+  "app.amounts.setting": "Hide equity and dollar P&L",
+  "app.amounts.hint": "The calculator, trade entry and exports always show the real numbers.",
+  "app.glossary.title": "Glossary",
+  "app.glossary.search": "Search a term…",
+  "app.glossary.count": "{n} terms",
+  "app.glossary.empty": "No term found.",
+  "app.glossary.all": "All",
+  "app.glossary.example": "Example and use",
+  "app.glossary.intro": "165 trading and exchange terms in ten sections; each with its meaning and an example or its use in the constitution.",
+  "app.glossary.section": "Section {n}"
+ },
+ "uiArgs": {"app.glossary.count": ["n"], "app.glossary.section": ["n"]}
+}

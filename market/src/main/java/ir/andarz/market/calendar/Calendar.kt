@@ -18,7 +18,12 @@ data class EconEvent(
     val impact: Int,
     val previous: String = "",
     val forecast: String = "",
-)
+    /** The English title from the asset's `titleEn` (D-90); empty when absent. */
+    val titleEn: String = "",
+) {
+    /** The title in the display language: English when asked for and present, Persian otherwise. */
+    fun titleFor(english: Boolean): String = if (english && titleEn.isNotEmpty()) titleEn else title
+}
 
 /** The calendar as loaded from `market_calendar.json` (K6.10). */
 data class CalendarData(
@@ -69,6 +74,7 @@ object CalendarLoader {
                     impact = impact,
                     previous = e.optString("previous"),
                     forecast = e.optString("forecast"),
+                    titleEn = e.optString("titleEn"),
                 )
             }
         }

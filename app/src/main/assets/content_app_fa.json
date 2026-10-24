@@ -1,0 +1,19 @@
+{
+ "meta": {"schema": 1, "locale": "fa-IR", "direction": "rtl", "keyPrefix": "app.", "note": "Wording added after the spec froze (D-90..D-93): language, hidden amounts, glossary. English twin: content_app_en.json, same keys."},
+ "ui": {
+  "app.lang.fa": "فارسی",
+  "app.amounts.hide": "پنهان کردن مبلغ‌ها",
+  "app.amounts.show": "نمایش مبلغ‌ها",
+  "app.amounts.setting": "پنهان کردن سرمایه و سود و زیان دلاری",
+  "app.amounts.hint": "ماشین‌حساب، ثبت معامله و خروجی‌ها همیشه عدد واقعی را نشان می‌دهند.",
+  "app.glossary.title": "واژه‌نامه",
+  "app.glossary.search": "جستجوی واژه یا معادل لاتین…",
+  "app.glossary.count": "{n} واژه",
+  "app.glossary.empty": "واژه‌ای پیدا نشد.",
+  "app.glossary.all": "همه",
+  "app.glossary.example": "مثال و کاربرد",
+  "app.glossary.intro": "۱۶۵ اصطلاح ترید و صرافی در ده بخش؛ هر واژه با معادل لاتین، معنی و یک مثال یا کاربرد در اساس‌نامه.",
+  "app.glossary.section": "بخش {n}"
+ },
+ "uiArgs": {"app.glossary.count": ["n"], "app.glossary.section": ["n"]}
+}

@@ -41,6 +41,7 @@ class AndarzApp : Application(), Configuration.Provider {
     @Inject lateinit var db: AndarzDatabase
     @Inject lateinit var lock: AppLock
     @Inject lateinit var tradeWatcher: ir.andarz.app.market.TradeWatcher
+    @Inject lateinit var settingsRepo: ir.andarz.data.settings.SettingsRepository
 
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder().setWorkerFactory(workerFactory).build()
@@ -58,6 +59,16 @@ class AndarzApp : Application(), Configuration.Provider {
             runCatching { File(cacheDir, "out").deleteRecursively() }
             runCatching { content.preload() }
             runCatching { DisciplineChannels.ensure(this@AndarzApp, content) }
+        }
+        // D-90: notifications and receivers read the wording through ContentRepository, so it follows the
+        // language setting even when no screen is open; channel names are renamed in the new language.
+        appScope.launch(Dispatchers.IO) {
+            settingsRepo.settings.collect { s ->
+                if (content.language != s.language) {
+                    content.setLanguage(s.language)
+                    runCatching { DisciplineChannels.ensure(this@AndarzApp, content) }
+                }
+            }
         }
         ProcessLifecycleOwner.get().lifecycle.addObserver(
             LifecycleEventObserver { _, e ->

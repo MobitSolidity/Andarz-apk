@@ -39,6 +39,8 @@ class ContentBundleTest {
         ContentBundle.parse(
             asset(ContentRepository.BASE_ASSET).readText(Charsets.UTF_8),
             asset(ContentRepository.MARKET_ASSET).readText(Charsets.UTF_8),
+            asset(ContentRepository.GLOSSARY_ASSET).readText(Charsets.UTF_8),
+            asset(ContentRepository.APP_ASSET).readText(Charsets.UTF_8),
         )
     }
 
@@ -58,7 +60,7 @@ class ContentBundleTest {
     fun `no ui key is defined by both documents`() {
         // The one sanctioned way to change a base string is the overrides block (K7).
         val base = ContentBundle.parse(asset(ContentRepository.BASE_ASSET).readText(Charsets.UTF_8))
-        val marketOnly = bundle.keys - base.keys
+        val marketOnly = bundle.keys - base.keys - bundle.keys.filter { it.startsWith(ContentBundle.APP_PREFIX) }.toSet()
         assertTrue(marketOnly.isNotEmpty(), "the market document must add keys")
         assertTrue(
             marketOnly.all { it.startsWith(ContentBundle.MARKET_PREFIX) },

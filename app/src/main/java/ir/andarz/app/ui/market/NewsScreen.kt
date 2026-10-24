@@ -231,7 +231,7 @@ private fun EventRow(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 ImpactBars(e.impact)
                 Spacer(Modifier.width(8.dp))
-                Text(e.title, style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis, color = if (past) c.textMuted else MaterialTheme.colorScheme.onSurface)
+                Text(e.titleFor(ir.andarz.app.ui.ui().ltr), style = MaterialTheme.typography.bodyLarge, maxLines = 2, overflow = TextOverflow.Ellipsis, color = if (past) c.textMuted else MaterialTheme.colorScheme.onSurface)
             }
             if (e.forecast.isNotEmpty() || e.previous.isNotEmpty()) {
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(top = 2.dp)) {

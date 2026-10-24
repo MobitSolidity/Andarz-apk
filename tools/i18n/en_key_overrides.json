@@ -1,0 +1,6 @@
+{
+ "_note": "English values for ui keys whose Persian string is shared with another key but means something else (D-90). Applied after the table.",
+ "a11y.toggleOn": "On",
+ "set.wipe.word": "DELETE",
+ "common.dash": "—"
+}

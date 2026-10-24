@@ -76,10 +76,12 @@ class MainActivity : FragmentActivity() {
             else window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
             var onboarded by rememberSaveable { mutableStateOf(s.onboardingDone) }
             val choice = when (s.theme) { ThemeMode.DARK -> ThemeChoice.DARK; ThemeMode.LIGHT -> ThemeChoice.LIGHT; ThemeMode.SYSTEM -> ThemeChoice.SYSTEM }
-            // The app is Persian and forces RTL, and must still work if a device reports LTR (6.3).
+            // Persian forces RTL and English forces LTR, whatever the device reports (6.3, D-90).
+            content.setLanguage(s.language)
+            val bundle = content.bundleFor(s.language)
             CompositionLocalProvider(
-                LocalLayoutDirection provides LayoutDirection.Rtl,
-                LocalUi provides Ui(content.bundle, s),
+                LocalLayoutDirection provides if (bundle.isLtr) LayoutDirection.Ltr else LayoutDirection.Rtl,
+                LocalUi provides Ui(bundle, s),
             ) {
                 AndarzTheme(choice = choice) {
                     Surface(modifier = Modifier.fillMaxSize()) {

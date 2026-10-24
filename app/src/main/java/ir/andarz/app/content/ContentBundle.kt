@@ -31,6 +31,10 @@ class ContentBundle private constructor(
     val base: JsonObject,
     /** The market document, or null when the app ships without it. */
     val market: JsonObject?,
+    /** The trading glossary of Learn (D-92), or null when the asset is absent. */
+    val glossaryDoc: JsonObject? = null,
+    /** The app document of `app.*` keys (D-90), or null. */
+    val appDoc: JsonObject? = null,
 ) {
 
     /** Every known `ui` key. */
@@ -82,6 +86,12 @@ class ContentBundle private constructor(
     val numberWords: List<String>
         get() = (market?.get("numberWords") as? JsonArray)?.mapNotNull { (it as? JsonPrimitive)?.content } ?: emptyList()
 
+    /** True when the base document is written left to right (the English wording, D-90). */
+    val isLtr: Boolean get() = str(base, "meta", "direction") == "ltr"
+
+    /** The glossary in this bundle's language (D-92); empty when the asset is absent. */
+    val glossary: Glossary by lazy { Glossary.from(glossaryDoc, if (isLtr) "en" else "fa") }
+
     /** A nested object of the base document, e.g. `obj("params")` or `obj("enums")`. */
     fun obj(vararg path: String): JsonObject? = node(base, *path) as? JsonObject
 
@@ -123,6 +133,12 @@ class ContentBundle private constructor(
             }
         }
 
+        val appUi = (appDoc?.let { node(it, "ui") } as? JsonObject)?.keys ?: emptySet()
+        for (key in appUi) {
+            if (!key.startsWith(APP_PREFIX)) problems.add("ui key '" + key + "' lives in the app document but does not start with '" + APP_PREFIX + "'")
+            if (key in baseUi || key in marketUi) problems.add("ui key '" + key + "' is defined by the app document and another document")
+        }
+
         for ((key, declared) in uiArgs) {
             val text = uiMap[key]
             if (text == null) {
@@ -145,6 +161,9 @@ class ContentBundle private constructor(
         /** Keys of the market document all carry this prefix (K7). */
         const val MARKET_PREFIX = "mkt."
 
+        /** Keys of the app document all carry this prefix (D-90). */
+        const val APP_PREFIX = "app."
+
         private val json = Json {
             ignoreUnknownKeys = true
             isLenient = false
@@ -160,8 +179,10 @@ class ContentBundle private constructor(
          * Parses the base document and, when present, the market document. Throws only when a document is
          * not JSON at all; everything softer is reported by [validate].
          */
-        fun parse(baseJson: String, marketJson: String? = null): ContentBundle {
+        fun parse(baseJson: String, marketJson: String? = null, glossaryJson: String? = null, appJson: String? = null): ContentBundle {
             val base = json.parseToJsonElement(baseJson).jsonObject
+            val appDoc = appJson?.let { json.parseToJsonElement(it).jsonObject }
+            val glossary = glossaryJson?.let { runCatching { json.parseToJsonElement(it).jsonObject }.getOrNull() }
             val market = marketJson?.let { json.parseToJsonElement(it).jsonObject }
 
             val ui = LinkedHashMap<String, String>()
@@ -178,6 +199,13 @@ class ContentBundle private constructor(
                 }
             }
 
+            // The app document (D-90) adds `app.*` keys written after the base spec was frozen.
+            appDoc?.let { a ->
+                (node(a, "ui") as? JsonObject)?.forEach { (k, v) ->
+                    (v as? JsonPrimitive)?.let { ui[k] = it.content }
+                }
+            }
+
             val args = LinkedHashMap<String, List<String>>()
             fun readArgs(doc: JsonObject) {
                 (node(doc, "uiArgs") as? JsonObject)?.forEach { (k, v) ->
@@ -188,8 +216,9 @@ class ContentBundle private constructor(
             }
             readArgs(base)
             market?.let { readArgs(it) }
+            appDoc?.let { readArgs(it) }
 
-            return ContentBundle(ui, args, base, market)
+            return ContentBundle(ui, args, base, market, glossary, appDoc)
         }
 
         private fun node(root: JsonObject, vararg path: String): Any? {

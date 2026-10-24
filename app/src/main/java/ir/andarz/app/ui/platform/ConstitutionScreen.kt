@@ -105,8 +105,8 @@ private fun refsOf(o: JsonObject): List<Ref> = (o["refs"] as? JsonArray).orEmpty
  */
 @Composable
 private fun LiveClause(u: Ui, id: String?, text: String, refs: List<Ref>, p: Params, onRules: () -> Unit) {
-    val rendered = runCatching { Clause.render(text, refs, p, u.content.numberWords) }.getOrDefault(text)
-    val values = refs.map { r -> r.template.replace("{v}", runCatching { Clause.formatRef(if (r.param.startsWith("@")) Clause.slFloor(p) else p[r.param], r.fmt, u.content.numberWords) }.getOrDefault("")) }
+    val rendered = runCatching { Clause.render(text, refs, p, u.content.numberWords, fa = !u.content.isLtr) }.getOrDefault(text)
+    val values = refs.map { r -> r.template.replace("{v}", runCatching { Clause.formatRef(if (r.param.startsWith("@")) Clause.slFloor(p) else p[r.param], r.fmt, u.content.numberWords, fa = !u.content.isLtr) }.getOrDefault("")) }
     val shown = u.digits(rendered)
     val color = LocalAndarzColors.current.info
     val annotated = buildAnnotatedString {

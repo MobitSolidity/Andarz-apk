@@ -58,6 +58,7 @@ import ir.andarz.app.ui.ui
 import ir.andarz.data.backup.BackupService
 import ir.andarz.data.settings.CalendarMode
 import ir.andarz.data.settings.Digits
+import ir.andarz.data.settings.Language
 import ir.andarz.data.settings.LockMethod
 import ir.andarz.data.settings.PinLock
 import ir.andarz.data.settings.Settings
@@ -119,6 +120,13 @@ fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -
 @Composable
 private fun Appearance(u: Ui, s: Settings, vm: SettingsViewModel) {
     SectionCard(u.t("set.appearance")) {
+        // D-90: language first, so a user who cannot read the current one finds it at the top. Each chip is written
+        // in its own language, as language pickers are everywhere.
+        Text(u.t("set.language"), style = MaterialTheme.typography.labelLarge)
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = s.language == Language.FA, onClick = { vm.set { setLanguage(Language.FA) } }, label = { Text(u.t("app.lang.fa")) })
+            FilterChip(selected = s.language == Language.EN, onClick = { vm.set { setLanguage(Language.EN) } }, label = { Text(LANG_EN) })
+        }
         Text(u.t("set.theme"), style = MaterialTheme.typography.labelLarge)
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             mapOf(ThemeMode.DARK to "set.theme.dark", ThemeMode.LIGHT to "set.theme.light", ThemeMode.SYSTEM to "set.theme.system").forEach { (m, k) ->
@@ -143,9 +151,14 @@ private fun Appearance(u: Ui, s: Settings, vm: SettingsViewModel) {
         SwitchRow(u.t("set.reduceMotion"), s.reduceMotion, { v -> vm.set { setReduceMotion(v) } })
         SwitchRow(u.t("set.haptics"), s.haptics, { v -> vm.set { setHaptics(v) } })
         SwitchRow(u.t("set.advice.show"), s.adviceEnabled, { v -> vm.set { setAdviceEnabled(v) } })
-        Text(u.t("set.fontScale") + " \u00B7 " + u.t("set.language") + ": " + u.t("set.language.fa"), style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
+        SwitchRow(u.t("app.amounts.setting"), s.hideAmounts, { v -> vm.set { setHideAmounts(v) } })
+        Text(u.t("app.amounts.hint"), style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
+        Text(u.t("set.fontScale"), style = MaterialTheme.typography.labelMedium, color = LocalAndarzColors.current.textMuted)
     }
 }
+
+/** The language names as each language writes itself; the Persian name lives in both app documents (app.lang.fa). */
+private const val LANG_EN = "English"
 
 /** A short list of zones; Tehran first. Ids are tz identifiers, not wording. */
 private val ZONES = listOf("Asia/Tehran", "Asia/Dubai", "Europe/Istanbul", "Europe/London", "Europe/Berlin", "America/Toronto", "UTC")
