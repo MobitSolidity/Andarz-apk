@@ -44,13 +44,13 @@ val andarzCommit: String = git("rev-parse", "--short=10", "HEAD") ?: "unknown"
 
 android {
     namespace = "ir.andarz.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         // Placeholder (D-11, D-M02): decide the final id before any store release.
         applicationId = "ir.andarz.app"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = andarzVersionCode
         versionName = andarzVersionName
         buildConfigField("String", "GIT_COMMIT", "\"" + andarzCommit + "\"")

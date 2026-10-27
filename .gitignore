@@ -16,3 +16,33 @@ captures/
 # truth; a tracked copy would be a second one that can drift.
 app/src/main/assets/content_fa.json
 app/src/main/assets/design_tokens.json
+
+
+# ===== Sensitive files and credentials =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.ppk
+*.mobileprovision
+keystore.properties
+secrets.properties
+credentials.json
+service-account*.json
+
+# Local machine and signing configuration
+local.properties
+google-services.json
+
+# Build artifacts
+*.apk
+*.aab
+*.ap_
+*.dex
+*.class
+/release-prep-backup-20261027-162342/
