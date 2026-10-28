@@ -691,7 +691,8 @@ app document lacks any of the three or has an empty section.
   manifest permission listed with its reason; Coil is a dependency but no code loads a remote image, so no
   image host is contacted.
 - **Hosted copy.** `tools/legal/build_legal_site.py` writes `docs/index.html` (+ `.nojekyll`) from the same
-  blocks; `LegalContentTest` fails when the page is stale. The owner enables GitHub Pages from `main:/docs`.
+  blocks; `LegalContentTest` fails when the page is stale. GitHub Pages was enabled from `main:/docs` on
+  2026-10-27; the live page was fetched and is byte-identical to `docs/index.html`.
 
 ### D-97 — The app addresses every trader, not one owner
 

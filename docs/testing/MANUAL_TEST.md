@@ -294,5 +294,5 @@ The release smoke S1–S18 lives in `TESTING.md` §3. Cases that check this audi
 | L-6 | App lock on, kill and reopen on a fresh install that has accepted | Lock first, then Today (the terms are not shown again) | pending |
 | L-7 | Restore a backup on a second fresh install | The terms are still asked on that device | pending |
 | L-8 | `adb shell pm list packages | grep andarz` | `package:ir.mobitmaster.andarz` | pending |
-| L-9 | Open https://mobitsolidity.github.io/Andarz-apk/ after Pages is enabled | Persian and English texts identical to the app | pending (owner enables Pages) |
+| L-9 | Open https://mobitsolidity.github.io/Andarz-apk/ | Persian and English texts identical to the app | done 2026-10-27: HTTP 200, byte-identical to docs/index.html (browser rendering on a phone still to check) |
 
