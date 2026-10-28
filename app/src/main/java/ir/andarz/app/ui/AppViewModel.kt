@@ -27,4 +27,7 @@ class AppViewModel @Inject constructor(
 
     /** The eye on Today (D-91). */
     fun setHideAmounts(v: Boolean) = safeLaunch { settingsRepo.setHideAmounts(v) }
+
+    /** The explicit tap on the legal gate (D-96). */
+    fun acceptLegal(version: Int) = safeLaunch { settingsRepo.acceptLegal(version, System.currentTimeMillis()) }
 }

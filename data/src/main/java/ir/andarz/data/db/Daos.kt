@@ -23,6 +23,8 @@ interface TradeDao {
     @Query("SELECT * FROM trade WHERE status IN ('OPEN','CLOSED')") suspend fun engineRows(): List<TradeEntity>
     @Query("SELECT * FROM trade WHERE status IN ('OPEN','CLOSED')") fun observeEngineRows(): Flow<List<TradeEntity>>
     @Query("SELECT * FROM trade WHERE status = 'PLANNED' AND createdAt < :before") suspend fun plannedBefore(before: Long): List<TradeEntity>
+    /** Open trades only, newest first; served by the `status` index so Today stays light with a long journal (D-98). */
+    @Query("SELECT * FROM trade WHERE status = 'OPEN' ORDER BY COALESCE(entryTime, createdAt) DESC") fun observeOpen(): Flow<List<TradeEntity>>
     @Query("DELETE FROM trade") suspend fun deleteAll()
 }
 

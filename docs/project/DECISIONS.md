@@ -21,8 +21,8 @@ store release.
 
 | # | Open question | Why it is open | Who decides |
 |---|---|---|---|
-| O-1 | **Final `applicationId`** (today the placeholder `ir.andarz.app`) and a name check for «اندرز» on Bazaar, Myket and Google Play | D-11, D-M02: availability was never verified. Changing the id after a release breaks updates | owner, before the first release |
-| O-2 | **Release signing key**: create a new keystore and set `ANDARZ_KEYSTORE`, `ANDARZ_KEYSTORE_PASSWORD`, `ANDARZ_KEY_ALIAS`, `ANDARZ_KEY_PASSWORD` (env or a git-ignored `keystore.properties`) | D-M10: March's committed key is compromised and is never reused. Without these the release build is debug-signed and prints `NOT PUBLISHABLE` | owner |
+| ~~O-1~~ | **Closed by D-95 (2026-10-27):** `applicationId = ir.mobitmaster.andarz`, chosen by the owner; free on Myket and Bazaar on that date | — | owner |
+| O-2 | **Release signing key** (the owner reports a key created and kept outside git, 2026-10-27; verify per release with `apksigner verify --print-certs`): create a new keystore and set `ANDARZ_KEYSTORE`, `ANDARZ_KEYSTORE_PASSWORD`, `ANDARZ_KEY_ALIAS`, `ANDARZ_KEY_PASSWORD` (env or a git-ignored `keystore.properties`) | D-M10: March's committed key is compromised and is never reused. Without these the release build is debug-signed and prints `NOT PUBLISHABLE` | owner |
 
 **Decided by the agent at the owner's request (2026-10-20, D-77); O-1 and O-2 stay open.**
 
@@ -651,6 +651,65 @@ kickoff, Persian brief, the opus5 review prompt and the three skills of the audi
 `docs/{project,release,testing,audit,reference}`. Code, `spec/` and every build guard are unchanged. The old
 layout is tagged `pre-restructure`. **Note on the key:** deleting `march-ci.jks.b64` from `main` does not
 remove it from history; it stays compromised and must never be used (D-74).
+
+## Owner request 0.12.0 — Myket and Bazaar, terms and privacy, every trader (decisions)
+
+### D-95 — Package name `ir.mobitmaster.andarz`; Myket and Bazaar only
+
+The owner asked for «mobitmaster» in the package name and chose Myket and Cafe Bazaar as the only stores for
+now (Google Play is not a target: Iran is not a supported Play developer country, per Google's list read on
+2026-10-27). `applicationId = "ir.mobitmaster.andarz"` (closes O-1). On 2026-10-27
+`myket.ir/app/ir.mobitmaster.andarz` and `cafebazaar.ir/app/ir.mobitmaster.andarz` returned 404 while a known app
+returned 200 on both, so the id was free. The Kotlin `namespace` stays `ir.andarz.app`: it only names the
+generated `R`/`BuildConfig` classes, and changing it would move every source package for no user-visible gain.
+Code that needs the id reads `context.packageName`; the FileProvider and startup authorities use
+`${applicationId}`; the only id-bearing library permission (`<id>.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`) is
+matched by suffix in guard 1. Verified in the merged release manifest and with `aapt2 dump badging`
+(`package: name='ir.mobitmaster.andarz'`). The deprecated `resourceConfigurations` became
+`androidResources.localeFilters` (same `fa` filter; the unqualified defaults stay, which carry English).
+Myket requires targetSdk ≥ 34 from 1 Aban 1405; the owner's toolchain update (compile/target 36, AGP 8.9.1,
+Gradle 8.11.1) was built and tested in full before any change here. Store steps: `docs/release/IRAN_STORES.md`.
+
+### D-96 — Terms of use, privacy policy and risk warning, with a first-run agreement
+
+Both stores require the privacy text inside the app, easy to reach, and consent by a direct user action (Myket
+"privacy-security-access-info", Bazaar "rules/privacy"). The three texts live in the `legal` block of
+`content_app_fa.json` / `content_app_en.json` (law 3: wording in content), with a `version`, the support address
+mobitmaster@gmail.com and the hosted URL. `Legal.kt` parses them; `ContentBundle.validate()` fails a build whose
+app document lacks any of the three or has an empty section.
+
+- **Gate.** `LegalGateScreen` comes after the lock screen and before onboarding, and again whenever
+  `legal.version` rises. Acceptance needs a ticked box **and** a tap on the button; back, home and timeouts
+  never count. There is no decline button: a user who does not agree leaves the app (nothing has been
+  collected, so there is nothing to undo).
+- **Storage.** `legal.acceptedVersion` / `legal.acceptedAt` in DataStore, per device, never exported by
+  `SettingsDoc`, so a restored backup cannot accept on the user's behalf (same rule as the Market consent).
+- **Always reachable.** More → «قوانین و حریم خصوصی», Settings → About card, About screen.
+- **Content checked against the code.** Every host of `MarketHosts.all` is named (a test enforces it); only
+  coin symbols leave the phone; HTTPS GET only (`EgressInterceptor`); no analytics or crash SDK (guard 4);
+  system backup off (`allowBackup=false`); PIN stored as a salted hash; biometrics handled by Android; each
+  manifest permission listed with its reason; Coil is a dependency but no code loads a remote image, so no
+  image host is contacted.
+- **Hosted copy.** `tools/legal/build_legal_site.py` writes `docs/index.html` (+ `.nojekyll`) from the same
+  blocks; `LegalContentTest` fails when the page is stale. The owner enables GitHub Pages from `main:/docs`.
+
+### D-97 — The app addresses every trader, not one owner
+
+The owner asked that the app read as a product for many traders and named the About sentence
+`about.madeFor` ("built on your own personal constitution; every number can be adjusted") as the one to change;
+the rest of the wording stays as it is (owner's answer, 2026-10-27). `about.madeFor` lives in the read-only spec,
+so About now shows the new key `app.about.audience` instead ("for any trader who wants to write down their own
+rules and stick to them; every number and rule can be adjusted"). The base key is no longer shown anywhere.
+
+### D-98 — Long journals: Today reads open trades through an index
+
+Review of the queries for many users with long journals: every table that is filtered has an index (`trade`:
+status, entryTime, exitTime, setupId, account; `trade_event`/`attachment`: tradeId; `ledger_entry`, `review`,
+`param_change`, `audit_log` by time/type), and the journal list is a `LazyColumn` with stable keys. One hot path
+loaded the whole journal on every change to show the open trades on Today; it now uses
+`TradeDao.observeOpen()` (`WHERE status = 'OPEN'`). A Robolectric test inserts 2 000 trades and checks the result
+and that SQLite's plan uses `index_trade_status`. Left as is, on purpose: Insights, CSV and backup read every
+row because they need every row; the engine already reads only OPEN/CLOSED rows.
 
 ## Owner request 0.11.0 — language, hidden amounts, glossary, narrow phones (decisions)
 

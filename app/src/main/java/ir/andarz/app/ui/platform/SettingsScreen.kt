@@ -70,7 +70,7 @@ import java.time.Instant
 /** Settings of 5.15 with the Market section of K6.9. */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -> Unit, vm: SettingsViewModel = hiltViewModel()) {
+fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -> Unit, onLegal: () -> Unit = {}, vm: SettingsViewModel = hiltViewModel()) {
     val u = ui()
     val s = vm.settings.collectAsState().value ?: return
     val message by vm.message.collectAsState()
@@ -110,6 +110,7 @@ fun SettingsScreen(onBack: () -> Unit, onAbout: () -> Unit, onMarketAlerts: () -
         SectionCard(u.t("set.about")) {
             Text(u.t("set.version", "v" to u.digits(vm.versionName)) + " \u00B7 " + u.t("set.build", "b" to u.int(vm.versionCode)), style = MaterialTheme.typography.bodyMedium)
             TextButton(onClick = onAbout) { Text(u.t("about.title")) }
+            TextButton(onClick = onLegal) { Text(u.t("app.legal.title")) }
         }
     }
     SnackbarHost(snack, Modifier.align(Alignment.BottomCenter).padding(16.dp))

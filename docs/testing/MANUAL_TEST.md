@@ -249,7 +249,7 @@ alarm explanation. Data Safety form: only "Files and docs, user-initiated export
 
 | Id | Steps | Expected | State |
 |---|---|---|---|
-| S-1 | `adb shell am start -n ir.andarz.app/.MainActivity --es ir.andarz.app.extra.ROUTE onboarding` | App opens on Today; onboarding is not shown | pending |
+| S-1 | `adb shell am start -n ir.mobitmaster.andarz/ir.andarz.app.MainActivity --es ir.andarz.app.extra.ROUTE onboarding` (package `ir.mobitmaster.andarz` since D-95; the class and the extra keep the `ir.andarz.app` namespace) | App opens on Today; onboarding is not shown | pending |
 | S-2 | Tap a trade reminder notification while the app is locked | Unlock, then the trade opens | pending |
 | S-3 | Open a text field in Rules / Ledger / Settings with the keyboard up, 3-button and gesture navigation | Field stays above the keyboard; nothing behind the navigation bar; no double gap | pending |
 | S-4 | Lock screen at 200% font with the PIN keyboard open | PIN field and unlock button reachable by scrolling | pending |
@@ -281,3 +281,18 @@ The release smoke S1–S18 lives in `TESTING.md` §3. Cases that check this audi
 | G-1 | Learn → Glossary, pick each section, search "لیکوئید" and "liquidation" | Cards render; search finds the term in both forms | pending |
 | N-1 | 320 dp phone (or Display size largest + Font size largest) | Bottom bar labels whole, including the calculator label; Today figure fits | pending |
 | N-2 | Tablet or landscape | Content in a centred column, not stretched edge to edge | pending |
+
+## 0.12.0 — terms gate, legal screen, package name (pending: needs a device)
+
+| Id | Steps | Expected | State |
+|---|---|---|---|
+| L-1 | Fresh install, open the app | The terms screen appears before onboarding; the button stays disabled until the box is ticked | pending |
+| L-2 | On L-1 press Back / Home, reopen | Still on the terms screen; nothing was accepted | pending |
+| L-3 | Tick, accept | Onboarding starts; reopening the app never shows the terms again | pending |
+| L-4 | More → قوانین و حریم خصوصی; Settings → About card; About screen | All three open the legal screen with three tabs and the accepted date | pending |
+| L-5 | Switch language to English, open the legal screen | English text, left to right, same three tabs | pending |
+| L-6 | App lock on, kill and reopen on a fresh install that has accepted | Lock first, then Today (the terms are not shown again) | pending |
+| L-7 | Restore a backup on a second fresh install | The terms are still asked on that device | pending |
+| L-8 | `adb shell pm list packages | grep andarz` | `package:ir.mobitmaster.andarz` | pending |
+| L-9 | Open https://mobitsolidity.github.io/Andarz-apk/ after Pages is enabled | Persian and English texts identical to the app | pending (owner enables Pages) |
+

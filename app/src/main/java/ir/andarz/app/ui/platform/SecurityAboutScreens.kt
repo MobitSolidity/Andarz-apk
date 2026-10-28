@@ -109,7 +109,7 @@ fun SecurityScreen(onBack: () -> Unit, vm: SecurityViewModel = hiltViewModel()) 
  * the internet.
  */
 @Composable
-fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
+fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit, onLegal: () -> Unit = {}) {
     val u = ui()
     val c = LocalAndarzColors.current
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -117,7 +117,8 @@ fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
         Text(u.content.appName + " \u00B7 " + u.content.tagline, style = MaterialTheme.typography.titleMedium)
         Text(u.t("set.version", "v" to u.digits(BuildConfig.VERSION_NAME)) + " \u00B7 " + u.t("set.build", "b" to u.int(BuildConfig.VERSION_CODE)) + " \u00B7 " + Fmt.isolate(BuildConfig.GIT_COMMIT), style = MaterialTheme.typography.labelLarge)
         Text(u.t("about.meaning"), style = MaterialTheme.typography.bodyMedium)
-        Text(u.t("about.madeFor"), style = MaterialTheme.typography.bodyMedium)
+        // D-97: about.madeFor ("built on your own personal constitution") addressed one owner; the app is for every trader.
+        Text(u.t("app.about.audience"), style = MaterialTheme.typography.bodyMedium)
         SectionCard(null) { Text(u.t("about.privacy"), style = MaterialTheme.typography.bodyMedium) }
         SectionCard(u.t("mkt.net.title")) {
             Text(u.t("mkt.net.body"), style = MaterialTheme.typography.bodyMedium)
@@ -127,6 +128,7 @@ fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit) {
         Text(u.t("about.disclaimer"), style = MaterialTheme.typography.bodyMedium, color = c.caution)
         Text(u.t("about.fonts"), style = MaterialTheme.typography.labelMedium)
         Text(u.t("mkt.about.credit"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)
+        TextButton(onClick = onLegal) { Text(u.t("app.legal.title")) }
         TextButton(onClick = onLicenses) { Text(u.t("set.licenses")) }
     }
 }

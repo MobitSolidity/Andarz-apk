@@ -60,7 +60,6 @@ import ir.andarz.data.db.TradeEntity
 import ir.andarz.engine.LockNeed
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -68,7 +67,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TodayViewModel @Inject constructor(db: AndarzDatabase, private val journal: JournalRepository) : ViewModel() {
     val open: StateFlow<List<TradeEntity>> =
-        db.trades().observeAll().map { all -> all.filter { it.status == "OPEN" } }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+        // D-98: an indexed query for the open rows instead of loading the whole journal and filtering in memory.
+        db.trades().observeOpen().stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     init { safeLaunch { journal.expirePlans() } }
 
@@ -189,7 +189,7 @@ fun AndarzNavHost(
                         "ins.title" to go(AndarzNav.INSIGHTS), "rev.title" to go(AndarzNav.REVIEWS), "params.title" to go(AndarzNav.RULES),
                         "setups.title" to go(AndarzNav.SETUPS), "wl.title" to go(AndarzNav.WATCHLIST), "ledger.title" to go(AndarzNav.LEDGER),
                         "con.title" to go(AndarzNav.CONSTITUTION), "learn.title" to go(AndarzNav.LEARN), "sec.title" to go(AndarzNav.SECURITY), "set.title" to go(AndarzNav.SETTINGS),
-                        "about.title" to go(AndarzNav.ABOUT),
+                        "about.title" to go(AndarzNav.ABOUT), "app.legal.title" to go(AndarzNav.LEGAL),
                     ),
                 )
             }
@@ -208,6 +208,7 @@ fun AndarzNavHost(
                 SettingsScreen(
                     onBack = { navController.popBackStack() }, onAbout = { navController.navigate(AndarzNav.ABOUT) },
                     onMarketAlerts = { navController.navigate(AndarzNav.MARKET_ALERTS) },
+                    onLegal = { navController.navigate(AndarzNav.LEGAL) },
                 )
             }
             composable(AndarzNav.CONSTITUTION) {
@@ -220,7 +221,13 @@ fun AndarzNavHost(
             }
             composable(AndarzNav.LEARN) { ir.andarz.app.ui.platform.LearnScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.SECURITY) { SecurityScreen(onBack = { navController.popBackStack() }) }
-            composable(AndarzNav.ABOUT) { AboutScreen(onBack = { navController.popBackStack() }, onLicenses = { navController.navigate(AndarzNav.LICENSES) }) }
+            composable(AndarzNav.ABOUT) {
+                AboutScreen(
+                    onBack = { navController.popBackStack() }, onLicenses = { navController.navigate(AndarzNav.LICENSES) },
+                    onLegal = { navController.navigate(AndarzNav.LEGAL) },
+                )
+            }
+            composable(AndarzNav.LEGAL) { ir.andarz.app.ui.platform.LegalScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.LICENSES) { LicensesScreen(onBack = { navController.popBackStack() }) }
             composable(AndarzNav.WIZARD) {
                 WizardScreen(

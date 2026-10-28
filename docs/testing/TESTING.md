@@ -68,7 +68,7 @@ checklist are in `MANUAL_TEST.md`; this is the release smoke on top of them.
 | S14 | Live monitor on, reboot | Foreground notification back only if enabled | pending |
 | S15 | TalkBack through Today, Wizard, Journal row, Settings | Every control has a label and role; order follows RTL | pending |
 | S16 | Battery: leave the app in background 1 h with Market off | No wake-ups attributable to Andarz in *Battery usage* (P-01) | pending |
-| S17 | Cold start time (`adb shell am start -W ir.andarz.app/.MainActivity`) on the API 26 device | `TotalTime` < 1500 ms (record the value) | pending |
+| S17 | Cold start time (`adb shell am start -W ir.mobitmaster.andarz/ir.andarz.app.MainActivity`) on the API 26 device | `TotalTime` < 1500 ms (record the value) | pending |
 | S18 | Upgrade install over the previous Play version with data | Migration runs, data intact | pending |
 
 ## 4. Crash monitoring

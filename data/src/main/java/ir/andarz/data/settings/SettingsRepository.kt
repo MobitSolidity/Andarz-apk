@@ -61,6 +61,12 @@ data class Settings(
     val language: Language = Language.FA,
     /** Masks equity and dollar P&L on screen (D-91); the numbers themselves are never changed. */
     val hideAmounts: Boolean = false,
+    /**
+     * Version of the terms, privacy policy and disclaimer the user accepted on this device, 0 for never (D-96).
+     * Per device and never exported, like the Market consent: a restored backup does not accept on the user's behalf.
+     */
+    val legalAcceptedVersion: Int = 0,
+    val legalAcceptedAt: Long = 0,
 ) {
     val zone: ZoneId get() = runCatching { ZoneId.of(zoneId) }.getOrDefault(ZoneId.of(DEFAULT_ZONE))
 
@@ -107,6 +113,8 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
         val demo = booleanPreferencesKey("demoLoaded")
         val language = stringPreferencesKey("language")
         val hideAmounts = booleanPreferencesKey("hideAmounts")
+        val legalVersion = intPreferencesKey("legal.acceptedVersion")
+        val legalAt = longPreferencesKey("legal.acceptedAt")
     }
 
     val settings: Flow<Settings> = store.data.map(::read)
@@ -134,6 +142,7 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
             readArticles = p[K.readArticles] ?: emptySet(), lastSecurityReviewAt = p[K.lastSecurity] ?: 0,
             onboardingDone = p[K.onboarding] ?: false, adviceEnabled = p[K.advice] ?: d.adviceEnabled, demoLoaded = p[K.demo] ?: false,
             language = enumOr(p[K.language], d.language), hideAmounts = p[K.hideAmounts] ?: d.hideAmounts,
+            legalAcceptedVersion = p[K.legalVersion] ?: 0, legalAcceptedAt = p[K.legalAt] ?: 0,
         )
     }
 
@@ -150,6 +159,12 @@ class SettingsRepository(private val store: DataStore<Preferences>) {
     suspend fun setLastSecurityReviewAt(v: Long) = store.edit { it[K.lastSecurity] = v }
     suspend fun setDemoLoaded(v: Boolean) = store.edit { it[K.demo] = v }
     suspend fun setHideAmounts(v: Boolean) = store.edit { it[K.hideAmounts] = v }
+
+    /** Records an explicit tap on "accept" for the given legal version (D-96). Never called on the user's behalf. */
+    suspend fun acceptLegal(version: Int, at: Long) {
+        require(version > 0) { "legal version must be positive" }
+        store.edit { it[K.legalVersion] = version; it[K.legalAt] = at }
+    }
 
     /**
      * Switches the display language (D-90). Digits and calendar follow the language, because a Persian text with

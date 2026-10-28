@@ -54,6 +54,7 @@ object AndarzNav {
     const val LEARN = "learn"
     const val ABOUT = "about"
     const val LICENSES = "licenses"
+    const val LEGAL = "legal"
     const val ONBOARDING = "onboarding"
 
     fun trade(id: String) = "trade/$id"

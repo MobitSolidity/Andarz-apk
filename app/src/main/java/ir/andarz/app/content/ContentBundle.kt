@@ -92,6 +92,9 @@ class ContentBundle private constructor(
     /** The glossary in this bundle's language (D-92); empty when the asset is absent. */
     val glossary: Glossary by lazy { Glossary.from(glossaryDoc, if (isLtr) "en" else "fa") }
 
+    /** Terms of use, privacy policy and risk warning (D-96), or null when the app document has none. */
+    val legal: Legal? by lazy { Legal.parse(appDoc?.get("legal") as? JsonObject) }
+
     /** A nested object of the base document, e.g. `obj("params")` or `obj("enums")`. */
     fun obj(vararg path: String): JsonObject? = node(base, *path) as? JsonObject
 
@@ -137,6 +140,22 @@ class ContentBundle private constructor(
         for (key in appUi) {
             if (!key.startsWith(APP_PREFIX)) problems.add("ui key '" + key + "' lives in the app document but does not start with '" + APP_PREFIX + "'")
             if (key in baseUi || key in marketUi) problems.add("ui key '" + key + "' is defined by the app document and another document")
+        }
+
+        // D-96: when the app document is present it must carry the three legal documents, none of them empty.
+        if (appDoc != null) {
+            val l = legal
+            if (l == null || l.version < 1) problems.add("the app document has no legal block with a positive version (D-96)")
+            else {
+                for (id in Legal.REQUIRED_IDS) {
+                    val d = l.doc(id)
+                    if (d == null || d.sections.isEmpty() || d.sections.any { it.heading.isBlank() || it.paragraphs.isEmpty() || it.paragraphs.any(String::isBlank) }) {
+                        problems.add("legal document '" + id + "' is missing or has an empty section (D-96)")
+                    }
+                }
+                if (!l.contact.contains('@')) problems.add("legal.contact is not an e-mail address (D-96)")
+                if (!l.url.startsWith("https://")) problems.add("legal.url is not an https URL (D-96)")
+            }
         }
 
         for ((key, declared) in uiArgs) {

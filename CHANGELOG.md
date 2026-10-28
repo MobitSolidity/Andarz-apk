@@ -4,6 +4,27 @@ All notable changes. Format: [Keep a Changelog](https://keepachangelog.com/en/1.
 SemVer for `versionName`; `versionCode` is the git commit count (D-73). User-facing release notes for each
 build are in `RELEASE_NOTES.md`.
 
+## [0.12.0] — Myket and Bazaar readiness (not published)
+
+### Added
+- Terms of use, privacy policy and risk warning in Persian and English (D-96). They are shown once before
+  first use and need an explicit tick and tap to accept. They are always available from More, Settings and
+  About, and are published at https://mobitsolidity.github.io/Andarz-apk/ (generated from the same text).
+- `docs/release/IRAN_STORES.md`: the Myket and Bazaar steps, listing text, the permission note for reviewers,
+  and the licence-question ticket.
+
+### Changed
+- Package name is now `ir.mobitmaster.andarz` (D-95). This is final; it cannot change after the first upload.
+- About describes the app as made for any trader instead of one person's constitution (D-97).
+- Today loads only open trades from the database, not the whole journal (D-98).
+- Build: `resourceConfigurations` → `androidResources.localeFilters` (AGP 8.9). Toolchain: compile/target SDK
+  36, AGP 8.9.1, Gradle 8.11.1 (owner's update, verified).
+
+### Tests
+- Legal content parity, hosts named, support address, hosted page in sync, nothing accepted by default,
+  acceptance never exported (app); acceptance persistence (data); open-trade query on 2 000 rows with the
+  index plan (data).
+
 ## [0.11.0] — English, hidden amounts, glossary (not published)
 
 ### Added

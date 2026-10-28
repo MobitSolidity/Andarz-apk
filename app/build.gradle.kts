@@ -47,15 +47,22 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        // Placeholder (D-11, D-M02): decide the final id before any store release.
-        applicationId = "ir.andarz.app"
+        // Final store id (D-95, closes O-1). It can never change after the first upload to Myket or Bazaar.
+        // The Kotlin namespace above stays ir.andarz.app: the namespace names the R/BuildConfig classes only.
+        applicationId = "ir.mobitmaster.andarz"
         minSdk = 26
         targetSdk = 36
         versionCode = andarzVersionCode
         versionName = andarzVersionName
         buildConfigField("String", "GIT_COMMIT", "\"" + andarzCommit + "\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        resourceConfigurations += listOf("fa")
+    }
+
+    // Android resources ship Persian plus the unqualified defaults (English). The app's own wording comes from
+    // the content JSON in both languages (D-90), so no further locale is needed. Replaces the deprecated
+    // resourceConfigurations (AGP 8.9, D-95).
+    androidResources {
+        localeFilters += listOf("fa")
     }
 
     signingConfigs {

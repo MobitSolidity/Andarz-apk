@@ -1,5 +1,10 @@
 # RELEASE.md — build, sign, upload, roll out, roll back
 
+> **2026-10-27 (D-95):** the owner publishes on Myket and Cafe Bazaar only; follow `IRAN_STORES.md`. This
+> Google Play document is kept for a possible later Play release. The package name is now
+> `ir.mobitmaster.andarz`, and the privacy policy is the in-app legal text hosted at
+> https://mobitsolidity.github.io/Andarz-apk/ (D-96).
+
 The playbook for publishing Andarz on Google Play. There is no CI and no release automation, by the owner's
 rule (D-74, D-87): every step below is run by a person. Commands are verified in this repo unless marked
 **(owner)**. **Blocked until:** O-1 (final applicationId) and O-2 (upload key) are decided, and the device pass

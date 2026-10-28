@@ -1,5 +1,10 @@
 # Store listing — Google Play (draft for the owner)
 
+> **2026-10-27 (D-95):** the owner publishes on Myket and Cafe Bazaar only; follow `IRAN_STORES.md`. This
+> Google Play document is kept for a possible later Play release. The package name is now
+> `ir.mobitmaster.andarz`, and the privacy policy is the in-app legal text hosted at
+> https://mobitsolidity.github.io/Andarz-apk/ (D-96).
+
 Everything here is a **draft**. Text that ships inside the app lives in `content_fa.json` /
 `content_market_fa.json` (K13); this file is store copy only. Wording claims were checked against the code:
 the journal, engine and backup make no network request; only `:market` connects, only after the user turns

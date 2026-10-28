@@ -87,6 +87,9 @@ class MainActivity : FragmentActivity() {
                     Surface(modifier = Modifier.fillMaxSize()) {
                         when {
                             locked && s.lockEnabled && s.pinHash != null -> LockScreen(lock, s)
+                            // D-96: the terms come first, before onboarding, and again when their version rises.
+                            bundle.legal?.isAccepted(s.legalAcceptedVersion) == false ->
+                                ir.andarz.app.ui.platform.LegalGateScreen(onAccept = { v -> app.acceptLegal(v) })
                             !onboarded && !s.onboardingDone -> androidx.compose.foundation.layout.Box(Modifier.fillMaxSize()) {
                                 OnboardingScreen(onDone = { onboarded = true })
                                 ir.andarz.app.ui.UiErrorSnackbarHost(

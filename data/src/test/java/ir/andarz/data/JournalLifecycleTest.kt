@@ -8,6 +8,7 @@ import ir.andarz.engine.Clock
 import ir.andarz.engine.LockCode
 import ir.andarz.engine.LockNeed
 import ir.andarz.engine.Side
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -93,6 +94,30 @@ class JournalLifecycleTest {
         val reviewed = journal.saveReview(planned.id, ReviewInput(emptyList(), null, "M00", "CALM", "patience"), 20)
         assertNotNull(reviewed.reviewedAt)
         assertEquals(2039.4, facade.snapshot().equity.now, 1e-9)
+    }
+
+    /** D-98: Today reads open trades through an indexed query that returns exactly the OPEN rows, newest first. */
+    @Test
+    fun observeOpenReturnsOnlyOpenTradesNewestFirstInALargeJournal() = runBlocking {
+        val s = onboarded()
+        val base = journal.savePlan(draft(s))
+        db.trades().delete(base)
+        val statuses = listOf("CLOSED", "PLANNED", "REJECTED", "CANCELLED")
+        val rows = (0 until 2000).map { k ->
+            val t = clock.now().minus(Duration.ofMinutes(2000L - k)).toEpochMilli()
+            base.copy(id = "r$k", status = if (k % 100 == 7) "OPEN" else statuses[k % statuses.size], entryTime = t, createdAt = t)
+        }
+        db.trades().insertAll(rows)
+        val open = db.trades().observeOpen().first()
+        val expected = rows.filter { it.status == "OPEN" }.sortedByDescending { it.entryTime }.map { it.id }
+        assertEquals(20, open.size)
+        assertEquals(expected, open.map { it.id })
+        assertTrue(open.all { it.status == "OPEN" })
+        // The query is served by the status index, not a full scan of the journal.
+        val plan = db.openHelper.readableDatabase.query(
+            "EXPLAIN QUERY PLAN SELECT * FROM trade WHERE status = 'OPEN' ORDER BY COALESCE(entryTime, createdAt) DESC",
+        ).use { c -> buildString { while (c.moveToNext()) append(c.getString(c.columnCount - 1)).append('\n') } }
+        assertTrue("index_trade_status" in plan, plan)
     }
 
     @Test

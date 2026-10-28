@@ -1,5 +1,11 @@
 {
- "meta": {"schema": 1, "locale": "en", "direction": "ltr", "keyPrefix": "app.", "note": "English twin of content_app_fa.json (D-90); same keys."},
+ "meta": {
+  "schema": 1,
+  "locale": "en",
+  "direction": "ltr",
+  "keyPrefix": "app.",
+  "note": "English twin of content_app_fa.json (D-90); same keys. Legal texts (D-96) under \"legal\"."
+ },
  "ui": {
   "app.lang.fa": "فارسی",
   "app.amounts.hide": "Hide amounts",
@@ -13,7 +19,199 @@
   "app.glossary.all": "All",
   "app.glossary.example": "Example and use",
   "app.glossary.intro": "165 trading and exchange terms in ten sections; each with its meaning and an example or its use in the constitution.",
-  "app.glossary.section": "Section {n}"
+  "app.glossary.section": "Section {n}",
+  "app.legal.title": "Terms & privacy",
+  "app.legal.gate.title": "Before you start",
+  "app.legal.gate.body": "Please read the terms of use, the privacy policy and the risk warning. Andarz gives no financial advice and every trade is your own responsibility.",
+  "app.legal.gate.check": "I have read and accept these texts",
+  "app.legal.gate.accept": "Accept and continue",
+  "app.legal.gate.updated": "These texts have been updated; please read and accept them again to continue.",
+  "app.legal.accepted": "Accepted on {date}",
+  "app.legal.updated": "Last updated: {date}",
+  "app.legal.online": "Online version: {url}",
+  "app.legal.contact": "Support: {email}",
+  "app.about.audience": "Andarz is made for any trader who wants to write down their own trading rules and stick to them; every number and rule can be adjusted."
  },
- "uiArgs": {"app.glossary.count": ["n"], "app.glossary.section": ["n"]}
+ "uiArgs": {
+  "app.glossary.count": [
+   "n"
+  ],
+  "app.glossary.section": [
+   "n"
+  ],
+  "app.legal.accepted": [
+   "date"
+  ],
+  "app.legal.updated": [
+   "date"
+  ],
+  "app.legal.online": [
+   "url"
+  ],
+  "app.legal.contact": [
+   "email"
+  ]
+ },
+ "legal": {
+  "version": 1,
+  "updated": "2026-10-27",
+  "contact": "mobitmaster@gmail.com",
+  "url": "https://mobitsolidity.github.io/Andarz-apk/",
+  "docs": [
+   {
+    "id": "terms",
+    "title": "Terms of use",
+    "sections": [
+     {
+      "h": "Accepting the terms",
+      "p": [
+       "By installing and using Andarz you accept these terms, the privacy policy and the risk warning. If you do not agree, do not use the app and uninstall it.",
+       "Andarz is free, has no user account and shows no ads."
+      ]
+     },
+     {
+      "h": "What Andarz is and is not",
+      "p": [
+       "Andarz is a trading journal, a pre-entry checklist, a position-size calculator and a risk-management tool, all running on your own phone.",
+       "Andarz is not an exchange, a broker or a wallet. It places no trades, holds no money and does not connect to your exchange account.",
+       "Andarz gives no financial advice, buy or sell signals or investment recommendations. The default rules and numbers are a sample framework; every user should adjust them to their own situation and trading style."
+      ]
+     },
+     {
+      "h": "Responsibility for decisions",
+      "p": [
+       "Every trading decision and its outcome, including profit and loss, is yours alone. The yes or no that Andarz shows only reflects the rules you have set.",
+       "Before every order, check the size, leverage, stop and fees again on the exchange itself. Calculations are rounded and may differ from your exchange's rules."
+      ]
+     },
+     {
+      "h": "Market section and alerts",
+      "p": [
+       "The Market section stays off until you turn it on. Prices, the Fear & Greed index and the USDT rate are read from public third-party services and may be delayed, incomplete, wrong or unavailable. Andarz is not affiliated with any of these services or exchanges.",
+       "Price alerts, ringing and live monitoring depend on the internet, battery settings and Android's limits, and may arrive late or not at all. To protect your capital, always place your stop on the exchange itself and do not rely on Andarz alerts."
+      ]
+     },
+     {
+      "h": "Data and backups",
+      "p": [
+       "Your data is stored only on your phone and the developer has no access to it, so keeping backups is your responsibility. Uninstalling the app or clearing its data cannot be undone without a backup.",
+       "If you forget a backup file's password, nobody, including the developer, can open it."
+      ]
+     },
+     {
+      "h": "Permitted use",
+      "p": [
+       "You are responsible for following the laws of your country on trading digital assets and the rules of your exchanges.",
+       "Using the app for anything illegal, trying to harm third-party services, or publishing a modified version under the Andarz name is not allowed. The open-source libraries used are covered by their own licenses (About Andarz → Open-source licenses)."
+      ]
+     },
+     {
+      "h": "Disclaimer",
+      "p": [
+       "The app is provided as is. To the extent the law allows, the developer gives no warranty that it is free of errors, that its calculations and data are accurate or that the service is continuous, and is not liable for financial loss, data loss or any direct or indirect damage arising from using the app."
+      ]
+     },
+     {
+      "h": "Changes and contact",
+      "p": [
+       "This text may be updated in later versions. If a change is significant, the app will ask you to accept again.",
+       "For questions, suggestions or problem reports write to mobitmaster@gmail.com."
+      ]
+     }
+    ]
+   },
+   {
+    "id": "privacy",
+    "title": "Privacy policy",
+    "sections": [
+     {
+      "h": "Summary",
+      "p": [
+       "Andarz has no user account, no ads, no behaviour analytics and no automatic crash reporting, and the developer receives no data from you. Your journal, trades, balances, reviews and settings stay on your phone."
+      ]
+     },
+     {
+      "h": "What is stored on the phone",
+      "p": [
+       "Trades and their events, the deposit and withdrawal ledger, reviews, setups, the symbol list, rule changes, the pledge (with the name you type) and the app settings.",
+       "If you turn on the app lock, the PIN is stored as a salted hash, never the PIN itself. Fingerprint or face is checked by Android; Andarz never sees it.",
+       "Android's automatic backup is turned off for Andarz, so the data does not go to Google's or your phone maker's cloud either."
+      ]
+     },
+     {
+      "h": "Market section (optional)",
+      "p": [
+       "The Market section is off by default and connects to the internet only after you turn it on and accept the consent screen. It then reads data only from these public services: api.coingecko.com (coin list and prices), data-stream.binance.vision (live prices), api.nobitex.ir and api.wallex.ir (USDT to Toman rate) and api.alternative.me (Fear & Greed index).",
+       "These requests carry only the symbols of the coins needed. If you set a price alert on an open trade, that coin's symbol is included in the price request; no size, entry price, profit or loss or any other journal data is sent.",
+       "All requests are encrypted (HTTPS) and read-only; no cookies, device identifiers or login details are sent. As with any internet connection, these services see your IP address, and their own privacy policies apply to it.",
+       "You can turn the Market section off in Settings at any time; from then on no request is sent."
+      ]
+     },
+     {
+      "h": "Permissions and why",
+      "p": [
+       "Internet and network state: only for the Market section, while it is on.",
+       "Notifications: review and cool-down reminders, price alerts and the live-monitor notification. Asked the first time it is needed.",
+       "Foreground service, keeping the device awake and starting after boot: for the live price monitor that you turn on, and to restore reminders after a restart. A persistent notification is shown the whole time the monitor runs.",
+       "Exact alarms, full-screen notifications, display over other apps and setting a Clock alarm: so a price alert can ring like an alarm clock, even on the lock screen. Each is requested only when you turn that feature on, with its own explanation, and without it Andarz plays its own ring instead.",
+       "Fingerprint or face and vibration: for the app lock and haptic feedback.",
+       "Andarz has no access to contacts, SMS, calls, location, camera, microphone or the list of installed apps."
+      ]
+     },
+     {
+      "h": "Exports and sharing",
+      "p": [
+       "You create the backup file yourself and it is saved where you choose, encrypted with AES-256-GCM using a password you set.",
+       "CSV and JSON exports and trade notes are not encrypted and go only to the app you pick in the share sheet."
+      ]
+     },
+     {
+      "h": "Deleting data",
+      "p": [
+       "Settings → Delete all data erases the journal. Uninstalling the app removes all its data from the phone. Because the developer holds no data, there is nothing to delete on the developer's side."
+      ]
+     },
+     {
+      "h": "Children",
+      "p": [
+       "Andarz is not made for children and is not intended for users under 18."
+      ]
+     },
+     {
+      "h": "Changes and contact",
+      "p": [
+       "If the way data is handled changes, this text will be updated and the app will ask you to accept again. The online version of this text is at https://mobitsolidity.github.io/Andarz-apk/.",
+       "Privacy questions: mobitmaster@gmail.com"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "risk",
+    "title": "Risk warning",
+    "sections": [
+     {
+      "h": "Trading is high risk",
+      "p": [
+       "Trading crypto assets, especially futures and leveraged trading, is very high risk. You can lose part or all of your capital in a short time, and with leverage losses come faster than you expect.",
+       "Only trade with money whose loss would not disrupt your life."
+      ]
+     },
+     {
+      "h": "Andarz does not guarantee profit",
+      "p": [
+       "Following the Andarz rules lowers risk but does not remove it. Past statistics, win rate or average R do not guarantee future results.",
+       "No part of the app, including the constitution, the daily advice, Learn and the glossary, is a recommendation to buy or sell any asset."
+      ]
+     },
+     {
+      "h": "Data and calculations",
+      "p": [
+       "Market prices come from third-party services and may differ from your exchange's price. Position size, suggested leverage and liquidation price are approximate; always check the final number on the exchange."
+      ]
+     }
+    ]
+   }
+  ]
+ }
 }
