@@ -348,7 +348,7 @@ fun AndarzTheme(
         MaterialTheme(
             colorScheme = if (dark) darkScheme else lightScheme,
             typography = andarzTypo,
-            shapes = andarzShapes,
+            shapes = androidx.compose.material3.Shapes(),
             content = content,
         )
     }
