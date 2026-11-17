@@ -39,7 +39,7 @@ private val numeralRun = Regex(
 
 /** The character ranges of [text] that belong to the numeral family. Exposed for the unit test. */
 internal fun numeralRanges(text: String): List<IntRange> {
-    if (text.none { it in '0'..'9' || it in '٠'..'٩' || it in '۰'..'۹' || it in 'A'..'Z' || it in 'a'..'z' }) return emptyList()
+    if (text.none { it in '0'..'9' || it in '\u0660'..'\u0669' || it in '\u06F0'..'\u06F9' || it in 'A'..'Z' || it in 'a'..'z' }) return emptyList()
     return numeralRun.findAll(text).map { it.range }.toList()
 }
 
