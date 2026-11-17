@@ -347,7 +347,7 @@ fun AndarzTheme(
     CompositionLocalProvider(LocalAndarzColors provides if (dark) darkExtras else lightExtras) {
         MaterialTheme(
             colorScheme = if (dark) darkScheme else lightScheme,
-            typography = andarzTypo,
+            typography = androidx.compose.material3.Typography(),
             shapes = andarzShapes,
             content = content,
         )
