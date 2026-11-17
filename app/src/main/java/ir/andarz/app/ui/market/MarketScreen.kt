@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import ir.andarz.app.ui.components.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Text
+import ir.andarz.app.ui.components.Text
 import ir.andarz.app.ui.components.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
