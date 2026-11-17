@@ -77,7 +77,7 @@ fun Text(
 ) {
     // Naskh carries the advice quote only; its own figures stay as they are.
     val effective = fontFamily ?: style.fontFamily
-    val shaped = if (effective === AndarzFonts.naskh) null else remember(text) { withNumerals(text) }
+    val shaped: AnnotatedString? = null
     if (shaped == null) {
         androidx.compose.material3.Text(
             text = text, modifier = modifier, color = color, fontSize = fontSize, fontStyle = fontStyle, fontWeight = fontWeight,
