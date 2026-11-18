@@ -138,13 +138,13 @@ internal object LightTokens {
 internal object ShapeTokens {
     const val SMALL = 8
     const val MEDIUM = 14
-    const val LARGE = 20
+    const val LARGE = 24
     const val SHEET = 28
     const val HERO = 28
 
-    /** Card: 26 dp top corners over 14 dp bottom corners. */
-    const val ARCH_TOP = 26
-    const val ARCH_BOTTOM = 14
+    /** Card: 24 dp top corners over 12 dp bottom corners (drawn, never clipped; see `archSurface`). */
+    const val ARCH_TOP = 24
+    const val ARCH_BOTTOM = 12
 }
 
 /** The 4 dp spacing grid (`spacing` of the tokens). */

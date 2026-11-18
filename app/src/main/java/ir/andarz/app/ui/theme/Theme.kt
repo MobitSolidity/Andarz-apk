@@ -131,11 +131,12 @@ private val andarzShapes = Shapes(
     extraSmall = RoundedCornerShape(ShapeTokens.SMALL.dp),
     small = RoundedCornerShape(ShapeTokens.SMALL.dp),
     medium = RoundedCornerShape(ShapeTokens.MEDIUM.dp),
-    // Cards are arches: a large top radius over a small bottom radius.
-    large = RoundedCornerShape(
-        topStart = ShapeTokens.ARCH_TOP.dp, topEnd = ShapeTokens.ARCH_TOP.dp,
-        bottomEnd = ShapeTokens.ARCH_BOTTOM.dp, bottomStart = ShapeTokens.ARCH_BOTTOM.dp,
-    ),
+    // The Material surfaces (Card, Surface, dialogs) clip their content to this shape, and a layer clipped to a
+    // rounded rectangle with unequal corners is hit-tested through Path.op, which Robolectric's legacy graphics
+    // cannot do: every click inside such a layer silently misses in the unit tests. So the shape handed to
+    // Material stays uniform. The arch ("taagh") is drawn by `archSurface` (components/Surfaces.kt), which
+    // fills and outlines the arch without clipping a layer.
+    large = RoundedCornerShape(ShapeTokens.LARGE.dp),
     extraLarge = RoundedCornerShape(ShapeTokens.SHEET.dp),
 )
 
