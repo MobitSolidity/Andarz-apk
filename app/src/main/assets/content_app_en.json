@@ -30,7 +30,41 @@
   "app.legal.updated": "Last updated: {date}",
   "app.legal.online": "Online version: {url}",
   "app.legal.contact": "Support: {email}",
-  "app.about.audience": "Andarz is made for any trader who wants to write down their own trading rules and stick to them; every number and rule can be adjusted."
+  "app.about.audience": "Andarz is made for any trader who wants to write down their own trading rules and stick to them; every number and rule can be adjusted.",
+  "app.today.col.day": "Today",
+  "app.today.col.week": "Week",
+  "app.today.atPeak": "At peak",
+  "app.today.fromPeak": "From peak {v}",
+  "app.today.lamp.open": "Open",
+  "app.today.lamp.caution": "Caution",
+  "app.today.lamp.closed": "Closed",
+  "app.today.lamp.open.desc": "Gate open: entry allowed",
+  "app.today.lamp.caution.desc": "Gate half open: entry allowed, with caution",
+  "app.today.lamp.closed.desc": "Gate closed: entry not allowed",
+  "app.today.chart.desc": "Equity curve from {from} to {to}",
+  "app.today.capOf": "of {v}",
+  "app.today.gauge.free": "Free",
+  "app.today.gauge.near": "Near the cap",
+  "app.today.gauge.full": "Full",
+  "app.today.verdict.ok": "New trade allowed: every cap is free",
+  "app.today.verdict.near": "New trade allowed: one cap is near",
+  "app.today.verdict.no": "New entry not allowed: a cap is active",
+  "app.today.left": "left",
+  "app.today.pos.sl": "Stop",
+  "app.today.pos.timeStop": "Time exit",
+  "app.today.pos.candles": "{n} candles",
+  "app.today.pos.due": "Due",
+  "app.today.pos.manage": "Manage",
+  "app.today.closeDay": "Close the day and review",
+  "app.today.verdict.lock": "Entry not allowed: a lock is active",
+  "app.today.verdict.risk": "Risk up to {risk}",
+  "app.today.verdict.holdA": "Grade A closed until {until}",
+  "app.today.pos.checked": "Checked · {t}",
+  "app.today.cap.title": "Risk cap {risk}",
+  "app.today.hold.title": "Big win hold",
+  "app.today.verdict.limited": "New trade allowed, with limits",
+  "app.today.pos.entry": "Entry",
+  "app.today.pos.tp": "Target"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -50,6 +84,31 @@
   ],
   "app.legal.contact": [
    "email"
+  ],
+  "app.today.fromPeak": [
+   "v"
+  ],
+  "app.today.chart.desc": [
+   "from",
+   "to"
+  ],
+  "app.today.capOf": [
+   "v"
+  ],
+  "app.today.pos.candles": [
+   "n"
+  ],
+  "app.today.verdict.risk": [
+   "risk"
+  ],
+  "app.today.verdict.holdA": [
+   "until"
+  ],
+  "app.today.pos.checked": [
+   "t"
+  ],
+  "app.today.cap.title": [
+   "risk"
   ]
  },
  "legal": {

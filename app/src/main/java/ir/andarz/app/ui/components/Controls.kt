@@ -411,6 +411,7 @@ fun FitText(
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     minScale: Float = 0.7f,
+    textAlign: androidx.compose.ui.text.style.TextAlign = androidx.compose.ui.text.style.TextAlign.Center,
 ) {
     var scale by androidx.compose.runtime.remember(text, style) { androidx.compose.runtime.mutableFloatStateOf(1f) }
     var settled by androidx.compose.runtime.remember(text, style) { androidx.compose.runtime.mutableStateOf(false) }
@@ -421,7 +422,38 @@ fun FitText(
         maxLines = 1,
         softWrap = false,
         overflow = if (settled) androidx.compose.ui.text.style.TextOverflow.Ellipsis else androidx.compose.ui.text.style.TextOverflow.Clip,
-        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+        textAlign = textAlign,
+        modifier = modifier.drawWithContentIfSettled(settled),
+        onTextLayout = { r ->
+            if (r.hasVisualOverflow && scale > minScale) scale = (scale - 0.05f).coerceAtLeast(minScale)
+            else settled = true
+        },
+    )
+}
+
+/**
+ * [FitText] for a figure made of spans, such as the equity with its small dollar sign and decimals. The spans must
+ * size themselves in `em` (relative to [style]), so shrinking the base size shrinks them with it.
+ */
+@Composable
+fun FitText(
+    text: androidx.compose.ui.text.AnnotatedString,
+    style: TextStyle,
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified,
+    minScale: Float = 0.7f,
+    textAlign: androidx.compose.ui.text.style.TextAlign = androidx.compose.ui.text.style.TextAlign.Center,
+) {
+    var scale by androidx.compose.runtime.remember(text, style) { androidx.compose.runtime.mutableFloatStateOf(1f) }
+    var settled by androidx.compose.runtime.remember(text, style) { androidx.compose.runtime.mutableStateOf(false) }
+    Text(
+        text = text,
+        style = style.copy(fontSize = style.fontSize * scale),
+        color = color,
+        maxLines = 1,
+        softWrap = false,
+        overflow = if (settled) androidx.compose.ui.text.style.TextOverflow.Ellipsis else androidx.compose.ui.text.style.TextOverflow.Clip,
+        textAlign = textAlign,
         modifier = modifier.drawWithContentIfSettled(settled),
         onTextLayout = { r ->
             if (r.hasVisualOverflow && scale > minScale) scale = (scale - 0.05f).coerceAtLeast(minScale)

@@ -50,6 +50,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.heading
@@ -183,6 +184,7 @@ fun LimitGauge(
     segments: Int? = null,
     modifier: Modifier = Modifier,
     statusText: String? = null,
+    detail: String? = null,
 ) {
     val c = LocalAndarzColors.current
     val u = ui()
@@ -202,9 +204,10 @@ fun LimitGauge(
     val track = c.track
     val tick = if (red) c.text else c.muted
     Column(
-        modifier.heightIn(min = 48.dp).padding(horizontal = 6.dp, vertical = 6.dp).semantics(mergeDescendants = true) {
-            contentDescription = "$label, $valueText"
-            stateDescription = state
+        modifier.heightIn(min = 48.dp).padding(start = 6.dp, top = 5.dp, end = 6.dp, bottom = 3.dp).semantics(mergeDescendants = true) {
+            // "2 / of 3" reads as "2 of 3"; [detail] (the long wording of a red status) follows the state word
+            contentDescription = "$label, ${valueText.replace(" / ", " ")}"
+            stateDescription = if (detail != null) "$state, $detail" else state
         },
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -265,16 +268,14 @@ private fun DialFigure(value: String, cap: String?) {
 }
 
 /**
- * The board of dials: cells separated by 1 dp hairlines inside one card, like the "limits board" of the canvas.
- * [cells] are laid out [columns] to a row; an incomplete last row is padded with empty cells.
+ * The cells of a board of dials: [columns] to a row, with 1 dp hairlines between them. The hairlines are the divider
+ * colour showing through the gaps; [topLine] adds one more above the first row (under a heading).
  */
 @Composable
-fun LimitBoard(columns: Int, modifier: Modifier = Modifier, cells: List<@Composable () -> Unit>) {
+fun LimitGrid(columns: Int, modifier: Modifier = Modifier, topLine: Boolean = false, cells: List<@Composable () -> Unit>) {
     val c = LocalAndarzColors.current
     Column(
-        // The hairlines between the cells are the card's own divider colour showing through 1 dp gaps. The shape is
-        // uniform, so clipping the square cells to it is safe (only unequal corners break hit-testing in tests).
-        modifier.fillMaxWidth().archSurface(RoundedCornerShape(24.dp), c.divider, c.divider, c.edge, clipContent = true),
+        modifier.fillMaxWidth().background(c.divider).padding(top = if (topLine) 1.dp else 0.dp),
         verticalArrangement = Arrangement.spacedBy(1.dp),
     ) {
         cells.chunked(columns).forEach { row ->
@@ -289,12 +290,67 @@ fun LimitBoard(columns: Int, modifier: Modifier = Modifier, cells: List<@Composa
     }
 }
 
-/** The countdown of a lock: how much of the pause is left (0 to 1) and the text in the middle of the ring. */
-class LockCountdown(val remaining: Float, val label: String)
+/**
+ * A card made of a [LimitGrid]: the "limits board" of the canvas. The shape is uniform, so clipping the square cells to
+ * it is safe (only unequal corners break hit-testing in tests).
+ */
+@Composable
+fun LimitBoard(columns: Int, modifier: Modifier = Modifier, cells: List<@Composable () -> Unit>) {
+    val c = LocalAndarzColors.current
+    Box(modifier.fillMaxWidth().archSurface(RoundedCornerShape(24.dp), c.divider, c.divider, c.edge, clipContent = true)) {
+        LimitGrid(columns, cells = cells)
+    }
+}
 
 /**
- * 6.4.6 LockBanner: red-line container, the countdown ring (or a lock tile when no countdown is known), the
- * title, the explanation, one button per need. A polite live region.
+ * The countdown of a lock: how much of the pause is left (0 to 1), the clock in the middle of the ring and the word
+ * under it ("left"). The ring is drawn from 12 o'clock and shrinks toward the start edge of the layout. The clock
+ * changes every second, so TalkBack gets [description] instead (the time left in whole minutes): the banner is a polite
+ * live region and would otherwise read out every second.
+ */
+class LockCountdown(val remaining: Float, val label: String, val caption: String, val description: String)
+
+/** A size in sp that stops growing with the system font scale at [maxScale]: text inside a fixed ring must not overflow it. */
+@Composable
+private fun cappedSp(size: Float, maxScale: Float = 1.3f): androidx.compose.ui.unit.TextUnit {
+    val fs = LocalDensity.current.fontScale
+    return (if (fs > maxScale) size * maxScale / fs else size).sp
+}
+
+@Composable
+private fun CountdownRing(countdown: LockCountdown) {
+    val c = LocalAndarzColors.current
+    val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    Box(Modifier.size(76.dp).clearAndSetSemantics { contentDescription = countdown.description }, contentAlignment = Alignment.Center) {
+        val track = c.anSoft
+        val arc = c.anG
+        Canvas(Modifier.fillMaxSize()) {
+            val w = 6.dp.toPx()
+            val inset = w / 2f
+            val box = Size(size.width - w, size.height - w)
+            drawArc(track, 0f, 360f, false, Offset(inset, inset), box, style = Stroke(w))
+            val sweep = 360f * countdown.remaining.coerceIn(0f, 1f)
+            drawArc(arc, -90f, if (rtl) -sweep else sweep, false, Offset(inset, inset), box, style = Stroke(w, cap = StrokeCap.Round))
+        }
+        Column(Modifier.width(58.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+            // FitText: "03:59:59" of a long cool-down still fits the ring instead of spilling out of it
+            FitText(
+                countdown.label,
+                style = TextStyle(fontFamily = AndarzFonts.plex, fontWeight = FontWeight.W600, fontSize = cappedSp(20f), lineHeight = cappedSp(22f), fontFeatureSettings = "tnum"),
+                modifier = Modifier.fillMaxWidth(), color = c.an, minScale = 0.5f,
+            )
+            FitText(
+                countdown.caption,
+                style = MaterialTheme.typography.labelMedium.copy(fontSize = cappedSp(12f), lineHeight = cappedSp(14f)),
+                modifier = Modifier.fillMaxWidth(), color = c.muted, minScale = 0.6f,
+            )
+        }
+    }
+}
+
+/**
+ * 6.4.6 LockBanner: a red-line container (24 dp, ring in the line colour), the countdown ring (or a lock tile when no
+ * countdown is known), the title with a lock glyph, the explanation, one button per need. A polite live region.
  */
 @Composable
 fun LockBanner(
@@ -306,39 +362,20 @@ fun LockBanner(
     countdown: LockCountdown? = null,
 ) {
     val c = LocalAndarzColors.current
-    val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     Row(
         modifier.fillMaxWidth().semantics { liveRegion = LiveRegionMode.Polite }
-            .archSurface(ArchShapes.banner, c.anC, c.anLine)
+            .archSurface(RoundedCornerShape(24.dp), c.anC, c.anLine)
             .padding(horizontal = 14.dp, vertical = 12.dp),
         horizontalArrangement = Arrangement.spacedBy(14.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        if (countdown != null) {
-            Box(Modifier.size(60.dp), contentAlignment = Alignment.Center) {
-                val track = c.anG.copy(alpha = 0.2f)
-                val arc = c.anG
-                Canvas(Modifier.fillMaxSize()) {
-                    val w = 5.dp.toPx()
-                    val inset = w / 2f
-                    val box = Size(size.width - w, size.height - w)
-                    drawArc(track, 0f, 360f, false, Offset(inset, inset), box, style = Stroke(w))
-                    val sweep = 360f * countdown.remaining.coerceIn(0f, 1f)
-                    // starts at 12 o'clock and shrinks toward the start edge of the layout
-                    drawArc(arc, -90f, if (rtl) -sweep else sweep, false, Offset(inset, inset), box, style = Stroke(w, cap = StrokeCap.Round))
-                }
-                Text(
-                    countdown.label,
-                    style = TextStyle(fontFamily = AndarzFonts.plex, fontWeight = FontWeight.W600, fontSize = 14.sp, fontFeatureSettings = "tnum"),
-                    maxLines = 1,
-                )
-            }
-        } else {
-            ArchTile(c.anSoft) { GlyphIcon(Glyph.LOCK, ui().t("a11y.lockedState"), tint = c.an, size = 20.dp, strokeWidth = 2.4f) }
-        }
+        if (countdown != null) CountdownRing(countdown)
         Column(Modifier.weight(1f)) {
-            Text(title, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W700), color = c.an)
-            Text(body, style = MaterialTheme.typography.bodySmall.copy(lineHeight = 22.sp), modifier = Modifier.padding(top = 2.dp))
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                GlyphIcon(Glyph.LOCK, ui().t("a11y.lockedState"), tint = c.an, size = 18.dp, strokeWidth = 2.2f)
+                Text(title, style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W700), color = c.an, modifier = Modifier.weight(1f))
+            }
+            Text(body, style = MaterialTheme.typography.bodyMedium.copy(fontSize = 14.sp, lineHeight = 23.sp), modifier = Modifier.padding(top = 2.dp))
             if (until != null && countdown == null) Text(until, style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(top = 6.dp))
             actions.forEach { (label, go) -> OutlinedButton(onClick = go, modifier = Modifier.padding(top = 8.dp)) { Text(label) } }
         }

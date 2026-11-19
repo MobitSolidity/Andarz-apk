@@ -38,6 +38,13 @@ object LockTexts {
         return u.t("lock.until", "until" to u.dateTime(until))
     }
 
+    /**
+     * The whole length of a lock that counts down in minutes (only the cool-down does), or null for a lock that ends at a
+     * date or when something is done. The Today countdown ring is drawn for the first kind only.
+     */
+    fun total(l: Lock, p: Params): Duration? =
+        if (l.code == LockCode.COOLDOWN) Duration.ofMinutes(p.cooldownMin.toLong()) else null
+
     fun needText(u: Ui, n: LockNeed, p: Params) = when (n) {
         LockNeed.REPORT -> u.t("need.REPORT", "min" to u.int(p.reportMinChars.toInt()))
         else -> u.t("need.${n.name}")

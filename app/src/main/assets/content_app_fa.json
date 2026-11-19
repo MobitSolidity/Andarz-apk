@@ -30,7 +30,41 @@
   "app.legal.updated": "آخرین به‌روزرسانی: {date}",
   "app.legal.online": "نسخهٔ آنلاین: {url}",
   "app.legal.contact": "پشتیبانی: {email}",
-  "app.about.audience": "اندرز برای هر تریدری ساخته شده که می‌خواهد قوانین معاملهٔ خودش را بنویسد و به آن پایبند بماند؛ همهٔ عددها و قوانین قابل تنظیم‌اند."
+  "app.about.audience": "اندرز برای هر تریدری ساخته شده که می‌خواهد قوانین معاملهٔ خودش را بنویسد و به آن پایبند بماند؛ همهٔ عددها و قوانین قابل تنظیم‌اند.",
+  "app.today.col.day": "امروز",
+  "app.today.col.week": "هفته",
+  "app.today.atPeak": "در اوج",
+  "app.today.fromPeak": "از اوج {v}",
+  "app.today.lamp.open": "مجاز",
+  "app.today.lamp.caution": "احتیاط",
+  "app.today.lamp.closed": "ممنوع",
+  "app.today.lamp.open.desc": "درگاه باز است؛ ورود مجاز",
+  "app.today.lamp.caution.desc": "درگاه نیمه‌باز است؛ ورود مجاز، با احتیاط",
+  "app.today.lamp.closed.desc": "درگاه بسته است؛ ورود ممنوع",
+  "app.today.chart.desc": "منحنی سرمایه از {from} تا {to}",
+  "app.today.capOf": "از {v}",
+  "app.today.gauge.free": "آزاد",
+  "app.today.gauge.near": "نزدیک سقف",
+  "app.today.gauge.full": "پر شد",
+  "app.today.verdict.ok": "مجاز به معاملهٔ جدید: همهٔ سقف‌ها آزاد است",
+  "app.today.verdict.near": "مجاز به معاملهٔ جدید: یک سقف نزدیک است",
+  "app.today.verdict.no": "ورود جدید ممنوع: یکی از سقف‌ها فعال است",
+  "app.today.left": "مانده",
+  "app.today.pos.sl": "حد ضرر",
+  "app.today.pos.timeStop": "خروج زمانی",
+  "app.today.pos.candles": "{n} کندل",
+  "app.today.pos.due": "سررسید",
+  "app.today.pos.manage": "مدیریت",
+  "app.today.closeDay": "بستن روز و مرور",
+  "app.today.verdict.lock": "ورود ممنوع: یک قفل فعال است",
+  "app.today.verdict.risk": "ریسک تا {risk}",
+  "app.today.verdict.holdA": "درجه A تا {until} بسته است",
+  "app.today.pos.checked": "بررسی کردم · {t}",
+  "app.today.cap.title": "سقف ریسک {risk}",
+  "app.today.hold.title": "نگه‌داشت سود بزرگ",
+  "app.today.verdict.limited": "مجاز به معاملهٔ جدید، با محدودیت",
+  "app.today.pos.entry": "ورود",
+  "app.today.pos.tp": "حد سود"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -50,6 +84,31 @@
   ],
   "app.legal.contact": [
    "email"
+  ],
+  "app.today.fromPeak": [
+   "v"
+  ],
+  "app.today.chart.desc": [
+   "from",
+   "to"
+  ],
+  "app.today.capOf": [
+   "v"
+  ],
+  "app.today.pos.candles": [
+   "n"
+  ],
+  "app.today.verdict.risk": [
+   "risk"
+  ],
+  "app.today.verdict.holdA": [
+   "until"
+  ],
+  "app.today.pos.checked": [
+   "t"
+  ],
+  "app.today.cap.title": [
+   "risk"
   ]
  },
  "legal": {
