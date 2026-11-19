@@ -144,7 +144,11 @@ fun AndarzNavHost(
                 )
             }
             composable(AndarzNav.JOURNAL) {
-                JournalScreen(onOpen = { navController.navigate(AndarzNav.trade(it)) }, onInsights = { navController.navigate(AndarzNav.INSIGHTS) })
+                JournalScreen(
+                    onOpen = { navController.navigate(AndarzNav.trade(it)) },
+                    onInsights = { navController.navigate(AndarzNav.INSIGHTS) },
+                    onNewTrade = { navController.navigate(AndarzNav.WIZARD) },
+                )
             }
             composable(AndarzNav.MARKET) { MarketScreen(content = content) }
             // Section routes and the coin deep link (K6.1, K6.11). Arguments are ids only.

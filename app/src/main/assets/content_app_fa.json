@@ -64,7 +64,19 @@
   "app.today.hold.title": "نگه‌داشت سود بزرگ",
   "app.today.verdict.limited": "مجاز به معاملهٔ جدید، با محدودیت",
   "app.today.pos.entry": "ورود",
-  "app.today.pos.tp": "حد سود"
+  "app.today.pos.tp": "حد سود",
+  "app.welcome.step": "مرحلهٔ {n} از {total}",
+  "app.welcome.logo": "نشان اندرز: الف با نوار زعفرانی",
+  "app.welcome.promise1": "قانون‌هایت را خودت نوشته‌ای؛ اندرز اجرایشان می‌کند.",
+  "app.welcome.promise2": "هر «نه» دلیل، عدد و ماده دارد.",
+  "app.welcome.promise3": "نتیجهٔ هر معامله یک کارت خنثی است: عدد، قانون، مرور.",
+  "app.more.constitution.sub": "{n} ماده · عددها از «قوانین» می‌آیند",
+  "app.more.program": "برنامه",
+  "app.journal.sub": "{n} معامله · {m} مرور منتظر",
+  "app.journal.rhythm.title": "{n} روز اخیر",
+  "app.journal.rhythm.caption": "خالص روزانه",
+  "app.journal.rhythm.desc": "نمودار میله‌ای خالص روزانهٔ {n} روز اخیر؛ امروز {today}، دیروز {yesterday}",
+  "app.journal.empty": "هنوز معامله‌ای ثبت نشده؛ هر برنامه‌ای که از دروازه رد شود اینجا می‌آید."
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -109,6 +121,25 @@
   ],
   "app.today.cap.title": [
    "risk"
+  ],
+  "app.welcome.step": [
+   "n",
+   "total"
+  ],
+  "app.more.constitution.sub": [
+   "n"
+  ],
+  "app.journal.sub": [
+   "m",
+   "n"
+  ],
+  "app.journal.rhythm.title": [
+   "n"
+  ],
+  "app.journal.rhythm.desc": [
+   "n",
+   "today",
+   "yesterday"
   ]
  },
  "legal": {

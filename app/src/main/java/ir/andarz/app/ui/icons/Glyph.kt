@@ -86,6 +86,8 @@ enum class Glyph(internal val parts: List<GlyphPart>, internal val mirror: Boole
     CLOUD_DOWN(listOf(p("M7 18.5a4.5 4.5 0 0 1-.7-8.95 6 6 0 0 1 11.5 1.45A4 4 0 0 1 17.5 18.5M12 11v7m0 0l-2.5-2.5M12 18l2.5-2.5"))),
     POWER_OFF(listOf(p("M12 2v10"), p("M18.4 6.6a9 9 0 1 1-12.77.04"))),
     CHEVRON_LEFT(listOf(p("M14.5 6l-6 6 6 6")), mirror = true),
+    /** Points toward the end edge in LTR and, mirrored, in RTL: the drill-in chevron of a list row. */
+    CHEVRON_RIGHT(listOf(p("M9.5 6l6 6-6 6")), mirror = true),
     CALENDAR(listOf(p("M7 5h10a3 3 0 0 1 3 3v9a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-9a3 3 0 0 1 3 -3z"), p("M4 10h16M9 3v4M15 3v4"))),
     SHIELD_CHECK(listOf(p("M12 3l7.5 3v5.5c0 4.3-3 7.8-7.5 9.5-4.5-1.7-7.5-5.2-7.5-9.5V6z"), p("M8.8 12l2.2 2.2 4.2-4.4"))),
     CLIPBOARD_CHECK(listOf(p("M8 5.5h8a3 3 0 0 1 3 3v9.5a3 3 0 0 1 -3 3h-8a3 3 0 0 1 -3 -3v-9.5a3 3 0 0 1 3 -3z"), p("M9 5.5V4.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M9.2 13.8l2 2 3.6-3.8"))),

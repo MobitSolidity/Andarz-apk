@@ -64,7 +64,19 @@
   "app.today.hold.title": "Big win hold",
   "app.today.verdict.limited": "New trade allowed, with limits",
   "app.today.pos.entry": "Entry",
-  "app.today.pos.tp": "Target"
+  "app.today.pos.tp": "Target",
+  "app.welcome.step": "Step {n} of {total}",
+  "app.welcome.logo": "Andarz mark: an alef with a saffron bar",
+  "app.welcome.promise1": "You wrote the rules yourself; Andarz carries them out.",
+  "app.welcome.promise2": "Every \"no\" comes with a reason, a number and an article.",
+  "app.welcome.promise3": "The result of every trade is one neutral card: number, rule, review.",
+  "app.more.constitution.sub": "{n} articles · the numbers come from \"Rules\"",
+  "app.more.program": "App",
+  "app.journal.sub": "{n} trades · {m} reviews pending",
+  "app.journal.rhythm.title": "Last {n} days",
+  "app.journal.rhythm.caption": "Daily net",
+  "app.journal.rhythm.desc": "Bar chart of the daily net of the last {n} days; today {today}, yesterday {yesterday}",
+  "app.journal.empty": "No trades yet; every plan that passes the gate lands here."
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -109,6 +121,25 @@
   ],
   "app.today.cap.title": [
    "risk"
+  ],
+  "app.welcome.step": [
+   "n",
+   "total"
+  ],
+  "app.more.constitution.sub": [
+   "n"
+  ],
+  "app.journal.sub": [
+   "m",
+   "n"
+  ],
+  "app.journal.rhythm.title": [
+   "n"
+  ],
+  "app.journal.rhythm.desc": [
+   "n",
+   "today",
+   "yesterday"
   ]
  },
  "legal": {
