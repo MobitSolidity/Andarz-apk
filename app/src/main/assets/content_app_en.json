@@ -76,7 +76,29 @@
   "app.journal.rhythm.title": "Last {n} days",
   "app.journal.rhythm.caption": "Daily net",
   "app.journal.rhythm.desc": "Bar chart of the daily net of the last {n} days; today {today}, yesterday {yesterday}",
-  "app.journal.empty": "No trades yet; every plan that passes the gate lands here."
+  "app.journal.empty": "No trades yet; every plan that passes the gate lands here.",
+  "app.wizard.menu": "Menu",
+  "app.wizard.sl": "Stop loss",
+  "app.wizard.tp": "Take profit",
+  "app.wizard.risk": "Trade risk",
+  "app.wizard.lev.dec": "Decrease leverage",
+  "app.wizard.lev.inc": "Increase leverage",
+  "app.wizard.risk.dec": "Decrease risk",
+  "app.wizard.risk.inc": "Increase risk",
+  "app.wizard.tp.short": "TP",
+  "app.wizard.sl.short": "SL",
+  "app.wizard.ladder.entry": "Entry",
+  "app.wizard.ladder.desc": "Price ladder: take profit {tp} ({tpR}); entry {entry}; stop loss {sl} ({slR}); liquidation {liq}",
+  "app.wizard.calc.riskUsd": "Allowed risk",
+  "app.wizard.calc.notional": "Allowed position",
+  "app.wizard.calc.margin": "Margin needed",
+  "app.wizard.calc.liq": "Liquidation price",
+  "app.wizard.fill": "Enter the entry price, stop loss and take profit to see the price ladder and the calculations.",
+  "app.wizard.adv.recommended": "Suggested: {lev}× (margin {margin})",
+  "app.wizard.rail.desc": "Leverage rail from 1 to {max} times; allowed range {min} to {hi}; current leverage {cur} ({state}); suggested {rec} times",
+  "app.wizard.rail.in": "inside the range",
+  "app.wizard.rail.out": "outside the range",
+  "app.wizard.rail.unknown": "unknown"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -140,6 +162,26 @@
    "n",
    "today",
    "yesterday"
+  ],
+  "app.wizard.ladder.desc": [
+   "entry",
+   "liq",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.wizard.adv.recommended": [
+   "lev",
+   "margin"
+  ],
+  "app.wizard.rail.desc": [
+   "cur",
+   "hi",
+   "max",
+   "min",
+   "rec",
+   "state"
   ]
  },
  "legal": {

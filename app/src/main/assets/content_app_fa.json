@@ -76,7 +76,29 @@
   "app.journal.rhythm.title": "{n} روز اخیر",
   "app.journal.rhythm.caption": "خالص روزانه",
   "app.journal.rhythm.desc": "نمودار میله‌ای خالص روزانهٔ {n} روز اخیر؛ امروز {today}، دیروز {yesterday}",
-  "app.journal.empty": "هنوز معامله‌ای ثبت نشده؛ هر برنامه‌ای که از دروازه رد شود اینجا می‌آید."
+  "app.journal.empty": "هنوز معامله‌ای ثبت نشده؛ هر برنامه‌ای که از دروازه رد شود اینجا می‌آید.",
+  "app.wizard.menu": "منو",
+  "app.wizard.sl": "حد ضرر",
+  "app.wizard.tp": "حد سود",
+  "app.wizard.risk": "ریسک معامله",
+  "app.wizard.lev.dec": "کاهش اهرم",
+  "app.wizard.lev.inc": "افزایش اهرم",
+  "app.wizard.risk.dec": "کاهش ریسک",
+  "app.wizard.risk.inc": "افزایش ریسک",
+  "app.wizard.tp.short": "TP",
+  "app.wizard.sl.short": "SL",
+  "app.wizard.ladder.entry": "ورود",
+  "app.wizard.ladder.desc": "نردبان قیمت: حد سود {tp} ({tpR})؛ ورود {entry}؛ حد ضرر {sl} ({slR})؛ لیکوئید {liq}",
+  "app.wizard.calc.riskUsd": "ریسک مجاز",
+  "app.wizard.calc.notional": "پوزیشن مجاز",
+  "app.wizard.calc.margin": "مارجین لازم",
+  "app.wizard.calc.liq": "قیمت لیکوئید",
+  "app.wizard.fill": "قیمت ورود، حد ضرر و حد سود را بنویس تا نردبان قیمت و محاسبه‌ها پیدا شوند.",
+  "app.wizard.adv.recommended": "پیشنهاد: {lev}× (مارجین {margin})",
+  "app.wizard.rail.desc": "ریل اهرم از ۱ تا {max} برابر؛ بازهٔ مجاز {min} تا {hi}؛ اهرم فعلی {cur} ({state})؛ پیشنهاد {rec} برابر",
+  "app.wizard.rail.in": "داخل بازه",
+  "app.wizard.rail.out": "بیرون از بازه",
+  "app.wizard.rail.unknown": "نامعلوم"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -140,6 +162,26 @@
    "n",
    "today",
    "yesterday"
+  ],
+  "app.wizard.ladder.desc": [
+   "entry",
+   "liq",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.wizard.adv.recommended": [
+   "lev",
+   "margin"
+  ],
+  "app.wizard.rail.desc": [
+   "cur",
+   "hi",
+   "max",
+   "min",
+   "rec",
+   "state"
   ]
  },
  "legal": {
