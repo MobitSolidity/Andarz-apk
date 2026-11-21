@@ -143,30 +143,6 @@ internal fun InvertedButton(onClick: () -> Unit, modifier: Modifier = Modifier, 
     ) { ProvideTextStyle(MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W700)) { content() } }
 }
 
-/** The primary action of a page: turquoise fill with `onFz` text, the grey of `high` while it cannot be used yet. */
-@Composable
-internal fun FilledAction(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    height: Dp = 52.dp,
-    radius: Dp = 16.dp,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val k = LocalAndarzColors.current
-    androidx.compose.material3.Button(
-        onClick = onClick,
-        enabled = enabled,
-        modifier = modifier.heightIn(min = height),
-        shape = RoundedCornerShape(radius),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = k.fzFill, contentColor = k.onFz, disabledContainerColor = k.high, disabledContentColor = k.muted,
-        ),
-        elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
-        contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = 16.dp, vertical = 10.dp),
-    ) { ProvideTextStyle(MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W700)) { content() } }
-}
-
 /** "25 minutes ago" in the unit that fits: minutes under an hour, hours under a day, then days. */
 internal fun ago(u: Ui, minutes: Long): String = when {
     minutes < 60 -> u.t("app.trade.ago.min", "n" to u.int(minutes.coerceAtLeast(0).toInt()))

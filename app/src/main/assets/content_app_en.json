@@ -166,7 +166,34 @@
   "app.trade.review.hint.both": "To save: a report of {min} characters and one main mistake are needed.",
   "app.trade.review.hint.mistake": "To save: one main mistake is needed.",
   "app.trade.review.hint.report": "To save: a report of {min} characters is needed.",
-  "app.trade.review.save": "Save the review"
+  "app.trade.review.save": "Save the review",
+  "app.calc.note": "Nothing is saved · no effect on the limits",
+  "app.calc.clear": "Clear all inputs",
+  "app.calc.side": "Trade direction",
+  "app.calc.equity": "Equity (USD)",
+  "app.calc.useEquity": "Use the account equity",
+  "app.calc.risk": "Risk · current cap {cap}",
+  "app.calc.lev.range": "Allowed {min} to {max} · suggested {rec}",
+  "app.calc.lev.dec": "Decrease leverage",
+  "app.calc.lev.inc": "Increase leverage",
+  "app.calc.lev.desc": "Leverage rail from {from} to {to}; allowed range {min} to {max}; current leverage {lev}",
+  "app.calc.lev.desc.none": "Leverage rail from {from} to {to}; current leverage {lev}; no allowed range",
+  "app.calc.lev.isRec": "; the suggested one",
+  "app.calc.verdict.line": "Risk {risk} = {usd} · margin {margin} · liquidation {liq}",
+  "app.calc.f.risk": "Allowed risk",
+  "app.calc.f.notional": "Allowed position",
+  "app.calc.f.margin": "Margin needed",
+  "app.calc.f.marginPct": "Margin share",
+  "app.calc.f.liq": "Liquidation price",
+  "app.calc.f.liqX": "Liquidation ÷ loss",
+  "app.calc.min": "Min {v}",
+  "app.calc.cap": "Cap {v}",
+  "app.calc.fee.switch": "With round-trip fee",
+  "app.calc.fee.input": "Round-trip fee in percent",
+  "app.calc.fee.rr": "R:R from {from} to {to}",
+  "app.calc.fee.total": "Total fee {usd}",
+  "app.calc.fee.bar": "R:R before the fee {from} and after the fee {to}; allowed minimum {min}",
+  "app.calc.toPlan": "Build a trade from these numbers"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -334,6 +361,50 @@
   ],
   "app.trade.review.hint.report": [
    "min"
+  ],
+  "app.calc.risk": [
+   "cap"
+  ],
+  "app.calc.lev.range": [
+   "max",
+   "min",
+   "rec"
+  ],
+  "app.calc.lev.desc": [
+   "from",
+   "lev",
+   "max",
+   "min",
+   "to"
+  ],
+  "app.calc.lev.desc.none": [
+   "from",
+   "lev",
+   "to"
+  ],
+  "app.calc.verdict.line": [
+   "liq",
+   "margin",
+   "risk",
+   "usd"
+  ],
+  "app.calc.min": [
+   "v"
+  ],
+  "app.calc.cap": [
+   "v"
+  ],
+  "app.calc.fee.rr": [
+   "from",
+   "to"
+  ],
+  "app.calc.fee.total": [
+   "usd"
+  ],
+  "app.calc.fee.bar": [
+   "from",
+   "min",
+   "to"
   ]
  },
  "legal": {

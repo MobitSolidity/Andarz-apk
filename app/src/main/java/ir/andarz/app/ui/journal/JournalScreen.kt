@@ -59,6 +59,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.andarz.app.ui.Ui
 import ir.andarz.app.ui.components.ArchShapes
+import ir.andarz.app.ui.components.HeaderTile
 import ir.andarz.app.ui.components.EmptyState
 import ir.andarz.app.ui.components.FilterChip
 import ir.andarz.app.ui.components.RChip
@@ -242,20 +243,6 @@ private fun JournalHeader(
             enabled = hasTrades, selected = filterOpen, onClick = onFilter,
         )
     }
-}
-
-@Composable
-private fun HeaderTile(
-    glyph: Glyph, description: String, tint: Color, container: Color, onClick: () -> Unit,
-    enabled: Boolean = true, selected: Boolean = false,
-) {
-    Box(
-        Modifier.size(48.dp)
-            .background(container, ArchShapes.arch(24.dp, 12.dp))
-            .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
-            .semantics { this.selected = selected },
-        contentAlignment = Alignment.Center,
-    ) { GlyphIcon(glyph, description, tint = tint, size = 22.dp, strokeWidth = 2f) }
 }
 
 /** The empty journal: a dashed arch ("not yet") around a small arch card with the book, a sentence and the way in. */

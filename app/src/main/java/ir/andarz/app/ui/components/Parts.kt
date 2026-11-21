@@ -1,8 +1,11 @@
 package ir.andarz.app.ui.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,9 +13,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,6 +33,8 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -128,4 +136,43 @@ fun Modifier.archRing(shape: Shape, color: Color, width: Dp = 1.5.dp): Modifier 
         drawContent()
         translate(w / 2f, w / 2f) { drawOutline(outline, color, style = Stroke(w)) }
     }
+}
+
+/** A 48 dp arch tile with one glyph: the actions at the end edge of a tab header (search, filter, reset). */
+@Composable
+fun HeaderTile(
+    glyph: Glyph, description: String, tint: Color, container: Color, onClick: () -> Unit,
+    enabled: Boolean = true, selected: Boolean = false,
+) {
+    Box(
+        Modifier.size(48.dp)
+            .background(container, ArchShapes.arch(24.dp, 12.dp))
+            .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
+            .semantics { this.selected = selected },
+        contentAlignment = Alignment.Center,
+    ) { GlyphIcon(glyph, description, tint = tint, size = 22.dp, strokeWidth = 2f) }
+}
+
+/** The primary action of a page: turquoise fill with `onFz` text, the grey of `high` while it cannot be used yet. */
+@Composable
+fun FilledAction(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    height: Dp = 52.dp,
+    radius: Dp = 16.dp,
+    content: @Composable RowScope.() -> Unit,
+) {
+    val k = LocalAndarzColors.current
+    androidx.compose.material3.Button(
+        onClick = onClick,
+        enabled = enabled,
+        modifier = modifier.heightIn(min = height),
+        shape = RoundedCornerShape(radius),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = k.fzFill, contentColor = k.onFz, disabledContainerColor = k.high, disabledContentColor = k.muted,
+        ),
+        elevation = ButtonDefaults.buttonElevation(0.dp, 0.dp, 0.dp, 0.dp, 0.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
+    ) { ProvideTextStyle(MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W700)) { content() } }
 }

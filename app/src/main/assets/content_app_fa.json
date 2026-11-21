@@ -166,7 +166,34 @@
   "app.trade.review.hint.both": "برای ذخیره: گزارش {min} نویسه و یک اشتباه اصلی لازم است.",
   "app.trade.review.hint.mistake": "برای ذخیره: یک اشتباه اصلی لازم است.",
   "app.trade.review.hint.report": "برای ذخیره: گزارش {min} نویسه لازم است.",
-  "app.trade.review.save": "ذخیرهٔ مرور"
+  "app.trade.review.save": "ذخیرهٔ مرور",
+  "app.calc.note": "چیزی ذخیره نمی‌شود · روی سقف‌ها اثری ندارد",
+  "app.calc.clear": "پاک کردن همهٔ ورودی‌ها",
+  "app.calc.side": "جهت معامله",
+  "app.calc.equity": "سرمایه (دلار)",
+  "app.calc.useEquity": "استفاده از سرمایهٔ حساب",
+  "app.calc.risk": "ریسک · سقف فعلی {cap}",
+  "app.calc.lev.range": "مجاز {min} تا {max} · پیشنهاد {rec}",
+  "app.calc.lev.dec": "کاهش اهرم",
+  "app.calc.lev.inc": "افزایش اهرم",
+  "app.calc.lev.desc": "ریل اهرم از {from} تا {to}؛ بازهٔ مجاز {min} تا {max}؛ اهرم فعلی {lev}",
+  "app.calc.lev.desc.none": "ریل اهرم از {from} تا {to}؛ اهرم فعلی {lev}؛ بازهٔ مجازی وجود ندارد",
+  "app.calc.lev.isRec": "؛ همان پیشنهاد",
+  "app.calc.verdict.line": "ریسک {risk} = {usd} · مارجین {margin} · لیکوئید {liq}",
+  "app.calc.f.risk": "ریسک مجاز",
+  "app.calc.f.notional": "پوزیشن مجاز",
+  "app.calc.f.margin": "مارجین لازم",
+  "app.calc.f.marginPct": "سهم مارجین",
+  "app.calc.f.liq": "قیمت لیکوئید",
+  "app.calc.f.liqX": "لیکوئید ÷ ضرر",
+  "app.calc.min": "حداقل {v}",
+  "app.calc.cap": "سقف {v}",
+  "app.calc.fee.switch": "با کارمزد رفت‌وبرگشت",
+  "app.calc.fee.input": "کارمزد رفت‌وبرگشت به درصد",
+  "app.calc.fee.rr": "R:R از {from} به {to}",
+  "app.calc.fee.total": "کارمزد کل {usd}",
+  "app.calc.fee.bar": "R:R پیش از کارمزد {from} و پس از کارمزد {to}؛ حداقل مجاز {min}",
+  "app.calc.toPlan": "ساختن معامله از این اعداد"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -334,6 +361,50 @@
   ],
   "app.trade.review.hint.report": [
    "min"
+  ],
+  "app.calc.risk": [
+   "cap"
+  ],
+  "app.calc.lev.range": [
+   "max",
+   "min",
+   "rec"
+  ],
+  "app.calc.lev.desc": [
+   "from",
+   "lev",
+   "max",
+   "min",
+   "to"
+  ],
+  "app.calc.lev.desc.none": [
+   "from",
+   "lev",
+   "to"
+  ],
+  "app.calc.verdict.line": [
+   "liq",
+   "margin",
+   "risk",
+   "usd"
+  ],
+  "app.calc.min": [
+   "v"
+  ],
+  "app.calc.cap": [
+   "v"
+  ],
+  "app.calc.fee.rr": [
+   "from",
+   "to"
+  ],
+  "app.calc.fee.total": [
+   "usd"
+  ],
+  "app.calc.fee.bar": [
+   "from",
+   "min",
+   "to"
   ]
  },
  "legal": {

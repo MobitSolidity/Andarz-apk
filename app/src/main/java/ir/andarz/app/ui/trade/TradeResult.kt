@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ir.andarz.app.ui.Ui
 import ir.andarz.app.ui.components.ArchTile
+import ir.andarz.app.ui.components.FilledAction
 import ir.andarz.app.ui.components.FitText
 import ir.andarz.app.ui.components.KeyValue
 import ir.andarz.app.ui.components.OutlinedButton
