@@ -98,7 +98,75 @@
   "app.wizard.rail.desc": "Leverage rail from 1 to {max} times; allowed range {min} to {hi}; current leverage {cur} ({state}); suggested {rec} times",
   "app.wizard.rail.in": "inside the range",
   "app.wizard.rail.out": "outside the range",
-  "app.wizard.rail.unknown": "unknown"
+  "app.wizard.rail.unknown": "unknown",
+  "app.trade.menu": "Trade options",
+  "app.trade.ago.min": "{n} min ago",
+  "app.trade.ago.hour": "{n} h ago",
+  "app.trade.ago.day": "{n} d ago",
+  "app.trade.entryAt": "Entry {t}",
+  "app.trade.ladder.now": "Now",
+  "app.trade.ladder.nowDesc": "Current price {price}, {r}.",
+  "app.trade.ladder.desc": "Price ladder: take profit {tp} ({tpR}), entry {entry}, stop loss {sl} ({slR}), liquidation {liq}. {now}",
+  "app.trade.liq": "Liq.",
+  "app.trade.floating": "Floating P&L",
+  "app.trade.floating.empty": "Type the current price to see the live R.",
+  "app.trade.toTp": "To take profit",
+  "app.trade.toSl": "To stop loss",
+  "app.trade.risk0": "Initial risk",
+  "app.trade.candlesLeft": "{n} candles left",
+  "app.trade.candlesDue": "Time to exit",
+  "app.trade.timeStop.desc": "{left} of {total} candles left.",
+  "app.trade.monitor.last": "Last check · {t}",
+  "app.trade.monitor.none": "Not checked yet",
+  "app.trade.cell.notional": "Position value",
+  "app.trade.cell.margin": "Margin",
+  "app.trade.cell.grade": "Setup grade",
+  "app.trade.isolated": "Isolated",
+  "app.trade.cross": "Cross",
+  "app.trade.events": "Events",
+  "app.trade.tl.gate": "Gate cleared · risk {risk}",
+  "app.trade.tl.gateNo": "Entered without gate clearance",
+  "app.trade.tl.entry": "Entry {price} · checklist {n} of {total} · {grade}",
+  "app.trade.tl.monitor": "Monitor check",
+  "app.trade.manage.log": "Log behaviour",
+  "app.trade.closed": "Closed",
+  "app.trade.result.title": "Trade result",
+  "app.trade.result.entry": "Entry {price}",
+  "app.trade.result.exit": "Exit {price}",
+  "app.trade.ruler.exit": "Exit",
+  "app.trade.ruler.desc": "Where the exit fell between the stop and the target: stop loss {sl}, entry {entry}, take profit {tp}, exit {exit}.",
+  "app.trade.receipt.net": "Net, after fees",
+  "app.trade.receipt.gross": "Gross result",
+  "app.trade.receipt.fees": "Fees",
+  "app.trade.receipt.r": "R against the initial stop",
+  "app.trade.receipt.equity": "Equity after the trade",
+  "app.trade.rules.ok": "Rules followed",
+  "app.trade.rules.no": "Rules not followed",
+  "app.trade.chip.gate.ok": "Entry was allowed",
+  "app.trade.chip.gate.no": "Entry was not allowed",
+  "app.trade.chip.size.ok": "Size was right",
+  "app.trade.chip.size.no": "Size was over the cap",
+  "app.trade.chip.viol.ok": "No breach logged",
+  "app.trade.chip.viol.no": "A breach was logged",
+  "app.trade.review.cta": "Write the trade review",
+  "app.trade.review.edit": "Edit the review",
+  "app.trade.review.title": "Trade review",
+  "app.trade.review.step": "Step {n} of {total}",
+  "app.trade.review.close": "Close the review",
+  "app.trade.review.s1": "Which rule did I break?",
+  "app.trade.review.s3.cap": "Only one · required",
+  "app.trade.review.s5": "One-line lesson",
+  "app.trade.review.s5.cap": "For tomorrow's self",
+  "app.trade.review.auto": "Detected automatically · {id}",
+  "app.trade.review.suggested": "Andarz suggests · {id}",
+  "app.trade.review.confirm": "Confirm",
+  "app.trade.review.more": "{n} more",
+  "app.trade.review.counter": "{n} of {min} characters · {left} more needed",
+  "app.trade.review.counter.ok": "{n} of {min} characters",
+  "app.trade.review.hint.both": "To save: a report of {min} characters and one main mistake are needed.",
+  "app.trade.review.hint.mistake": "To save: one main mistake is needed.",
+  "app.trade.review.hint.report": "To save: a report of {min} characters is needed.",
+  "app.trade.review.save": "Save the review"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -182,6 +250,90 @@
    "min",
    "rec",
    "state"
+  ],
+  "app.trade.ago.min": [
+   "n"
+  ],
+  "app.trade.ago.hour": [
+   "n"
+  ],
+  "app.trade.ago.day": [
+   "n"
+  ],
+  "app.trade.entryAt": [
+   "t"
+  ],
+  "app.trade.ladder.nowDesc": [
+   "price",
+   "r"
+  ],
+  "app.trade.ladder.desc": [
+   "entry",
+   "liq",
+   "now",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.trade.candlesLeft": [
+   "n"
+  ],
+  "app.trade.timeStop.desc": [
+   "left",
+   "total"
+  ],
+  "app.trade.monitor.last": [
+   "t"
+  ],
+  "app.trade.tl.gate": [
+   "risk"
+  ],
+  "app.trade.tl.entry": [
+   "grade",
+   "n",
+   "price",
+   "total"
+  ],
+  "app.trade.result.entry": [
+   "price"
+  ],
+  "app.trade.result.exit": [
+   "price"
+  ],
+  "app.trade.ruler.desc": [
+   "entry",
+   "exit",
+   "sl",
+   "tp"
+  ],
+  "app.trade.review.step": [
+   "n",
+   "total"
+  ],
+  "app.trade.review.auto": [
+   "id"
+  ],
+  "app.trade.review.suggested": [
+   "id"
+  ],
+  "app.trade.review.more": [
+   "n"
+  ],
+  "app.trade.review.counter": [
+   "left",
+   "min",
+   "n"
+  ],
+  "app.trade.review.counter.ok": [
+   "min",
+   "n"
+  ],
+  "app.trade.review.hint.both": [
+   "min"
+  ],
+  "app.trade.review.hint.report": [
+   "min"
   ]
  },
  "legal": {

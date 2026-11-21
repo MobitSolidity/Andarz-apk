@@ -98,7 +98,75 @@
   "app.wizard.rail.desc": "ریل اهرم از ۱ تا {max} برابر؛ بازهٔ مجاز {min} تا {hi}؛ اهرم فعلی {cur} ({state})؛ پیشنهاد {rec} برابر",
   "app.wizard.rail.in": "داخل بازه",
   "app.wizard.rail.out": "بیرون از بازه",
-  "app.wizard.rail.unknown": "نامعلوم"
+  "app.wizard.rail.unknown": "نامعلوم",
+  "app.trade.menu": "گزینه‌های معامله",
+  "app.trade.ago.min": "{n} دقیقه پیش",
+  "app.trade.ago.hour": "{n} ساعت پیش",
+  "app.trade.ago.day": "{n} روز پیش",
+  "app.trade.entryAt": "ورود {t}",
+  "app.trade.ladder.now": "الان",
+  "app.trade.ladder.nowDesc": "قیمت فعلی {price}، {r}.",
+  "app.trade.ladder.desc": "نردبان قیمت: حد سود {tp} ({tpR})، ورود {entry}، حد ضرر {sl} ({slR})، لیکوئید {liq}. {now}",
+  "app.trade.liq": "لیکوئید",
+  "app.trade.floating": "سود و زیان شناور",
+  "app.trade.floating.empty": "قیمت فعلی را بنویس تا R لحظه‌ای دیده شود.",
+  "app.trade.toTp": "تا حد سود",
+  "app.trade.toSl": "تا حد ضرر",
+  "app.trade.risk0": "ریسک اولیه",
+  "app.trade.candlesLeft": "{n} کندل مانده",
+  "app.trade.candlesDue": "زمان خروج رسید",
+  "app.trade.timeStop.desc": "{left} کندل از {total} کندل مانده است.",
+  "app.trade.monitor.last": "آخرین بررسی · {t}",
+  "app.trade.monitor.none": "هنوز بررسی نشده",
+  "app.trade.cell.notional": "ارزش پوزیشن",
+  "app.trade.cell.margin": "مارجین",
+  "app.trade.cell.grade": "درجهٔ ستاپ",
+  "app.trade.isolated": "ایزوله",
+  "app.trade.cross": "کراس",
+  "app.trade.events": "رویدادها",
+  "app.trade.tl.gate": "مجوز دروازه · ریسک {risk}",
+  "app.trade.tl.gateNo": "ورود بدون مجوز دروازه",
+  "app.trade.tl.entry": "ورود {price} · چک‌لیست {n} از {total} · {grade}",
+  "app.trade.tl.monitor": "بررسی نظارت",
+  "app.trade.manage.log": "ثبت رفتار",
+  "app.trade.closed": "بسته شد",
+  "app.trade.result.title": "نتیجهٔ معامله",
+  "app.trade.result.entry": "ورود {price}",
+  "app.trade.result.exit": "خروج {price}",
+  "app.trade.ruler.exit": "خروج",
+  "app.trade.ruler.desc": "جای خروج میان حد ضرر و حد سود: حد ضرر {sl}، ورود {entry}، حد سود {tp}، خروج {exit}.",
+  "app.trade.receipt.net": "خالص، بعد از کارمزد",
+  "app.trade.receipt.gross": "سود یا زیان ناخالص",
+  "app.trade.receipt.fees": "کارمزد",
+  "app.trade.receipt.r": "R نسبت به حد ضرر اولیه",
+  "app.trade.receipt.equity": "سرمایه پس از معامله",
+  "app.trade.rules.ok": "قوانین رعایت شد",
+  "app.trade.rules.no": "قوانین رعایت نشد",
+  "app.trade.chip.gate.ok": "ورود مجاز بود",
+  "app.trade.chip.gate.no": "ورود مجاز نبود",
+  "app.trade.chip.size.ok": "اندازه درست بود",
+  "app.trade.chip.size.no": "اندازه از سقف بیشتر بود",
+  "app.trade.chip.viol.ok": "نقضی ثبت نشد",
+  "app.trade.chip.viol.no": "نقض ثبت شد",
+  "app.trade.review.cta": "ثبت مرور معامله",
+  "app.trade.review.edit": "ویرایش مرور",
+  "app.trade.review.title": "مرور معامله",
+  "app.trade.review.step": "مرحلهٔ {n} از {total}",
+  "app.trade.review.close": "بستن مرور",
+  "app.trade.review.s1": "کدام قانون را شکستم؟",
+  "app.trade.review.s3.cap": "فقط یکی · لازم است",
+  "app.trade.review.s5": "درس یک‌جمله‌ای",
+  "app.trade.review.s5.cap": "برای خودِ فردا",
+  "app.trade.review.auto": "تشخیص خودکار · {id}",
+  "app.trade.review.suggested": "پیشنهاد اندرز · {id}",
+  "app.trade.review.confirm": "تأیید",
+  "app.trade.review.more": "{n} مورد دیگر",
+  "app.trade.review.counter": "{n} از {min} نویسه · {left} نویسهٔ دیگر لازم است",
+  "app.trade.review.counter.ok": "{n} از {min} نویسه",
+  "app.trade.review.hint.both": "برای ذخیره: گزارش {min} نویسه و یک اشتباه اصلی لازم است.",
+  "app.trade.review.hint.mistake": "برای ذخیره: یک اشتباه اصلی لازم است.",
+  "app.trade.review.hint.report": "برای ذخیره: گزارش {min} نویسه لازم است.",
+  "app.trade.review.save": "ذخیرهٔ مرور"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -182,6 +250,90 @@
    "min",
    "rec",
    "state"
+  ],
+  "app.trade.ago.min": [
+   "n"
+  ],
+  "app.trade.ago.hour": [
+   "n"
+  ],
+  "app.trade.ago.day": [
+   "n"
+  ],
+  "app.trade.entryAt": [
+   "t"
+  ],
+  "app.trade.ladder.nowDesc": [
+   "price",
+   "r"
+  ],
+  "app.trade.ladder.desc": [
+   "entry",
+   "liq",
+   "now",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.trade.candlesLeft": [
+   "n"
+  ],
+  "app.trade.timeStop.desc": [
+   "left",
+   "total"
+  ],
+  "app.trade.monitor.last": [
+   "t"
+  ],
+  "app.trade.tl.gate": [
+   "risk"
+  ],
+  "app.trade.tl.entry": [
+   "grade",
+   "n",
+   "price",
+   "total"
+  ],
+  "app.trade.result.entry": [
+   "price"
+  ],
+  "app.trade.result.exit": [
+   "price"
+  ],
+  "app.trade.ruler.desc": [
+   "entry",
+   "exit",
+   "sl",
+   "tp"
+  ],
+  "app.trade.review.step": [
+   "n",
+   "total"
+  ],
+  "app.trade.review.auto": [
+   "id"
+  ],
+  "app.trade.review.suggested": [
+   "id"
+  ],
+  "app.trade.review.more": [
+   "n"
+  ],
+  "app.trade.review.counter": [
+   "left",
+   "min",
+   "n"
+  ],
+  "app.trade.review.counter.ok": [
+   "min",
+   "n"
+  ],
+  "app.trade.review.hint.both": [
+   "min"
+  ],
+  "app.trade.review.hint.report": [
+   "min"
   ]
  },
  "legal": {
