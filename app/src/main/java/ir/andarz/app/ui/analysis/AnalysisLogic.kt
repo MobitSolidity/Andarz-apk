@@ -137,6 +137,9 @@ data class Insights(
     val violations: List<Bar>,
     val setups: List<SetupRow>,
     val topMistake: Pair<String, Int>?,
+    /** Exit dates of the first and the last trade of the period: the ends of the equity chart's time axis. */
+    val firstExit: LocalDate? = null,
+    val lastExit: LocalDate? = null,
 ) {
     val empty: Boolean get() = kpis.n == 0
 }
@@ -199,7 +202,7 @@ object InsightsLogic {
         }.sortedByDescending { it.n }
 
         val top = mistakes.firstOrNull()?.let { it.label to it.count }
-        return Insights(kpis, equity, dd, R_BINS.mapIndexed { i, l -> Bar(l, hist[i].toDouble(), hist[i]) }, weekly, byHour, bySymbol, bySetup, mistakes, violations, setups, top)
+        return Insights(kpis, equity, dd, R_BINS.mapIndexed { i, l -> Bar(l, hist[i].toDouble(), hist[i]) }, weekly, byHour, bySymbol, bySetup, mistakes, violations, setups, top, rows.firstOrNull()?.exitDate, rows.lastOrNull()?.exitDate)
     }
 }
 

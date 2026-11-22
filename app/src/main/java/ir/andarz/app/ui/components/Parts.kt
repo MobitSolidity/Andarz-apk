@@ -176,3 +176,16 @@ fun FilledAction(
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 10.dp),
     ) { ProvideTextStyle(MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W700)) { content() } }
 }
+
+/** A small pill: text with an optional glyph, on a container colour (status words, sides, tags). */
+@Composable
+fun Pill(text: String, container: Color, ink: Color, glyph: Glyph? = null, height: Dp = 24.dp, modifier: Modifier = Modifier) {
+    Row(
+        modifier.heightIn(min = height).background(container, RoundedCornerShape(50)).padding(horizontal = 10.dp, vertical = 2.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(5.dp),
+    ) {
+        if (glyph != null) GlyphIcon(glyph, null, tint = ink, size = 10.dp)
+        Text(text, color = ink, style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.W700), maxLines = 1)
+    }
+}

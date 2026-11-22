@@ -193,7 +193,43 @@
   "app.calc.fee.rr": "R:R از {from} به {to}",
   "app.calc.fee.total": "کارمزد کل {usd}",
   "app.calc.fee.bar": "R:R پیش از کارمزد {from} و پس از کارمزد {to}؛ حداقل مجاز {min}",
-  "app.calc.toPlan": "ساختن معامله از این اعداد"
+  "app.calc.toPlan": "ساختن معامله از این اعداد",
+  "app.ins.title": "آمار و تحلیل",
+  "app.ins.p.week": "هفته",
+  "app.ins.p.month": "ماه",
+  "app.ins.p.last30": "{n} روز",
+  "app.ins.p.all": "همه",
+  "app.ins.p.custom": "سفارشی",
+  "app.ins.k.compliance": "رعایت قوانین",
+  "app.ins.k.expectancy": "امید ریاضی",
+  "app.ins.k.winRate": "نرخ برد",
+  "app.ins.k.maxDD": "بیشینهٔ افت",
+  "app.ins.sub": "{n} معامله · هدف {t}",
+  "app.ins.sub.empty": "{n} از {min} معامله",
+  "app.ins.target.short": "هدف {t}",
+  "app.ins.lowData": "دادهٔ کم",
+  "app.ins.noValue": "بدون مقدار",
+  "app.ins.chk.of": "از",
+  "app.ins.chk.desc": "میانگین چک‌لیست {v} از {n}",
+  "app.ins.win.sub": "سربه‌سری {p} · {w} از {n}",
+  "app.ins.win.count": "{w} از {n} معامله",
+  "app.ins.win.desc": "نرخ برد {p}، نقطهٔ سربه‌سری {b}",
+  "app.ins.pf.desc": "مجموع سود {pf} برابر مجموع زیان است",
+  "app.ins.dd.desc": "بیشینهٔ افت {p} از سقف {c}",
+  "app.ins.ring.desc": "رعایت قوانین {v}، هدف {t}، {s}",
+  "app.ins.ring.desc.empty": "رعایت قوانین: دادهٔ کم، هدف {t}",
+  "app.ins.equity": "سرمایه",
+  "app.ins.equity.note": "فقط نتیجهٔ معامله‌ها",
+  "app.ins.equity.alt": "سرمایه و افت از اوج",
+  "app.ins.equity.summary": "از {a} تا {b} در {n} معامله؛ بیشینهٔ افت {dd}",
+  "app.ins.start": "شروع {v}",
+  "app.ins.table": "نمای جدول",
+  "app.ins.row.start": "شروع: {eq}",
+  "app.ins.row": "معامله {i}: {eq}، افت {dd}",
+  "app.ins.empty.text": "هنوز داده‌ای برای نمودار نیست؛ بعد از بستن اولین معامله، نمودار سرمایه اینجا شکل می‌گیرد.",
+  "app.ins.empty.need": "برای قضاوت دست‌کم {min} معامله لازم است",
+  "app.ins.empty.count": "{n} از {min}",
+  "app.ins.empty.bar": "معامله‌های بسته‌شده تا حد قضاوت"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -405,6 +441,76 @@
    "from",
    "min",
    "to"
+  ],
+  "app.ins.p.last30": [
+   "n"
+  ],
+  "app.ins.sub": [
+   "n",
+   "t"
+  ],
+  "app.ins.sub.empty": [
+   "min",
+   "n"
+  ],
+  "app.ins.target.short": [
+   "t"
+  ],
+  "app.ins.chk.desc": [
+   "n",
+   "v"
+  ],
+  "app.ins.win.sub": [
+   "n",
+   "p",
+   "w"
+  ],
+  "app.ins.win.count": [
+   "n",
+   "w"
+  ],
+  "app.ins.win.desc": [
+   "b",
+   "p"
+  ],
+  "app.ins.pf.desc": [
+   "pf"
+  ],
+  "app.ins.dd.desc": [
+   "c",
+   "p"
+  ],
+  "app.ins.ring.desc": [
+   "s",
+   "t",
+   "v"
+  ],
+  "app.ins.ring.desc.empty": [
+   "t"
+  ],
+  "app.ins.equity.summary": [
+   "a",
+   "b",
+   "dd",
+   "n"
+  ],
+  "app.ins.start": [
+   "v"
+  ],
+  "app.ins.row.start": [
+   "eq"
+  ],
+  "app.ins.row": [
+   "dd",
+   "eq",
+   "i"
+  ],
+  "app.ins.empty.need": [
+   "min"
+  ],
+  "app.ins.empty.count": [
+   "min",
+   "n"
   ]
  },
  "legal": {

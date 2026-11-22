@@ -54,6 +54,7 @@ import ir.andarz.app.ui.components.FilledAction
 import ir.andarz.app.ui.components.FitText
 import ir.andarz.app.ui.components.KeyValue
 import ir.andarz.app.ui.components.OutlinedButton
+import ir.andarz.app.ui.components.Pill
 import ir.andarz.app.ui.components.SectionCard
 import ir.andarz.app.ui.components.Text
 import ir.andarz.app.ui.components.TextButton

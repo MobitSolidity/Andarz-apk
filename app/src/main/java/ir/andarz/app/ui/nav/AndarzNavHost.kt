@@ -170,7 +170,7 @@ fun AndarzNavHost(
                     ),
                 )
             }
-            composable(AndarzNav.INSIGHTS) { InsightsScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.INSIGHTS) { InsightsScreen(onBack = { navController.popBackStack() }, onNewTrade = { navController.navigate(AndarzNav.WIZARD) }) }
             composable(AndarzNav.REVIEWS) {
                 ReviewsScreen(
                     onBack = { navController.popBackStack() }, onOpenTrade = { navController.navigate(AndarzNav.trade(it)) },

@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ir.andarz.app.ui.Ui
+import ir.andarz.app.ui.components.Pill
 import ir.andarz.app.ui.components.Text
 import ir.andarz.app.ui.components.archSurface
 import ir.andarz.app.ui.icons.Glyph
@@ -96,19 +97,6 @@ internal fun TradeHeader(
                 }
             }
         }
-    }
-}
-
-/** A small pill: text with an optional glyph, on a container colour. */
-@Composable
-internal fun Pill(text: String, container: Color, ink: Color, glyph: Glyph? = null, height: Dp = 24.dp) {
-    Row(
-        Modifier.heightIn(min = height).background(container, RoundedCornerShape(50)).padding(horizontal = 10.dp, vertical = 2.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(5.dp),
-    ) {
-        if (glyph != null) GlyphIcon(glyph, null, tint = ink, size = 10.dp)
-        Text(text, color = ink, style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.W700), maxLines = 1)
     }
 }
 

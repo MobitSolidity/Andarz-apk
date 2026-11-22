@@ -193,7 +193,43 @@
   "app.calc.fee.rr": "R:R from {from} to {to}",
   "app.calc.fee.total": "Total fee {usd}",
   "app.calc.fee.bar": "R:R before the fee {from} and after the fee {to}; allowed minimum {min}",
-  "app.calc.toPlan": "Build a trade from these numbers"
+  "app.calc.toPlan": "Build a trade from these numbers",
+  "app.ins.title": "Insights",
+  "app.ins.p.week": "Week",
+  "app.ins.p.month": "Month",
+  "app.ins.p.last30": "{n} days",
+  "app.ins.p.all": "All",
+  "app.ins.p.custom": "Custom",
+  "app.ins.k.compliance": "Rule compliance",
+  "app.ins.k.expectancy": "Expectancy",
+  "app.ins.k.winRate": "Win rate",
+  "app.ins.k.maxDD": "Max drawdown",
+  "app.ins.sub": "{n} trades · target {t}",
+  "app.ins.sub.empty": "{n} of {min} trades",
+  "app.ins.target.short": "Target {t}",
+  "app.ins.lowData": "Low data",
+  "app.ins.noValue": "No value",
+  "app.ins.chk.of": "of",
+  "app.ins.chk.desc": "Checklist average {v} of {n}",
+  "app.ins.win.sub": "Break-even {p} · {w} of {n}",
+  "app.ins.win.count": "{w} of {n} trades",
+  "app.ins.win.desc": "Win rate {p}, break-even point {b}",
+  "app.ins.pf.desc": "Total gain is {pf} times total loss",
+  "app.ins.dd.desc": "Max drawdown {p} of the {c} cap",
+  "app.ins.ring.desc": "Rule compliance {v}, target {t}, {s}",
+  "app.ins.ring.desc.empty": "Rule compliance: low data, target {t}",
+  "app.ins.equity": "Equity",
+  "app.ins.equity.note": "trade results only",
+  "app.ins.equity.alt": "Equity and drawdown",
+  "app.ins.equity.summary": "From {a} to {b} over {n} trades; max drawdown {dd}",
+  "app.ins.start": "Start {v}",
+  "app.ins.table": "Table view",
+  "app.ins.row.start": "Start: {eq}",
+  "app.ins.row": "Trade {i}: {eq}, drawdown {dd}",
+  "app.ins.empty.text": "There is no data for the chart yet. After you close your first trade, the equity chart takes shape here.",
+  "app.ins.empty.need": "At least {min} trades are needed to judge",
+  "app.ins.empty.count": "{n} of {min}",
+  "app.ins.empty.bar": "Closed trades toward the judging threshold"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -405,6 +441,76 @@
    "from",
    "min",
    "to"
+  ],
+  "app.ins.p.last30": [
+   "n"
+  ],
+  "app.ins.sub": [
+   "n",
+   "t"
+  ],
+  "app.ins.sub.empty": [
+   "min",
+   "n"
+  ],
+  "app.ins.target.short": [
+   "t"
+  ],
+  "app.ins.chk.desc": [
+   "n",
+   "v"
+  ],
+  "app.ins.win.sub": [
+   "n",
+   "p",
+   "w"
+  ],
+  "app.ins.win.count": [
+   "n",
+   "w"
+  ],
+  "app.ins.win.desc": [
+   "b",
+   "p"
+  ],
+  "app.ins.pf.desc": [
+   "pf"
+  ],
+  "app.ins.dd.desc": [
+   "c",
+   "p"
+  ],
+  "app.ins.ring.desc": [
+   "s",
+   "t",
+   "v"
+  ],
+  "app.ins.ring.desc.empty": [
+   "t"
+  ],
+  "app.ins.equity.summary": [
+   "a",
+   "b",
+   "dd",
+   "n"
+  ],
+  "app.ins.start": [
+   "v"
+  ],
+  "app.ins.row.start": [
+   "eq"
+  ],
+  "app.ins.row": [
+   "dd",
+   "eq",
+   "i"
+  ],
+  "app.ins.empty.need": [
+   "min"
+  ],
+  "app.ins.empty.count": [
+   "min",
+   "n"
   ]
  },
  "legal": {
