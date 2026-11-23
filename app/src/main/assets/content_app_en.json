@@ -229,7 +229,61 @@
   "app.ins.empty.text": "There is no data for the chart yet. After you close your first trade, the equity chart takes shape here.",
   "app.ins.empty.need": "At least {min} trades are needed to judge",
   "app.ins.empty.count": "{n} of {min}",
-  "app.ins.empty.bar": "Closed trades toward the judging threshold"
+  "app.ins.empty.bar": "Closed trades toward the judging threshold",
+  "app.mkt.title": "Market",
+  "app.mkt.live": "Live",
+  "app.mkt.status.off": "Off · no requests are sent",
+  "app.mkt.status.updated": "Updated {t}",
+  "app.mkt.status.connecting": "Connecting",
+  "app.mkt.status.noprice": "No prices yet",
+  "app.mkt.stale": "Out of date",
+  "app.mkt.stale.at": "Last received {t}",
+  "app.mkt.unit.desc": "Price unit",
+  "app.mkt.refreshing": "Refreshing",
+  "app.mkt.search": "Search symbol or name",
+  "app.mkt.ov.title": "Market overview",
+  "app.mkt.ov.cap": "Market cap",
+  "app.mkt.ov.dom": "Bitcoin dominance",
+  "app.mkt.fg.title": "Fear and Greed index",
+  "app.mkt.fg.desc": "Fear and Greed index: {v} of 100, {label}",
+  "app.mkt.fg.none": "Not available",
+  "app.mkt.fg.pending": "Fear and Greed index: not received yet",
+  "app.mkt.trend.up": "Last 7 days: rising",
+  "app.mkt.trend.down": "Last 7 days: falling",
+  "app.mkt.trend.sUp": "This session: rising",
+  "app.mkt.trend.sDown": "This session: falling",
+  "app.mkt.star.add": "Add {name} to my coins",
+  "app.mkt.star.remove": "Remove {name} from my coins",
+  "app.mkt.loading.title": "Getting prices",
+  "app.mkt.loading.body": "Prices come from outside services. Wait a few seconds.",
+  "app.mkt.err.title": "Some services are not answering",
+  "app.mkt.err.bodyOld": "The prices below come from the last fetch and may be out of date. Check them before you rely on them.",
+  "app.mkt.err.bodyNone": "No prices have been received yet. Try again.",
+  "app.mkt.err.retry": "Try again",
+  "app.mkt.err.offlineNote": "The journal, the rules and backups work without the internet.",
+  "app.mkt.svc.title": "Service status",
+  "app.mkt.svc.coinList": "List and history",
+  "app.mkt.svc.sentiment": "Fear and Greed",
+  "app.mkt.svc.ticks": "Live prices",
+  "app.mkt.svc.iran": "USDT in Toman",
+  "app.mkt.svc.iranBackup": "USDT in Toman, backup",
+  "app.mkt.svc.timeout": "No answer",
+  "app.mkt.svc.blocked": "Access blocked",
+  "app.mkt.svc.rate": "Requests limited",
+  "app.mkt.svc.server": "Server error {code}",
+  "app.mkt.svc.bad": "Invalid answer",
+  "app.mkt.saved.title": "Last saved prices",
+  "app.mkt.off.what": "What does Andarz send?",
+  "app.mkt.off.features": "Turned on with Market",
+  "app.mkt.off.f.prices": "Top 200 coins",
+  "app.mkt.off.f.coins": "Starred coins",
+  "app.mkt.off.f.news": "Economic calendar",
+  "app.mkt.off.f.alerts": "Price and alarm alerts",
+  "app.mkt.off.note": "The journal, the calculator and the rules work without the internet. Turning Market off does not affect them.",
+  "app.mkt.consent.sends": "Coin symbols",
+  "app.mkt.consent.stays": "Journal, trades, balance",
+  "app.mkt.consent.diagram": "Data path: only coin symbols go from the phone to the services; the journal, trades and balance never do",
+  "app.mkt.consent.services": "Services"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -511,6 +565,25 @@
   "app.ins.empty.count": [
    "min",
    "n"
+  ],
+  "app.mkt.status.updated": [
+   "t"
+  ],
+  "app.mkt.stale.at": [
+   "t"
+  ],
+  "app.mkt.fg.desc": [
+   "label",
+   "v"
+  ],
+  "app.mkt.star.add": [
+   "name"
+  ],
+  "app.mkt.star.remove": [
+   "name"
+  ],
+  "app.mkt.svc.server": [
+   "code"
   ]
  },
  "legal": {

@@ -229,7 +229,61 @@
   "app.ins.empty.text": "هنوز داده‌ای برای نمودار نیست؛ بعد از بستن اولین معامله، نمودار سرمایه اینجا شکل می‌گیرد.",
   "app.ins.empty.need": "برای قضاوت دست‌کم {min} معامله لازم است",
   "app.ins.empty.count": "{n} از {min}",
-  "app.ins.empty.bar": "معامله‌های بسته‌شده تا حد قضاوت"
+  "app.ins.empty.bar": "معامله‌های بسته‌شده تا حد قضاوت",
+  "app.mkt.title": "بازار",
+  "app.mkt.live": "زنده",
+  "app.mkt.status.off": "خاموش · هیچ درخواستی ارسال نمی‌شود",
+  "app.mkt.status.updated": "به‌روز شد {t}",
+  "app.mkt.status.connecting": "در حال اتصال",
+  "app.mkt.status.noprice": "هنوز قیمتی نرسیده",
+  "app.mkt.stale": "قدیمی",
+  "app.mkt.stale.at": "آخرین دریافت {t}",
+  "app.mkt.unit.desc": "واحد نمایش قیمت",
+  "app.mkt.refreshing": "در حال به‌روزرسانی",
+  "app.mkt.search": "جست‌وجوی نماد یا نام",
+  "app.mkt.ov.title": "مرور بازار",
+  "app.mkt.ov.cap": "ارزش بازار",
+  "app.mkt.ov.dom": "تسلط بیت‌کوین",
+  "app.mkt.fg.title": "شاخص ترس و طمع",
+  "app.mkt.fg.desc": "شاخص ترس و طمع: {v} از ۱۰۰، {label}",
+  "app.mkt.fg.none": "موجود نیست",
+  "app.mkt.fg.pending": "شاخص ترس و طمع: هنوز دریافت نشده",
+  "app.mkt.trend.up": "روند ۷ روز اخیر: صعودی",
+  "app.mkt.trend.down": "روند ۷ روز اخیر: نزولی",
+  "app.mkt.trend.sUp": "روند این نشست: صعودی",
+  "app.mkt.trend.sDown": "روند این نشست: نزولی",
+  "app.mkt.star.add": "افزودن {name} به ارزهای من",
+  "app.mkt.star.remove": "حذف {name} از ارزهای من",
+  "app.mkt.loading.title": "در حال دریافت قیمت‌ها",
+  "app.mkt.loading.body": "قیمت‌ها از سرویس‌های بیرونی می‌رسند؛ چند ثانیه صبر کن.",
+  "app.mkt.err.title": "بعضی سرویس‌ها پاسخ نمی‌دهند",
+  "app.mkt.err.bodyOld": "قیمت‌های زیر از آخرین دریافت‌اند و ممکن است قدیمی باشند؛ پیش از استفاده بررسی کن.",
+  "app.mkt.err.bodyNone": "هنوز قیمتی دریافت نشده است. دوباره تلاش کن.",
+  "app.mkt.err.retry": "تلاش دوباره",
+  "app.mkt.err.offlineNote": "ژورنال، قوانین و پشتیبان‌گیری بدون اینترنت کار می‌کنند.",
+  "app.mkt.svc.title": "وضعیت سرویس‌ها",
+  "app.mkt.svc.coinList": "فهرست و تاریخچه",
+  "app.mkt.svc.sentiment": "ترس و طمع",
+  "app.mkt.svc.ticks": "قیمت لحظه‌ای",
+  "app.mkt.svc.iran": "تتر به تومان",
+  "app.mkt.svc.iranBackup": "تتر به تومان، جایگزین",
+  "app.mkt.svc.timeout": "پاسخ نداد",
+  "app.mkt.svc.blocked": "دسترسی مسدود است",
+  "app.mkt.svc.rate": "درخواست‌ها محدود شد",
+  "app.mkt.svc.server": "خطای سرور {code}",
+  "app.mkt.svc.bad": "پاسخ نامعتبر",
+  "app.mkt.saved.title": "آخرین قیمت‌های ذخیره‌شده",
+  "app.mkt.off.what": "اندرز چه چیزی می‌فرستد؟",
+  "app.mkt.off.features": "با روشن کردن بازار فعال می‌شود",
+  "app.mkt.off.f.prices": "۲۰۰ ارز برتر",
+  "app.mkt.off.f.coins": "ارزهای ستاره‌دار",
+  "app.mkt.off.f.news": "تقویم اقتصادی",
+  "app.mkt.off.f.alerts": "قیمت و زنگ هشدار",
+  "app.mkt.off.note": "ژورنال، ماشین‌حساب و قوانین بدون اینترنت کار می‌کنند؛ خاموش بودن بازار روی آن‌ها اثری ندارد.",
+  "app.mkt.consent.sends": "نماد ارزها",
+  "app.mkt.consent.stays": "ژورنال، معامله‌ها، موجودی",
+  "app.mkt.consent.diagram": "مسیر داده: فقط نماد ارزها از گوشی به سرویس‌ها می‌رود؛ ژورنال، معامله‌ها و موجودی هرگز نمی‌رود",
+  "app.mkt.consent.services": "سرویس‌ها"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -511,6 +565,25 @@
   "app.ins.empty.count": [
    "min",
    "n"
+  ],
+  "app.mkt.status.updated": [
+   "t"
+  ],
+  "app.mkt.stale.at": [
+   "t"
+  ],
+  "app.mkt.fg.desc": [
+   "label",
+   "v"
+  ],
+  "app.mkt.star.add": [
+   "name"
+  ],
+  "app.mkt.star.remove": [
+   "name"
+  ],
+  "app.mkt.svc.server": [
+   "code"
   ]
  },
  "legal": {

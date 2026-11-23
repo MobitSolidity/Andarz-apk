@@ -71,6 +71,9 @@ class MarketFmt(
     fun pct(v: Double): String =
         Fmt.isolate((if (v >= 0) UP else DOWN) + " " + Fmt.number(abs(v), 2, fa, group = false) + percent)
 
+    /** The one-decimal signed change of the canvas rows (`+0.8%`, with a real minus sign); the triangle beside it says the direction too. */
+    fun change(v: Double): String = Fmt.isolate(Fmt.signed(v, 1, fa) + percent)
+
     /** BTC dominance, one decimal (March: `%.1f%%`). */
     fun share(v: Double): String = Fmt.isolate(Fmt.number(v, 1, fa, group = false) + percent)
 
