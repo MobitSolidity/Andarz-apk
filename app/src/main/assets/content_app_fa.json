@@ -283,7 +283,30 @@
   "app.mkt.consent.sends": "نماد ارزها",
   "app.mkt.consent.stays": "ژورنال، معامله‌ها، موجودی",
   "app.mkt.consent.diagram": "مسیر داده: فقط نماد ارزها از گوشی به سرویس‌ها می‌رود؛ ژورنال، معامله‌ها و موجودی هرگز نمی‌رود",
-  "app.mkt.consent.services": "سرویس‌ها"
+  "app.mkt.consent.services": "سرویس‌ها",
+  "app.mkt.sheet.h24": "۲۴ ساعت",
+  "app.mkt.sheet.d7": "تغییر ۷ روزه",
+  "app.mkt.sheet.about": "حدود {v}",
+  "app.mkt.sheet.noValue": "بدون مقدار",
+  "app.mkt.sheet.today": "امروز",
+  "app.mkt.sheet.chart.desc": "{title} {name}: از {from} به {to}؛ کمترین {low}، بیشترین {high}",
+  "app.mkt.sheet.chart.loading": "در حال دریافت نمودار",
+  "app.mkt.sheet.chart.failed": "نمودار دریافت نشد",
+  "app.mkt.sheet.chart.pending": "نمودار هنوز آماده نیست",
+  "app.mkt.sheet.range.desc": "بازهٔ ۲۴ ساعته: کمترین {low}، بیشترین {high}؛ قیمت فعلی {price}",
+  "app.mkt.sheet.range.saved": "بازهٔ ۲۴ ساعته: کمترین {low}، بیشترین {high}؛ آخرین قیمت ذخیره‌شده {price}",
+  "app.mkt.rule.title": "هشدار این ارز",
+  "app.mkt.rule.threshold": "آستانهٔ تغییر",
+  "app.mkt.rule.default": "پیش‌فرض همه: {pct}",
+  "app.mkt.rule.dec": "کاهش آستانه",
+  "app.mkt.rule.inc": "افزایش آستانه",
+  "app.mkt.rule.lower": "هدف پایین‌تر",
+  "app.mkt.rule.upper": "هدف بالاتر",
+  "app.mkt.rule.none": "بدون هدف",
+  "app.mkt.rule.track.low": "هدف پایین‌تر {v}",
+  "app.mkt.rule.track.high": "هدف بالاتر {v}",
+  "app.mkt.rule.track.now": "قیمت فعلی {v}",
+  "app.mkt.rule.track.saved": "آخرین قیمت ذخیره‌شده {v}"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -584,6 +607,42 @@
   ],
   "app.mkt.svc.server": [
    "code"
+  ],
+  "app.mkt.sheet.about": [
+   "v"
+  ],
+  "app.mkt.sheet.chart.desc": [
+   "from",
+   "high",
+   "low",
+   "name",
+   "title",
+   "to"
+  ],
+  "app.mkt.sheet.range.desc": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.sheet.range.saved": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.rule.default": [
+   "pct"
+  ],
+  "app.mkt.rule.track.low": [
+   "v"
+  ],
+  "app.mkt.rule.track.high": [
+   "v"
+  ],
+  "app.mkt.rule.track.now": [
+   "v"
+  ],
+  "app.mkt.rule.track.saved": [
+   "v"
   ]
  },
  "legal": {

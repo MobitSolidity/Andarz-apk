@@ -283,7 +283,30 @@
   "app.mkt.consent.sends": "Coin symbols",
   "app.mkt.consent.stays": "Journal, trades, balance",
   "app.mkt.consent.diagram": "Data path: only coin symbols go from the phone to the services; the journal, trades and balance never do",
-  "app.mkt.consent.services": "Services"
+  "app.mkt.consent.services": "Services",
+  "app.mkt.sheet.h24": "24 hours",
+  "app.mkt.sheet.d7": "7 day change",
+  "app.mkt.sheet.about": "About {v}",
+  "app.mkt.sheet.noValue": "No value",
+  "app.mkt.sheet.today": "Today",
+  "app.mkt.sheet.chart.desc": "{title} {name}: from {from} to {to}; low {low}, high {high}",
+  "app.mkt.sheet.chart.loading": "Loading the chart",
+  "app.mkt.sheet.chart.failed": "The chart could not be loaded",
+  "app.mkt.sheet.chart.pending": "The chart is not ready yet",
+  "app.mkt.sheet.range.desc": "24 hour range: low {low}, high {high}; price now {price}",
+  "app.mkt.sheet.range.saved": "24 hour range: low {low}, high {high}; last saved price {price}",
+  "app.mkt.rule.title": "Alert for this coin",
+  "app.mkt.rule.threshold": "Move threshold",
+  "app.mkt.rule.default": "Default for all: {pct}",
+  "app.mkt.rule.dec": "Lower the threshold",
+  "app.mkt.rule.inc": "Raise the threshold",
+  "app.mkt.rule.lower": "Lower target",
+  "app.mkt.rule.upper": "Upper target",
+  "app.mkt.rule.none": "No target",
+  "app.mkt.rule.track.low": "lower target {v}",
+  "app.mkt.rule.track.high": "upper target {v}",
+  "app.mkt.rule.track.now": "price now {v}",
+  "app.mkt.rule.track.saved": "last saved price {v}"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -584,6 +607,42 @@
   ],
   "app.mkt.svc.server": [
    "code"
+  ],
+  "app.mkt.sheet.about": [
+   "v"
+  ],
+  "app.mkt.sheet.chart.desc": [
+   "from",
+   "high",
+   "low",
+   "name",
+   "title",
+   "to"
+  ],
+  "app.mkt.sheet.range.desc": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.sheet.range.saved": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.rule.default": [
+   "pct"
+  ],
+  "app.mkt.rule.track.low": [
+   "v"
+  ],
+  "app.mkt.rule.track.high": [
+   "v"
+  ],
+  "app.mkt.rule.track.now": [
+   "v"
+  ],
+  "app.mkt.rule.track.saved": [
+   "v"
   ]
  },
  "legal": {

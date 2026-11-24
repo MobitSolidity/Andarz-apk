@@ -141,7 +141,9 @@ fun MarketScreen(
         CoinSheet(
             content = content, fmt = fmt, c = coin, toman = toman, rate = state.usdt?.toman,
             starred = coin.id in watch, session = viewModel.session(coin.id),
+            error = state.error, loading = state.loading, updatedAt = state.updatedAt,
             onToggleStar = { viewModel.toggleStar(coin.id) },
+            onRetry = viewModel::refresh,
             onDismiss = { viewModel.openCoin(null) },
             rule = rules[coin.id],
             defaultPct = alertSettings.thresholdPct,
