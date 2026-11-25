@@ -59,7 +59,7 @@ internal class AlertDispatcher(
         if (s.clockApp && ClockRing.ringNow(context, t.title)) {
             post(key, t, coinId, silent = false)
         } else {
-            AlarmRinger.fire(context, t.title, t.body, coinId)
+            AlarmRinger.fire(context, t.title, t.body, coinId, t.face)
         }
     }
 

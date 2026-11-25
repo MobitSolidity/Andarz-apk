@@ -163,6 +163,9 @@ object MarketModule {
     /** Wording, or null before install (a receiver in a cold process of a not-yet-installed app). */
     internal fun textsOrNull(): MarketTexts? = state?.host?.texts
 
+    /** The alarm screen's fonts, or null before install. */
+    internal fun fontsOrNull(): MarketFonts? = state?.host?.fonts
+
     /** The explicit deep link into the app (K6.11). */
     internal fun openIntent(context: Context, target: MarketTarget): Intent = require().host.openIntent(context, target)
 
