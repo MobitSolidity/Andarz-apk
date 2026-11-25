@@ -3,7 +3,8 @@ package ir.andarz.app.ui.theme
 import androidx.compose.ui.graphics.Color
 
 /**
- * The colour tokens of the final design canvas (`spec/andarz_design_tokens.json`, version 3), transcribed once.
+ * The colour tokens of the final design canvas (its CSS variables), transcribed once. `spec/andarz_design_tokens.json`
+ * is the older v2 and stays as the read-only input; these tokens replace it in the app (D-UI3).
  *
  * "Night and turquoise": deep navy surfaces stepped in tone, a turquoise firouzeh for allowed, profit and the
  * main action, a warm saffron for caution, a coral anar for the red line and for loss, lapis for information.

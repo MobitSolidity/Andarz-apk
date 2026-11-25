@@ -255,7 +255,7 @@ alarm explanation. Data Safety form: only "Files and docs, user-initiated export
 | S-4 | Lock screen at 200% font with the PIN keyboard open | PIN field and unlock button reachable by scrolling | pending |
 | S-5 | Settings: make a backup at the bottom of the page | Snackbar at the bottom with the result | pending |
 | S-6 | Ledger: tap delete on a deposit | Confirmation dialog; cancel keeps the row | pending |
-| S-7 | Release APK: fonts | Vazirmatn shows (not the system font) | pending |
+| S-7 | Release APK: fonts | Peyda shows for words and IBM Plex Sans Arabic for numbers (not the system font); the advice of the day is in Naskh | pending |
 
 
 ## opus5 audit additions (pending: needs a device)

@@ -126,7 +126,8 @@ fun AboutScreen(onBack: () -> Unit, onLicenses: () -> Unit, onLegal: () -> Unit 
             MarketModule.hosts.forEach { Text(Fmt.isolate(it), style = MaterialTheme.typography.labelMedium, color = c.textMuted) }
         }
         Text(u.t("about.disclaimer"), style = MaterialTheme.typography.bodyMedium, color = c.caution)
-        Text(u.t("about.fonts"), style = MaterialTheme.typography.labelMedium)
+        // The base key about.fonts (read-only spec) still names the old font; the fonts of the final look are credited by app.about.fonts.
+        Text(u.t("app.about.fonts"), style = MaterialTheme.typography.labelMedium)
         Text(u.t("mkt.about.credit"), style = MaterialTheme.typography.labelMedium, color = c.textMuted)
         TextButton(onClick = onLegal) { Text(u.t("app.legal.title")) }
         TextButton(onClick = onLicenses) { Text(u.t("set.licenses")) }
@@ -157,5 +158,7 @@ private val LICENSES = listOf(
     "Dagger Hilt" to "Apache License 2.0",
     "OkHttp" to "Apache License 2.0",
     "Coil" to "Apache License 2.0",
-    "Vazirmatn" to "SIL Open Font License 1.1",
+    "IBM Plex Sans Arabic" to "SIL Open Font License 1.1",
+    "Noto Naskh Arabic" to "SIL Open Font License 1.1",
+    "Peyda (Fontiran)" to "Licence of the font's author, see fontiran.com",
 )

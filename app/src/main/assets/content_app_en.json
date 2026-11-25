@@ -327,7 +327,8 @@
   "app.news.lastDay": "Last day of the list",
   "app.news.emptyHigh": "No high-impact events are left in the list",
   "app.news.emptyAll": "No events are left to show",
-  "app.news.footer": "Tehran time, from the Federal Reserve and BLS calendars. You get a notification {n} minutes before every event whose reminder is on. The phone clock alarm works only for the next event and only within 24 hours of it."
+  "app.news.footer": "Tehran time, from the Federal Reserve and BLS calendars. You get a notification {n} minutes before every event whose reminder is on. The phone clock alarm works only for the next event and only within 24 hours of it.",
+  "app.about.fonts": "Fonts: Peyda by Fontiran; IBM Plex Sans Arabic and Noto Naskh Arabic (OFL licence)"
  },
  "uiArgs": {
   "app.glossary.count": [
