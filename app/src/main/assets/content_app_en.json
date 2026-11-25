@@ -306,7 +306,28 @@
   "app.mkt.rule.track.low": "lower target {v}",
   "app.mkt.rule.track.high": "upper target {v}",
   "app.mkt.rule.track.now": "price now {v}",
-  "app.mkt.rule.track.saved": "last saved price {v}"
+  "app.mkt.rule.track.saved": "last saved price {v}",
+  "app.news.next": "Next event",
+  "app.news.left": "{a} {ua} {b} {ub} until release",
+  "app.news.impact.high": "High impact",
+  "app.news.impact.mid": "Medium impact",
+  "app.news.impact.low": "Low impact",
+  "app.news.lead": "{n} min before",
+  "app.news.remind": "Reminder for {title}",
+  "app.news.remind.lead": "Reminder for {title}, {n} min before",
+  "app.news.on": "On",
+  "app.news.off": "Off",
+  "app.news.clock": "Phone clock alarm",
+  "app.news.clock.for": "Clock alarm for {title}",
+  "app.news.same": "{n} events at the same time",
+  "app.news.count": "{n} events until {date}",
+  "app.news.count.one": "{n} event until {date}",
+  "app.news.day": "{n} events",
+  "app.news.day.one": "{n} event",
+  "app.news.lastDay": "Last day of the list",
+  "app.news.emptyHigh": "No high-impact events are left in the list",
+  "app.news.emptyAll": "No events are left to show",
+  "app.news.footer": "Tehran time, from the Federal Reserve and BLS calendars. You get a notification {n} minutes before every event whose reminder is on. The phone clock alarm works only for the next event and only within 24 hours of it."
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -643,6 +664,45 @@
   ],
   "app.mkt.rule.track.saved": [
    "v"
+  ],
+  "app.news.left": [
+   "a",
+   "b",
+   "ua",
+   "ub"
+  ],
+  "app.news.lead": [
+   "n"
+  ],
+  "app.news.remind": [
+   "title"
+  ],
+  "app.news.remind.lead": [
+   "n",
+   "title"
+  ],
+  "app.news.clock.for": [
+   "title"
+  ],
+  "app.news.same": [
+   "n"
+  ],
+  "app.news.count": [
+   "date",
+   "n"
+  ],
+  "app.news.count.one": [
+   "date",
+   "n"
+  ],
+  "app.news.day": [
+   "n"
+  ],
+  "app.news.day.one": [
+   "n"
+  ],
+  "app.news.footer": [
+   "n"
   ]
  },
  "legal": {

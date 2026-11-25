@@ -176,7 +176,7 @@ private fun plain(v: Double): String = java.math.BigDecimal.valueOf(v).stripTrai
 
 /** True when the sheet's side-by-side rows would not fit: a narrow screen or a large font. */
 @Composable
-private fun isStacked(): Boolean = LocalDensity.current.fontScale > 1.15f || LocalConfiguration.current.screenWidthDp < 340
+internal fun isStacked(): Boolean = LocalDensity.current.fontScale > 1.15f || LocalConfiguration.current.screenWidthDp < 340
 
 private fun sourceLabel(content: ContentRepository, c: Coin): String = when (c.source) {
     Source.BINANCE -> content.ui("mkt.live.BINANCE")

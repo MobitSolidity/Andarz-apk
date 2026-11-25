@@ -11,7 +11,7 @@ class CoinSheetLogicTest {
 
     private val en = MarketFmt(fa = false, tomanSuffix = " T", zone = ZoneId.of("+03:30"))
 
-    private fun bare(s: String) = s.replace("⁦", "").replace("⁩", "")
+    private fun bare(s: String) = s.replace("\u2066", "").replace("\u2069", "")
 
     @Test
     fun `a nice step is one two or five times a power of ten`() {

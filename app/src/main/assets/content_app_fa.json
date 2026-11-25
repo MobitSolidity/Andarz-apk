@@ -306,7 +306,28 @@
   "app.mkt.rule.track.low": "هدف پایین‌تر {v}",
   "app.mkt.rule.track.high": "هدف بالاتر {v}",
   "app.mkt.rule.track.now": "قیمت فعلی {v}",
-  "app.mkt.rule.track.saved": "آخرین قیمت ذخیره‌شده {v}"
+  "app.mkt.rule.track.saved": "آخرین قیمت ذخیره‌شده {v}",
+  "app.news.next": "رویداد بعدی",
+  "app.news.left": "{a} {ua} و {b} {ub} تا انتشار",
+  "app.news.impact.high": "اثر بالا",
+  "app.news.impact.mid": "اثر متوسط",
+  "app.news.impact.low": "اثر کم",
+  "app.news.lead": "{n} دقیقه قبل",
+  "app.news.remind": "یادآوری {title}",
+  "app.news.remind.lead": "یادآوری {title}، {n} دقیقه قبل",
+  "app.news.on": "فعال است",
+  "app.news.off": "خاموش است",
+  "app.news.clock": "زنگ ساعت گوشی",
+  "app.news.clock.for": "زنگ ساعت گوشی برای {title}",
+  "app.news.same": "{n} رویداد هم‌زمان",
+  "app.news.count": "{n} رویداد تا {date}",
+  "app.news.count.one": "{n} رویداد تا {date}",
+  "app.news.day": "{n} رویداد",
+  "app.news.day.one": "{n} رویداد",
+  "app.news.lastDay": "آخرین روز فهرست",
+  "app.news.emptyHigh": "رویداد پراهمیتی در فهرست نمانده است",
+  "app.news.emptyAll": "رویدادی برای نمایش نمانده است",
+  "app.news.footer": "به وقت تهران، از تقویم فدرال رزرو و BLS. {n} دقیقه قبل از هر رویدادی که یادآورش روشن است اعلان می‌گیری. زنگ ساعت گوشی فقط برای رویداد بعدی و فقط تا ۲۴ ساعت مانده به آن ممکن است."
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -643,6 +664,45 @@
   ],
   "app.mkt.rule.track.saved": [
    "v"
+  ],
+  "app.news.left": [
+   "a",
+   "b",
+   "ua",
+   "ub"
+  ],
+  "app.news.lead": [
+   "n"
+  ],
+  "app.news.remind": [
+   "title"
+  ],
+  "app.news.remind.lead": [
+   "n",
+   "title"
+  ],
+  "app.news.clock.for": [
+   "title"
+  ],
+  "app.news.same": [
+   "n"
+  ],
+  "app.news.count": [
+   "date",
+   "n"
+  ],
+  "app.news.count.one": [
+   "date",
+   "n"
+  ],
+  "app.news.day": [
+   "n"
+  ],
+  "app.news.day.one": [
+   "n"
+  ],
+  "app.news.footer": [
+   "n"
   ]
  },
  "legal": {
