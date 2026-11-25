@@ -650,7 +650,7 @@ private fun pctFrom(price: Double, target: Double): Double? = if (price > 0) (ta
 
 /** A 48 dp round-cornered step button of the threshold stepper. */
 @Composable
-private fun StepButton(glyph: Glyph, label: String, enabled: Boolean, onClick: () -> Unit) {
+internal fun StepButton(glyph: Glyph, label: String, enabled: Boolean, onClick: () -> Unit) {
     val k = LocalAndarzColors.current
     IconButton(onClick = onClick, enabled = enabled, modifier = Modifier.size(48.dp)) {
         Box(Modifier.size(44.dp).background(k.high, RoundedCornerShape(14.dp)), contentAlignment = Alignment.Center) {
