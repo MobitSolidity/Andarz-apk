@@ -273,5 +273,6 @@ Andarz is a personal risk-management and journaling tool. It is **not** financia
 signals, does not place trades and does not connect to any exchange account. Trading leveraged products can
 lose more than you expect; you alone are responsible for your decisions.
 
-Font: [Vazirmatn](https://github.com/rastikerdar/vazirmatn) (SIL Open Font License 1.1). Third-party
-libraries are listed in the SBOM and in the app's licences screen.
+Fonts: Peyda by [Fontiran](https://fontiran.com) (the licence of its author applies, see D-UI3),
+[IBM Plex Sans Arabic](https://github.com/IBM/plex) and Noto Naskh Arabic (SIL Open Font License 1.1).
+Third-party libraries are listed in the SBOM and in the app's licences screen.

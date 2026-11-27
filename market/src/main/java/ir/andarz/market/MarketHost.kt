@@ -2,6 +2,7 @@ package ir.andarz.market
 
 import android.content.Context
 import android.content.Intent
+import androidx.compose.ui.text.font.FontFamily
 import ir.andarz.market.alerts.AlertAction
 import ir.andarz.market.model.AlertSettings
 import ir.andarz.market.model.MarketState
@@ -82,6 +83,17 @@ interface MarketTexts {
     fun alarmSnooze(): String
     fun alarmOpenCoin(): String
 
+    /** The tag in the header of the alarm screen, and the description of its picture of arches around a bell. */
+    fun alarmTag(): String
+    fun alarmDecor(): String
+
+    /** "Auto stop in 2:40" and its long form for a screen reader, from the time left and the whole span. */
+    fun alarmLeft(leftMs: Long): String
+    fun alarmLeftDesc(leftMs: Long, totalMs: Long): String
+
+    /** The label of the button that opens the coin, with its name: "Open Bitcoin". */
+    fun alarmOpen(name: String): String
+
     /** HH:mm and the weekday/date of the alarm screen, in the app's digit, calendar and zone settings. */
     fun clock(ms: Long): String
     fun day(ms: Long): String
@@ -96,8 +108,30 @@ interface MarketTexts {
     fun reminderBody(leadMinutes: Int): String
 }
 
-/** A finished notification text. */
-data class NotifText(val title: String, val body: String)
+/**
+ * What the alarm screen shows about the alert that is ringing, as finished strings: the screen formats nothing.
+ * [name] and [symbol] name the coin, [price] is its current price, [status] says what happened ("reached the
+ * upper target, $112,000"), [up] gives the arrow and its tone (null: no arrow) and [note] is the small line
+ * under the status, empty when there is none.
+ */
+data class AlarmFace(
+    val name: String,
+    val symbol: String,
+    val price: String,
+    val status: String,
+    val up: Boolean?,
+    val note: String,
+)
+
+/** A finished notification text. [face] is set for an alert about one coin, which can ring as an alarm. */
+data class NotifText(val title: String, val body: String, val face: AlarmFace? = null)
+
+/**
+ * The two font families of the alarm screen: [text] for words (Peyda) and [figures] for numerals and Latin
+ * symbols (IBM Plex Sans Arabic). The files live in :app (`R.font`), so the host hands the families over and
+ * :market carries no copy of them.
+ */
+data class MarketFonts(val text: FontFamily, val figures: FontFamily)
 
 /**
  * The bridge :market uses to reach the app: wording and deep links. Installed once from
@@ -106,6 +140,9 @@ data class NotifText(val title: String, val body: String)
 interface MarketHost {
     /** Every user-visible word :market shows. */
     val texts: MarketTexts
+
+    /** The families the alarm screen draws with. */
+    val fonts: MarketFonts
 
     /**
      * An explicit deep link into `MainActivity`. The caller wraps it in a `PendingIntent` with

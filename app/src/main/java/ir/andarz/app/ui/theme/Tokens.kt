@@ -3,91 +3,149 @@ package ir.andarz.app.ui.theme
 import androidx.compose.ui.graphics.Color
 
 /**
- * The colour tokens of `spec/andarz_design_tokens.json`, transcribed once.
+ * The colour tokens of the final design canvas (its CSS variables), transcribed once. `spec/andarz_design_tokens.json`
+ * is the older v2 and stays as the read-only input; these tokens replace it in the app (D-UI3).
  *
- * `ThemeTokensTest` parses the JSON and fails the build if any constant here drifts from it (§6.2), so
- * this file is a mirror, never a second opinion. Dynamic colour (Material You) is deliberately not used:
- * the palette is part of the identity (§6.2).
+ * "Night and turquoise": deep navy surfaces stepped in tone, a turquoise firouzeh for allowed, profit and the
+ * main action, a warm saffron for caution, a coral anar for the red line and for loss, lapis for information.
+ * The names follow the CSS variables of the canvas (`fz`, `sf`, `an`, `lapis` ...) so a board and a composable
+ * read the same. Dynamic colour (Material You) is deliberately not used: the palette is the identity.
  *
- * v2 "Ledger" palette (D-UI2): graphite surfaces stepped in tone (no shadows in dark), an emerald
- * firouzeh for allowed/profit, a gold saffron for caution and a coral anar for redline/loss. The token
- * NAMES are unchanged, so every semantic role keeps its meaning; only the hues moved.
+ * Text colours (`fz`, `sf`, `an`, `lapis`) and graphic colours (`fzG`, `sfG`, `anG`) are separate because in the
+ * light theme the colour that is readable as text is darker than the one that looks right as a fill or a line.
  */
 internal object DarkTokens {
-    val bg = Color(0xFF0D0E10)
-    val surface = Color(0xFF15171B)
-    val surfaceAlt = Color(0xFF1C1E24)
-    val surfaceHigh = Color(0xFF24272E)
-    val divider = Color(0xFF2C2F37)
-    val outline = Color(0xFF737A86)
-    val text = Color(0xFFF5F5F4)
-    val textMuted = Color(0xFFA3A79C)
-    val firouzeh = Color(0xFF4AE390)
-    val onFirouzeh = Color(0xFF05190D)
-    val firouzehContainer = Color(0xFF123623)
-    val saffron = Color(0xFFE0B667)
-    val onSaffron = Color(0xFF231600)
-    val saffronContainer = Color(0xFF352A12)
-    val anar = Color(0xFFFF7166)
-    val anarFill = Color(0xFFC9342A)
-    val onAnarFill = Color(0xFFFFFFFF)
-    val anarContainer = Color(0xFF3E1714)
-    val lapis = Color(0xFF8FA8FF)
-    val lapisContainer = Color(0xFF18213F)
+    val bg = Color(0xFF0A1118)
+    val bgDeep = Color(0xFF070D13)
+    val sf1 = Color(0xFF101A25)
+    val alt = Color(0xFF162231)
+    val high = Color(0xFF1D2B3D)
+    val text = Color(0xFFEAF0F5)
+    val muted = Color(0xFFA3B1C0)
+    val hmuted = Color(0xFFB9C5D1)
+    val divider = Color(0xFF233245)
+    val outline = Color(0xFF61748A)
+    val track = Color(0xFF243448)
+
+    val fz = Color(0xFF35D6C4)
+    val fzG = Color(0xFF35D6C4)
+    val fzC = Color(0xFF0E3A3A)
+    val fzFill = Color(0xFF35D6C4)
+    val onFz = Color(0xFF03201C)
+    val fzSoft = Color(0x2935D6C4)
+
+    val sf = Color(0xFFF3B63F)
+    val sfG = Color(0xFFF3B63F)
+    val sfC = Color(0xFF35290B)
+    val sfSoft = Color(0x29F3B63F)
+    val sfLine = Color(0x66F3B63F)
+
+    val an = Color(0xFFFF8A80)
+    val anG = Color(0xFFFF8A80)
+    val anC = Color(0xFF3A1619)
+    val anFill = Color(0xFFC8372F)
+    val onAnFill = Color(0xFFFFFFFF)
+    val anSoft = Color(0x33FF8A80)
+    val anLine = Color(0x57FF8A80)
+
+    val lapis = Color(0xFF8CA6FF)
+    val lapisC = Color(0xFF18264A)
+    val lapisSoft = Color(0x428CA6FF)
+    val lapisLine = Color(0x738CA6FF)
+
     val violet = Color(0xFFB79CFF)
 
-    /** Series order for charts (§6.5). */
-    val chartSeries = listOf(
-        Color(0xFF4AE390),
-        Color(0xFF8FA8FF),
-        Color(0xFFE0B667),
-        Color(0xFFFF7166),
-        Color(0xFFB79CFF),
-    )
+    val edge = Color(0x12FFFFFF)
+    val h1 = Color(0xFF16242F)
+    val h2 = Color(0xFF101A25)
+
+    val glowAllowed = Color(0x2B35D6C4)
+    val glowCaution = Color(0x26F3B63F)
+    val glowLocked = Color(0x24FF8A80)
+    val ringAllowed = Color(0x6B35D6C4)
+    val ringCaution = Color(0x6BF3B63F)
+    val ringLocked = Color(0x6BFF8A80)
+
+    val scrim = Color(0xAD02060A)
+
+    /** Series order for charts. */
+    val chartSeries = listOf(fzG, lapis, sfG, anG, violet)
 }
 
 internal object LightTokens {
-    val bg = Color(0xFFF3F3F0)
-    val surface = Color(0xFFFFFFFF)
-    val surfaceAlt = Color(0xFFEAEAE5)
-    val surfaceHigh = Color(0xFFE0E0DA)
-    val divider = Color(0xFFD3D3CB)
-    val outline = Color(0xFF74776D)
-    val text = Color(0xFF0D0E10)
-    val textMuted = Color(0xFF4E5249)
-    val firouzeh = Color(0xFF0A7342)
-    val onFirouzeh = Color(0xFFFFFFFF)
-    val firouzehContainer = Color(0xFFD3F2E0)
+    val bg = Color(0xFFF3F5F7)
+    val bgDeep = Color(0xFFF3F5F7)
+    val sf1 = Color(0xFFFFFFFF)
+    val alt = Color(0xFFEAEEF2)
+    val high = Color(0xFFDEE4EA)
+    val text = Color(0xFF0D1620)
+    val muted = Color(0xFF45556A)
+    val hmuted = Color(0xFF45556A)
+    val divider = Color(0xFFD3DAE2)
+    val outline = Color(0xFF7B8998)
+    val track = Color(0xFFDEE4EA)
 
-    /** Text saffron: 5.9:1 on surface. The chart amber below is graphics-only (D-20). */
-    val saffron = Color(0xFF835A00)
-    val onSaffron = Color(0xFF231600)
-    val saffronFill = Color(0xFFE0B667)
-    val saffronContainer = Color(0xFFF6EAD0)
-    val anar = Color(0xFFB3261E)
-    val anarFill = Color(0xFFB3261E)
-    val onAnarFill = Color(0xFFFFFFFF)
-    val anarContainer = Color(0xFFFADCD8)
-    val lapis = Color(0xFF2F4AC4)
-    val lapisContainer = Color(0xFFDDE3FB)
+    val fz = Color(0xFF00695D)
+    val fzG = Color(0xFF0A8576)
+    val fzC = Color(0xFFD5F3EF)
+    val fzFill = Color(0xFF17C2AF)
+    val onFz = Color(0xFF03201C)
+    val fzSoft = Color(0x1F00695D)
+
+    /** Text saffron; the amber below it is for graphics only. */
+    val sf = Color(0xFF8A5600)
+    val sfG = Color(0xFFB87300)
+    val sfC = Color(0xFFFBEFD3)
+    val sfSoft = Color(0x1F8A5600)
+    val sfLine = Color(0x578A5600)
+
+    val an = Color(0xFFA8221B)
+    val anG = Color(0xFFB3261E)
+    val anC = Color(0xFFFBE3E0)
+    val anFill = Color(0xFFB3261E)
+    val onAnFill = Color(0xFFFFFFFF)
+    val anSoft = Color(0x24B3261E)
+    val anLine = Color(0x4DA8221B)
+
+    val lapis = Color(0xFF2F4FB5)
+    val lapisC = Color(0xFFE1E8FF)
+    val lapisSoft = Color(0x332F4FB5)
+    val lapisLine = Color(0x662F4FB5)
+
     val violet = Color(0xFF6B4FD1)
 
-    /** Series 3 (#B87300) is a chart-only amber at 3.82:1 — never used for text (D-20). */
-    val chartSeries = listOf(
-        Color(0xFF0A7342),
-        Color(0xFF2F4AC4),
-        Color(0xFFB87300),
-        Color(0xFFB3261E),
-        Color(0xFF6B4FD1),
-    )
+    val edge = Color(0xE6FFFFFF)
+    val h1 = Color(0xFFFFFFFF)
+    val h2 = Color(0xFFE8F0F2)
+
+    val glowAllowed = Color(0x3317C2AF)
+    val glowCaution = Color(0x21B87300)
+    val glowLocked = Color(0x1AB3261E)
+    val ringAllowed = Color(0x5900695D)
+    val ringCaution = Color(0x618A5600)
+    val ringLocked = Color(0x59A8221B)
+
+    val scrim = Color(0x700D1620)
+
+    /** Series 3 is a chart-only amber, never used for text. */
+    val chartSeries = listOf(fzG, lapis, sfG, anG, violet)
 }
 
-/** Shape radii in dp (`shape` of the tokens). */
+/**
+ * Shape radii in dp. The signature shape of the design is the arch ("taagh"): a large top radius and a small
+ * bottom radius ([ARCH_TOP] over [ARCH_BOTTOM] for a card; a small icon tile uses half its width on top and
+ * 7 to 12 dp below).
+ */
 internal object ShapeTokens {
-    const val SMALL = 10
-    const val MEDIUM = 16
-    const val LARGE = 20
+    const val SMALL = 8
+    const val MEDIUM = 14
+    const val LARGE = 24
     const val SHEET = 28
+    const val HERO = 28
+
+    /** Card: 24 dp top corners over 12 dp bottom corners (drawn, never clipped; see `archSurface`). */
+    const val ARCH_TOP = 24
+    const val ARCH_BOTTOM = 12
 }
 
 /** The 4 dp spacing grid (`spacing` of the tokens). */

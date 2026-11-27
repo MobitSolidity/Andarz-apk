@@ -5,8 +5,10 @@ import ir.andarz.market.model.Coin
 import java.time.Instant
 import java.time.ZoneId
 import kotlin.math.abs
+import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.log10
+import kotlin.math.round
 
 /**
  * March's `ui/Format.kt` rebuilt on top of [Fmt] (D-M14, K7). No `String.format` with a locale, no ICU
@@ -71,8 +73,35 @@ class MarketFmt(
     fun pct(v: Double): String =
         Fmt.isolate((if (v >= 0) UP else DOWN) + " " + Fmt.number(abs(v), 2, fa, group = false) + percent)
 
+    /** The one-decimal signed change of the canvas rows (`+0.8%`, with a real minus sign); the triangle beside it says the direction too. */
+    fun change(v: Double): String = Fmt.isolate(Fmt.signed(v, 1, fa) + percent)
+
     /** BTC dominance, one decimal (March: `%.1f%%`). */
     fun share(v: Double): String = Fmt.isolate(Fmt.number(v, 1, fa, group = false) + percent)
+
+    /**
+     * The labels of a chart's price axis for the round [levels] that lie [step] apart: in K or M when the numbers are
+     * large, with just enough decimals to tell neighbouring labels apart.
+     */
+    fun axisLabels(levels: List<Double>, step: Double): List<String> {
+        val top = levels.maxOfOrNull { abs(it) } ?: return emptyList()
+        val unit = when {
+            top >= 1e6 -> 1e6
+            top >= 1e4 -> 1e3
+            else -> 1.0
+        }
+        val suffix = when (unit) {
+            1e6 -> "M"
+            1e3 -> "K"
+            else -> ""
+        }
+        val s = step / unit
+        val decimals = when {
+            s >= 1.0 -> if (abs(s - round(s)) < 1e-9) 0 else 1
+            else -> ceil(-log10(s) - 1e-9).toInt().coerceIn(1, 8)
+        }
+        return levels.map { Fmt.isolate(Fmt.number(it / unit, decimals, fa, group = unit == 1.0 && abs(it) >= 1000, trim = false) + suffix) }
+    }
 
     /** A plain integer with the digit setting (rank, Fear & Greed value). */
     fun int(n: Int): String = digits(n.toString())

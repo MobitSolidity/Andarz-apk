@@ -22,6 +22,7 @@ import android.os.VibratorManager
 import android.provider.Settings
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import ir.andarz.market.AlarmFace
 import ir.andarz.market.MarketChannel
 import ir.andarz.market.MarketModule
 import ir.andarz.market.R
@@ -54,7 +55,8 @@ object AlarmRinger {
     /** If the alarm stream is quieter than this share of max, raise it while ringing (restored afterwards). */
     const val MIN_VOLUME = 0.7f
 
-    data class Info(val title: String, val body: String, val coinId: String?, val at: Long)
+    /** The alarm that is ringing: its plain text, the coin it opens, when it started and what the screen shows. */
+    data class Info(val title: String, val body: String, val coinId: String?, val at: Long, val face: AlarmFace? = null)
 
     private val _state = MutableStateFlow<Info?>(null)
 
@@ -70,9 +72,9 @@ object AlarmRinger {
     private val autoStop = Runnable { app?.let { stop(it) } }
 
     /** Start ringing (or update the text if already ringing). Safe to call from any thread. */
-    fun fire(context: Context, title: String, body: String, coinId: String?) {
+    fun fire(context: Context, title: String, body: String, coinId: String?, face: AlarmFace? = null) {
         val ctx = context.applicationContext
-        main.post { start(ctx, Info(title, body, coinId, System.currentTimeMillis())) }
+        main.post { start(ctx, Info(title, body, coinId, System.currentTimeMillis(), face)) }
     }
 
     @SuppressLint("MissingPermission") // vibrator.cancel(); see vibrate() (D-M53)
@@ -108,6 +110,7 @@ object AlarmRinger {
             .putExtra("title", info.title)
             .putExtra("body", info.body)
             .putExtra("coin", info.coinId)
+            .putFace(info.face)
         val pi = PendingIntent.getBroadcast(ctx, 7306, i, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         val at = System.currentTimeMillis() + SNOOZE_MIN * 60_000L
         if (canExact(ctx)) {
@@ -298,7 +301,31 @@ class AlarmReceiver : BroadcastReceiver() {
                 intent.getStringExtra("title") ?: "",
                 intent.getStringExtra("body") ?: "",
                 intent.getStringExtra("coin"),
+                intent.readFace(),
             )
         }
     }
+}
+
+/** The screen's texts travel with a snoozed alarm, so it comes back looking the same. */
+private fun Intent.putFace(face: AlarmFace?): Intent {
+    if (face == null) return this
+    return putExtra("f_name", face.name)
+        .putExtra("f_symbol", face.symbol)
+        .putExtra("f_price", face.price)
+        .putExtra("f_status", face.status)
+        .putExtra("f_up", when (face.up) { true -> 1; false -> -1; null -> 0 })
+        .putExtra("f_note", face.note)
+}
+
+private fun Intent.readFace(): AlarmFace? {
+    val symbol = getStringExtra("f_symbol") ?: return null
+    return AlarmFace(
+        name = getStringExtra("f_name") ?: "",
+        symbol = symbol,
+        price = getStringExtra("f_price") ?: "",
+        status = getStringExtra("f_status") ?: "",
+        up = when (getIntExtra("f_up", 0)) { 1 -> true; -1 -> false; else -> null },
+        note = getStringExtra("f_note") ?: "",
+    )
 }

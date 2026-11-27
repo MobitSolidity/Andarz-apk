@@ -1,40 +1,42 @@
 package ir.andarz.app.ui.market
 
-import androidx.compose.ui.text.style.TextOverflow
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import ir.andarz.app.content.ContentRepository
+import ir.andarz.app.ui.components.ArchTile
 import ir.andarz.app.ui.components.EmptyState
+import ir.andarz.app.ui.components.Text
+import ir.andarz.app.ui.icons.Glyph
+import ir.andarz.app.ui.icons.GlyphIcon
 import ir.andarz.app.ui.theme.LocalAndarzColors
-import ir.andarz.engine.Fmt
 import ir.andarz.market.model.Coin
 
 /**
- * My coins (March's `ui/WatchScreen.kt`, REIMPLEMENT): starred coins as cards, two per row. The block of
- * reminded releases still ahead is kept (MK2).
+ * My coins (March's `ui/WatchScreen.kt`, REIMPLEMENT): the starred coins as the same rows as the price list, in one
+ * card with a header, and the releases still ahead that have a reminder (MK2) in a second card. The star of a row
+ * takes the coin out of the list. There is no board for this section, so it is built from the parts of Prices.
  */
 @Composable
 internal fun MyCoinsScreen(
@@ -50,72 +52,58 @@ internal fun MyCoinsScreen(
     onGoNews: () -> Unit,
     reminders: List<Pair<String, String>> = emptyList(),
 ) {
-    val mine = coins.filter { it.id in watch }
-    LazyColumn(Modifier.fillMaxWidth().padding(horizontal = 12.dp)) {
-        item { SectionHeader(content.ui("mkt.tab.coins")) }
-        if (mine.isEmpty()) {
-            item { EmptyState(content.ui("mkt.coins.empty"), content.ui("mkt.tab.prices") to onGoPrices) }
+    val mine = remember(coins, watch) { coins.filter { it.id in watch } }
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        val scale = LocalDensity.current.fontScale
+        val layout = when {
+            maxWidth >= 360.dp && scale <= 1.15f -> RowLayout.FULL
+            maxWidth >= 300.dp && scale <= 1.3f -> RowLayout.NO_SPARK
+            else -> RowLayout.STACKED
         }
-        mine.chunked(2).forEach { pair ->
-            item(key = pair.joinToString { it.id }) {
-                Row(Modifier.fillMaxWidth().padding(bottom = 10.dp), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    pair.forEach { c ->
-                        WatchCard(content, fmt, c, toman, rate, Modifier.weight(1f), onRemove = { onToggle(c.id) }, onOpen = { onOpen(c.id) })
-                    }
-                    if (pair.size == 1) Box(Modifier.weight(1f))
-                }
+        LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp)) {
+            item(key = "coins-head") { CardHeaderRow(content.ui("mkt.tab.coins"), if (mine.isEmpty()) RowSlot.ONLY else RowSlot.FIRST) }
+            if (mine.isEmpty()) {
+                item(key = "coins-empty") { EmptyState(content.ui("mkt.coins.empty"), content.ui("mkt.tab.prices") to onGoPrices) }
+            }
+            itemsIndexed(mine, key = { _, c -> c.id }, contentType = { _, _ -> "coin" }) { i, c ->
+                CoinRow(
+                    content, fmt, c, true, toman, rate,
+                    onToggle = { onToggle(c.id) }, onOpen = { onOpen(c.id) },
+                    slot = slotOf(i, mine.size, headed = true), layout = layout,
+                )
+            }
+            item(key = "gap") { Spacer(Modifier.height(14.dp)) }
+            // March's block of reminded releases still ahead: title and time; tapping opens News.
+            item(key = "rem-head") { CardHeaderRow(content.ui("mkt.coins.reminders"), if (reminders.isEmpty()) RowSlot.ONLY else RowSlot.FIRST) }
+            if (reminders.isEmpty()) {
+                item(key = "rem-empty") { EmptyState(content.ui("mkt.coins.remindersEmpty"), content.ui("mkt.tab.news") to onGoNews) }
+            }
+            itemsIndexed(reminders, key = { i, r -> "r$i-${r.first}" }, contentType = { _, _ -> "reminder" }) { i, (title, whenText) ->
+                ReminderRow(title, whenText, slotOf(i, reminders.size, headed = true), onGoNews)
             }
         }
-        item { SectionHeader(content.ui("mkt.coins.reminders")) }
-        // March's block of reminded releases still ahead: title and time; tapping opens News.
-        if (reminders.isEmpty()) {
-            item { EmptyState(content.ui("mkt.coins.remindersEmpty"), content.ui("mkt.tab.news") to onGoNews) }
-        } else {
-            reminders.forEach { (title, whenText) ->
-                item {
-                    Surface(Modifier.fillMaxWidth().padding(bottom = 6.dp).clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onGoNews), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
-                        Column(Modifier.padding(12.dp)) {
-                            Text(title, style = MaterialTheme.typography.bodyLarge)
-                            Text(whenText, style = MaterialTheme.typography.bodySmall, color = LocalAndarzColors.current.textMuted)
-                        }
-                    }
-                }
-            }
-        }
-        item { Spacer(Modifier.height(24.dp)) }
     }
 }
 
+/** One reminded release: a bell tile, its name and when it comes. The row opens News. */
 @Composable
-private fun SectionHeader(t: String) =
-    Text(t, style = MaterialTheme.typography.titleSmall, color = LocalAndarzColors.current.textMuted, modifier = Modifier.padding(start = 4.dp, top = 18.dp, bottom = 8.dp))
-
-@Composable
-private fun WatchCard(
-    content: ContentRepository,
-    fmt: MarketFmt,
-    c: Coin,
-    toman: Boolean,
-    rate: Double?,
-    modifier: Modifier,
-    onRemove: () -> Unit,
-    onOpen: () -> Unit,
-) {
-    val tone = toneOf(c.change24h)
-    Surface(modifier.clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onOpen), shape = RoundedCornerShape(20.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
-        Column(Modifier.padding(12.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                SymbolBadge(c.symbol, c.isToman)
-                Spacer(Modifier.width(8.dp))
-                Text(Fmt.isolate(c.symbol), style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f))
-                IconButton(onClick = onRemove, modifier = Modifier.size(48.dp)) {
-                    Icon(Icons.Filled.Close, contentDescription = content.ui("mkt.coins.remove"), tint = LocalAndarzColors.current.textMuted)
-                }
-            }
-            if (c.isToman) Text(content.ui("mkt.coins.usdtPair"), style = MaterialTheme.typography.bodySmall, color = LocalAndarzColors.current.textMuted)
-            Text(fmt.coinPrice(c, toman, rate), style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(top = 6.dp), maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text(fmt.pct(c.change24h), style = MaterialTheme.typography.labelLarge, color = tone)
-            Sparkline(c.spark.takeLast(if (c.isToman) 120 else 48), tone, Modifier.fillMaxWidth().height(36.dp).padding(top = 6.dp))
+private fun ReminderRow(title: String, whenText: String, slot: RowSlot, onClick: () -> Unit) {
+    val k = LocalAndarzColors.current
+    Row(
+        Modifier.fillMaxWidth()
+            .cardRow(slot, k.sf1, k.divider)
+            .clickable(role = Role.Button, onClick = onClick)
+            .heightIn(min = 56.dp)
+            .padding(horizontal = 12.dp, vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        ArchTile(k.lapisC, width = 32.dp, height = 36.dp, bottom = 9.dp) {
+            GlyphIcon(Glyph.BELL_FILL, null, tint = k.lapis, size = 16.dp, strokeWidth = 1.8f)
+        }
+        Column(Modifier.weight(1f)) {
+            Text(title, style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.W700), maxLines = 2, overflow = TextOverflow.Ellipsis)
+            Text(whenText, style = MaterialTheme.typography.labelMedium, color = k.muted)
         }
     }
 }

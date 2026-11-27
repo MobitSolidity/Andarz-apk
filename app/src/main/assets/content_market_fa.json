@@ -9,9 +9,20 @@
  },
  "ui": {
   "mkt.about.credit": "بخش بازار بر پایهٔ برنامهٔ March ساخته شده است.",
+  "mkt.alarm.decor": "تصویر تزئینی: زنگ در مرکز چند طاق هم‌مرکز",
+  "mkt.alarm.hit.down": "به هدف پایین‌تر رسید",
+  "mkt.alarm.hit.up": "به هدف بالاتر رسید",
+  "mkt.alarm.in24": "در ۲۴ ساعت",
+  "mkt.alarm.left": "قطع خودکار تا {t} دیگر",
+  "mkt.alarm.left.desc": "{m} دقیقه و {s} ثانیه از {total} دقیقه مانده",
+  "mkt.alarm.move.down": "در {window} {pct}٪ ریزش کرد",
+  "mkt.alarm.move.up": "در {window} {pct}٪ رشد کرد",
+  "mkt.alarm.once": "این هدف یک‌بار اعلام می‌شود و حالا خاموش است",
+  "mkt.alarm.open": "باز کردن {name}",
   "mkt.alarm.openCoin": "مشاهده‌ی ارز",
-  "mkt.alarm.snooze": "تعویق ۵ دقیقه",
-  "mkt.alarm.stop": "قطع زنگ",
+  "mkt.alarm.snooze": "چُرت ۵ دقیقه",
+  "mkt.alarm.stop": "توقف",
+  "mkt.alarm.tag": "هشدار قیمت",
   "mkt.alert.change24": "تغییر ۲۴ ساعته: ",
   "mkt.alert.move.down": "{symbol} در {window} {pct}٪ ریزش کرد",
   "mkt.alert.move.up": "{symbol} در {window} {pct}٪ رشد کرد",
@@ -20,7 +31,7 @@
   "mkt.alert.target.title": "{symbol} به قیمت هدفت رسید",
   "mkt.alert.test.body": "هر وقت ارزی در {window} بیش از {pct}٪ جابه‌جا شد، همین‌طور فوری خبرت می‌کنم.",
   "mkt.alert.test.title": "اعلان‌های اندرز فعال است",
-  "mkt.alert.testAlarm.body": "وقتی قیمت به هدفت برسد گوشی همین‌طور زنگ می‌خورد. برای قطع، زنگ را قطع کن.",
+  "mkt.alert.testAlarm.body": "وقتی قیمت به هدفت برسد گوشی همین‌طور زنگ می‌خورد. برای قطع، روی توقف بزن.",
   "mkt.alert.yourThreshold": "آستانه‌ی تو: ",
   "mkt.alerts.battery": "حذف محدودیت باتری برای اندرز",
   "mkt.alerts.bg": "پایش زنده در پس‌زمینه",
@@ -200,6 +211,25 @@
   "mkt.word.below": "زیر "
  },
  "uiArgs": {
+  "mkt.alarm.left": [
+   "t"
+  ],
+  "mkt.alarm.left.desc": [
+   "m",
+   "s",
+   "total"
+  ],
+  "mkt.alarm.move.down": [
+   "pct",
+   "window"
+  ],
+  "mkt.alarm.move.up": [
+   "pct",
+   "window"
+  ],
+  "mkt.alarm.open": [
+   "name"
+  ],
   "mkt.alert.move.down": [
    "pct",
    "symbol",

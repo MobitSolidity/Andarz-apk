@@ -10,9 +10,20 @@
  },
  "ui": {
   "mkt.about.credit": "The Market section is built on the March app.",
+  "mkt.alarm.decor": "Decorative picture: a bell in the middle of several concentric arches",
+  "mkt.alarm.hit.down": "Reached the lower target",
+  "mkt.alarm.hit.up": "Reached the upper target",
+  "mkt.alarm.in24": "in 24 hours",
+  "mkt.alarm.left": "Auto stop in {t}",
+  "mkt.alarm.left.desc": "{m} minutes and {s} seconds left of {total} minutes",
+  "mkt.alarm.move.down": "Fell {pct}% in {window}",
+  "mkt.alarm.move.up": "Rose {pct}% in {window}",
+  "mkt.alarm.once": "This target is announced once and is now off",
+  "mkt.alarm.open": "Open {name}",
   "mkt.alarm.openCoin": "View coin",
-  "mkt.alarm.snooze": "Snooze 5 minutes",
-  "mkt.alarm.stop": "Stop alarm",
+  "mkt.alarm.snooze": "Snooze 5 min",
+  "mkt.alarm.stop": "Stop",
+  "mkt.alarm.tag": "Price alert",
   "mkt.alert.change24": "24h change: ",
   "mkt.alert.move.down": "{symbol} fell {pct}% in {window}",
   "mkt.alert.move.up": "{symbol} rose {pct}% in {window}",
@@ -21,7 +32,7 @@
   "mkt.alert.target.title": "{symbol} reached your target price",
   "mkt.alert.test.body": "Whenever a coin moves more than {pct}% in {window}, I will notify you instantly like this.",
   "mkt.alert.test.title": "Andarz notifications are on",
-  "mkt.alert.testAlarm.body": "When the price reaches your target, the phone rings like this. To stop it, stop the alarm.",
+  "mkt.alert.testAlarm.body": "When the price reaches your target, the phone rings like this. To stop it, tap Stop.",
   "mkt.alert.yourThreshold": "Your threshold: ",
   "mkt.alerts.battery": "Remove battery restrictions for Andarz",
   "mkt.alerts.bg": "Live monitoring in the background",
@@ -201,6 +212,25 @@
   "mkt.word.below": "below "
  },
  "uiArgs": {
+  "mkt.alarm.left": [
+   "t"
+  ],
+  "mkt.alarm.left.desc": [
+   "m",
+   "s",
+   "total"
+  ],
+  "mkt.alarm.move.down": [
+   "pct",
+   "window"
+  ],
+  "mkt.alarm.move.up": [
+   "pct",
+   "window"
+  ],
+  "mkt.alarm.open": [
+   "name"
+  ],
   "mkt.alert.move.down": [
    "pct",
    "symbol",

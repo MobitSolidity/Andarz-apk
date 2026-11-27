@@ -17,23 +17,17 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Warning
 import ir.andarz.app.ui.components.Button
 import ir.andarz.app.ui.components.FilterChip
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Slider
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import ir.andarz.app.ui.components.Text
 import ir.andarz.app.ui.components.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,14 +39,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import ir.andarz.app.content.ContentRepository
 import ir.andarz.app.ui.Ui
+import ir.andarz.app.ui.components.AndarzTextField
+import ir.andarz.app.ui.components.ArchShapes
 import ir.andarz.app.ui.components.SectionCard
 import ir.andarz.app.ui.components.SwitchRow
+import ir.andarz.app.ui.components.archSurface
+import ir.andarz.app.ui.icons.Glyph
+import ir.andarz.app.ui.icons.GlyphIcon
 import ir.andarz.app.ui.theme.LocalAndarzColors
 import ir.andarz.app.ui.ui
 import ir.andarz.engine.Fmt
@@ -64,7 +65,6 @@ import ir.andarz.market.model.Coin
 import ir.andarz.market.model.CoinRule
 import ir.andarz.market.model.RingMode
 import ir.andarz.market.model.USDT_IRT_ID
-import kotlin.math.roundToInt
 
 /** The cooldown choices of March's Alerts screen. */
 internal val COOLDOWNS = listOf(5, 15, 30, 60)
@@ -105,7 +105,11 @@ internal fun AlertsScreen(
     }
     val ruleList = remember(rules) { rules.values.toList() }
 
-    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(12.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+    LazyColumn(
+        Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
         if (!marketOn) {
             item(key = "off") {
                 SectionCard(null) { Text(content.ui("mkt.link.needMarket"), style = MaterialTheme.typography.bodyMedium, color = c.caution) }
@@ -142,14 +146,19 @@ internal fun AlertsScreen(
                 var pct by remember(s.thresholdPct) { mutableFloatStateOf(s.thresholdPct) }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(content.ui("mkt.alerts.threshold"), style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
-                    Text(pctText(u, pct.toDouble()), style = MaterialTheme.typography.titleLarge, color = c.caution)
+                    StepButton(Glyph.MINUS, u.t("app.mkt.rule.dec"), pct > 0.5f) {
+                        pct = stepPct(pct, false)
+                        vm.update { it.copy(thresholdPct = pct) }
+                    }
+                    Text(
+                        pctText(u, pct.toDouble()), style = MaterialTheme.typography.titleLarge, color = c.caution,
+                        textAlign = TextAlign.Center, modifier = Modifier.widthIn(min = 56.dp),
+                    )
+                    StepButton(Glyph.PLUS, u.t("app.mkt.rule.inc"), pct < 20f) {
+                        pct = stepPct(pct, true)
+                        vm.update { it.copy(thresholdPct = pct) }
+                    }
                 }
-                Slider(
-                    value = pct,
-                    onValueChange = { pct = (it * 2).roundToInt() / 2f },
-                    onValueChangeFinished = { vm.update { it.copy(thresholdPct = pct) } },
-                    valueRange = 0.5f..20f,
-                )
                 FieldLabel(content.ui("mkt.alerts.window"))
                 Pills { AlertWindow.entries.forEach { w -> FilterChip(s.window == w, { vm.update { it.copy(window = w) } }, label = { Text(content.ui("mkt.win." + w.name)) }) } }
                 FieldLabel(content.ui("mkt.alerts.direction"))
@@ -169,15 +178,14 @@ internal fun AlertsScreen(
         item(key = "personal") {
             SectionCard(content.ui("mkt.alerts.personal")) {
                 var name by remember { mutableStateOf(s.name) }
-                OutlinedTextField(
+                AndarzTextField(
+                    label = content.ui("mkt.alerts.name"),
                     value = name,
-                    onValueChange = { v ->
+                    onValue = { v ->
                         name = v.take(24)
                         vm.update { it.copy(name = name.trim()) }
                     },
-                    singleLine = true,
-                    label = { Text(content.ui("mkt.alerts.name")) },
-                    modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+                    modifier = Modifier.padding(top = 8.dp),
                 )
                 val who = name.trim().let { if (it.isEmpty()) "" else it + content.ui("mkt.sep.comma") }
                 val preview = MarketFmt.UP + " " + who + content.ui(
@@ -223,14 +231,19 @@ internal fun AlertsScreen(
 @Composable
 private fun PermissionRow(title: String, sub: String, onClick: () -> Unit) {
     val c = LocalAndarzColors.current
-    Surface(Modifier.fillMaxWidth().padding(top = 8.dp).clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onClick), shape = RoundedCornerShape(12.dp), color = c.surfaceAlt) {
-        Row(Modifier.padding(12.dp), verticalAlignment = Alignment.Top) {
-            // K6.7: the warning emoji of March becomes a core icon next to the text.
-            Icon(Icons.Filled.Warning, contentDescription = null, tint = c.caution, modifier = Modifier.padding(end = 8.dp))
-            Column {
-                Text(title, style = MaterialTheme.typography.titleSmall, color = c.caution)
-                Text(sub, style = MaterialTheme.typography.bodySmall, color = c.textMuted)
-            }
+    Row(
+        Modifier.fillMaxWidth().padding(top = 8.dp)
+            .archSurface(ArchShapes.tile, c.alt, c.divider, c.edge)
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.Top,
+    ) {
+        // K6.7: the warning emoji of March becomes a core glyph next to the text.
+        GlyphIcon(Glyph.ALERT_TRIANGLE, null, tint = c.sf, size = 20.dp, strokeWidth = 1.9f)
+        Column {
+            Text(title, style = MaterialTheme.typography.titleSmall, color = c.sf)
+            Text(sub, style = MaterialTheme.typography.bodySmall, color = c.muted)
         }
     }
 }
@@ -259,13 +272,20 @@ internal fun ruleSummary(content: ContentRepository, fmt: MarketFmt, u: Ui, r: C
 @Composable
 private fun RuleRow(content: ContentRepository, fmt: MarketFmt, u: Ui, r: CoinRule, coin: Coin?, onOpen: () -> Unit, onRemove: () -> Unit) {
     val toman = r.id == USDT_IRT_ID
-    Surface(Modifier.fillMaxWidth().clickable(role = androidx.compose.ui.semantics.Role.Button, onClick = onOpen), shape = RoundedCornerShape(14.dp), color = MaterialTheme.colorScheme.surfaceContainerLow) {
-        Row(Modifier.padding(start = 14.dp, top = 6.dp, bottom = 6.dp), verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text(if (toman) content.ui("mkt.coins.usdtPair") else Fmt.isolate(coin?.symbol ?: r.id), style = MaterialTheme.typography.titleSmall)
-                Text(ruleSummary(content, fmt, u, r), style = MaterialTheme.typography.bodySmall, color = LocalAndarzColors.current.textMuted)
-            }
-            IconButton(onClick = onRemove) { Icon(Icons.Filled.Delete, contentDescription = content.ui("common.delete"), tint = LocalAndarzColors.current.redline) }
+    val c = LocalAndarzColors.current
+    Row(
+        Modifier.fillMaxWidth()
+            .archSurface(ArchShapes.tile, c.sf1, c.divider, c.edge)
+            .clickable(role = Role.Button, onClick = onOpen)
+            .padding(start = 14.dp, top = 6.dp, bottom = 6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(if (toman) content.ui("mkt.coins.usdtPair") else Fmt.isolate(coin?.symbol ?: r.id), style = MaterialTheme.typography.titleSmall)
+            Text(ruleSummary(content, fmt, u, r), style = MaterialTheme.typography.bodySmall, color = c.muted)
+        }
+        IconButton(onClick = onRemove, modifier = Modifier.size(48.dp)) {
+            GlyphIcon(Glyph.X_SMALL, content.ui("common.delete"), tint = c.an, size = 20.dp, strokeWidth = 2.2f)
         }
     }
 }

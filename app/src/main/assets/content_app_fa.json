@@ -30,7 +30,305 @@
   "app.legal.updated": "آخرین به‌روزرسانی: {date}",
   "app.legal.online": "نسخهٔ آنلاین: {url}",
   "app.legal.contact": "پشتیبانی: {email}",
-  "app.about.audience": "اندرز برای هر تریدری ساخته شده که می‌خواهد قوانین معاملهٔ خودش را بنویسد و به آن پایبند بماند؛ همهٔ عددها و قوانین قابل تنظیم‌اند."
+  "app.about.audience": "اندرز برای هر تریدری ساخته شده که می‌خواهد قوانین معاملهٔ خودش را بنویسد و به آن پایبند بماند؛ همهٔ عددها و قوانین قابل تنظیم‌اند.",
+  "app.today.col.day": "امروز",
+  "app.today.col.week": "هفته",
+  "app.today.atPeak": "در اوج",
+  "app.today.fromPeak": "از اوج {v}",
+  "app.today.lamp.open": "مجاز",
+  "app.today.lamp.caution": "احتیاط",
+  "app.today.lamp.closed": "ممنوع",
+  "app.today.lamp.open.desc": "درگاه باز است؛ ورود مجاز",
+  "app.today.lamp.caution.desc": "درگاه نیمه‌باز است؛ ورود مجاز، با احتیاط",
+  "app.today.lamp.closed.desc": "درگاه بسته است؛ ورود ممنوع",
+  "app.today.chart.desc": "منحنی سرمایه از {from} تا {to}",
+  "app.today.capOf": "از {v}",
+  "app.today.gauge.free": "آزاد",
+  "app.today.gauge.near": "نزدیک سقف",
+  "app.today.gauge.full": "پر شد",
+  "app.today.verdict.ok": "مجاز به معاملهٔ جدید: همهٔ سقف‌ها آزاد است",
+  "app.today.verdict.near": "مجاز به معاملهٔ جدید: یک سقف نزدیک است",
+  "app.today.verdict.no": "ورود جدید ممنوع: یکی از سقف‌ها فعال است",
+  "app.today.left": "مانده",
+  "app.today.pos.sl": "حد ضرر",
+  "app.today.pos.timeStop": "خروج زمانی",
+  "app.today.pos.candles": "{n} کندل",
+  "app.today.pos.due": "سررسید",
+  "app.today.pos.manage": "مدیریت",
+  "app.today.closeDay": "بستن روز و مرور",
+  "app.today.verdict.lock": "ورود ممنوع: یک قفل فعال است",
+  "app.today.verdict.risk": "ریسک تا {risk}",
+  "app.today.verdict.holdA": "درجه A تا {until} بسته است",
+  "app.today.pos.checked": "بررسی کردم · {t}",
+  "app.today.cap.title": "سقف ریسک {risk}",
+  "app.today.hold.title": "نگه‌داشت سود بزرگ",
+  "app.today.verdict.limited": "مجاز به معاملهٔ جدید، با محدودیت",
+  "app.today.pos.entry": "ورود",
+  "app.today.pos.tp": "حد سود",
+  "app.welcome.step": "مرحلهٔ {n} از {total}",
+  "app.welcome.logo": "نشان اندرز: الف با نوار زعفرانی",
+  "app.welcome.promise1": "قانون‌هایت را خودت نوشته‌ای؛ اندرز اجرایشان می‌کند.",
+  "app.welcome.promise2": "هر «نه» دلیل، عدد و ماده دارد.",
+  "app.welcome.promise3": "نتیجهٔ هر معامله یک کارت خنثی است: عدد، قانون، مرور.",
+  "app.more.constitution.sub": "{n} ماده · عددها از «قوانین» می‌آیند",
+  "app.more.program": "برنامه",
+  "app.journal.sub": "{n} معامله · {m} مرور منتظر",
+  "app.journal.rhythm.title": "{n} روز اخیر",
+  "app.journal.rhythm.caption": "خالص روزانه",
+  "app.journal.rhythm.desc": "نمودار میله‌ای خالص روزانهٔ {n} روز اخیر؛ امروز {today}، دیروز {yesterday}",
+  "app.journal.empty": "هنوز معامله‌ای ثبت نشده؛ هر برنامه‌ای که از دروازه رد شود اینجا می‌آید.",
+  "app.wizard.menu": "منو",
+  "app.wizard.sl": "حد ضرر",
+  "app.wizard.tp": "حد سود",
+  "app.wizard.risk": "ریسک معامله",
+  "app.wizard.lev.dec": "کاهش اهرم",
+  "app.wizard.lev.inc": "افزایش اهرم",
+  "app.wizard.risk.dec": "کاهش ریسک",
+  "app.wizard.risk.inc": "افزایش ریسک",
+  "app.wizard.tp.short": "TP",
+  "app.wizard.sl.short": "SL",
+  "app.wizard.ladder.entry": "ورود",
+  "app.wizard.ladder.desc": "نردبان قیمت: حد سود {tp} ({tpR})؛ ورود {entry}؛ حد ضرر {sl} ({slR})؛ لیکوئید {liq}",
+  "app.wizard.calc.riskUsd": "ریسک مجاز",
+  "app.wizard.calc.notional": "پوزیشن مجاز",
+  "app.wizard.calc.margin": "مارجین لازم",
+  "app.wizard.calc.liq": "قیمت لیکوئید",
+  "app.wizard.fill": "قیمت ورود، حد ضرر و حد سود را بنویس تا نردبان قیمت و محاسبه‌ها پیدا شوند.",
+  "app.wizard.adv.recommended": "پیشنهاد: {lev}× (مارجین {margin})",
+  "app.wizard.rail.desc": "ریل اهرم از ۱ تا {max} برابر؛ بازهٔ مجاز {min} تا {hi}؛ اهرم فعلی {cur} ({state})؛ پیشنهاد {rec} برابر",
+  "app.wizard.rail.in": "داخل بازه",
+  "app.wizard.rail.out": "بیرون از بازه",
+  "app.wizard.rail.unknown": "نامعلوم",
+  "app.trade.menu": "گزینه‌های معامله",
+  "app.trade.ago.min": "{n} دقیقه پیش",
+  "app.trade.ago.hour": "{n} ساعت پیش",
+  "app.trade.ago.day": "{n} روز پیش",
+  "app.trade.entryAt": "ورود {t}",
+  "app.trade.ladder.now": "الان",
+  "app.trade.ladder.nowDesc": "قیمت فعلی {price}، {r}.",
+  "app.trade.ladder.desc": "نردبان قیمت: حد سود {tp} ({tpR})، ورود {entry}، حد ضرر {sl} ({slR})، لیکوئید {liq}. {now}",
+  "app.trade.liq": "لیکوئید",
+  "app.trade.floating": "سود و زیان شناور",
+  "app.trade.floating.empty": "قیمت فعلی را بنویس تا R لحظه‌ای دیده شود.",
+  "app.trade.toTp": "تا حد سود",
+  "app.trade.toSl": "تا حد ضرر",
+  "app.trade.risk0": "ریسک اولیه",
+  "app.trade.candlesLeft": "{n} کندل مانده",
+  "app.trade.candlesDue": "زمان خروج رسید",
+  "app.trade.timeStop.desc": "{left} کندل از {total} کندل مانده است.",
+  "app.trade.monitor.last": "آخرین بررسی · {t}",
+  "app.trade.monitor.none": "هنوز بررسی نشده",
+  "app.trade.cell.notional": "ارزش پوزیشن",
+  "app.trade.cell.margin": "مارجین",
+  "app.trade.cell.grade": "درجهٔ ستاپ",
+  "app.trade.isolated": "ایزوله",
+  "app.trade.cross": "کراس",
+  "app.trade.events": "رویدادها",
+  "app.trade.tl.gate": "مجوز دروازه · ریسک {risk}",
+  "app.trade.tl.gateNo": "ورود بدون مجوز دروازه",
+  "app.trade.tl.entry": "ورود {price} · چک‌لیست {n} از {total} · {grade}",
+  "app.trade.tl.monitor": "بررسی نظارت",
+  "app.trade.manage.log": "ثبت رفتار",
+  "app.trade.closed": "بسته شد",
+  "app.trade.result.title": "نتیجهٔ معامله",
+  "app.trade.result.entry": "ورود {price}",
+  "app.trade.result.exit": "خروج {price}",
+  "app.trade.ruler.exit": "خروج",
+  "app.trade.ruler.desc": "جای خروج میان حد ضرر و حد سود: حد ضرر {sl}، ورود {entry}، حد سود {tp}، خروج {exit}.",
+  "app.trade.receipt.net": "خالص، بعد از کارمزد",
+  "app.trade.receipt.gross": "سود یا زیان ناخالص",
+  "app.trade.receipt.fees": "کارمزد",
+  "app.trade.receipt.r": "R نسبت به حد ضرر اولیه",
+  "app.trade.receipt.equity": "سرمایه پس از معامله",
+  "app.trade.rules.ok": "قوانین رعایت شد",
+  "app.trade.rules.no": "قوانین رعایت نشد",
+  "app.trade.chip.gate.ok": "ورود مجاز بود",
+  "app.trade.chip.gate.no": "ورود مجاز نبود",
+  "app.trade.chip.size.ok": "اندازه درست بود",
+  "app.trade.chip.size.no": "اندازه از سقف بیشتر بود",
+  "app.trade.chip.viol.ok": "نقضی ثبت نشد",
+  "app.trade.chip.viol.no": "نقض ثبت شد",
+  "app.trade.review.cta": "ثبت مرور معامله",
+  "app.trade.review.edit": "ویرایش مرور",
+  "app.trade.review.title": "مرور معامله",
+  "app.trade.review.step": "مرحلهٔ {n} از {total}",
+  "app.trade.review.close": "بستن مرور",
+  "app.trade.review.s1": "کدام قانون را شکستم؟",
+  "app.trade.review.s3.cap": "فقط یکی · لازم است",
+  "app.trade.review.s5": "درس یک‌جمله‌ای",
+  "app.trade.review.s5.cap": "برای خودِ فردا",
+  "app.trade.review.auto": "تشخیص خودکار · {id}",
+  "app.trade.review.suggested": "پیشنهاد اندرز · {id}",
+  "app.trade.review.confirm": "تأیید",
+  "app.trade.review.more": "{n} مورد دیگر",
+  "app.trade.review.counter": "{n} از {min} نویسه · {left} نویسهٔ دیگر لازم است",
+  "app.trade.review.counter.ok": "{n} از {min} نویسه",
+  "app.trade.review.hint.both": "برای ذخیره: گزارش {min} نویسه و یک اشتباه اصلی لازم است.",
+  "app.trade.review.hint.mistake": "برای ذخیره: یک اشتباه اصلی لازم است.",
+  "app.trade.review.hint.report": "برای ذخیره: گزارش {min} نویسه لازم است.",
+  "app.trade.review.save": "ذخیرهٔ مرور",
+  "app.calc.note": "چیزی ذخیره نمی‌شود · روی سقف‌ها اثری ندارد",
+  "app.calc.clear": "پاک کردن همهٔ ورودی‌ها",
+  "app.calc.side": "جهت معامله",
+  "app.calc.equity": "سرمایه (دلار)",
+  "app.calc.useEquity": "استفاده از سرمایهٔ حساب",
+  "app.calc.risk": "ریسک · سقف فعلی {cap}",
+  "app.calc.lev.range": "مجاز {min} تا {max} · پیشنهاد {rec}",
+  "app.calc.lev.dec": "کاهش اهرم",
+  "app.calc.lev.inc": "افزایش اهرم",
+  "app.calc.lev.desc": "ریل اهرم از {from} تا {to}؛ بازهٔ مجاز {min} تا {max}؛ اهرم فعلی {lev}",
+  "app.calc.lev.desc.none": "ریل اهرم از {from} تا {to}؛ اهرم فعلی {lev}؛ بازهٔ مجازی وجود ندارد",
+  "app.calc.lev.isRec": "؛ همان پیشنهاد",
+  "app.calc.verdict.line": "ریسک {risk} = {usd} · مارجین {margin} · لیکوئید {liq}",
+  "app.calc.f.risk": "ریسک مجاز",
+  "app.calc.f.notional": "پوزیشن مجاز",
+  "app.calc.f.margin": "مارجین لازم",
+  "app.calc.f.marginPct": "سهم مارجین",
+  "app.calc.f.liq": "قیمت لیکوئید",
+  "app.calc.f.liqX": "لیکوئید ÷ ضرر",
+  "app.calc.min": "حداقل {v}",
+  "app.calc.cap": "سقف {v}",
+  "app.calc.fee.switch": "با کارمزد رفت‌وبرگشت",
+  "app.calc.fee.input": "کارمزد رفت‌وبرگشت به درصد",
+  "app.calc.fee.rr": "R:R از {from} به {to}",
+  "app.calc.fee.total": "کارمزد کل {usd}",
+  "app.calc.fee.bar": "R:R پیش از کارمزد {from} و پس از کارمزد {to}؛ حداقل مجاز {min}",
+  "app.calc.toPlan": "ساختن معامله از این اعداد",
+  "app.ins.title": "آمار و تحلیل",
+  "app.ins.p.week": "هفته",
+  "app.ins.p.month": "ماه",
+  "app.ins.p.last30": "{n} روز",
+  "app.ins.p.all": "همه",
+  "app.ins.p.custom": "سفارشی",
+  "app.ins.k.compliance": "رعایت قوانین",
+  "app.ins.k.expectancy": "امید ریاضی",
+  "app.ins.k.winRate": "نرخ برد",
+  "app.ins.k.maxDD": "بیشینهٔ افت",
+  "app.ins.sub": "{n} معامله · هدف {t}",
+  "app.ins.sub.empty": "{n} از {min} معامله",
+  "app.ins.target.short": "هدف {t}",
+  "app.ins.lowData": "دادهٔ کم",
+  "app.ins.noValue": "بدون مقدار",
+  "app.ins.chk.of": "از",
+  "app.ins.chk.desc": "میانگین چک‌لیست {v} از {n}",
+  "app.ins.win.sub": "سربه‌سری {p} · {w} از {n}",
+  "app.ins.win.count": "{w} از {n} معامله",
+  "app.ins.win.desc": "نرخ برد {p}، نقطهٔ سربه‌سری {b}",
+  "app.ins.pf.desc": "مجموع سود {pf} برابر مجموع زیان است",
+  "app.ins.dd.desc": "بیشینهٔ افت {p} از سقف {c}",
+  "app.ins.ring.desc": "رعایت قوانین {v}، هدف {t}، {s}",
+  "app.ins.ring.desc.empty": "رعایت قوانین: دادهٔ کم، هدف {t}",
+  "app.ins.equity": "سرمایه",
+  "app.ins.equity.note": "فقط نتیجهٔ معامله‌ها",
+  "app.ins.equity.alt": "سرمایه و افت از اوج",
+  "app.ins.equity.summary": "از {a} تا {b} در {n} معامله؛ بیشینهٔ افت {dd}",
+  "app.ins.start": "شروع {v}",
+  "app.ins.table": "نمای جدول",
+  "app.ins.row.start": "شروع: {eq}",
+  "app.ins.row": "معامله {i}: {eq}، افت {dd}",
+  "app.ins.empty.text": "هنوز داده‌ای برای نمودار نیست؛ بعد از بستن اولین معامله، نمودار سرمایه اینجا شکل می‌گیرد.",
+  "app.ins.empty.need": "برای قضاوت دست‌کم {min} معامله لازم است",
+  "app.ins.empty.count": "{n} از {min}",
+  "app.ins.empty.bar": "معامله‌های بسته‌شده تا حد قضاوت",
+  "app.mkt.title": "بازار",
+  "app.mkt.live": "زنده",
+  "app.mkt.status.off": "خاموش · هیچ درخواستی ارسال نمی‌شود",
+  "app.mkt.status.updated": "به‌روز شد {t}",
+  "app.mkt.status.connecting": "در حال اتصال",
+  "app.mkt.status.noprice": "هنوز قیمتی نرسیده",
+  "app.mkt.stale": "قدیمی",
+  "app.mkt.stale.at": "آخرین دریافت {t}",
+  "app.mkt.unit.desc": "واحد نمایش قیمت",
+  "app.mkt.refreshing": "در حال به‌روزرسانی",
+  "app.mkt.search": "جست‌وجوی نماد یا نام",
+  "app.mkt.ov.title": "مرور بازار",
+  "app.mkt.ov.cap": "ارزش بازار",
+  "app.mkt.ov.dom": "تسلط بیت‌کوین",
+  "app.mkt.fg.title": "شاخص ترس و طمع",
+  "app.mkt.fg.desc": "شاخص ترس و طمع: {v} از ۱۰۰، {label}",
+  "app.mkt.fg.none": "موجود نیست",
+  "app.mkt.fg.pending": "شاخص ترس و طمع: هنوز دریافت نشده",
+  "app.mkt.trend.up": "روند ۷ روز اخیر: صعودی",
+  "app.mkt.trend.down": "روند ۷ روز اخیر: نزولی",
+  "app.mkt.trend.sUp": "روند این نشست: صعودی",
+  "app.mkt.trend.sDown": "روند این نشست: نزولی",
+  "app.mkt.star.add": "افزودن {name} به ارزهای من",
+  "app.mkt.star.remove": "حذف {name} از ارزهای من",
+  "app.mkt.loading.title": "در حال دریافت قیمت‌ها",
+  "app.mkt.loading.body": "قیمت‌ها از سرویس‌های بیرونی می‌رسند؛ چند ثانیه صبر کن.",
+  "app.mkt.err.title": "بعضی سرویس‌ها پاسخ نمی‌دهند",
+  "app.mkt.err.bodyOld": "قیمت‌های زیر از آخرین دریافت‌اند و ممکن است قدیمی باشند؛ پیش از استفاده بررسی کن.",
+  "app.mkt.err.bodyNone": "هنوز قیمتی دریافت نشده است. دوباره تلاش کن.",
+  "app.mkt.err.retry": "تلاش دوباره",
+  "app.mkt.err.offlineNote": "ژورنال، قوانین و پشتیبان‌گیری بدون اینترنت کار می‌کنند.",
+  "app.mkt.svc.title": "وضعیت سرویس‌ها",
+  "app.mkt.svc.coinList": "فهرست و تاریخچه",
+  "app.mkt.svc.sentiment": "ترس و طمع",
+  "app.mkt.svc.ticks": "قیمت لحظه‌ای",
+  "app.mkt.svc.iran": "تتر به تومان",
+  "app.mkt.svc.iranBackup": "تتر به تومان، جایگزین",
+  "app.mkt.svc.timeout": "پاسخ نداد",
+  "app.mkt.svc.blocked": "دسترسی مسدود است",
+  "app.mkt.svc.rate": "درخواست‌ها محدود شد",
+  "app.mkt.svc.server": "خطای سرور {code}",
+  "app.mkt.svc.bad": "پاسخ نامعتبر",
+  "app.mkt.saved.title": "آخرین قیمت‌های ذخیره‌شده",
+  "app.mkt.off.what": "اندرز چه چیزی می‌فرستد؟",
+  "app.mkt.off.features": "با روشن کردن بازار فعال می‌شود",
+  "app.mkt.off.f.prices": "۲۰۰ ارز برتر",
+  "app.mkt.off.f.coins": "ارزهای ستاره‌دار",
+  "app.mkt.off.f.news": "تقویم اقتصادی",
+  "app.mkt.off.f.alerts": "قیمت و زنگ هشدار",
+  "app.mkt.off.note": "ژورنال، ماشین‌حساب و قوانین بدون اینترنت کار می‌کنند؛ خاموش بودن بازار روی آن‌ها اثری ندارد.",
+  "app.mkt.consent.sends": "نماد ارزها",
+  "app.mkt.consent.stays": "ژورنال، معامله‌ها، موجودی",
+  "app.mkt.consent.diagram": "مسیر داده: فقط نماد ارزها از گوشی به سرویس‌ها می‌رود؛ ژورنال، معامله‌ها و موجودی هرگز نمی‌رود",
+  "app.mkt.consent.services": "سرویس‌ها",
+  "app.mkt.sheet.h24": "۲۴ ساعت",
+  "app.mkt.sheet.d7": "تغییر ۷ روزه",
+  "app.mkt.sheet.about": "حدود {v}",
+  "app.mkt.sheet.noValue": "بدون مقدار",
+  "app.mkt.sheet.today": "امروز",
+  "app.mkt.sheet.chart.desc": "{title} {name}: از {from} به {to}؛ کمترین {low}، بیشترین {high}",
+  "app.mkt.sheet.chart.loading": "در حال دریافت نمودار",
+  "app.mkt.sheet.chart.failed": "نمودار دریافت نشد",
+  "app.mkt.sheet.chart.pending": "نمودار هنوز آماده نیست",
+  "app.mkt.sheet.range.desc": "بازهٔ ۲۴ ساعته: کمترین {low}، بیشترین {high}؛ قیمت فعلی {price}",
+  "app.mkt.sheet.range.saved": "بازهٔ ۲۴ ساعته: کمترین {low}، بیشترین {high}؛ آخرین قیمت ذخیره‌شده {price}",
+  "app.mkt.rule.title": "هشدار این ارز",
+  "app.mkt.rule.threshold": "آستانهٔ تغییر",
+  "app.mkt.rule.default": "پیش‌فرض همه: {pct}",
+  "app.mkt.rule.dec": "کاهش آستانه",
+  "app.mkt.rule.inc": "افزایش آستانه",
+  "app.mkt.rule.lower": "هدف پایین‌تر",
+  "app.mkt.rule.upper": "هدف بالاتر",
+  "app.mkt.rule.none": "بدون هدف",
+  "app.mkt.rule.track.low": "هدف پایین‌تر {v}",
+  "app.mkt.rule.track.high": "هدف بالاتر {v}",
+  "app.mkt.rule.track.now": "قیمت فعلی {v}",
+  "app.mkt.rule.track.saved": "آخرین قیمت ذخیره‌شده {v}",
+  "app.news.next": "رویداد بعدی",
+  "app.news.left": "{a} {ua} و {b} {ub} تا انتشار",
+  "app.news.impact.high": "اثر بالا",
+  "app.news.impact.mid": "اثر متوسط",
+  "app.news.impact.low": "اثر کم",
+  "app.news.lead": "{n} دقیقه قبل",
+  "app.news.remind": "یادآوری {title}",
+  "app.news.remind.lead": "یادآوری {title}، {n} دقیقه قبل",
+  "app.news.on": "فعال است",
+  "app.news.off": "خاموش است",
+  "app.news.clock": "زنگ ساعت گوشی",
+  "app.news.clock.for": "زنگ ساعت گوشی برای {title}",
+  "app.news.same": "{n} رویداد هم‌زمان",
+  "app.news.count": "{n} رویداد تا {date}",
+  "app.news.count.one": "{n} رویداد تا {date}",
+  "app.news.day": "{n} رویداد",
+  "app.news.day.one": "{n} رویداد",
+  "app.news.lastDay": "آخرین روز فهرست",
+  "app.news.emptyHigh": "رویداد پراهمیتی در فهرست نمانده است",
+  "app.news.emptyAll": "رویدادی برای نمایش نمانده است",
+  "app.news.footer": "به وقت تهران، از تقویم فدرال رزرو و BLS. {n} دقیقه قبل از هر رویدادی که یادآورش روشن است اعلان می‌گیری. زنگ ساعت گوشی فقط برای رویداد بعدی و فقط تا ۲۴ ساعت مانده به آن ممکن است.",
+  "app.about.fonts": "قلم‌ها: پیدا از فونت‌ایران؛ آی‌بی‌ام پلکس سنس عربی و نوتو نسخ عربی با مجوز OFL"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -50,6 +348,362 @@
   ],
   "app.legal.contact": [
    "email"
+  ],
+  "app.today.fromPeak": [
+   "v"
+  ],
+  "app.today.chart.desc": [
+   "from",
+   "to"
+  ],
+  "app.today.capOf": [
+   "v"
+  ],
+  "app.today.pos.candles": [
+   "n"
+  ],
+  "app.today.verdict.risk": [
+   "risk"
+  ],
+  "app.today.verdict.holdA": [
+   "until"
+  ],
+  "app.today.pos.checked": [
+   "t"
+  ],
+  "app.today.cap.title": [
+   "risk"
+  ],
+  "app.welcome.step": [
+   "n",
+   "total"
+  ],
+  "app.more.constitution.sub": [
+   "n"
+  ],
+  "app.journal.sub": [
+   "m",
+   "n"
+  ],
+  "app.journal.rhythm.title": [
+   "n"
+  ],
+  "app.journal.rhythm.desc": [
+   "n",
+   "today",
+   "yesterday"
+  ],
+  "app.wizard.ladder.desc": [
+   "entry",
+   "liq",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.wizard.adv.recommended": [
+   "lev",
+   "margin"
+  ],
+  "app.wizard.rail.desc": [
+   "cur",
+   "hi",
+   "max",
+   "min",
+   "rec",
+   "state"
+  ],
+  "app.trade.ago.min": [
+   "n"
+  ],
+  "app.trade.ago.hour": [
+   "n"
+  ],
+  "app.trade.ago.day": [
+   "n"
+  ],
+  "app.trade.entryAt": [
+   "t"
+  ],
+  "app.trade.ladder.nowDesc": [
+   "price",
+   "r"
+  ],
+  "app.trade.ladder.desc": [
+   "entry",
+   "liq",
+   "now",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.trade.candlesLeft": [
+   "n"
+  ],
+  "app.trade.timeStop.desc": [
+   "left",
+   "total"
+  ],
+  "app.trade.monitor.last": [
+   "t"
+  ],
+  "app.trade.tl.gate": [
+   "risk"
+  ],
+  "app.trade.tl.entry": [
+   "grade",
+   "n",
+   "price",
+   "total"
+  ],
+  "app.trade.result.entry": [
+   "price"
+  ],
+  "app.trade.result.exit": [
+   "price"
+  ],
+  "app.trade.ruler.desc": [
+   "entry",
+   "exit",
+   "sl",
+   "tp"
+  ],
+  "app.trade.review.step": [
+   "n",
+   "total"
+  ],
+  "app.trade.review.auto": [
+   "id"
+  ],
+  "app.trade.review.suggested": [
+   "id"
+  ],
+  "app.trade.review.more": [
+   "n"
+  ],
+  "app.trade.review.counter": [
+   "left",
+   "min",
+   "n"
+  ],
+  "app.trade.review.counter.ok": [
+   "min",
+   "n"
+  ],
+  "app.trade.review.hint.both": [
+   "min"
+  ],
+  "app.trade.review.hint.report": [
+   "min"
+  ],
+  "app.calc.risk": [
+   "cap"
+  ],
+  "app.calc.lev.range": [
+   "max",
+   "min",
+   "rec"
+  ],
+  "app.calc.lev.desc": [
+   "from",
+   "lev",
+   "max",
+   "min",
+   "to"
+  ],
+  "app.calc.lev.desc.none": [
+   "from",
+   "lev",
+   "to"
+  ],
+  "app.calc.verdict.line": [
+   "liq",
+   "margin",
+   "risk",
+   "usd"
+  ],
+  "app.calc.min": [
+   "v"
+  ],
+  "app.calc.cap": [
+   "v"
+  ],
+  "app.calc.fee.rr": [
+   "from",
+   "to"
+  ],
+  "app.calc.fee.total": [
+   "usd"
+  ],
+  "app.calc.fee.bar": [
+   "from",
+   "min",
+   "to"
+  ],
+  "app.ins.p.last30": [
+   "n"
+  ],
+  "app.ins.sub": [
+   "n",
+   "t"
+  ],
+  "app.ins.sub.empty": [
+   "min",
+   "n"
+  ],
+  "app.ins.target.short": [
+   "t"
+  ],
+  "app.ins.chk.desc": [
+   "n",
+   "v"
+  ],
+  "app.ins.win.sub": [
+   "n",
+   "p",
+   "w"
+  ],
+  "app.ins.win.count": [
+   "n",
+   "w"
+  ],
+  "app.ins.win.desc": [
+   "b",
+   "p"
+  ],
+  "app.ins.pf.desc": [
+   "pf"
+  ],
+  "app.ins.dd.desc": [
+   "c",
+   "p"
+  ],
+  "app.ins.ring.desc": [
+   "s",
+   "t",
+   "v"
+  ],
+  "app.ins.ring.desc.empty": [
+   "t"
+  ],
+  "app.ins.equity.summary": [
+   "a",
+   "b",
+   "dd",
+   "n"
+  ],
+  "app.ins.start": [
+   "v"
+  ],
+  "app.ins.row.start": [
+   "eq"
+  ],
+  "app.ins.row": [
+   "dd",
+   "eq",
+   "i"
+  ],
+  "app.ins.empty.need": [
+   "min"
+  ],
+  "app.ins.empty.count": [
+   "min",
+   "n"
+  ],
+  "app.mkt.status.updated": [
+   "t"
+  ],
+  "app.mkt.stale.at": [
+   "t"
+  ],
+  "app.mkt.fg.desc": [
+   "label",
+   "v"
+  ],
+  "app.mkt.star.add": [
+   "name"
+  ],
+  "app.mkt.star.remove": [
+   "name"
+  ],
+  "app.mkt.svc.server": [
+   "code"
+  ],
+  "app.mkt.sheet.about": [
+   "v"
+  ],
+  "app.mkt.sheet.chart.desc": [
+   "from",
+   "high",
+   "low",
+   "name",
+   "title",
+   "to"
+  ],
+  "app.mkt.sheet.range.desc": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.sheet.range.saved": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.rule.default": [
+   "pct"
+  ],
+  "app.mkt.rule.track.low": [
+   "v"
+  ],
+  "app.mkt.rule.track.high": [
+   "v"
+  ],
+  "app.mkt.rule.track.now": [
+   "v"
+  ],
+  "app.mkt.rule.track.saved": [
+   "v"
+  ],
+  "app.news.left": [
+   "a",
+   "b",
+   "ua",
+   "ub"
+  ],
+  "app.news.lead": [
+   "n"
+  ],
+  "app.news.remind": [
+   "title"
+  ],
+  "app.news.remind.lead": [
+   "n",
+   "title"
+  ],
+  "app.news.clock.for": [
+   "title"
+  ],
+  "app.news.same": [
+   "n"
+  ],
+  "app.news.count": [
+   "date",
+   "n"
+  ],
+  "app.news.count.one": [
+   "date",
+   "n"
+  ],
+  "app.news.day": [
+   "n"
+  ],
+  "app.news.day.one": [
+   "n"
+  ],
+  "app.news.footer": [
+   "n"
   ]
  },
  "legal": {

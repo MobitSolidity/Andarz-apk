@@ -1,12 +1,6 @@
 package ir.andarz.app.ui.nav
 
-import androidx.annotation.DrawableRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.ui.graphics.vector.ImageVector
-import ir.andarz.app.R
+import ir.andarz.app.ui.icons.Glyph
 
 /**
  * The bottom bar of K6.1, built from one list so the owner can change it in a single place.
@@ -19,8 +13,8 @@ data class AndarzDestination(
     val route: String,
     /** The `content.ui` key of the label. No Persian in code (law 3). */
     val labelKey: String,
-    val icon: ImageVector? = null,
-    @DrawableRes val iconRes: Int? = null,
+    /** The line icon of the canvas (ui/icons/Glyph.kt). */
+    val glyph: Glyph,
     val visible: Boolean = true,
 )
 
@@ -60,11 +54,11 @@ object AndarzNav {
     fun trade(id: String) = "trade/$id"
 
     val bottomBar: List<AndarzDestination> = listOf(
-        AndarzDestination(TODAY, "nav.today", icon = Icons.Filled.Home),
-        AndarzDestination(JOURNAL, "nav.journal", icon = Icons.AutoMirrored.Filled.List),
-        AndarzDestination(MARKET, "mkt.nav.market", iconRes = R.drawable.ic_nav_market),
-        AndarzDestination(CALCULATOR, "nav.calculator", iconRes = R.drawable.ic_nav_calculator),
-        AndarzDestination(MORE, "nav.more", icon = Icons.Filled.MoreVert),
+        AndarzDestination(TODAY, "nav.today", Glyph.CALENDAR_CHECK),
+        AndarzDestination(JOURNAL, "nav.journal", Glyph.BOOK),
+        AndarzDestination(MARKET, "mkt.nav.market", Glyph.BARS),
+        AndarzDestination(CALCULATOR, "nav.calculator", Glyph.CALC),
+        AndarzDestination(MORE, "nav.more", Glyph.DOTS),
     )
 }
 

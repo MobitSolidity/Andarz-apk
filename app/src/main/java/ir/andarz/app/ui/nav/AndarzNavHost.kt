@@ -11,19 +11,14 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.WindowInsets
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import ir.andarz.app.ui.components.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -107,41 +102,19 @@ fun AndarzNavHost(
         contentWindowInsets = WindowInsets.safeDrawing,
         snackbarHost = { ir.andarz.app.ui.UiErrorSnackbarHost(content) },
         bottomBar = {
-            if (showBar) NavigationBar(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-                tonalElevation = 0.dp,
-            ) {
-                for (destination in AndarzNav.bottomBar.filter { it.visible }) {
-                    NavigationBarItem(
-                        selected = currentRoute?.startsWith(destination.route) == true,
-                        onClick = {
-                            if (currentRoute != destination.route) {
-                                navController.navigate(destination.route) {
-                                    popUpTo(AndarzNav.TODAY) { saveState = true }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
-                        },
-                        icon = {
-                            when {
-                                destination.icon != null -> Icon(destination.icon, contentDescription = null)
-                                destination.iconRes != null -> Icon(painterResource(destination.iconRes), contentDescription = null)
-                            }
-                        },
-                        // D-93: one line that shrinks to fit, so no label loses its last letter on a narrow phone.
-                        label = { ir.andarz.app.ui.components.FitText(ir.andarz.app.ui.ui().t(destination.labelKey), style = MaterialTheme.typography.labelMedium) },
-                        alwaysShowLabel = true,
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = MaterialTheme.colorScheme.primary,
-                            selectedTextColor = MaterialTheme.colorScheme.primary,
-                            indicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        ),
-                    )
-                }
-            }
+            if (showBar) AndarzBottomBar(
+                items = AndarzNav.bottomBar.filter { it.visible },
+                currentRoute = currentRoute,
+                onSelect = { destination ->
+                    if (currentRoute != destination.route) {
+                        navController.navigate(destination.route) {
+                            popUpTo(AndarzNav.TODAY) { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                },
+            )
         },
     ) { insets ->
         // D-93: on tablets, foldables and landscape the content keeps a readable column (max 720 dp) centred in
@@ -171,7 +144,11 @@ fun AndarzNavHost(
                 )
             }
             composable(AndarzNav.JOURNAL) {
-                JournalScreen(onOpen = { navController.navigate(AndarzNav.trade(it)) }, onInsights = { navController.navigate(AndarzNav.INSIGHTS) })
+                JournalScreen(
+                    onOpen = { navController.navigate(AndarzNav.trade(it)) },
+                    onInsights = { navController.navigate(AndarzNav.INSIGHTS) },
+                    onNewTrade = { navController.navigate(AndarzNav.WIZARD) },
+                )
             }
             composable(AndarzNav.MARKET) { MarketScreen(content = content) }
             // Section routes and the coin deep link (K6.1, K6.11). Arguments are ids only.
@@ -193,7 +170,7 @@ fun AndarzNavHost(
                     ),
                 )
             }
-            composable(AndarzNav.INSIGHTS) { InsightsScreen(onBack = { navController.popBackStack() }) }
+            composable(AndarzNav.INSIGHTS) { InsightsScreen(onBack = { navController.popBackStack() }, onNewTrade = { navController.navigate(AndarzNav.WIZARD) }) }
             composable(AndarzNav.REVIEWS) {
                 ReviewsScreen(
                     onBack = { navController.popBackStack() }, onOpenTrade = { navController.navigate(AndarzNav.trade(it)) },

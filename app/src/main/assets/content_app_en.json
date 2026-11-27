@@ -30,7 +30,305 @@
   "app.legal.updated": "Last updated: {date}",
   "app.legal.online": "Online version: {url}",
   "app.legal.contact": "Support: {email}",
-  "app.about.audience": "Andarz is made for any trader who wants to write down their own trading rules and stick to them; every number and rule can be adjusted."
+  "app.about.audience": "Andarz is made for any trader who wants to write down their own trading rules and stick to them; every number and rule can be adjusted.",
+  "app.today.col.day": "Today",
+  "app.today.col.week": "Week",
+  "app.today.atPeak": "At peak",
+  "app.today.fromPeak": "From peak {v}",
+  "app.today.lamp.open": "Open",
+  "app.today.lamp.caution": "Caution",
+  "app.today.lamp.closed": "Closed",
+  "app.today.lamp.open.desc": "Gate open: entry allowed",
+  "app.today.lamp.caution.desc": "Gate half open: entry allowed, with caution",
+  "app.today.lamp.closed.desc": "Gate closed: entry not allowed",
+  "app.today.chart.desc": "Equity curve from {from} to {to}",
+  "app.today.capOf": "of {v}",
+  "app.today.gauge.free": "Free",
+  "app.today.gauge.near": "Near the cap",
+  "app.today.gauge.full": "Full",
+  "app.today.verdict.ok": "New trade allowed: every cap is free",
+  "app.today.verdict.near": "New trade allowed: one cap is near",
+  "app.today.verdict.no": "New entry not allowed: a cap is active",
+  "app.today.left": "left",
+  "app.today.pos.sl": "Stop",
+  "app.today.pos.timeStop": "Time exit",
+  "app.today.pos.candles": "{n} candles",
+  "app.today.pos.due": "Due",
+  "app.today.pos.manage": "Manage",
+  "app.today.closeDay": "Close the day and review",
+  "app.today.verdict.lock": "Entry not allowed: a lock is active",
+  "app.today.verdict.risk": "Risk up to {risk}",
+  "app.today.verdict.holdA": "Grade A closed until {until}",
+  "app.today.pos.checked": "Checked · {t}",
+  "app.today.cap.title": "Risk cap {risk}",
+  "app.today.hold.title": "Big win hold",
+  "app.today.verdict.limited": "New trade allowed, with limits",
+  "app.today.pos.entry": "Entry",
+  "app.today.pos.tp": "Target",
+  "app.welcome.step": "Step {n} of {total}",
+  "app.welcome.logo": "Andarz mark: an alef with a saffron bar",
+  "app.welcome.promise1": "You wrote the rules yourself; Andarz carries them out.",
+  "app.welcome.promise2": "Every \"no\" comes with a reason, a number and an article.",
+  "app.welcome.promise3": "The result of every trade is one neutral card: number, rule, review.",
+  "app.more.constitution.sub": "{n} articles · the numbers come from \"Rules\"",
+  "app.more.program": "App",
+  "app.journal.sub": "{n} trades · {m} reviews pending",
+  "app.journal.rhythm.title": "Last {n} days",
+  "app.journal.rhythm.caption": "Daily net",
+  "app.journal.rhythm.desc": "Bar chart of the daily net of the last {n} days; today {today}, yesterday {yesterday}",
+  "app.journal.empty": "No trades yet; every plan that passes the gate lands here.",
+  "app.wizard.menu": "Menu",
+  "app.wizard.sl": "Stop loss",
+  "app.wizard.tp": "Take profit",
+  "app.wizard.risk": "Trade risk",
+  "app.wizard.lev.dec": "Decrease leverage",
+  "app.wizard.lev.inc": "Increase leverage",
+  "app.wizard.risk.dec": "Decrease risk",
+  "app.wizard.risk.inc": "Increase risk",
+  "app.wizard.tp.short": "TP",
+  "app.wizard.sl.short": "SL",
+  "app.wizard.ladder.entry": "Entry",
+  "app.wizard.ladder.desc": "Price ladder: take profit {tp} ({tpR}); entry {entry}; stop loss {sl} ({slR}); liquidation {liq}",
+  "app.wizard.calc.riskUsd": "Allowed risk",
+  "app.wizard.calc.notional": "Allowed position",
+  "app.wizard.calc.margin": "Margin needed",
+  "app.wizard.calc.liq": "Liquidation price",
+  "app.wizard.fill": "Enter the entry price, stop loss and take profit to see the price ladder and the calculations.",
+  "app.wizard.adv.recommended": "Suggested: {lev}× (margin {margin})",
+  "app.wizard.rail.desc": "Leverage rail from 1 to {max} times; allowed range {min} to {hi}; current leverage {cur} ({state}); suggested {rec} times",
+  "app.wizard.rail.in": "inside the range",
+  "app.wizard.rail.out": "outside the range",
+  "app.wizard.rail.unknown": "unknown",
+  "app.trade.menu": "Trade options",
+  "app.trade.ago.min": "{n} min ago",
+  "app.trade.ago.hour": "{n} h ago",
+  "app.trade.ago.day": "{n} d ago",
+  "app.trade.entryAt": "Entry {t}",
+  "app.trade.ladder.now": "Now",
+  "app.trade.ladder.nowDesc": "Current price {price}, {r}.",
+  "app.trade.ladder.desc": "Price ladder: take profit {tp} ({tpR}), entry {entry}, stop loss {sl} ({slR}), liquidation {liq}. {now}",
+  "app.trade.liq": "Liq.",
+  "app.trade.floating": "Floating P&L",
+  "app.trade.floating.empty": "Type the current price to see the live R.",
+  "app.trade.toTp": "To take profit",
+  "app.trade.toSl": "To stop loss",
+  "app.trade.risk0": "Initial risk",
+  "app.trade.candlesLeft": "{n} candles left",
+  "app.trade.candlesDue": "Time to exit",
+  "app.trade.timeStop.desc": "{left} of {total} candles left.",
+  "app.trade.monitor.last": "Last check · {t}",
+  "app.trade.monitor.none": "Not checked yet",
+  "app.trade.cell.notional": "Position value",
+  "app.trade.cell.margin": "Margin",
+  "app.trade.cell.grade": "Setup grade",
+  "app.trade.isolated": "Isolated",
+  "app.trade.cross": "Cross",
+  "app.trade.events": "Events",
+  "app.trade.tl.gate": "Gate cleared · risk {risk}",
+  "app.trade.tl.gateNo": "Entered without gate clearance",
+  "app.trade.tl.entry": "Entry {price} · checklist {n} of {total} · {grade}",
+  "app.trade.tl.monitor": "Monitor check",
+  "app.trade.manage.log": "Log behaviour",
+  "app.trade.closed": "Closed",
+  "app.trade.result.title": "Trade result",
+  "app.trade.result.entry": "Entry {price}",
+  "app.trade.result.exit": "Exit {price}",
+  "app.trade.ruler.exit": "Exit",
+  "app.trade.ruler.desc": "Where the exit fell between the stop and the target: stop loss {sl}, entry {entry}, take profit {tp}, exit {exit}.",
+  "app.trade.receipt.net": "Net, after fees",
+  "app.trade.receipt.gross": "Gross result",
+  "app.trade.receipt.fees": "Fees",
+  "app.trade.receipt.r": "R against the initial stop",
+  "app.trade.receipt.equity": "Equity after the trade",
+  "app.trade.rules.ok": "Rules followed",
+  "app.trade.rules.no": "Rules not followed",
+  "app.trade.chip.gate.ok": "Entry was allowed",
+  "app.trade.chip.gate.no": "Entry was not allowed",
+  "app.trade.chip.size.ok": "Size was right",
+  "app.trade.chip.size.no": "Size was over the cap",
+  "app.trade.chip.viol.ok": "No breach logged",
+  "app.trade.chip.viol.no": "A breach was logged",
+  "app.trade.review.cta": "Write the trade review",
+  "app.trade.review.edit": "Edit the review",
+  "app.trade.review.title": "Trade review",
+  "app.trade.review.step": "Step {n} of {total}",
+  "app.trade.review.close": "Close the review",
+  "app.trade.review.s1": "Which rule did I break?",
+  "app.trade.review.s3.cap": "Only one · required",
+  "app.trade.review.s5": "One-line lesson",
+  "app.trade.review.s5.cap": "For tomorrow's self",
+  "app.trade.review.auto": "Detected automatically · {id}",
+  "app.trade.review.suggested": "Andarz suggests · {id}",
+  "app.trade.review.confirm": "Confirm",
+  "app.trade.review.more": "{n} more",
+  "app.trade.review.counter": "{n} of {min} characters · {left} more needed",
+  "app.trade.review.counter.ok": "{n} of {min} characters",
+  "app.trade.review.hint.both": "To save: a report of {min} characters and one main mistake are needed.",
+  "app.trade.review.hint.mistake": "To save: one main mistake is needed.",
+  "app.trade.review.hint.report": "To save: a report of {min} characters is needed.",
+  "app.trade.review.save": "Save the review",
+  "app.calc.note": "Nothing is saved · no effect on the limits",
+  "app.calc.clear": "Clear all inputs",
+  "app.calc.side": "Trade direction",
+  "app.calc.equity": "Equity (USD)",
+  "app.calc.useEquity": "Use the account equity",
+  "app.calc.risk": "Risk · current cap {cap}",
+  "app.calc.lev.range": "Allowed {min} to {max} · suggested {rec}",
+  "app.calc.lev.dec": "Decrease leverage",
+  "app.calc.lev.inc": "Increase leverage",
+  "app.calc.lev.desc": "Leverage rail from {from} to {to}; allowed range {min} to {max}; current leverage {lev}",
+  "app.calc.lev.desc.none": "Leverage rail from {from} to {to}; current leverage {lev}; no allowed range",
+  "app.calc.lev.isRec": "; the suggested one",
+  "app.calc.verdict.line": "Risk {risk} = {usd} · margin {margin} · liquidation {liq}",
+  "app.calc.f.risk": "Allowed risk",
+  "app.calc.f.notional": "Allowed position",
+  "app.calc.f.margin": "Margin needed",
+  "app.calc.f.marginPct": "Margin share",
+  "app.calc.f.liq": "Liquidation price",
+  "app.calc.f.liqX": "Liquidation ÷ loss",
+  "app.calc.min": "Min {v}",
+  "app.calc.cap": "Cap {v}",
+  "app.calc.fee.switch": "With round-trip fee",
+  "app.calc.fee.input": "Round-trip fee in percent",
+  "app.calc.fee.rr": "R:R from {from} to {to}",
+  "app.calc.fee.total": "Total fee {usd}",
+  "app.calc.fee.bar": "R:R before the fee {from} and after the fee {to}; allowed minimum {min}",
+  "app.calc.toPlan": "Build a trade from these numbers",
+  "app.ins.title": "Insights",
+  "app.ins.p.week": "Week",
+  "app.ins.p.month": "Month",
+  "app.ins.p.last30": "{n} days",
+  "app.ins.p.all": "All",
+  "app.ins.p.custom": "Custom",
+  "app.ins.k.compliance": "Rule compliance",
+  "app.ins.k.expectancy": "Expectancy",
+  "app.ins.k.winRate": "Win rate",
+  "app.ins.k.maxDD": "Max drawdown",
+  "app.ins.sub": "{n} trades · target {t}",
+  "app.ins.sub.empty": "{n} of {min} trades",
+  "app.ins.target.short": "Target {t}",
+  "app.ins.lowData": "Low data",
+  "app.ins.noValue": "No value",
+  "app.ins.chk.of": "of",
+  "app.ins.chk.desc": "Checklist average {v} of {n}",
+  "app.ins.win.sub": "Break-even {p} · {w} of {n}",
+  "app.ins.win.count": "{w} of {n} trades",
+  "app.ins.win.desc": "Win rate {p}, break-even point {b}",
+  "app.ins.pf.desc": "Total gain is {pf} times total loss",
+  "app.ins.dd.desc": "Max drawdown {p} of the {c} cap",
+  "app.ins.ring.desc": "Rule compliance {v}, target {t}, {s}",
+  "app.ins.ring.desc.empty": "Rule compliance: low data, target {t}",
+  "app.ins.equity": "Equity",
+  "app.ins.equity.note": "trade results only",
+  "app.ins.equity.alt": "Equity and drawdown",
+  "app.ins.equity.summary": "From {a} to {b} over {n} trades; max drawdown {dd}",
+  "app.ins.start": "Start {v}",
+  "app.ins.table": "Table view",
+  "app.ins.row.start": "Start: {eq}",
+  "app.ins.row": "Trade {i}: {eq}, drawdown {dd}",
+  "app.ins.empty.text": "There is no data for the chart yet. After you close your first trade, the equity chart takes shape here.",
+  "app.ins.empty.need": "At least {min} trades are needed to judge",
+  "app.ins.empty.count": "{n} of {min}",
+  "app.ins.empty.bar": "Closed trades toward the judging threshold",
+  "app.mkt.title": "Market",
+  "app.mkt.live": "Live",
+  "app.mkt.status.off": "Off · no requests are sent",
+  "app.mkt.status.updated": "Updated {t}",
+  "app.mkt.status.connecting": "Connecting",
+  "app.mkt.status.noprice": "No prices yet",
+  "app.mkt.stale": "Out of date",
+  "app.mkt.stale.at": "Last received {t}",
+  "app.mkt.unit.desc": "Price unit",
+  "app.mkt.refreshing": "Refreshing",
+  "app.mkt.search": "Search symbol or name",
+  "app.mkt.ov.title": "Market overview",
+  "app.mkt.ov.cap": "Market cap",
+  "app.mkt.ov.dom": "Bitcoin dominance",
+  "app.mkt.fg.title": "Fear and Greed index",
+  "app.mkt.fg.desc": "Fear and Greed index: {v} of 100, {label}",
+  "app.mkt.fg.none": "Not available",
+  "app.mkt.fg.pending": "Fear and Greed index: not received yet",
+  "app.mkt.trend.up": "Last 7 days: rising",
+  "app.mkt.trend.down": "Last 7 days: falling",
+  "app.mkt.trend.sUp": "This session: rising",
+  "app.mkt.trend.sDown": "This session: falling",
+  "app.mkt.star.add": "Add {name} to my coins",
+  "app.mkt.star.remove": "Remove {name} from my coins",
+  "app.mkt.loading.title": "Getting prices",
+  "app.mkt.loading.body": "Prices come from outside services. Wait a few seconds.",
+  "app.mkt.err.title": "Some services are not answering",
+  "app.mkt.err.bodyOld": "The prices below come from the last fetch and may be out of date. Check them before you rely on them.",
+  "app.mkt.err.bodyNone": "No prices have been received yet. Try again.",
+  "app.mkt.err.retry": "Try again",
+  "app.mkt.err.offlineNote": "The journal, the rules and backups work without the internet.",
+  "app.mkt.svc.title": "Service status",
+  "app.mkt.svc.coinList": "List and history",
+  "app.mkt.svc.sentiment": "Fear and Greed",
+  "app.mkt.svc.ticks": "Live prices",
+  "app.mkt.svc.iran": "USDT in Toman",
+  "app.mkt.svc.iranBackup": "USDT in Toman, backup",
+  "app.mkt.svc.timeout": "No answer",
+  "app.mkt.svc.blocked": "Access blocked",
+  "app.mkt.svc.rate": "Requests limited",
+  "app.mkt.svc.server": "Server error {code}",
+  "app.mkt.svc.bad": "Invalid answer",
+  "app.mkt.saved.title": "Last saved prices",
+  "app.mkt.off.what": "What does Andarz send?",
+  "app.mkt.off.features": "Turned on with Market",
+  "app.mkt.off.f.prices": "Top 200 coins",
+  "app.mkt.off.f.coins": "Starred coins",
+  "app.mkt.off.f.news": "Economic calendar",
+  "app.mkt.off.f.alerts": "Price and alarm alerts",
+  "app.mkt.off.note": "The journal, the calculator and the rules work without the internet. Turning Market off does not affect them.",
+  "app.mkt.consent.sends": "Coin symbols",
+  "app.mkt.consent.stays": "Journal, trades, balance",
+  "app.mkt.consent.diagram": "Data path: only coin symbols go from the phone to the services; the journal, trades and balance never do",
+  "app.mkt.consent.services": "Services",
+  "app.mkt.sheet.h24": "24 hours",
+  "app.mkt.sheet.d7": "7 day change",
+  "app.mkt.sheet.about": "About {v}",
+  "app.mkt.sheet.noValue": "No value",
+  "app.mkt.sheet.today": "Today",
+  "app.mkt.sheet.chart.desc": "{title} {name}: from {from} to {to}; low {low}, high {high}",
+  "app.mkt.sheet.chart.loading": "Loading the chart",
+  "app.mkt.sheet.chart.failed": "The chart could not be loaded",
+  "app.mkt.sheet.chart.pending": "The chart is not ready yet",
+  "app.mkt.sheet.range.desc": "24 hour range: low {low}, high {high}; price now {price}",
+  "app.mkt.sheet.range.saved": "24 hour range: low {low}, high {high}; last saved price {price}",
+  "app.mkt.rule.title": "Alert for this coin",
+  "app.mkt.rule.threshold": "Move threshold",
+  "app.mkt.rule.default": "Default for all: {pct}",
+  "app.mkt.rule.dec": "Lower the threshold",
+  "app.mkt.rule.inc": "Raise the threshold",
+  "app.mkt.rule.lower": "Lower target",
+  "app.mkt.rule.upper": "Upper target",
+  "app.mkt.rule.none": "No target",
+  "app.mkt.rule.track.low": "lower target {v}",
+  "app.mkt.rule.track.high": "upper target {v}",
+  "app.mkt.rule.track.now": "price now {v}",
+  "app.mkt.rule.track.saved": "last saved price {v}",
+  "app.news.next": "Next event",
+  "app.news.left": "{a} {ua} {b} {ub} until release",
+  "app.news.impact.high": "High impact",
+  "app.news.impact.mid": "Medium impact",
+  "app.news.impact.low": "Low impact",
+  "app.news.lead": "{n} min before",
+  "app.news.remind": "Reminder for {title}",
+  "app.news.remind.lead": "Reminder for {title}, {n} min before",
+  "app.news.on": "On",
+  "app.news.off": "Off",
+  "app.news.clock": "Phone clock alarm",
+  "app.news.clock.for": "Clock alarm for {title}",
+  "app.news.same": "{n} events at the same time",
+  "app.news.count": "{n} events until {date}",
+  "app.news.count.one": "{n} event until {date}",
+  "app.news.day": "{n} events",
+  "app.news.day.one": "{n} event",
+  "app.news.lastDay": "Last day of the list",
+  "app.news.emptyHigh": "No high-impact events are left in the list",
+  "app.news.emptyAll": "No events are left to show",
+  "app.news.footer": "Tehran time, from the Federal Reserve and BLS calendars. You get a notification {n} minutes before every event whose reminder is on. The phone clock alarm works only for the next event and only within 24 hours of it.",
+  "app.about.fonts": "Fonts: Peyda by Fontiran; IBM Plex Sans Arabic and Noto Naskh Arabic (OFL licence)"
  },
  "uiArgs": {
   "app.glossary.count": [
@@ -50,6 +348,362 @@
   ],
   "app.legal.contact": [
    "email"
+  ],
+  "app.today.fromPeak": [
+   "v"
+  ],
+  "app.today.chart.desc": [
+   "from",
+   "to"
+  ],
+  "app.today.capOf": [
+   "v"
+  ],
+  "app.today.pos.candles": [
+   "n"
+  ],
+  "app.today.verdict.risk": [
+   "risk"
+  ],
+  "app.today.verdict.holdA": [
+   "until"
+  ],
+  "app.today.pos.checked": [
+   "t"
+  ],
+  "app.today.cap.title": [
+   "risk"
+  ],
+  "app.welcome.step": [
+   "n",
+   "total"
+  ],
+  "app.more.constitution.sub": [
+   "n"
+  ],
+  "app.journal.sub": [
+   "m",
+   "n"
+  ],
+  "app.journal.rhythm.title": [
+   "n"
+  ],
+  "app.journal.rhythm.desc": [
+   "n",
+   "today",
+   "yesterday"
+  ],
+  "app.wizard.ladder.desc": [
+   "entry",
+   "liq",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.wizard.adv.recommended": [
+   "lev",
+   "margin"
+  ],
+  "app.wizard.rail.desc": [
+   "cur",
+   "hi",
+   "max",
+   "min",
+   "rec",
+   "state"
+  ],
+  "app.trade.ago.min": [
+   "n"
+  ],
+  "app.trade.ago.hour": [
+   "n"
+  ],
+  "app.trade.ago.day": [
+   "n"
+  ],
+  "app.trade.entryAt": [
+   "t"
+  ],
+  "app.trade.ladder.nowDesc": [
+   "price",
+   "r"
+  ],
+  "app.trade.ladder.desc": [
+   "entry",
+   "liq",
+   "now",
+   "sl",
+   "slR",
+   "tp",
+   "tpR"
+  ],
+  "app.trade.candlesLeft": [
+   "n"
+  ],
+  "app.trade.timeStop.desc": [
+   "left",
+   "total"
+  ],
+  "app.trade.monitor.last": [
+   "t"
+  ],
+  "app.trade.tl.gate": [
+   "risk"
+  ],
+  "app.trade.tl.entry": [
+   "grade",
+   "n",
+   "price",
+   "total"
+  ],
+  "app.trade.result.entry": [
+   "price"
+  ],
+  "app.trade.result.exit": [
+   "price"
+  ],
+  "app.trade.ruler.desc": [
+   "entry",
+   "exit",
+   "sl",
+   "tp"
+  ],
+  "app.trade.review.step": [
+   "n",
+   "total"
+  ],
+  "app.trade.review.auto": [
+   "id"
+  ],
+  "app.trade.review.suggested": [
+   "id"
+  ],
+  "app.trade.review.more": [
+   "n"
+  ],
+  "app.trade.review.counter": [
+   "left",
+   "min",
+   "n"
+  ],
+  "app.trade.review.counter.ok": [
+   "min",
+   "n"
+  ],
+  "app.trade.review.hint.both": [
+   "min"
+  ],
+  "app.trade.review.hint.report": [
+   "min"
+  ],
+  "app.calc.risk": [
+   "cap"
+  ],
+  "app.calc.lev.range": [
+   "max",
+   "min",
+   "rec"
+  ],
+  "app.calc.lev.desc": [
+   "from",
+   "lev",
+   "max",
+   "min",
+   "to"
+  ],
+  "app.calc.lev.desc.none": [
+   "from",
+   "lev",
+   "to"
+  ],
+  "app.calc.verdict.line": [
+   "liq",
+   "margin",
+   "risk",
+   "usd"
+  ],
+  "app.calc.min": [
+   "v"
+  ],
+  "app.calc.cap": [
+   "v"
+  ],
+  "app.calc.fee.rr": [
+   "from",
+   "to"
+  ],
+  "app.calc.fee.total": [
+   "usd"
+  ],
+  "app.calc.fee.bar": [
+   "from",
+   "min",
+   "to"
+  ],
+  "app.ins.p.last30": [
+   "n"
+  ],
+  "app.ins.sub": [
+   "n",
+   "t"
+  ],
+  "app.ins.sub.empty": [
+   "min",
+   "n"
+  ],
+  "app.ins.target.short": [
+   "t"
+  ],
+  "app.ins.chk.desc": [
+   "n",
+   "v"
+  ],
+  "app.ins.win.sub": [
+   "n",
+   "p",
+   "w"
+  ],
+  "app.ins.win.count": [
+   "n",
+   "w"
+  ],
+  "app.ins.win.desc": [
+   "b",
+   "p"
+  ],
+  "app.ins.pf.desc": [
+   "pf"
+  ],
+  "app.ins.dd.desc": [
+   "c",
+   "p"
+  ],
+  "app.ins.ring.desc": [
+   "s",
+   "t",
+   "v"
+  ],
+  "app.ins.ring.desc.empty": [
+   "t"
+  ],
+  "app.ins.equity.summary": [
+   "a",
+   "b",
+   "dd",
+   "n"
+  ],
+  "app.ins.start": [
+   "v"
+  ],
+  "app.ins.row.start": [
+   "eq"
+  ],
+  "app.ins.row": [
+   "dd",
+   "eq",
+   "i"
+  ],
+  "app.ins.empty.need": [
+   "min"
+  ],
+  "app.ins.empty.count": [
+   "min",
+   "n"
+  ],
+  "app.mkt.status.updated": [
+   "t"
+  ],
+  "app.mkt.stale.at": [
+   "t"
+  ],
+  "app.mkt.fg.desc": [
+   "label",
+   "v"
+  ],
+  "app.mkt.star.add": [
+   "name"
+  ],
+  "app.mkt.star.remove": [
+   "name"
+  ],
+  "app.mkt.svc.server": [
+   "code"
+  ],
+  "app.mkt.sheet.about": [
+   "v"
+  ],
+  "app.mkt.sheet.chart.desc": [
+   "from",
+   "high",
+   "low",
+   "name",
+   "title",
+   "to"
+  ],
+  "app.mkt.sheet.range.desc": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.sheet.range.saved": [
+   "high",
+   "low",
+   "price"
+  ],
+  "app.mkt.rule.default": [
+   "pct"
+  ],
+  "app.mkt.rule.track.low": [
+   "v"
+  ],
+  "app.mkt.rule.track.high": [
+   "v"
+  ],
+  "app.mkt.rule.track.now": [
+   "v"
+  ],
+  "app.mkt.rule.track.saved": [
+   "v"
+  ],
+  "app.news.left": [
+   "a",
+   "b",
+   "ua",
+   "ub"
+  ],
+  "app.news.lead": [
+   "n"
+  ],
+  "app.news.remind": [
+   "title"
+  ],
+  "app.news.remind.lead": [
+   "n",
+   "title"
+  ],
+  "app.news.clock.for": [
+   "title"
+  ],
+  "app.news.same": [
+   "n"
+  ],
+  "app.news.count": [
+   "date",
+   "n"
+  ],
+  "app.news.count.one": [
+   "date",
+   "n"
+  ],
+  "app.news.day": [
+   "n"
+  ],
+  "app.news.day.one": [
+   "n"
+  ],
+  "app.news.footer": [
+   "n"
   ]
  },
  "legal": {

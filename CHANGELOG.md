@@ -4,6 +4,20 @@ All notable changes. Format: [Keep a Changelog](https://keepachangelog.com/en/1.
 SemVer for `versionName`; `versionCode` is the git commit count (D-73). User-facing release notes for each
 build are in `RELEASE_NOTES.md`.
 
+## [Unreleased] - The final look of the canvas (not published)
+
+### Changed
+- The app follows the final design canvas: the "night and turquoise" palette, arch-shaped surfaces, Peyda for
+  words, IBM Plex Sans Arabic for numbers and Noto Naskh Arabic for the advice of the day (D-UI3).
+- Market is rebuilt from the boards: prices with their header, off state and consent sheet; the coin sheet with its
+  chart, stats and alert rule; News with the next release, its countdown and two reminders, releases by day and the
+  expired list; My coins; Alerts; and the full-screen price alarm (D-UI3, D-99).
+- About and the licences screen credit the fonts of the final look.
+
+### Tests
+- News logic (days, same-time slots, countdown, release figures), coin sheet logic, and the alarm's time left and
+  figure runs (`:market`).
+
 ## [0.12.0] — Myket and Bazaar readiness (not published)
 
 ### Added

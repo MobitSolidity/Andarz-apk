@@ -11,10 +11,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import ir.andarz.app.ui.components.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -34,6 +36,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import ir.andarz.app.ui.components.SectionCard
+import ir.andarz.app.ui.icons.Glyph
+import ir.andarz.app.ui.icons.GlyphIcon
 import ir.andarz.app.ui.theme.LocalAndarzColors
 import ir.andarz.app.ui.ui
 
@@ -46,7 +50,7 @@ import ir.andarz.app.ui.ui
 /**
  * A chart card: title, optional note, the chart, or `ins.chart.empty`. The toggle (6.5 "table view") swaps the
  * canvas for an accessible list of the same data: [rows] when given, else the summary split at its Persian
- * commas. The toggle is labelled `common.details` / `common.less` until a dedicated key exists (D-70).
+ * commas. The toggle is a list icon button labelled `app.ins.table` / `common.less`.
  */
 @Composable
 fun ChartCard(title: String, summary: String, empty: Boolean, note: String? = null, rows: List<Pair<String, String>>? = null, chart: @Composable () -> Unit) {
@@ -55,8 +59,9 @@ fun ChartCard(title: String, summary: String, empty: Boolean, note: String? = nu
     SectionCard(
         title,
         action = if (empty) null else ({
-            ir.andarz.app.ui.components.TextButton(onClick = { table = !table }) {
-                Text(u.t(if (table) "common.less" else "common.details"))
+            val k = LocalAndarzColors.current
+            IconButton(onClick = { table = !table }, modifier = Modifier.size(48.dp)) {
+                GlyphIcon(Glyph.LINES, u.t(if (table) "common.less" else "app.ins.table"), tint = if (table) k.fz else k.muted, size = 20.dp, strokeWidth = 2f)
             }
         }),
     ) {

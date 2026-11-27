@@ -7,9 +7,13 @@ import ir.andarz.app.content.ContentRepository
 import ir.andarz.app.ui.Ui
 import ir.andarz.app.ui.market.MarketFmt
 import ir.andarz.app.ui.market.SEP
+import ir.andarz.app.ui.market.coinName
+import ir.andarz.app.ui.theme.AndarzFonts
 import ir.andarz.data.settings.Settings
 import ir.andarz.data.settings.SettingsRepository
 import ir.andarz.engine.Fmt
+import ir.andarz.market.AlarmFace
+import ir.andarz.market.MarketFonts
 import ir.andarz.market.NotifText
 import ir.andarz.market.alerts.AlertAction
 import ir.andarz.market.model.AlertSettings
@@ -49,6 +53,9 @@ class MarketHostImpl @Inject constructor(
     private var current: Settings = Settings()
 
     override val texts: MarketTexts = AndarzMarketTexts(content) { current }
+
+    /** The alarm screen draws with the app's own families, so :market carries no copy of the font files. */
+    override val fonts: MarketFonts = MarketFonts(AndarzFonts.peyda, AndarzFonts.plex)
 
     /** Follows the settings for the life of the process. */
     fun watchSettings(scope: CoroutineScope) {
@@ -120,7 +127,20 @@ internal class AndarzMarketTexts(
         val body = content.ui("mkt.alert.now") + priceLine(f, m.coin, usdtToman) +
             "\n" + content.ui("mkt.alert.change24") + f.pct(m.coin.change24h) +
             SEP + content.ui("mkt.alert.yourThreshold") + pctNumber(u, m.threshold) + percent(u)
-        return NotifText(title, body)
+        // The alarm screen of the canvas: name and symbol, the price as the big figure, what happened, the 24 h line.
+        val face = AlarmFace(
+            name = coinName(content, m.coin),
+            symbol = Fmt.isolate(m.coin.symbol),
+            price = unit(f, m.coin, m.coin.price),
+            status = content.ui(
+                if (up) "mkt.alarm.move.up" else "mkt.alarm.move.down",
+                mapOf("window" to content.ui("mkt.win." + s.window.name), "pct" to pctNumber(u, abs(m.pct))),
+            ),
+            up = up,
+            note = content.ui("mkt.alert.change24") + f.pct(m.coin.change24h) +
+                SEP + content.ui("mkt.alert.yourThreshold") + pctNumber(u, m.threshold) + percent(u),
+        )
+        return NotifText(title, body, face)
     }
 
     override fun target(t: AlertAction.Target, s: AlertSettings, usdtToman: Double?): NotifText {
@@ -128,7 +148,15 @@ internal class AndarzMarketTexts(
         val title = greeting(s) + content.ui("mkt.alert.target.title", "symbol" to Fmt.isolate(t.coin.symbol))
         val body = content.ui(if (t.above) "mkt.word.above" else "mkt.word.below") + unit(f, t.coin, t.target) +
             SEP + content.ui("mkt.alert.now") + priceLine(f, t.coin, usdtToman)
-        return NotifText(title, body)
+        val face = AlarmFace(
+            name = coinName(content, t.coin),
+            symbol = Fmt.isolate(t.coin.symbol),
+            price = unit(f, t.coin, t.coin.price),
+            status = content.ui(if (t.above) "mkt.alarm.hit.up" else "mkt.alarm.hit.down") + SEP + unit(f, t.coin, t.target),
+            up = t.above,
+            note = f.pct(t.coin.change24h) + " " + content.ui("mkt.alarm.in24") + SEP + content.ui("mkt.alarm.once"),
+        )
+        return NotifText(title, body, face)
     }
 
     override fun summary(rest: List<AlertAction.Move>, s: AlertSettings): NotifText {
@@ -156,6 +184,27 @@ internal class AndarzMarketTexts(
     override fun alarmStop(): String = content.ui("mkt.alarm.stop")
     override fun alarmSnooze(): String = content.ui("mkt.alarm.snooze")
     override fun alarmOpenCoin(): String = content.ui("mkt.alarm.openCoin")
+    override fun alarmTag(): String = content.ui("mkt.alarm.tag")
+    override fun alarmDecor(): String = content.ui("mkt.alarm.decor")
+    override fun alarmOpen(name: String): String = content.ui("mkt.alarm.open", "name" to name)
+
+    /** "2:40" for the time left, rounded up to whole seconds, digits per setting, one LTR run. */
+    override fun alarmLeft(leftMs: Long): String {
+        val secs = wholeSeconds(leftMs)
+        val raw = (secs / 60).toString() + ":" + (secs % 60).toString().padStart(2, '0')
+        return content.ui("mkt.alarm.left", "t" to Fmt.isolate(ui().digits(raw)))
+    }
+
+    override fun alarmLeftDesc(leftMs: Long, totalMs: Long): String {
+        val u = ui()
+        val secs = wholeSeconds(leftMs)
+        return content.ui(
+            "mkt.alarm.left.desc",
+            mapOf("m" to u.int((secs / 60).toInt()), "s" to u.int((secs % 60).toInt()), "total" to u.int((totalMs / 60_000L).toInt())),
+        )
+    }
+
+    private fun wholeSeconds(ms: Long): Long = (ms.coerceAtLeast(0L) + 999L) / 1000L
 
     override fun clock(ms: Long): String = ui().time(Instant.ofEpochMilli(ms))
 

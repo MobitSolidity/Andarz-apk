@@ -55,4 +55,4 @@ A test reports unused `mkt.*` keys (K7), with an allow-list for the rows above.
 |---|---|
 | English wording of every base, market and app key | Written for D-90 and reviewed by hand; a native-speaker review is still welcome |
 | English glossary meanings and examples | Written for D-92; the Persian text is the owner's PDF |
-| English font | Vazirmatn covers Latin; no separate English font was added |
+| English font | IBM Plex Sans Arabic covers Latin; no separate English font was added |

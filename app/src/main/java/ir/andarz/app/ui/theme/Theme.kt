@@ -1,12 +1,9 @@
 package ir.andarz.app.ui.theme
 
-import ir.andarz.app.R
-
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
-import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
@@ -15,22 +12,25 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 /** The theme the user chose (`DARK` is the default — law 9). */
 enum class ThemeChoice { DARK, LIGHT, SYSTEM }
 
+/** The three states of the day that colour the hero, the lamp and the gauges. */
+enum class Tone { ALLOWED, CAUTION, LOCKED }
+
 /**
- * The semantic colours that Material 3 has no role for (§6.2). Colour is never the only signal: every
- * state also carries an icon and a text label, and every signed number its own sign (§6.1).
+ * The semantic colours that Material 3 has no role for. Colour is never the only signal: every state also
+ * carries an icon and a text label, and every signed number its own sign (§6.1).
+ *
+ * The first block keeps the names every screen already uses. The second block carries the tokens of the
+ * final design canvas under the names of its CSS variables (`bg`, `sf1`, `fz`, `sf`, `an` ...), so a board
+ * and a composable read the same.
  */
 @Immutable
 data class AndarzColors(
+    // ---- semantic roles used across the app
     val allowed: Color,
     val caution: Color,
     val redline: Color,
@@ -44,183 +44,294 @@ data class AndarzColors(
     val surfaceHigh: Color,
     val chartSeries: List<Color>,
     val isDark: Boolean,
-)
+    // ---- the design canvas
+    val bg: Color,
+    val bgDeep: Color,
+    val sf1: Color,
+    val alt: Color,
+    val high: Color,
+    val text: Color,
+    val muted: Color,
+    val hmuted: Color,
+    val outline: Color,
+    val track: Color,
+    val fz: Color,
+    val fzG: Color,
+    val fzC: Color,
+    val fzFill: Color,
+    val onFz: Color,
+    val fzSoft: Color,
+    val sf: Color,
+    val sfG: Color,
+    val sfC: Color,
+    val sfSoft: Color,
+    val sfLine: Color,
+    val an: Color,
+    val anG: Color,
+    val anC: Color,
+    val anFill: Color,
+    val anSoft: Color,
+    val anLine: Color,
+    val lapis: Color,
+    val lapisC: Color,
+    val lapisSoft: Color,
+    val lapisLine: Color,
+    val edge: Color,
+    val h1: Color,
+    val h2: Color,
+    val glowAllowed: Color,
+    val glowCaution: Color,
+    val glowLocked: Color,
+    val ringAllowed: Color,
+    val ringCaution: Color,
+    val ringLocked: Color,
+) {
+    /** The glow behind the hero card and the lamp for a state of the day. */
+    fun glow(tone: Tone): Color = when (tone) {
+        Tone.ALLOWED -> glowAllowed
+        Tone.CAUTION -> glowCaution
+        Tone.LOCKED -> glowLocked
+    }
+
+    /** The 1 dp ring around the lamp and the verdict tile for a state of the day. */
+    fun ring(tone: Tone): Color = when (tone) {
+        Tone.ALLOWED -> ringAllowed
+        Tone.CAUTION -> ringCaution
+        Tone.LOCKED -> ringLocked
+    }
+
+    /** The text-level accent of a state of the day. */
+    fun accent(tone: Tone): Color = when (tone) {
+        Tone.ALLOWED -> fz
+        Tone.CAUTION -> sf
+        Tone.LOCKED -> an
+    }
+
+    /** The graphic-level accent (lines, arcs, dots) of a state of the day. */
+    fun accentG(tone: Tone): Color = when (tone) {
+        Tone.ALLOWED -> fzG
+        Tone.CAUTION -> sfG
+        Tone.LOCKED -> anG
+    }
+
+    /** The soft container of a state of the day. */
+    fun container(tone: Tone): Color = when (tone) {
+        Tone.ALLOWED -> fzC
+        Tone.CAUTION -> sfC
+        Tone.LOCKED -> anC
+    }
+}
 
 val LocalAndarzColors: ProvidableCompositionLocal<AndarzColors> =
     staticCompositionLocalOf { error("AndarzColors was read outside AndarzTheme") }
 
-/**
- * Vazirmatn (SIL OFL), weights 300/400/500/700 (§6.3).
- *
- * The TTFs ship in `res/font` (D-M34). They are referenced as `R.font.*`, not looked up by name, so R8's
- * resource shrinker sees them and keeps them (D-80, r8-analyzer: no reflection-only references).
- * Light (300) is used only for the large display figures (equity, prices, countdowns) of the v2 look (D-UI2).
- */
-private val persianFamily = FontFamily(
-    Font(R.font.vazirmatn_light, FontWeight.Light),
-    Font(R.font.vazirmatn_regular, FontWeight.Normal),
-    Font(R.font.vazirmatn_medium, FontWeight.Medium),
-    Font(R.font.vazirmatn_bold, FontWeight.Bold),
-)
-
-@Composable
-private fun rememberPersianFamily(): FontFamily = persianFamily
-
-/**
- * Line height 1.6 for Persian text (§6.3, `typography.lineHeightFactorFa`). Tabular figures everywhere, so
- * money, R values and prices line up in columns (tokens `typography.numerals`).
- */
-private fun fa(family: FontFamily, size: Int, weight: FontWeight, lineFactor: Float = 1.6f) = TextStyle(
-    fontFamily = family,
-    fontWeight = weight,
-    fontSize = size.sp,
-    lineHeight = (size * lineFactor).sp,
-    fontFeatureSettings = "tnum",
-)
-
-/**
- * Every Material 3 role is set, so no text ever falls back to the platform font (the v1 scale defined six
- * roles and the other nine — titleLarge, titleSmall, labelLarge, bodySmall… — rendered in the system font).
- * Display roles are light and tighter: they only ever carry figures.
- */
-private fun typographyOf(family: FontFamily) = Typography(
-    displayLarge = fa(family, 44, FontWeight.Light, 1.2f),
-    displayMedium = fa(family, 36, FontWeight.Light, 1.25f),
-    displaySmall = fa(family, 32, FontWeight.Light, 1.3f),
-    headlineLarge = fa(family, 28, FontWeight.Bold),
-    headlineMedium = fa(family, 24, FontWeight.Bold),
-    headlineSmall = fa(family, 22, FontWeight.Bold),
-    titleLarge = fa(family, 20, FontWeight.Bold),
-    titleMedium = fa(family, 17, FontWeight.Medium),
-    titleSmall = fa(family, 15, FontWeight.Medium),
-    bodyLarge = fa(family, 16, FontWeight.Normal),
-    bodyMedium = fa(family, 15, FontWeight.Normal),
-    bodySmall = fa(family, 13, FontWeight.Normal),
-    labelLarge = fa(family, 14, FontWeight.Medium),
-    labelMedium = fa(family, 12, FontWeight.Medium),
-    labelSmall = fa(family, 11, FontWeight.Medium),
-)
+private val andarzTypo = andarzTypography()
 
 private val andarzShapes = Shapes(
     extraSmall = RoundedCornerShape(ShapeTokens.SMALL.dp),
     small = RoundedCornerShape(ShapeTokens.SMALL.dp),
     medium = RoundedCornerShape(ShapeTokens.MEDIUM.dp),
+    // The Material surfaces (Card, Surface, dialogs) clip their content to this shape, and a layer clipped to a
+    // rounded rectangle with unequal corners is hit-tested through Path.op, which Robolectric's legacy graphics
+    // cannot do: every click inside such a layer silently misses in the unit tests. So the shape handed to
+    // Material stays uniform. The arch ("taagh") is drawn by `archSurface` (components/Surfaces.kt), which
+    // fills and outlines the arch without clipping a layer.
     large = RoundedCornerShape(ShapeTokens.LARGE.dp),
     extraLarge = RoundedCornerShape(ShapeTokens.SHEET.dp),
 )
 
-// The role mapping of §6.2, one row per Material 3 role.
+// The role mapping, one row per Material 3 role. `primary` is the text-level teal (it tints links, icons and
+// selected labels); the app's own Button, FAB and indicator use `fzFill` / `onFz` through AndarzColors.
 private val darkScheme = darkColorScheme(
     background = DarkTokens.bg,
     onBackground = DarkTokens.text,
-    surface = DarkTokens.surface,
+    surface = DarkTokens.sf1,
     onSurface = DarkTokens.text,
-    surfaceVariant = DarkTokens.surfaceAlt,
-    onSurfaceVariant = DarkTokens.textMuted,
+    surfaceVariant = DarkTokens.alt,
+    onSurfaceVariant = DarkTokens.muted,
     surfaceContainerLowest = DarkTokens.bg,
-    surfaceContainerLow = DarkTokens.surface,
-    surfaceContainer = DarkTokens.surfaceAlt,
-    surfaceContainerHigh = DarkTokens.surfaceHigh,
-    surfaceContainerHighest = DarkTokens.surfaceHigh,
+    surfaceContainerLow = DarkTokens.sf1,
+    surfaceContainer = DarkTokens.alt,
+    surfaceContainerHigh = DarkTokens.high,
+    surfaceContainerHighest = DarkTokens.high,
     outline = DarkTokens.outline,
     outlineVariant = DarkTokens.divider,
-    primary = DarkTokens.firouzeh,
-    onPrimary = DarkTokens.onFirouzeh,
-    primaryContainer = DarkTokens.firouzehContainer,
-    onPrimaryContainer = DarkTokens.firouzeh,
+    primary = DarkTokens.fz,
+    onPrimary = DarkTokens.onFz,
+    primaryContainer = DarkTokens.fzC,
+    onPrimaryContainer = DarkTokens.fz,
     secondary = DarkTokens.lapis,
-    secondaryContainer = DarkTokens.lapisContainer,
-    onSecondaryContainer = DarkTokens.lapis,
-    tertiary = DarkTokens.saffron,
-    onTertiary = DarkTokens.onSaffron,
-    tertiaryContainer = DarkTokens.saffronContainer,
-    onTertiaryContainer = DarkTokens.saffron,
-    error = DarkTokens.anar,
-    errorContainer = DarkTokens.anarContainer,
-    onErrorContainer = DarkTokens.anar,
-    onError = DarkTokens.bg,
     onSecondary = DarkTokens.bg,
+    secondaryContainer = DarkTokens.lapisC,
+    onSecondaryContainer = DarkTokens.lapis,
+    tertiary = DarkTokens.sf,
+    onTertiary = Color(0xFF231600),
+    tertiaryContainer = DarkTokens.sfC,
+    onTertiaryContainer = DarkTokens.sf,
+    error = DarkTokens.an,
+    onError = DarkTokens.bg,
+    errorContainer = DarkTokens.anC,
+    onErrorContainer = DarkTokens.an,
     inverseSurface = DarkTokens.text,
     inverseOnSurface = DarkTokens.bg,
-    inversePrimary = DarkTokens.firouzehContainer,
+    inversePrimary = DarkTokens.fzC,
     surfaceDim = DarkTokens.bg,
-    surfaceBright = DarkTokens.surfaceHigh,
-    // Tonal elevation must not tint dialogs and sheets green: depth is the surface steps (tokens `elevation`).
-    surfaceTint = DarkTokens.surfaceHigh,
-    scrim = Color(0x99000000),
+    surfaceBright = DarkTokens.high,
+    // Tonal elevation must not tint dialogs and sheets: depth is the surface steps.
+    surfaceTint = DarkTokens.high,
+    scrim = DarkTokens.scrim,
 )
 
 private val lightScheme = lightColorScheme(
     background = LightTokens.bg,
     onBackground = LightTokens.text,
-    surface = LightTokens.surface,
+    surface = LightTokens.sf1,
     onSurface = LightTokens.text,
-    surfaceVariant = LightTokens.surfaceAlt,
-    onSurfaceVariant = LightTokens.textMuted,
+    surfaceVariant = LightTokens.alt,
+    onSurfaceVariant = LightTokens.muted,
     surfaceContainerLowest = LightTokens.bg,
-    surfaceContainerLow = LightTokens.surface,
-    surfaceContainer = LightTokens.surfaceAlt,
-    surfaceContainerHigh = LightTokens.surfaceHigh,
-    surfaceContainerHighest = LightTokens.surfaceHigh,
+    surfaceContainerLow = LightTokens.sf1,
+    surfaceContainer = LightTokens.alt,
+    surfaceContainerHigh = LightTokens.high,
+    surfaceContainerHighest = LightTokens.high,
     outline = LightTokens.outline,
     outlineVariant = LightTokens.divider,
-    primary = LightTokens.firouzeh,
-    onPrimary = LightTokens.onFirouzeh,
-    primaryContainer = LightTokens.firouzehContainer,
-    onPrimaryContainer = LightTokens.firouzeh,
+    primary = LightTokens.fz,
+    onPrimary = Color(0xFFFFFFFF),
+    primaryContainer = LightTokens.fzC,
+    onPrimaryContainer = LightTokens.fz,
     secondary = LightTokens.lapis,
-    secondaryContainer = LightTokens.lapisContainer,
+    onSecondary = Color(0xFFFFFFFF),
+    secondaryContainer = LightTokens.lapisC,
     onSecondaryContainer = LightTokens.lapis,
-    // Light fills use saffronFill; saffron itself stays the text colour (D-20).
-    tertiary = LightTokens.saffronFill,
-    onTertiary = LightTokens.onSaffron,
-    tertiaryContainer = LightTokens.saffronContainer,
-    onTertiaryContainer = LightTokens.saffron,
-    error = LightTokens.anar,
-    errorContainer = LightTokens.anarContainer,
-    onErrorContainer = LightTokens.anar,
-    onError = LightTokens.onAnarFill,
-    onSecondary = LightTokens.bg,
+    // Light fills use the amber graphic colour; the darker saffron stays the text colour.
+    tertiary = LightTokens.sfG,
+    onTertiary = Color(0xFFFFFFFF),
+    tertiaryContainer = LightTokens.sfC,
+    onTertiaryContainer = LightTokens.sf,
+    error = LightTokens.an,
+    onError = LightTokens.onAnFill,
+    errorContainer = LightTokens.anC,
+    onErrorContainer = LightTokens.an,
     inverseSurface = LightTokens.text,
     inverseOnSurface = LightTokens.bg,
-    inversePrimary = LightTokens.firouzehContainer,
+    inversePrimary = LightTokens.fzC,
     surfaceDim = LightTokens.bg,
-    surfaceBright = LightTokens.surfaceHigh,
-    // Tonal elevation must not tint dialogs and sheets green: depth is the surface steps (tokens `elevation`).
-    surfaceTint = LightTokens.surfaceHigh,
-    scrim = Color(0x99000000),
+    surfaceBright = LightTokens.high,
+    surfaceTint = LightTokens.high,
+    scrim = LightTokens.scrim,
 )
 
 private val darkExtras = AndarzColors(
-    allowed = DarkTokens.firouzeh,
-    caution = DarkTokens.saffron,
-    redline = DarkTokens.anar,
-    redlineFill = DarkTokens.anarFill,
-    onRedlineFill = DarkTokens.onAnarFill,
+    allowed = DarkTokens.fz,
+    caution = DarkTokens.sf,
+    redline = DarkTokens.an,
+    redlineFill = DarkTokens.anFill,
+    onRedlineFill = DarkTokens.onAnFill,
     info = DarkTokens.lapis,
     violet = DarkTokens.violet,
-    textMuted = DarkTokens.textMuted,
+    textMuted = DarkTokens.muted,
     divider = DarkTokens.divider,
-    surfaceAlt = DarkTokens.surfaceAlt,
-    surfaceHigh = DarkTokens.surfaceHigh,
+    surfaceAlt = DarkTokens.alt,
+    surfaceHigh = DarkTokens.high,
     chartSeries = DarkTokens.chartSeries,
     isDark = true,
+    bg = DarkTokens.bg,
+    bgDeep = DarkTokens.bgDeep,
+    sf1 = DarkTokens.sf1,
+    alt = DarkTokens.alt,
+    high = DarkTokens.high,
+    text = DarkTokens.text,
+    muted = DarkTokens.muted,
+    hmuted = DarkTokens.hmuted,
+    outline = DarkTokens.outline,
+    track = DarkTokens.track,
+    fz = DarkTokens.fz,
+    fzG = DarkTokens.fzG,
+    fzC = DarkTokens.fzC,
+    fzFill = DarkTokens.fzFill,
+    onFz = DarkTokens.onFz,
+    fzSoft = DarkTokens.fzSoft,
+    sf = DarkTokens.sf,
+    sfG = DarkTokens.sfG,
+    sfC = DarkTokens.sfC,
+    sfSoft = DarkTokens.sfSoft,
+    sfLine = DarkTokens.sfLine,
+    an = DarkTokens.an,
+    anG = DarkTokens.anG,
+    anC = DarkTokens.anC,
+    anFill = DarkTokens.anFill,
+    anSoft = DarkTokens.anSoft,
+    anLine = DarkTokens.anLine,
+    lapis = DarkTokens.lapis,
+    lapisC = DarkTokens.lapisC,
+    lapisSoft = DarkTokens.lapisSoft,
+    lapisLine = DarkTokens.lapisLine,
+    edge = DarkTokens.edge,
+    h1 = DarkTokens.h1,
+    h2 = DarkTokens.h2,
+    glowAllowed = DarkTokens.glowAllowed,
+    glowCaution = DarkTokens.glowCaution,
+    glowLocked = DarkTokens.glowLocked,
+    ringAllowed = DarkTokens.ringAllowed,
+    ringCaution = DarkTokens.ringCaution,
+    ringLocked = DarkTokens.ringLocked,
 )
 
 private val lightExtras = AndarzColors(
-    allowed = LightTokens.firouzeh,
-    caution = LightTokens.saffron,
-    redline = LightTokens.anar,
-    redlineFill = LightTokens.anarFill,
-    onRedlineFill = LightTokens.onAnarFill,
+    allowed = LightTokens.fz,
+    caution = LightTokens.sf,
+    redline = LightTokens.an,
+    redlineFill = LightTokens.anFill,
+    onRedlineFill = LightTokens.onAnFill,
     info = LightTokens.lapis,
     violet = LightTokens.violet,
-    textMuted = LightTokens.textMuted,
+    textMuted = LightTokens.muted,
     divider = LightTokens.divider,
-    surfaceAlt = LightTokens.surfaceAlt,
-    surfaceHigh = LightTokens.surfaceHigh,
+    surfaceAlt = LightTokens.alt,
+    surfaceHigh = LightTokens.high,
     chartSeries = LightTokens.chartSeries,
     isDark = false,
+    bg = LightTokens.bg,
+    bgDeep = LightTokens.bgDeep,
+    sf1 = LightTokens.sf1,
+    alt = LightTokens.alt,
+    high = LightTokens.high,
+    text = LightTokens.text,
+    muted = LightTokens.muted,
+    hmuted = LightTokens.hmuted,
+    outline = LightTokens.outline,
+    track = LightTokens.track,
+    fz = LightTokens.fz,
+    fzG = LightTokens.fzG,
+    fzC = LightTokens.fzC,
+    fzFill = LightTokens.fzFill,
+    onFz = LightTokens.onFz,
+    fzSoft = LightTokens.fzSoft,
+    sf = LightTokens.sf,
+    sfG = LightTokens.sfG,
+    sfC = LightTokens.sfC,
+    sfSoft = LightTokens.sfSoft,
+    sfLine = LightTokens.sfLine,
+    an = LightTokens.an,
+    anG = LightTokens.anG,
+    anC = LightTokens.anC,
+    anFill = LightTokens.anFill,
+    anSoft = LightTokens.anSoft,
+    anLine = LightTokens.anLine,
+    lapis = LightTokens.lapis,
+    lapisC = LightTokens.lapisC,
+    lapisSoft = LightTokens.lapisSoft,
+    lapisLine = LightTokens.lapisLine,
+    edge = LightTokens.edge,
+    h1 = LightTokens.h1,
+    h2 = LightTokens.h2,
+    glowAllowed = LightTokens.glowAllowed,
+    glowCaution = LightTokens.glowCaution,
+    glowLocked = LightTokens.glowLocked,
+    ringAllowed = LightTokens.ringAllowed,
+    ringCaution = LightTokens.ringCaution,
+    ringLocked = LightTokens.ringLocked,
 )
 
 /** Dark is the default; every screen must also work in the light theme (law 9). */
@@ -234,11 +345,10 @@ fun AndarzTheme(
         ThemeChoice.LIGHT -> false
         ThemeChoice.SYSTEM -> isSystemInDarkTheme()
     }
-    val family = rememberPersianFamily()
     CompositionLocalProvider(LocalAndarzColors provides if (dark) darkExtras else lightExtras) {
         MaterialTheme(
             colorScheme = if (dark) darkScheme else lightScheme,
-            typography = typographyOf(family),
+            typography = andarzTypo,
             shapes = andarzShapes,
             content = content,
         )

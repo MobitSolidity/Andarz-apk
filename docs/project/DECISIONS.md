@@ -652,6 +652,57 @@ kickoff, Persian brief, the opus5 review prompt and the three skills of the audi
 layout is tagged `pre-restructure`. **Note on the key:** deleting `march-ci.jks.b64` from `main` does not
 remove it from history; it stays compromised and must never be used (D-74).
 
+## Owner request - the final look of the design canvas (decisions)
+
+### D-UI3 - The final look of the canvas (appearance only)
+
+The owner asked for the last UI of the design canvas (29 boards) to be applied to this repository so the final APK
+can be built. Data, engine, database schema, navigation and behaviour are unchanged; the exceptions are the Market
+notes below and D-99.
+
+- **Palette:** "night and turquoise" in `ui/theme/Tokens.kt` (dark and light), named like the CSS variables of the
+  canvas (`fz`, `sf`, `an`, `lapis`, with graphic variants `fzG`, `sfG`, `anG`). The old names (`textMuted`,
+  `caution`, `surfaceAlt`, `redline`, `allowed`) are aliases of the new values, so screens that were not re-laid out
+  still follow the palette. `spec/andarz_design_tokens.json` is the read-only v2 and is no longer the source of the
+  colours.
+- **Type:** Peyda (Regular and Black) for words, IBM Plex Sans Arabic (400 to 700) for numerals and Latin, Noto Naskh
+  Arabic for the advice of the day only. The shared `Text` shapes every numeral run in Plex with tabular figures.
+  Vazirmatn is gone from the app. **Licence note:** the Peyda files were supplied by the owner; the licence of its
+  author (Fontiran) applies and must be checked against the intended use before the store upload. About credits
+  the fonts through the new key `app.about.fonts`, because the base key `about.fonts` is read-only and still names
+  Vazirmatn.
+- **Shapes and parts:** one arch family (`ArchShapes`), `archSurface`, `ArchTile`, pills, fields, a vector glyph set,
+  the new bottom bar and the tile art; the library controls (Button, TextButton, FilterChip, SwitchRow,
+  SectionCard, EmptyState, text fields) take the same look, so every screen gets it.
+- **Screens rebuilt from a board:** welcome, Today, More, Journal, the trade wizard, trade pages, the calculator,
+  Insights, and in Market the prices list with its header, off state, consent sheet and loading and error states,
+  the coin sheet (chart, range, stats, alert rule), News (next release with countdown and two reminders, releases by
+  day, the expired list) and the full-screen price alarm.
+- **Screens without a board** (Settings, About, Lock, Legal, Constitution, Rules, Setups, Ledger, Learn, Reviews,
+  My coins, Alerts) keep their layout and take the palette, type and library parts. My coins is built from the rows
+  of the prices list and Alerts keeps its flow with the stepper, text field and glyphs of the coin sheet.
+- **Where the build differs from a board, on purpose:** the header shows the clock time of a release, not a count;
+  the unit toggle is hidden on News and Alerts; the Off state keeps the tabs; the coin sheet draws the 7 day range
+  only, with a stepper in place of the slider and switch of the rule editor and "about" in words in place of the
+  approximation sign; News offers the clock alarm on the next-release card only (the rows keep their bell), the
+  clock chip opens the Clock app for confirmation instead of being a toggle, a row without numbers shows its
+  impact word, and the last hour counts minutes and seconds in saffron.
+- **Verification:** there is no Android SDK in the working environment. Each stage was compiled, unit tested,
+  linted and guard checked by GitHub Actions on a throw-away branch (D-87 keeps CI out of the repository). Nothing
+  was run on a device, so the screens are not yet judged by eye (see `MANUAL_TEST.md`).
+
+### D-99 - The alarm screen gets finished strings from the host
+
+The alarm board shows the coin, its price as the big figure, what happened and a 24 h line, which the old
+`AlarmRinger.Info(title, body, coinId, at)` did not carry. `NotifText` now holds an optional `AlarmFace` (name,
+symbol, price, status, direction, note) that `MarketHostImpl` builds for target and move alerts; it travels in
+`AlarmRinger.Info` and in the extras of a snoozed alarm, so the alarm comes back looking the same. A test alarm has
+no coin and falls back to its title and body. `MarketHost` also hands over the Peyda and Plex families
+(`MarketFonts`), so `:market` carries no copy of the font files, and `MarketTexts` gained `alarmTag`, `alarmDecor`,
+`alarmLeft`, `alarmLeftDesc` and `alarmOpen`. Law 3 holds: `:market` still contains no Persian and formats nothing.
+The stop and snooze labels follow the board ("Stop", "Snooze 5 min"). The time left for the auto-stop bar and the
+figure runs of a text are plain functions with a JVM test (`AlarmMathTest`).
+
 ## Owner request 0.12.0 — Myket and Bazaar, terms and privacy, every trader (decisions)
 
 ### D-95 — Package name `ir.mobitmaster.andarz`; Myket and Bazaar only
